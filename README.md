@@ -4,8 +4,11 @@
 
 ## 문서
 
+- [MVP 계획서](docs/MVP.md) — 1단계 범위, 화면, 데이터, 5주 일정, 완료 기준
+- [개발 단계](docs/ROADMAP.md) — 4개 단계와 단계별 범위
 - [개발 계획서](docs/PLAN.md) — 요구사항, 데이터 소스, 기능 설계, 아키텍처, 데이터 모델, API, 로드맵, 비용, 법률, 리스크
 - [개발 계획서 웹 페이지](docs/plan.html) — 계획서의 웹 버전 원본 (인터랙티브 그래프·초성 검색 데모 포함, [게시본](https://claude.ai/artifact/4Ak3rrZ1MqnqsZkfsBuuLN))
+- [골프장 DB](data/golf-courses/) — 인허가 데이터와 OpenStreetMap을 결합한 520곳 (검수 진행 중)
 - [날씨 모델 검증](research/model-verification/) — 12개 수치모델을 기상청 관측과 대조한 재현 가능한 분석 (2026-08~11)
 
 ## 검증 한 줄 요약
