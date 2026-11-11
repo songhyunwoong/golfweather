@@ -1,12 +1,13 @@
 """Build per-course forecast files for the app.
 
-Sources: Open-Meteo (ICON, ECMWF IFS, ECMWF AIFS, GFS, UKMO) and KMA 단기예보 (data.go.kr, optional:
-needs DATA_GO_KR_SERVICE_KEY). Output directory (default ../site/data):
+Sources: Open-Meteo open data on AWS (ICON, ECMWF IFS, ECMWF AIFS, GFS, UKMO; see openmeteo_s3.py) and
+KMA 단기예보 (data.go.kr, optional: needs DATA_GO_KR_SERVICE_KEY). `--source api` uses the Open-Meteo API
+instead (rate-limited; for comparison only). Output directory (default ../site/data):
   courses.json        slim search index
   meta.json           generation time, model list, latest run times
   fc/{course_id}.json hourly values for every model on one shared time axis (KST)
 
-Usage: python3 build_forecasts.py [--out DIR] [--limit N]
+Usage: python3 build_forecasts.py [--out DIR] [--limit N] [--source s3|api]
 """
 import argparse, datetime as dt, json, math, os, statistics, subprocess, sys, time, urllib.parse
 from concurrent.futures import ThreadPoolExecutor
@@ -151,7 +152,7 @@ def blend(models, n):
 
 # ---------------------------------------------------------------- main
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=os.path.join(HERE, "..", "site", "data")); ap.add_argument("--limit", type=int)
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default=os.path.join(HERE, "..", "site", "data")); ap.add_argument("--limit", type=int); ap.add_argument("--source", default="s3", choices=["s3", "api"])
     a = ap.parse_args()
     src = json.load(open(os.path.join(HERE, "..", "data", "golf-courses", "courses.json")))
     courses = [c for c in src["courses"] if c["name"]]       # nameless areas cannot be searched; they wait for review
@@ -159,7 +160,15 @@ def main():
     os.makedirs(os.path.join(a.out, "fc"), exist_ok=True)
     now = dt.datetime.now(KST)
     print(f"courses {len(courses)}", flush=True)
-    om = fetch_open_meteo(courses); runs = model_runs()
+    if a.source == "api":
+        om = fetch_open_meteo(courses); runs = model_runs()
+    else:
+        import openmeteo_s3
+        day0 = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        axis = [day0 + dt.timedelta(hours=h) for h in range(24 * DAYS)]
+        by_course, runs = openmeteo_s3.fetch(courses, [int(t.timestamp()) for t in axis])
+        times = [t.strftime("%Y-%m-%dT%H:%M") for t in axis]
+        om = {cid: {"time": times, "models": m} for cid, m in by_course.items()}
     kma, kma_init = {}, None
     key = os.environ.get("DATA_GO_KR_SERVICE_KEY")
     if key:
@@ -184,7 +193,7 @@ def main():
     info = {k: dict(label=v[2], init=runs.get(k), native_steps=v[3]) for k, v in MODELS.items()}
     info["blend"] = dict(label="블렌드", members=BLEND, init=None)
     info["kma"] = dict(label="기상청 단기예보", init=kma_init, courses=n_kma)
-    json.dump(dict(generated=now.strftime("%Y-%m-%dT%H:%M+09:00"), courses=len(courses), days=DAYS, rain_mm=RAIN_MM, models=info),
+    json.dump(dict(generated=now.strftime("%Y-%m-%dT%H:%M+09:00"), source=a.source, courses=len(courses), days=DAYS, rain_mm=RAIN_MM, models=info),
               open(os.path.join(a.out, "meta.json"), "w"), ensure_ascii=False, indent=1)
     missing = {k: sum(1 for c in courses if k not in om[c["id"]]["models"]) for k in list(MODELS) + ["blend"]}
     print("done", dict(courses=len(courses), kma=n_kma, missing=missing), flush=True)
