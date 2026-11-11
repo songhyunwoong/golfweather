@@ -5,6 +5,8 @@ on:
     # 기상청 단기예보 발표(02·05·…·23시 KST) 25분 뒤 = UTC 17·20·23·02·05·08·11·14시 25분
     - cron: "25 2,5,8,11,14,17,20,23 * * *"
   workflow_dispatch:
+  push:
+    paths: ["site/**", "pipeline/**", "data/golf-courses/courses.json"]
 
 permissions:
   contents: read
