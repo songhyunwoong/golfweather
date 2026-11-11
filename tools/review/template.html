@@ -1,0 +1,286 @@
+<title>골프장 DB 검수</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: review workbench — queue list on the left, one course's evidence and decision on the right; stacks on phones. */
+:root {
+  --bg: #f4f7f5; --surface: #ffffff; --surface-2: #ecf1ee; --fg: #14201a; --fg-2: #3a4740; --muted: #64716a; --line: #d8e0dc;
+  --accent: #1c6a55; --accent-ink: #ffffff; --accent-soft: #e0eee8;
+  --ok: #1c6a55; --ok-soft: #e0eee8; --warn: #8a5300; --warn-soft: #fbf0dc; --bad: #a3322b; --bad-soft: #f9e4e2;
+  --font-display: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e1311; --surface: #151b18; --surface-2: #1b2320; --fg: #e3eae6; --fg-2: #bac6bf; --muted: #8b9891; --line: #29332f;
+  --accent: #63c4a3; --accent-ink: #0e1311; --accent-soft: #192a23;
+  --ok: #63c4a3; --ok-soft: #192a23; --warn: #e3a84c; --warn-soft: #2a2113; --bad: #ef8a82; --bad-soft: #2e1817; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e1311; --surface: #151b18; --surface-2: #1b2320; --fg: #e3eae6; --fg-2: #bac6bf; --muted: #8b9891; --line: #29332f;
+  --accent: #63c4a3; --accent-ink: #0e1311; --accent-soft: #192a23;
+  --ok: #63c4a3; --ok-soft: #192a23; --warn: #e3a84c; --warn-soft: #2a2113; --bad: #ef8a82; --bad-soft: #2e1817; color-scheme: dark; }
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 14.5px; line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; line-height: 1.3; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+a { color: var(--accent); }
+.wrap { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 60px; display: grid; gap: 16px; }
+header { display: grid; gap: 10px; }
+header h1 { font-size: 1.5rem; }
+header p { margin: 0; color: var(--fg-2); max-width: 60em; }
+.status { font-size: 13px; padding: 8px 12px; border-radius: 8px; background: var(--warn-soft); color: var(--warn); }
+.status.ok { background: var(--ok-soft); color: var(--ok); }
+.status.bad { background: var(--bad-soft); color: var(--bad); }
+.progress { display: grid; gap: 6px; }
+.bar { height: 10px; border-radius: 99px; background: var(--surface-2); overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .2s; }
+.progress span { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tabs button { border: 1px solid var(--line); background: var(--surface); padding: 6px 14px; border-radius: 99px; color: var(--fg-2); }
+.tabs button[aria-selected="true"] { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.work { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 860px) { .work { grid-template-columns: minmax(0, 1fr); } }
+.queue { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; display: grid; min-width: 0; }
+.filters { padding: 12px; display: grid; gap: 8px; border-bottom: 1px solid var(--line); }
+.filters input, .filters select { width: 100%; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.filters .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.list { list-style: none; margin: 0; padding: 0; max-height: 68vh; overflow: auto; }
+@media (max-width: 860px) { .list { max-height: 38vh; } }
+.list li button { width: 100%; text-align: left; background: none; border: 0; border-bottom: 1px solid var(--line); padding: 9px 12px; display: grid; grid-template-columns: 18px 1fr; gap: 8px; align-items: start; }
+.list li button[aria-current="true"] { background: var(--accent-soft); }
+.list .nm { font-weight: 500; color: var(--fg); }
+.list .sub { font-size: 12px; color: var(--muted); }
+.dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; border: 2px solid var(--muted); }
+.dot.ok { background: var(--ok); border-color: var(--ok); } .dot.fix { background: var(--warn); border-color: var(--warn); } .dot.remove, .dot.duplicate, .dot.exclude { background: var(--bad); border-color: var(--bad); }
+.empty { padding: 20px 12px; color: var(--muted); font-size: 13px; }
+.detail { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; display: grid; gap: 14px; min-width: 0; }
+.detail h2 { font-size: 1.3rem; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag { font-size: 12px; padding: 1px 9px; border-radius: 99px; background: var(--surface-2); color: var(--fg-2); }
+.tag.flag { background: var(--warn-soft); color: var(--warn); }
+dl { margin: 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 12px; font-size: 13.5px; }
+dt { color: var(--muted); } dd { margin: 0; color: var(--fg-2); }
+.mono { font-family: var(--font-mono); font-size: 12.5px; }
+.hint { font-size: 13px; color: var(--fg-2); background: var(--surface-2); border-radius: 8px; padding: 10px 12px; }
+.links { display: flex; gap: 8px; flex-wrap: wrap; }
+.links a { border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; text-decoration: none; background: var(--bg); }
+.form { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 14px; }
+.form label { display: grid; gap: 3px; font-size: 13px; color: var(--fg-2); }
+.form input, .form select, .form textarea { padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); width: 100%; }
+.form .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+@media (max-width: 520px) { .form .two { grid-template-columns: 1fr; } }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.actions button { border: 1px solid var(--line); background: var(--bg); border-radius: 8px; padding: 8px 14px; }
+.actions .primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 500; }
+.actions .danger { color: var(--bad); }
+.saved { font-size: 13px; color: var(--muted); min-height: 1.4em; }
+.near { font-size: 13px; }
+.near button { background: none; border: 0; color: var(--accent); padding: 0; text-decoration: underline; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>골프장 DB 검수</h1>
+    <p>지도 링크로 위치와 이름을 확인하고 판정을 저장합니다. 저장한 내용은 서버에 남아 다른 기기에서도 이어서 할 수 있고, 검수가 끝나면 Claude가 읽어 DB에 반영합니다.</p>
+    <div class="status" id="status" role="status">저장소에 연결하는 중…</div>
+    <div class="progress"><div class="bar"><i id="bar"></i></div><span id="progress-text"></span></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" id="tab-c" aria-selected="true">골프장 <span id="n-c"></span></button>
+      <button role="tab" id="tab-l" aria-selected="false">위치 못 정한 인허가 <span id="n-l"></span></button>
+    </div>
+  </header>
+  <div class="work">
+    <div class="queue">
+      <div class="filters">
+        <input id="q" type="search" placeholder="이름·지역·초성 검색" autocomplete="off">
+        <div class="row">
+          <select id="f-flag" aria-label="검수 표시"></select>
+          <select id="f-state" aria-label="검수 상태">
+            <option value="todo">미검수만</option><option value="all">전체</option><option value="done">검수 완료만</option>
+          </select>
+        </div>
+      </div>
+      <ul class="list" id="list"></ul>
+    </div>
+    <div class="detail" id="detail"></div>
+  </div>
+</div>
+
+<script>
+(async function () {
+  "use strict";
+  const DATA = __DATA__;
+  const COURSES = DATA.courses, LICS = DATA.unresolved;
+  const byId = new Map(COURSES.map(c => [c.id, c]));
+  const FLAG_HELP = {
+    "인허가미확인": "OSM에는 있지만 연결된 인허가 기록이 없습니다. 실제 영업 중인 골프장인지, 군 체력단련장인지, 이미 목록에 있는 곳과 같은 곳인지 확인하세요.",
+    "영역없음": "코스 영역이 없어 인허가 주소 좌표(보통 클럽하우스)를 썼습니다. 좌표가 골프장 안에 찍히는지 확인하고, 근처에 같은 골프장이 따로 있으면 중복으로 표시하세요.",
+    "이름불일치": "인허가 명칭과 지도상의 이름이 다릅니다. 개명이면 현재 이름이 맞는지, 아니면 옆 골프장의 기록이 잘못 붙은 것인지 확인하세요.",
+    "이름없음": "이름을 정하지 못했습니다. 지도에서 이름을 확인해 입력하세요.",
+    "병합확인": "이름이 다른 인허가 기록이 한 곳에 묶였습니다. 한 골프장이 맞는지 확인하세요.",
+    "소형(25ha 미만)": "면적이 작습니다. 9홀·파3 골프장인지, 연습장처럼 빼야 할 곳인지 확인하세요.",
+    "동명": "이름이 같은 곳이 둘 있습니다. 서로 다른 골프장인지 확인하세요."
+  };
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const state = { tab: "c", sel: null, reviews: new Map(), lics: new Map(), db: null, canWrite: true };
+
+  // ---------- storage
+  const statusEl = $("status");
+  function setStatus(text, cls) { statusEl.textContent = text; statusEl.className = "status" + (cls ? " " + cls : ""); }
+  let loaded = 0;
+  const timer = setTimeout(() => { if (loaded < 2) setStatus("저장소에 연결하지 못했습니다. 목록은 볼 수 있지만 판정은 저장되지 않습니다. 로그인 상태를 확인하고 페이지를 다시 열어 주세요.", "bad"); }, 10000);
+  function subscribe() {
+    const onErr = e => setStatus("저장소 오류: " + (e && e.message || e && e.code || "알 수 없음"), "bad");
+    const mark = () => { loaded++; if (loaded >= 2) { clearTimeout(timer); setStatus("저장소에 연결됐습니다. 판정은 저장 버튼을 누를 때 기록됩니다.", "ok"); } };
+    let first1 = true, first2 = true;
+    state.db.collection("reviews").limit(1000).onSnapshot(snap => {
+      state.reviews = new Map(snap.docs.map(d => [d.id, d.data()])); if (first1) { first1 = false; mark(); } renderAll(false);
+    }, onErr);
+    state.db.collection("licences").limit(1000).onSnapshot(snap => {
+      state.lics = new Map(snap.docs.map(d => [d.id, d.data()])); if (first2) { first2 = false; mark(); } renderAll(false);
+    }, onErr);
+  }
+  const docId = id => id.replace(/[^A-Za-z0-9_-]/g, "_");
+  async function save(kind, id, data) {
+    const out = $("saved");
+    if (!state.db) { if (out) out.textContent = "저장소에 연결되지 않아 저장하지 못했습니다."; return false; }
+    try {
+      await state.db.collection(kind).doc(docId(id)).set(Object.assign({ target: id, updated: new Date().toISOString() }, data));
+      if (out) out.textContent = "저장했습니다."; return true;
+    } catch (e) { if (out) out.textContent = "저장하지 못했습니다: " + (e && (e.message || e.code) || "오류"); return false; }
+  }
+  async function clear(kind, id) {
+    try { await state.db.collection(kind).doc(docId(id)).delete(); } catch (e) { const out = $("saved"); if (out) out.textContent = "되돌리지 못했습니다: " + (e && (e.message || e.code) || "오류"); }
+  }
+
+  // ---------- helpers
+  const VERDICT = { ok: "확인 완료", fix: "수정", remove: "삭제(골프장 아님)", duplicate: "중복", attach: "기존 골프장에 연결", "new": "새 골프장으로 추가", exclude: "제외" };
+  const rev = c => state.reviews.get(docId(c.id));
+  const lrev = l => state.lics.get(docId(l.id));
+  function parseLatLon(s) {
+    const m = String(s || "").match(/(-?\d+(?:\.\d+)?)\s*[, ]\s*(-?\d+(?:\.\d+)?)/); if (!m) return null;
+    let a = +m[1], b = +m[2]; if (a > 100) [a, b] = [b, a];
+    return (a >= 32.5 && a <= 39 && b >= 124 && b <= 132) ? [a, b] : null;
+  }
+  const dist = (a, b) => { const R = 6371, r = Math.PI / 180, x = (b.lon - a.lon) * r * Math.cos((a.lat + b.lat) * r / 2), y = (b.lat - a.lat) * r; return R * Math.hypot(x, y); };
+  const mapLinks = (name, lat, lon) => '<div class="links">' +
+    '<a target="_blank" rel="noopener" href="https://map.kakao.com/link/map/' + encodeURIComponent((name || "위치").replace(/,/g, " ")) + ',' + lat + ',' + lon + '">카카오맵에서 위치 보기</a>' +
+    '<a target="_blank" rel="noopener" href="https://www.google.com/maps/@' + lat + ',' + lon + ',2500m/data=!3m1!1e3">구글 위성사진</a>' +
+    (name ? '<a target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(name) + '">네이버지도 이름 검색</a>' : '') + '</div>';
+  const courseOptions = (selected) => '<option value="">골프장 선택…</option>' + COURSES.slice().sort((a, b) => (a.name || "~").localeCompare(b.name || "~", "ko"))
+    .map(c => '<option value="' + esc(c.id) + '"' + (c.id === selected ? " selected" : "") + '>' + esc((c.name || "(이름없음)") + " · " + c.sigungu) + '</option>').join("");
+
+  // ---------- list
+  function filtered() {
+    const q = $("q").value.trim().toLowerCase().replace(/\s+/g, ""), flag = $("f-flag").value, st = $("f-state").value;
+    if (state.tab === "c") return COURSES.filter(c => {
+      const r = rev(c);
+      if (st === "todo" && r) return false; if (st === "done" && !r) return false;
+      if (flag === "__none" && c.review.length) return false;
+      if (flag && flag !== "__none" && flag !== "__any" && !c.review.includes(flag)) return false;
+      if (flag === "__any" && !c.review.length) return false;
+      if (!q) return true;
+      return (c.name + c.aliases.join("") + c.sido + c.sigungu + c.address).toLowerCase().replace(/\s+/g, "").includes(q) || c.choseong.includes(q);
+    });
+    return LICS.filter(l => { const r = lrev(l); if (st === "todo" && r) return false; if (st === "done" && !r) return false; return !q || (l.name + l.addr).toLowerCase().replace(/\s+/g, "").includes(q); });
+  }
+  function renderList() {
+    const items = filtered(), ul = $("list");
+    if (!items.length) { ul.innerHTML = '<li class="empty">조건에 맞는 항목이 없습니다. 검수 상태를 "전체"로 바꿔 보세요.</li>'; return; }
+    ul.innerHTML = items.map(it => {
+      const r = state.tab === "c" ? rev(it) : lrev(it), cur = state.sel === it.id;
+      const sub = state.tab === "c" ? esc(it.sido + " " + it.sigungu) + (it.review.length ? " · " + esc(it.review.join(", ")) : "") : esc(it.addr);
+      return '<li><button data-id="' + esc(it.id) + '"' + (cur ? ' aria-current="true"' : "") + '><span class="dot ' + (r ? esc(r.verdict) : "") + '"></span><span><span class="nm">' + esc(it.name || "(이름없음)") + '</span><br><span class="sub">' + sub + (r ? " · " + esc(VERDICT[r.verdict] || r.verdict) : "") + '</span></span></button></li>';
+    }).join("");
+  }
+  $("list").addEventListener("click", ev => { const b = ev.target.closest("button[data-id]"); if (b) { state.sel = b.dataset.id; renderAll(true); } });
+
+  // ---------- detail: course
+  function renderCourse(c) {
+    const r = rev(c) || {}, near = COURSES.filter(o => o.id !== c.id && dist(c, o) < 4).sort((a, b) => dist(c, a) - dist(c, b)).slice(0, 6);
+    $("detail").innerHTML =
+      '<div><h2>' + esc(c.name || "(이름없음)") + '</h2><div class="tags" style="margin-top:6px">' + c.review.map(f => '<span class="tag flag">' + esc(f) + '</span>').join("") +
+        c.type.map(t => '<span class="tag">' + esc(t) + '</span>').join("") + (c.status ? '<span class="tag">' + esc(c.status) + '</span>' : "") + '</div></div>' +
+      (c.review.length ? '<div class="hint">' + c.review.map(f => "<b>" + esc(f) + "</b>: " + esc(FLAG_HELP[f] || "")).join("<br>") + '</div>' : "") +
+      '<dl><dt>지역</dt><dd>' + esc(c.sido + " " + c.sigungu) + '</dd><dt>주소</dt><dd>' + esc(c.address || "—") + '</dd><dt>전화</dt><dd>' + esc(c.tel || "—") + '</dd>' +
+        '<dt>다른 이름</dt><dd>' + esc(c.aliases.join(" · ") || "—") + '</dd><dt>좌표</dt><dd class="mono">' + c.lat + ", " + c.lon + ' <span style="font-family:var(--font-body)">(' + esc(c.position) + ')</span></dd>' +
+        '<dt>면적·고도</dt><dd>' + (c.area_ha ? c.area_ha + " ha" : "영역 없음") + " · " + c.elevation_m + ' m</dd><dt>연결 방식</dt><dd>' + esc(c.match || (c.licences ? "인허가 좌표" : "인허가 기록 없음")) + " · 인허가 " + c.licences + '건</dd></dl>' +
+      mapLinks(c.name, c.lat, c.lon) +
+      (near.length ? '<div class="near">4 km 안의 다른 골프장: ' + near.map(o => '<button data-go="' + esc(o.id) + '">' + esc(o.name || "(이름없음)") + '</button> ' + dist(c, o).toFixed(1) + " km").join(" · ") + '</div>' : "") +
+      '<div class="form">' +
+        '<div class="two"><label>이름 (고칠 때만 입력)<input id="e-name" value="' + esc(r.name || "") + '" placeholder="' + esc(c.name) + '"></label>' +
+        '<label>좌표 (고칠 때만. 구글 지도에서 복사한 "위도, 경도")<input id="e-pos" value="' + (r.lat ? r.lat + ", " + r.lon : "") + '" placeholder="' + c.lat + ", " + c.lon + '"></label></div>' +
+        '<div class="two"><label>회원제 구분<select id="e-type">' + ["", "회원제", "비회원제", "회원제+비회원제", "군·공공"].map(t => '<option' + ((r.type || "") === t ? " selected" : "") + ' value="' + t + '">' + (t || "그대로") + '</option>').join("") + '</select></label>' +
+        '<label>중복일 때: 같은 골프장<select id="e-dup">' + courseOptions(r.dup_of) + '</select></label></div>' +
+        '<label>메모<textarea id="e-note" rows="2">' + esc(r.note || "") + '</textarea></label>' +
+        '<div class="actions"><button class="primary" data-v="ok">확인 완료</button><button data-v="fix">수정 내용 저장</button><button data-v="duplicate">중복으로 표시</button><button class="danger" data-v="remove">삭제 (골프장 아님)</button>' + (rev(c) ? '<button data-v="undo">판정 되돌리기</button>' : "") + '</div>' +
+        '<div class="saved" id="saved">' + (rev(c) ? "현재 판정: " + esc(VERDICT[r.verdict] || r.verdict) : "") + '</div></div>';
+  }
+  // ---------- detail: unresolved licence
+  function renderLic(l) {
+    const r = lrev(l) || {};
+    const guess = COURSES.filter(c => c.sigungu && l.addr.replace(/\s/g, "").includes(c.sigungu.replace(/\s/g, "").slice(0, 3))).slice(0, 40);
+    $("detail").innerHTML =
+      '<div><h2>' + esc(l.name) + '</h2><div class="tags" style="margin-top:6px">' + (l.kind ? '<span class="tag">' + esc(l.kind) + '</span>' : "") + '<span class="tag flag">좌표 없음</span></div></div>' +
+      '<div class="hint">인허가 기록에 좌표가 없고 이름으로도 못 찾았습니다. 주소를 지도에서 찾아, 이미 목록에 있는 골프장이면 연결하고, 없으면 좌표를 넣어 새로 추가하세요. 폐업했거나 골프장이 아니면 제외합니다.</div>' +
+      '<dl><dt>주소</dt><dd>' + esc(l.addr || "—") + '</dd><dt>전화</dt><dd>' + esc(l.tel || "—") + '</dd><dt>관리번호</dt><dd class="mono">' + esc(l.id) + '</dd></dl>' +
+      '<div class="links"><a target="_blank" rel="noopener" href="https://map.kakao.com/?q=' + encodeURIComponent(l.addr) + '">카카오맵에서 주소 찾기</a><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/' + encodeURIComponent(l.addr) + '">구글 지도에서 주소 찾기</a><a target="_blank" rel="noopener" href="https://map.naver.com/p/search/' + encodeURIComponent(l.name) + '">네이버지도 이름 검색</a></div>' +
+      (guess.length ? '<div class="near">같은 시군구의 골프장: ' + guess.map(o => esc(o.name || "(이름없음)")).join(" · ") + '</div>' : "") +
+      '<div class="form"><div class="two"><label>기존 골프장에 연결<select id="e-dup">' + courseOptions(r.course_id) + '</select></label>' +
+        '<label>새로 추가할 때 좌표 ("위도, 경도")<input id="e-pos" value="' + (r.lat ? r.lat + ", " + r.lon : "") + '" placeholder="37.1234, 127.1234"></label></div>' +
+        '<label>메모<textarea id="e-note" rows="2">' + esc(r.note || "") + '</textarea></label>' +
+        '<div class="actions"><button class="primary" data-v="attach">기존 골프장에 연결</button><button data-v="new">새 골프장으로 추가</button><button class="danger" data-v="exclude">제외</button>' + (lrev(l) ? '<button data-v="undo">판정 되돌리기</button>' : "") + '</div>' +
+        '<div class="saved" id="saved">' + (lrev(l) ? "현재 판정: " + esc(VERDICT[r.verdict] || r.verdict) : "") + '</div></div>';
+  }
+  $("detail").addEventListener("click", async ev => {
+    const go = ev.target.closest("button[data-go]"); if (go) { state.sel = go.dataset.go; $("f-state").value = "all"; renderAll(true); return; }
+    const b = ev.target.closest("button[data-v]"); if (!b) return;
+    const v = b.dataset.v, out = $("saved"), isC = state.tab === "c", kind = isC ? "reviews" : "licences", id = state.sel;
+    if (v === "undo") { await clear(kind, id); return; }
+    const note = $("e-note").value.trim(), posRaw = $("e-pos").value.trim(), pos = parseLatLon(posRaw), dup = $("e-dup").value;
+    if (posRaw && !pos) { out.textContent = '좌표를 읽지 못했습니다. "37.1234, 127.1234" 형태로 넣어 주세요.'; return; }
+    const d = { verdict: v }; if (note) d.note = note; if (pos) { d.lat = pos[0]; d.lon = pos[1]; }
+    if (isC) {
+      const name = $("e-name").value.trim(), type = $("e-type").value;
+      if (name) d.name = name; if (type) d.type = type;
+      if (v === "duplicate") { if (!dup) { out.textContent = "같은 골프장을 목록에서 골라 주세요."; return; } if (dup === id) { out.textContent = "자기 자신은 고를 수 없습니다."; return; } d.dup_of = dup; }
+      if (v === "fix" && !name && !pos && !type && !note) { out.textContent = "고칠 내용을 하나 이상 입력해 주세요."; return; }
+    } else {
+      if (v === "attach") { if (!dup) { out.textContent = "연결할 골프장을 골라 주세요."; return; } d.course_id = dup; }
+      if (v === "new" && !pos) { out.textContent = "새로 추가하려면 좌표가 필요합니다."; return; }
+    }
+    const ok = await save(kind, id, d);
+    if (ok) { const items = filtered(), i = items.findIndex(x => x.id === id); const next = items[i + 1] || items[i - 1]; if (next && $("f-state").value === "todo") state.sel = next.id; renderAll(true); }
+  });
+
+  // ---------- frame
+  function renderAll(redrawDetail) {
+    const doneC = COURSES.filter(c => rev(c)).length, doneL = LICS.filter(l => lrev(l)).length, total = COURSES.length + LICS.length;
+    $("bar").style.width = (100 * (doneC + doneL) / total) + "%";
+    const flaggedLeft = COURSES.filter(c => c.review.length && !rev(c)).length;
+    $("progress-text").textContent = "검수 " + (doneC + doneL) + " / " + total + " · 표시가 붙은 골프장 중 남은 곳 " + flaggedLeft + " · 위치 못 정한 인허가 중 남은 것 " + (LICS.length - doneL);
+    $("n-c").textContent = "(" + doneC + "/" + COURSES.length + ")"; $("n-l").textContent = "(" + doneL + "/" + LICS.length + ")";
+    const items = filtered();
+    if (!state.sel || !(state.tab === "c" ? byId.has(state.sel) : LICS.some(l => l.id === state.sel))) state.sel = items[0] ? items[0].id : null;
+    renderList();
+    const active = document.activeElement, typing = active && $("detail").contains(active) && /INPUT|TEXTAREA|SELECT/.test(active.tagName);
+    if (!redrawDetail && typing) return;   // do not wipe a form someone is filling in when a snapshot arrives
+    const it = state.tab === "c" ? byId.get(state.sel) : LICS.find(l => l.id === state.sel);
+    if (!it) { $("detail").innerHTML = '<p class="empty">왼쪽 목록에서 항목을 고르세요. 목록이 비어 있으면 이 조건의 검수가 끝난 것입니다.</p>'; return; }
+    state.tab === "c" ? renderCourse(it) : renderLic(it);
+  }
+  const flags = ["인허가미확인", "영역없음", "이름불일치", "이름없음", "병합확인", "소형(25ha 미만)", "동명"];
+  $("f-flag").innerHTML = '<option value="__any">표시 붙은 곳 전체</option>' + flags.map(f => '<option value="' + f + '">' + f + " (" + COURSES.filter(c => c.review.includes(f)).length + ')</option>').join("") + '<option value="__none">표시 없는 곳</option><option value="">전체</option>';
+  function setTab(t) { state.tab = t; state.sel = null; $("tab-c").setAttribute("aria-selected", t === "c"); $("tab-l").setAttribute("aria-selected", t === "l"); $("f-flag").hidden = t !== "c"; renderAll(true); }
+  $("tab-c").addEventListener("click", () => setTab("c")); $("tab-l").addEventListener("click", () => setTab("l"));
+  ["q", "f-flag", "f-state"].forEach(id => $(id).addEventListener("input", () => { state.sel = null; renderAll(true); }));
+  renderAll(true);
+
+  try { state.db = window.claude && window.claude.use ? await window.claude.use("db") : null; } catch (e) { state.db = null; }
+  if (state.db) subscribe();
+  else { clearTimeout(timer); setStatus("이 화면에서는 저장소를 쓸 수 없습니다. 목록은 볼 수 있지만 판정은 저장되지 않습니다. claude.ai에 로그인한 상태로 열어 주세요.", "bad"); }
+})();
+</script>
