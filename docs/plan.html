@@ -1,0 +1,1248 @@
+<title>티업웨더 개발 계획서</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* Layout: technical plan document — sticky table of contents beside a ~70ch reading column; wide tables scroll inside their own frame. */
+:root {
+  --bg: #f4f7f5;
+  --surface: #ffffff;
+  --surface-2: #ecf1ee;
+  --fg: #14201a;
+  --fg-2: #3a4740;
+  --muted: #64716a;
+  --line: #d8e0dc;
+  --accent: #1c6a55;
+  --accent-ink: #ffffff;
+  --accent-soft: #e0eee8;
+  --warn: #8a5300;
+  --warn-soft: #fbf0dc;
+  --s-icon: #2a78d6;
+  --s-ifs: #eb6834;
+  --s-blend: #1baf7a;
+  --s-aifs: #eda100;
+  --s-other: #c4cac7;
+  --font-display: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 0.96875rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-3: 1.75rem;
+  --step-4: 2.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1311; --surface: #151b18; --surface-2: #1b2320; --fg: #e3eae6; --fg-2: #bac6bf; --muted: #8b9891;
+    --line: #29332f; --accent: #63c4a3; --accent-ink: #0e1311; --accent-soft: #192a23; --warn: #e3a84c; --warn-soft: #2a2113;
+    --s-icon: #3987e5; --s-ifs: #d95926; --s-blend: #199e70; --s-aifs: #c98500; --s-other: #434a47;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1311; --surface: #151b18; --surface-2: #1b2320; --fg: #e3eae6; --fg-2: #bac6bf; --muted: #8b9891;
+  --line: #29332f; --accent: #63c4a3; --accent-ink: #0e1311; --accent-soft: #192a23; --warn: #e3a84c; --warn-soft: #2a2113;
+  --s-icon: #3987e5; --s-ifs: #d95926; --s-blend: #199e70; --s-aifs: #c98500; --s-other: #434a47;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: var(--step-0); line-height: 1.75;
+  -webkit-font-smoothing: antialiased; word-break: keep-all; overflow-wrap: anywhere;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px;
+}
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.3; text-wrap: balance; margin: 0; color: var(--fg); }
+p { margin: 0; }
+code, .mono { font-family: var(--font-mono); font-size: 0.9em; }
+:not(pre) > code { background: var(--surface-2); padding: 0.1em 0.35em; border-radius: 4px; }
+
+.page {
+  max-width: 1240px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 72px;
+  display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 48px; align-items: start;
+}
+.masthead { grid-column: 1 / -1; display: grid; gap: 20px; padding-bottom: 28px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-family: var(--font-mono); font-size: var(--step--1); color: var(--muted); letter-spacing: 0.04em; }
+.masthead h1 { font-size: var(--step-4); font-weight: 700; letter-spacing: -0.01em; }
+.masthead h1 small { font-family: var(--font-mono); font-size: 0.42em; font-weight: 400; color: var(--muted); margin-left: 10px; letter-spacing: 0.02em; }
+.lead { font-size: var(--step-1); color: var(--fg-2); max-width: 46em; line-height: 1.7; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: var(--step--1); color: var(--muted); }
+.meta b { color: var(--fg-2); font-weight: 500; }
+
+/* Lead-time ruler: the plan's one-line answer, drawn on the forecast's own axis (days) */
+.ruler { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 18px 12px; display: grid; gap: 10px; }
+.ruler-title { font-family: var(--font-display); font-weight: 600; font-size: var(--step-0); display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.ruler-title span { font-family: var(--font-body); font-weight: 400; font-size: var(--step--1); color: var(--muted); }
+.bands { display: grid; grid-template-columns: 3fr 4fr 8fr; gap: 3px; }
+.band { padding: 10px 12px; border-radius: 6px; display: grid; gap: 2px; min-width: 0; }
+.band b { font-family: var(--font-mono); font-size: var(--step--1); font-weight: 500; color: var(--fg-2); }
+.band strong { font-family: var(--font-display); font-size: var(--step-0); font-weight: 600; line-height: 1.35; }
+.band small { font-size: var(--step--1); color: var(--fg-2); line-height: 1.45; }
+.band.b1 { background: color-mix(in oklab, var(--s-icon) 16%, var(--surface)); box-shadow: inset 0 -3px 0 var(--s-icon); }
+.band.b2 { background: color-mix(in oklab, var(--s-blend) 16%, var(--surface)); box-shadow: inset 0 -3px 0 var(--s-blend); }
+.band.b3 { background: color-mix(in oklab, var(--s-aifs) 14%, var(--surface)); box-shadow: inset 0 -3px 0 var(--s-aifs); }
+.ticks { position: relative; height: 30px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ticks span { position: absolute; top: 0; transform: translateX(-50%); white-space: nowrap; }
+.ticks span:first-child { transform: none; }
+.ticks span.last { transform: translateX(-100%); }
+.ticks .icon-end { top: 14px; color: var(--s-icon); white-space: nowrap; font-family: var(--font-body); }
+.ticks .icon-end::before { content: ""; position: absolute; left: 50%; top: -15px; height: 12px; border-left: 2px dashed var(--s-icon); }
+@media (max-width: 640px) {
+  .bands { grid-template-columns: 1fr; }
+  .ticks { display: none; }
+}
+
+/* Table of contents */
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); max-height: calc(100vh - 48px); overflow: auto; font-size: var(--step--1); }
+nav.toc p { font-family: var(--font-mono); color: var(--muted); letter-spacing: 0.06em; margin-bottom: 8px; }
+nav.toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; }
+nav.toc a { display: grid; grid-template-columns: 2.2em 1fr; padding: 5px 8px; border-radius: 6px; color: var(--fg-2); text-decoration: none; line-height: 1.45; }
+nav.toc a span { font-family: var(--font-mono); color: var(--muted); }
+nav.toc a:hover { background: var(--surface-2); }
+nav.toc a.active { background: var(--accent-soft); color: var(--fg); }
+nav.toc a.active span { color: var(--accent); }
+@media (max-width: 960px) {
+  .page { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  nav.toc { position: static; max-height: none; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  nav.toc ol { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+}
+
+/* Document body */
+main { display: grid; gap: 64px; min-width: 0; }
+section { display: grid; gap: 18px; min-width: 0; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 20px); }
+.sec-head { display: grid; gap: 4px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.sec-head .num { font-family: var(--font-mono); font-size: var(--step--1); color: var(--accent); letter-spacing: 0.06em; }
+.sec-head h2 { font-size: var(--step-3); font-weight: 700; }
+h3 { font-size: var(--step-2); font-weight: 600; margin-top: 14px; }
+h4 { font-size: var(--step-1); font-weight: 600; margin-top: 6px; }
+.prose { display: grid; gap: 12px; max-width: 46em; color: var(--fg-2); }
+.prose strong, td strong { color: var(--fg); }
+ul, ol { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+li::marker { color: var(--muted); }
+ul ul { margin-top: 6px; }
+.note { background: var(--warn-soft); border: 1px solid color-mix(in oklab, var(--warn) 30%, transparent); border-radius: 8px; padding: 14px 16px; max-width: 46em; color: var(--fg-2); display: grid; gap: 4px; }
+.note b { color: var(--warn); font-family: var(--font-display); }
+.callout { background: var(--accent-soft); border-radius: 8px; padding: 14px 16px; max-width: 46em; color: var(--fg-2); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: var(--step--1); line-height: 1.55; }
+th, td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+thead th { font-family: var(--font-display); font-weight: 600; color: var(--fg); background: var(--surface-2); white-space: nowrap; }
+td { color: var(--fg-2); }
+td.n, th.n { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); white-space: nowrap; }
+tr.hl td { background: color-mix(in oklab, var(--accent) 7%, transparent); }
+.best { color: var(--fg); font-weight: 600; }
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--surface-2); color: var(--fg-2); white-space: nowrap; }
+.tag.p0 { background: var(--accent-soft); color: var(--accent); }
+.dim { color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.c-icon { background: var(--s-icon); } .c-ifs { background: var(--s-ifs); } .c-blend { background: var(--s-blend); } .c-aifs { background: var(--s-aifs); } .c-other { background: var(--s-other); }
+
+pre { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; color: var(--fg-2); }
+pre.mermaid { background: var(--surface); text-align: center; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+details > summary { cursor: pointer; padding: 10px 14px; font-weight: 500; color: var(--fg-2); }
+details[open] > summary { border-bottom: 1px solid var(--line); }
+details .inner { padding: 14px; display: grid; gap: 14px; }
+
+/* Charts */
+.chart-legend { display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: var(--step--1); color: var(--fg-2); }
+.chart-legend span { display: inline-flex; align-items: center; }
+.chart-legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; margin-right: 7px; }
+.charts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 1100px) { .charts { grid-template-columns: minmax(0, 1fr); } }
+.panel { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 12px 6px; min-width: 0; }
+.panel h4 { font-size: var(--step--1); font-weight: 600; margin: 0 0 2px; }
+.panel .sub { font-size: 12px; color: var(--muted); }
+.panel svg { display: block; width: 100%; height: auto; touch-action: pan-y; }
+.panel svg text { font-family: var(--font-body); }
+.ax { fill: var(--muted); font-size: 10.5px; font-variant-numeric: tabular-nums; }
+.grid line { stroke: var(--line); stroke-width: 1; }
+.base { stroke: var(--line); }
+.ln { fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.ln.other { stroke: var(--s-other); stroke-width: 1.1; }
+.ln.hl { stroke-width: 2.2; }
+.k-icon { stroke: var(--s-icon); } .k-ifs { stroke: var(--s-ifs); } .k-blend { stroke: var(--s-blend); } .k-aifs { stroke: var(--s-aifs); }
+.pt { stroke: var(--surface); stroke-width: 1.4; }
+.f-icon { fill: var(--s-icon); } .f-ifs { fill: var(--s-ifs); } .f-blend { fill: var(--s-blend); } .f-aifs { fill: var(--s-aifs); }
+.dl { fill: var(--fg-2); font-size: 11px; paint-order: stroke; stroke: var(--surface); stroke-width: 3.5px; stroke-linejoin: round; }
+.xh { stroke: var(--muted); stroke-dasharray: 3 3; }
+.tip { position: absolute; z-index: 5; pointer-events: none; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 6px 20px color-mix(in oklab, var(--fg) 14%, transparent); padding: 8px 10px; font-size: 12px; line-height: 1.5; min-width: 170px; color: var(--fg-2); }
+.tip b { font-family: var(--font-mono); color: var(--fg); font-weight: 500; }
+.tip .row { display: flex; justify-content: space-between; gap: 12px; }
+.tip .row.h { color: var(--fg); font-weight: 600; }
+.tip .row span:last-child { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Reliability heat cells: one hue, light to dark */
+td.r { text-align: center; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+td.r5 { background: color-mix(in oklab, var(--accent) 34%, transparent); color: var(--fg); font-weight: 600; }
+td.r4 { background: color-mix(in oklab, var(--accent) 22%, transparent); color: var(--fg); }
+td.r3 { background: color-mix(in oklab, var(--accent) 12%, transparent); }
+td.r2 { background: color-mix(in oklab, var(--accent) 5%, transparent); }
+
+/* Search demo */
+.demo { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 12px; max-width: 46em; }
+.demo label { font-family: var(--font-display); font-weight: 600; font-size: var(--step--1); }
+.demo input { width: 100%; font: inherit; font-size: var(--step-1); padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { font: inherit; font-size: var(--step--1); padding: 3px 10px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface-2); color: var(--fg-2); cursor: pointer; }
+.chips button:hover { border-color: var(--accent); color: var(--accent); }
+.results { list-style: none; padding: 0; display: grid; gap: 4px; min-height: 120px; }
+.results li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 8px 10px; border-radius: 8px; background: var(--bg); }
+.results .nm { font-weight: 500; color: var(--fg); }
+.results .rg { font-size: var(--step--1); color: var(--muted); }
+.results .why { grid-column: 1 / -1; font-size: 12px; color: var(--muted); }
+.results .sc { font-family: var(--font-mono); font-size: 12px; color: var(--accent); align-self: center; }
+.demo .foot { font-size: 12px; color: var(--muted); }
+
+/* Detail screen mock */
+.mock { max-width: 400px; background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 16px; display: grid; gap: 12px; box-shadow: 0 10px 30px color-mix(in oklab, var(--fg) 8%, transparent); }
+.mock-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.mock-top b { font-family: var(--font-display); font-size: var(--step-1); }
+.mock-model { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 12.5px; color: var(--fg-2); }
+.mock-model .sel { border: 1px solid var(--line); border-radius: 6px; padding: 2px 8px; background: var(--bg); }
+.stars { color: var(--accent); letter-spacing: 1px; }
+.mock-card { background: var(--bg); border-radius: 12px; padding: 12px; display: grid; gap: 6px; font-size: 13px; }
+.mock-card .t { font-size: 12px; color: var(--muted); }
+.mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-variant-numeric: tabular-nums; }
+.mock-days { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; font-size: 11.5px; text-align: center; }
+.mock-days div { background: var(--bg); border-radius: 8px; padding: 6px 2px; display: grid; gap: 1px; }
+.mock-days div.far { opacity: 0.55; }
+.mock-days b { font-family: var(--font-display); font-size: 12px; }
+.mock-toggle { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; font-size: 12px; }
+.mock-toggle span { padding: 2px 10px; }
+.mock-toggle span.on { background: var(--accent); color: var(--accent-ink); }
+.two-col { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 860px) { .two-col { grid-template-columns: minmax(0, 1fr); } }
+
+/* Roadmap */
+.gantt { display: grid; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+.g-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; align-items: center; font-size: var(--step--1); }
+.g-track { position: relative; height: 22px; background: var(--surface-2); border-radius: 5px; }
+.g-bar { position: absolute; top: 0; bottom: 0; border-radius: 5px; background: var(--accent); color: var(--accent-ink); font-family: var(--font-mono); font-size: 11px; display: flex; align-items: center; padding-left: 8px; white-space: nowrap; overflow: hidden; }
+.g-bar.ongoing { background: repeating-linear-gradient(135deg, var(--accent-soft) 0 6px, transparent 6px 12px); color: var(--accent); border: 1px dashed var(--accent); }
+.g-scale { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px; font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+.g-scale div:last-child { display: flex; justify-content: space-between; }
+@media (max-width: 560px) { .g-row, .g-scale { grid-template-columns: 96px minmax(0, 1fr); } }
+
+.check { list-style: none; padding: 0; display: grid; gap: 8px; max-width: 46em; }
+.check label { display: grid; grid-template-columns: 22px 1fr; gap: 8px; align-items: start; color: var(--fg-2); cursor: pointer; }
+.check input { width: 16px; height: 16px; margin-top: 5px; accent-color: var(--accent); }
+.check input:checked + span { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--muted); }
+
+footer { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 18px; font-size: var(--step--1); color: var(--muted); display: grid; gap: 4px; }
+</style>
+
+<div class="page">
+  <header class="masthead">
+    <p class="eyebrow">개발 계획서 v1.0 · 2026-11-10 · 초안</p>
+    <h1>티업웨더 <small>TeeUp Weather (가칭)</small></h1>
+    <p class="lead">국내 골프장을 고르면 7일(모델이 허용하면 최대 15일)의 강수·기온·바람을 한 화면에 보여주는 앱입니다. 날씨 모델을 고를 수 있고, 각 모델이 한국에서 실제로 얼마나 맞았는지 신뢰도를 함께 보여줍니다.</p>
+    <div class="meta">
+      <span><b>1차 범위</b> 대한민국 골프장 546곳</span>
+      <span><b>출시 형태</b> 웹 PWA → 모바일 앱</span>
+      <span><b>검증 자료</b> 12개 모델 × 178회 실행 × 관측 32곳</span>
+      <span><b>재현 코드</b> <a href="https://github.com/songhyunwoong/golfweather/tree/claude/quirky-hawking-qnkkkt/research/model-verification" target="_blank" rel="noopener">research/model-verification</a></span>
+    </div>
+    <div class="ruler" aria-label="리드타임별 추천 모델">
+      <p class="ruler-title">리드타임별 추천 모델 <span>과거 예보를 기상청 관측과 대조한 결과 (2026-08-10 ~ 11-06)</span></p>
+      <div class="bands">
+        <div class="band b1"><b>D+0 ~ 3</b><strong>DWD ICON 기본</strong><small>강수 적중·바람 단일 모델 1위. 블렌드와 비교 표시</small></div>
+        <div class="band b2"><b>D+4 ~ 7</b><strong>블렌드 (AIFS·IFS·ICON·UKMO)</strong><small>ICON은 7일차 강수 적중이 급락</small></div>
+        <div class="band b3"><b>D+8 ~ 15</b><strong>ECMWF AIFS · 참고용</strong><small>강수는 10일 이후 사실상 못 맞힘. 경향만 표시</small></div>
+      </div>
+      <div class="ticks" aria-hidden="true" id="ticks"></div>
+    </div>
+  </header>
+
+  <nav class="toc" aria-label="목차">
+    <p>목차</p>
+    <ol>
+      <li><a href="#s1"><span>01</span>개요</a></li>
+      <li><a href="#s2"><span>02</span>요구사항 정의</a></li>
+      <li><a href="#s3"><span>03</span>날씨 모델 검증</a></li>
+      <li><a href="#s4"><span>04</span>데이터 소스</a></li>
+      <li><a href="#s5"><span>05</span>기능 상세 설계</a></li>
+      <li><a href="#s6"><span>06</span>시스템 아키텍처</a></li>
+      <li><a href="#s7"><span>07</span>데이터 모델</a></li>
+      <li><a href="#s8"><span>08</span>API 설계</a></li>
+      <li><a href="#s9"><span>09</span>화면 설계</a></li>
+      <li><a href="#s10"><span>10</span>개발 로드맵</a></li>
+      <li><a href="#s11"><span>11</span>비용 추정</a></li>
+      <li><a href="#s12"><span>12</span>라이선스·법률</a></li>
+      <li><a href="#s13"><span>13</span>리스크와 대응</a></li>
+      <li><a href="#s14"><span>14</span>성공 지표</a></li>
+      <li><a href="#s15"><span>15</span>바로 다음에 할 일</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- 1 -->
+    <section id="s1">
+      <div class="sec-head"><span class="num">01</span><h2>개요</h2></div>
+      <h3>배경</h3>
+      <div class="prose">
+        <ul>
+          <li>골퍼는 라운드 며칠 전부터 <strong>강수·기온·바람</strong>을 반복해서 확인합니다. 우천 취소, 옷차림, 클럽 선택(맞바람/뒷바람)이 날씨로 정해집니다.</li>
+          <li>기상청 날씨누리·포털 날씨는 <strong>골프장 단위 검색이 안 되고</strong> 행정동 단위로 보여줍니다. 산간 골프장은 행정동 중심과 고도·지형이 크게 다릅니다.</li>
+          <li>Ventusky·Windy는 모델 선택과 지도 표현이 좋지만 <strong>골프장을 찾아 들어가기 번거롭고</strong>, 모델별 신뢰도를 알려주지 않습니다.</li>
+          <li>ICON처럼 특정 모델을 선호하는 사용자도 <strong>그 모델이 이 지역에서 실제로 잘 맞았는지</strong> 확인할 방법이 없습니다.</li>
+          <li>국내 골프장은 <strong>546곳</strong>입니다(2026-01-01 기준, 한국골프장경영협회 집계). 운영 527곳(회원제 152·비회원제 375), 건설 중 11곳, 미착공 8곳입니다. 규모가 작아서 전 골프장의 예보를 <strong>미리 계산</strong>해 둘 수 있습니다.</li>
+        </ul>
+      </div>
+      <h3>목표</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>#</th><th>목표</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">G1</td><td>골프장을 고르면 <strong>한 화면에서 7일(최대 15~16일)</strong> 강수·기온·바람을 확인</td></tr>
+          <tr><td class="mono">G2</td><td><strong>날씨 모델 선택</strong>과 모델별 <strong>신뢰도(과거 실측 대비 성적)</strong> 표시</td></tr>
+          <tr><td class="mono">G3</td><td><strong>초성</strong>(예: <code>ㅂㅇㅋㄹㅋ</code> → 베어크리크)·별칭·영문명 검색</td></tr>
+          <tr><td class="mono">G4</td><td><strong>1시간 / 3시간</strong> 단위 보기 전환</td></tr>
+          <tr><td class="mono">G5</td><td><strong>Ventusky처럼 지도 위에서</strong> 강수·기온·바람 레이어를 시간 슬라이더로 보기</td></tr>
+          <tr><td class="mono">G6</td><td>1차는 <strong>한국 골프장만</strong> 대상</td></tr>
+        </tbody>
+      </table></div>
+      <h3>핵심 차별점</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>차별점</th><th>설명</th></tr></thead>
+        <tbody>
+          <tr><td><strong>골프장 단위 정밀 좌표</strong></td><td>클럽하우스가 아니라 <strong>코스 영역 중심과 대표 고도</strong>로 예보를 뽑고, 고도 차이만큼 기온을 보정</td></tr>
+          <tr><td><strong>모델 신뢰도 공개</strong></td><td>기상청 ASOS/AWS 실측과 매일 자동 대조해 <strong>지역·리드타임·변수별 성적표</strong> 제공</td></tr>
+          <tr><td><strong>골프에 맞춘 요약</strong></td><td>티업 시각부터 <strong>약 5시간</strong>의 강수·바람·체감온도와 "라운드 적합도" 지수</td></tr>
+          <tr><td><strong>모델 간 불확실성</strong></td><td>모델들이 얼마나 다르게 예보하는지를 "오늘 예보의 확실성"으로 표시</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 2 -->
+    <section id="s2">
+      <div class="sec-head"><span class="num">02</span><h2>요구사항 정의</h2></div>
+      <h3>사용자 요구 → 기능 매핑</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>#</th><th>사용자 요구</th><th>기능</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">R1</td><td>골프장을 선택하면 한눈에 1주일 날씨, 가능하면 그 이후까지</td><td>골프장 상세: 요약 카드 + 일별 7일 + 15일 확장(모델별 한계 표시)</td><td><span class="tag p0">P0</span></td></tr>
+          <tr><td class="mono">R2</td><td>날씨 모델 선택과 신뢰도 표시</td><td>모델 선택기, 지역·리드타임별 신뢰도 배지, 모델 비교 차트</td><td><span class="tag p0">P0</span></td></tr>
+          <tr><td class="mono">R3</td><td>골프장 위치를 정확히, 초성으로 검색</td><td>골프장 DB(공공데이터 + 협회 + OSM + 검수), 초성·별칭·퍼지 검색</td><td><span class="tag p0">P0</span></td></tr>
+          <tr><td class="mono">R4</td><td>1시간 / 3시간 단위 보기</td><td>시간별 표·그래프 해상도 전환, 원자료 해상도 표시</td><td><span class="tag p0">P0</span></td></tr>
+          <tr><td class="mono">R5</td><td>Ventusky처럼 지도에서 날씨, 상세한 지도</td><td>MapLibre + VWorld(국토부) 배경지도 + 강수·기온·바람 파티클 레이어</td><td><span class="tag">P1</span> <span class="dim">(기본 레이어는 P0)</span></td></tr>
+          <tr><td class="mono">R6</td><td>한국 골프장 우선</td><td>데이터·검증·지도 영역을 한반도(33~39°N, 124~131°E)로 한정</td><td><span class="tag p0">P0</span></td></tr>
+        </tbody>
+      </table></div>
+      <h3>비기능 요구사항</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>항목</th><th>목표</th></tr></thead>
+        <tbody>
+          <tr><td>응답 속도</td><td>골프장 상세 첫 화면 LCP 1.5초 이내(모바일 4G), 검색 입력 반응 50 ms 이내(기기 안에서 검색)</td></tr>
+          <tr><td>데이터 최신성</td><td>각 모델의 새 실행이 공개되고 <strong>30분 이내</strong> 반영</td></tr>
+          <tr><td>가용성</td><td>99.5%. 예보 JSON을 CDN 정적 파일로 제공해 API 서버가 멈춰도 조회 가능</td></tr>
+          <tr><td>투명성</td><td>신뢰도 점수의 산출 기간·표본 수·방법을 화면에서 확인 가능</td></tr>
+          <tr><td>접근성</td><td>색만으로 정보를 전달하지 않음(강수 아이콘과 수치 병기), 다크 모드</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 3 -->
+    <section id="s3">
+      <div class="sec-head"><span class="num">03</span><h2>날씨 모델 검증: 한국 날씨에 맞는 모델 찾기</h2></div>
+      <p class="callout">과거 예보를 실제 관측과 직접 대조해 한국 날씨에 맞는 모델을 찾았습니다. 코드와 전체 결과표는 저장소의 <code>research/model-verification/</code>에 있어 누구나 다시 돌려볼 수 있습니다.</p>
+
+      <h3>결론</h3>
+      <div class="prose">
+        <ol>
+          <li><strong>ICON을 신뢰하는 데는 근거가 있습니다. 단, 1~3일 예보에서입니다.</strong>
+            <ul>
+              <li>1~3일 구간에서 ICON은 <strong>단일 물리 모델 중 종합 1위</strong>입니다.</li>
+              <li>12시간 강수 유무(1 mm 이상) 적중 ETS 0.46으로 13개 후보 중 1위입니다.</li>
+              <li>강수 빈도편향 1.12로 비 예보를 가장 덜 남발합니다(ECMWF IFS 1.52, AIFS 1.86).</li>
+              <li>풍속 오차 0.99 m/s로 물리 모델 중 1위, 기온 오차 1.23 °C로 블렌드(1.16)·AIFS(1.18) 다음입니다.</li>
+              <li>ECMWF IFS 9km와 같은 사례끼리 비교하면 ICON이 <strong>기온 −0.13 °C, 풍속 −0.10 m/s, 강수 ETS +0.05</strong>로 모두 앞섭니다. 90% 신뢰구간이 0을 포함하지 않습니다.</li>
+            </ul>
+          </li>
+          <li><strong>4~7일은 ECMWF 계열이 따라잡거나 앞섭니다.</strong> AI 모델 ECMWF AIFS가 기온(MAE 1.45 vs ICON 1.62 °C)과 강수(ETS 0.27 vs 0.23)에서 유의하게 우세합니다. ICON은 7일차 강수 적중이 급락하고(ETS 0.07) 예보도 7.5일에서 끝납니다.</li>
+          <li><strong>8~15일은 ECMWF AIFS가 가장 낫고, 그다음이 ECMWF IFS입니다.</strong> 강수는 10일 이후 사실상 맞히지 못하므로(ETS ≈ 0) 8일 이후는 경향(참고)으로만 표시합니다.</li>
+          <li><strong>여러 모델의 평균(블렌드: IFS+ICON+UKMO+GFS)은 기온에서 1~7일 내내 최상위입니다.</strong> 하지만 강수량을 평균하면 약한 비가 과다 예보됩니다(빈도편향 1.53). 그래서 강수 유무는 평균값이 아니라 <strong>모델 다수결/확률</strong>로 표시합니다.</li>
+          <li><strong>기상청 계열 모델은 이번 검증에 넣지 못했습니다.</strong> KMA-UM은 2026년에 종료됐고, Open-Meteo의 KMA 피드도 2026-04 이후 갱신이 멈췄으며, KIM은 공개 아카이브가 없습니다. 출시 후 기상청 단기예보를 직접 수집해 같은 방식으로 검증합니다.</li>
+        </ol>
+      </div>
+
+      <h4>리드타임별 앱 기본값 (제안)</h4>
+      <div class="table-wrap"><table>
+        <thead><tr><th>리드타임</th><th>기온·바람 기본</th><th>강수 유무 판단</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">D+0~3</td><td><strong>ICON</strong>과 블렌드(ICON·AIFS·IFS·UKMO)</td><td>ICON·UKMO·IFS·MSM·ARPEGE <strong>다수결</strong> + 강수량 중앙값</td><td>선호 모델 ICON을 기본으로, 블렌드와 비교</td></tr>
+          <tr><td class="mono">D+4~7</td><td><strong>블렌드</strong>(AIFS·IFS·ICON·UKMO)</td><td>AIFS·IFS·ICON 다수결</td><td>ICON은 7일차부터 신뢰도 급락 표시</td></tr>
+          <tr><td class="mono">D+8~15</td><td><strong>ECMWF AIFS</strong>와 IFS(ECMWF 앙상블 확률 추가 검토)</td><td>확률로만 표시</td><td>"참고용" 회색 처리</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>검증 방법</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>항목</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td>예보 자료</td><td>Open-Meteo 오픈데이터 AWS 버킷의 <strong>실행별 원본 예보</strong> <code>s3://openmeteo/data_run/{model}/{yyyy}/{mm}/{dd}/{HHMM}Z/*.om</code></td></tr>
+          <tr><td>기간·실행</td><td>2026-08-10 ~ 11-06 초기화, <strong>00·12 UTC 실행 178회</strong>(모델당). 늦여름 장마 후반·태풍기·가을 포함</td></tr>
+          <tr><td>비교 모델</td><td>DWD ICON, ECMWF IFS 9km, ECMWF IFS 0.25°, ECMWF AIFS, NCEP GFS 0.11°, NCEP AIGFS, UKMO 10km, JMA MSM 5km, JMA GSM, CMA GRAPES, Météo-France ARPEGE, CMC GEM 15km, <strong>블렌드</strong>(IFS+ICON+UKMO+GFS 단순 평균, 결과를 보기 전에 지정)</td></tr>
+          <tr><td>관측</td><td>기상청 ASOS 29곳(SYNOP/BUFR)과 공항 3곳(김포·서울공항·대구, METAR). NOAA GHCNh 2026 시간별 자료로 수집</td></tr>
+          <tr><td>지역</td><td>수도권·강원(대관령 844 m 포함)·충청·영남·호남·제주</td></tr>
+          <tr><td>격자 선택</td><td>관측소를 둘러싼 2×2 격자 중 <strong>고도가 가장 비슷한 육지 격자</strong>(바다 격자 제외)</td></tr>
+          <tr><td>기온 보정</td><td>모델 지형고도와 관측소 고도의 차이를 0.65 °C/100 m로 보정</td></tr>
+          <tr><td>기온·바람</td><td>00·06·12·18 UTC(09·15·21·03 KST) 값. 1·3·6시간 간격 모델을 같은 조건으로 비교</td></tr>
+          <tr><td>강수</td><td>12시간·24시간 누적. BUFR 3시간 강수(02·05·…·23 UTC, 24시간 누적과 97~100% 일치)를 합산. 관측 창이 모델 창보다 1시간 이르지만 모든 모델에 같은 조건</td></tr>
+          <tr><td>공정성</td><td>같은 리드타임에 <strong>모든 모델이 예보를 가진 사례만</strong> 비교(동일 표본). 그날을 끝까지 덮는 모델만 포함(예: ICON은 D1~7)</td></tr>
+          <tr><td>지표</td><td>MAE(평균절대오차), BIAS(평균 편차), 지속성 대비 스킬(1 − MAE/MAE<sub>지속성</sub>), 강수 ETS·POD·FAR·빈도편향(FBI)</td></tr>
+          <tr><td>통계적 신뢰성</td><td>초기화 날짜 단위 블록 부트스트랩(500~1,000회) 90% 구간, 모델 쌍별 대응 비교</td></tr>
+          <tr><td>표본 수</td><td>리드타임별 기온 약 1.7~1.9만 쌍, 풍속 약 0.7~0.8만 쌍, 12시간 강수 1 mm 이상 관측 사례 약 650~830건</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>리드타임별 성적</h3>
+      <div class="chart-legend" aria-hidden="true">
+        <span><i class="c-icon"></i>DWD ICON</span>
+        <span><i class="c-ifs"></i>ECMWF IFS 9km</span>
+        <span><i class="c-blend"></i>블렌드(4모델 평균)</span>
+        <span><i class="c-aifs"></i>ECMWF AIFS (AI)</span>
+        <span><i class="c-other"></i>기타 모델 8개</span>
+      </div>
+      <div class="charts" id="charts"></div>
+      <p class="dim" style="font-size: var(--step--1)">그래프 위에 마우스를 올리거나 탭하면 그날 13개 후보의 값을 순위대로 보여줍니다. 그래프를 선택한 뒤 ← → 키로 날짜를 옮길 수 있습니다.</p>
+      <details>
+        <summary>표로 보기 (일별 값)</summary>
+        <div class="inner" id="chart-tables"></div>
+      </details>
+
+      <h4>1~3일 종합 성적 (모든 모델 공통 표본)</h4>
+      <p class="dim" style="font-size: var(--step--1)">평균순위는 기온 MAE, 풍속 MAE, 12시간 강수 ETS, 24시간 10 mm 이상 ETS의 순위 평균입니다. ETS는 0이면 우연 수준, 1이면 완벽. 빈도편향(FBI)은 1이면 비 예보 횟수가 실제와 같고, 1보다 크면 비를 너무 자주 예보한다는 뜻입니다.</p>
+      <div class="table-wrap"><table>
+        <thead><tr><th class="n">순위</th><th>모델</th><th class="n">기온 MAE °C</th><th class="n">기온 편차</th><th class="n">풍속 MAE m/s</th><th class="n">풍속 편차</th><th class="n">12h ≥1mm ETS</th><th class="n">빈도편향</th><th class="n">24h ≥10mm ETS</th><th class="n">평균순위</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td class="n">1</td><td><strong>블렌드(4모델)</strong></td><td class="n best">1.16</td><td class="n">−0.40</td><td class="n">1.00</td><td class="n">+0.54</td><td class="n">0.431</td><td class="n">1.53</td><td class="n best">0.489</td><td class="n">2.5</td></tr>
+          <tr class="hl"><td class="n">2</td><td><strong>DWD ICON</strong></td><td class="n">1.23</td><td class="n">−0.21</td><td class="n">0.99</td><td class="n">+0.19</td><td class="n best">0.462</td><td class="n best">1.12</td><td class="n">0.381</td><td class="n">4.0</td></tr>
+          <tr><td class="n">3</td><td>UKMO 10km</td><td class="n">1.44</td><td class="n">−0.27</td><td class="n">1.26</td><td class="n">+0.75</td><td class="n">0.443</td><td class="n">1.29</td><td class="n">0.471</td><td class="n">4.8</td></tr>
+          <tr><td class="n">4</td><td>ECMWF IFS 9km</td><td class="n">1.36</td><td class="n">−0.46</td><td class="n">1.10</td><td class="n">+0.51</td><td class="n">0.402</td><td class="n">1.52</td><td class="n">0.442</td><td class="n">5.2</td></tr>
+          <tr><td class="n">5</td><td>ECMWF AIFS (AI)</td><td class="n">1.18</td><td class="n">+0.22</td><td class="n">1.10</td><td class="n">+0.46</td><td class="n">0.374</td><td class="n">1.86</td><td class="n">0.480</td><td class="n">5.5</td></tr>
+          <tr><td class="n">6</td><td>ECMWF IFS 0.25°</td><td class="n">1.47</td><td class="n">−0.56</td><td class="n">1.09</td><td class="n">+0.44</td><td class="n">0.388</td><td class="n">1.57</td><td class="n">0.432</td><td class="n">6.0</td></tr>
+          <tr><td class="n">7</td><td>NCEP AIGFS (AI)</td><td class="n">1.54</td><td class="n">−0.84</td><td class="n best">0.93</td><td class="n">−0.08</td><td class="n">0.378</td><td class="n">1.38</td><td class="n">0.389</td><td class="n">7.0</td></tr>
+          <tr><td class="n">8</td><td>CMC GEM</td><td class="n">1.51</td><td class="n">−0.69</td><td class="n">1.12</td><td class="n">+0.51</td><td class="n">0.421</td><td class="n">1.37</td><td class="n">0.403</td><td class="n">7.0</td></tr>
+          <tr><td class="n">9</td><td>JMA MSM 5km</td><td class="n">1.57</td><td class="n">−0.41</td><td class="n">1.45</td><td class="n">+0.99</td><td class="n">0.435</td><td class="n">1.15</td><td class="n">0.430</td><td class="n">8.2</td></tr>
+          <tr><td class="n">10</td><td>MF ARPEGE</td><td class="n">1.54</td><td class="n">+0.33</td><td class="n">1.39</td><td class="n">+0.55</td><td class="n">0.437</td><td class="n">1.29</td><td class="n">0.376</td><td class="n">8.8</td></tr>
+          <tr><td class="n">11</td><td>NCEP GFS</td><td class="n">1.56</td><td class="n">−0.65</td><td class="n">1.24</td><td class="n">+0.71</td><td class="n">0.387</td><td class="n">1.37</td><td class="n">0.369</td><td class="n">10.2</td></tr>
+          <tr><td class="n">12</td><td>JMA GSM</td><td class="n">1.80</td><td class="n">+0.28</td><td class="n">1.63</td><td class="n">+0.81</td><td class="n">0.422</td><td class="n">1.31</td><td class="n">0.379</td><td class="n">10.8</td></tr>
+          <tr><td class="n">13</td><td>CMA GRAPES</td><td class="n">1.72</td><td class="n">−0.86</td><td class="n">1.29</td><td class="n">+0.85</td><td class="n">0.358</td><td class="n">1.37</td><td class="n">0.384</td><td class="n">11.0</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4>리드타임 구간별 핵심 지표</h4>
+      <p class="dim" style="font-size: var(--step--1)">각 리드타임에서 그날을 끝까지 덮는 모델끼리 동일 표본으로 비교했습니다. "—"는 예보 기간이 그 구간에 닿지 않는 경우입니다.</p>
+      <div class="table-wrap"><table>
+        <thead>
+          <tr><th rowspan="2">모델</th><th class="n" colspan="5" style="text-align:center">기온 MAE (°C)</th><th class="n" colspan="5" style="text-align:center">12시간 강수 ≥1 mm ETS</th></tr>
+          <tr><th class="n">D1-3</th><th class="n">D4-5</th><th class="n">D6-7</th><th class="n">D8-10</th><th class="n">D11-15</th><th class="n">D1-3</th><th class="n">D4-5</th><th class="n">D6-7</th><th class="n">D8-10</th><th class="n">D11-15</th></tr>
+        </thead>
+        <tbody>
+          <tr class="hl"><td><strong>블렌드(4모델)</strong></td><td class="n best">1.16</td><td class="n best">1.32</td><td class="n best">1.51</td><td class="n">—</td><td class="n">—</td><td class="n">0.431</td><td class="n best">0.324</td><td class="n">0.179</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr class="hl"><td><strong>DWD ICON</strong></td><td class="n">1.23</td><td class="n">1.46</td><td class="n">1.78</td><td class="n">—</td><td class="n">—</td><td class="n best">0.462</td><td class="n">0.317</td><td class="n">0.151</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td>ECMWF AIFS (AI)</td><td class="n">1.18</td><td class="n">1.33</td><td class="n">1.57</td><td class="n best">1.99</td><td class="n best">2.57</td><td class="n">0.374</td><td class="n">0.320</td><td class="n best">0.226</td><td class="n best">0.126</td><td class="n best">0.037</td></tr>
+          <tr><td>ECMWF IFS 9km</td><td class="n">1.36</td><td class="n">1.52</td><td class="n">1.70</td><td class="n">2.22</td><td class="n">2.84</td><td class="n">0.402</td><td class="n">0.317</td><td class="n">0.197</td><td class="n">0.093</td><td class="n">−0.002</td></tr>
+          <tr><td>ECMWF IFS 0.25°</td><td class="n">1.47</td><td class="n">1.62</td><td class="n">1.79</td><td class="n">2.31</td><td class="n">2.91</td><td class="n">0.388</td><td class="n">0.301</td><td class="n">0.198</td><td class="n">0.090</td><td class="n">−0.003</td></tr>
+          <tr><td>UKMO 10km</td><td class="n">1.44</td><td class="n">1.61</td><td class="n">1.82</td><td class="n">—</td><td class="n">—</td><td class="n">0.443</td><td class="n">0.311</td><td class="n">0.174</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td>NCEP GFS</td><td class="n">1.56</td><td class="n">1.77</td><td class="n">2.09</td><td class="n">2.40</td><td class="n">2.93</td><td class="n">0.387</td><td class="n">0.210</td><td class="n">0.082</td><td class="n">0.039</td><td class="n">−0.008</td></tr>
+          <tr><td>NCEP AIGFS (AI)</td><td class="n">1.54</td><td class="n">1.75</td><td class="n">2.08</td><td class="n">2.49</td><td class="n">3.07</td><td class="n">0.378</td><td class="n">0.284</td><td class="n">0.195</td><td class="n">0.103</td><td class="n">0.021</td></tr>
+          <tr><td>CMC GEM</td><td class="n">1.51</td><td class="n">1.84</td><td class="n">2.13</td><td class="n">2.54</td><td class="n">—</td><td class="n">0.421</td><td class="n">0.259</td><td class="n">0.200</td><td class="n">0.103</td><td class="n">—</td></tr>
+          <tr><td>JMA GSM</td><td class="n">1.80</td><td class="n">2.01</td><td class="n">2.24</td><td class="n">2.51</td><td class="n">—</td><td class="n">0.422</td><td class="n">0.268</td><td class="n">0.124</td><td class="n">0.087</td><td class="n">—</td></tr>
+          <tr><td>JMA MSM 5km</td><td class="n">1.57</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">0.435</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td>MF ARPEGE</td><td class="n">1.54</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">0.437</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+          <tr><td>CMA GRAPES</td><td class="n">1.72</td><td class="n">1.86</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">0.358</td><td class="n">0.189</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4>ICON과 다른 모델의 대응 비교 (같은 사례, 90% 부트스트랩 구간)</h4>
+      <div class="table-wrap"><table>
+        <thead><tr><th>구간</th><th>비교</th><th class="n">기온 MAE 차 °C</th><th class="n">풍속 MAE 차 m/s</th><th class="n">12h 강수 ETS 차</th><th>해석</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">D1-3</td><td>ICON − ECMWF IFS 9km</td><td class="n"><strong>−0.13</strong> <span class="dim">(−0.15~−0.11)</span></td><td class="n"><strong>−0.10</strong> <span class="dim">(−0.12~−0.08)</span></td><td class="n"><strong>+0.050</strong> <span class="dim">(+0.027~+0.071)</span></td><td>ICON이 세 변수 모두 우세</td></tr>
+          <tr><td class="mono">D1-3</td><td>ICON − UKMO 10km</td><td class="n"><strong>−0.20</strong></td><td class="n"><strong>−0.26</strong></td><td class="n">+0.007 <span class="dim">(−0.016~+0.027)</span></td><td>강수는 동률, 기온·바람은 ICON</td></tr>
+          <tr><td class="mono">D1-3</td><td>ICON − ECMWF AIFS</td><td class="n">+0.04 <span class="dim">AIFS 우세</span></td><td class="n"><strong>−0.11</strong></td><td class="n"><strong>+0.074</strong></td><td>기온만 AIFS, 바람·강수는 ICON</td></tr>
+          <tr><td class="mono">D1-3</td><td>ICON − GFS</td><td class="n"><strong>−0.33</strong></td><td class="n"><strong>−0.24</strong></td><td class="n"><strong>+0.055</strong></td><td>ICON이 크게 앞섬</td></tr>
+          <tr><td class="mono">D4-7</td><td>ICON − ECMWF IFS 9km</td><td class="n">+0.01 <span class="dim">(−0.03~+0.05)</span></td><td class="n"><strong>−0.06</strong></td><td class="n">−0.027 <span class="dim">(−0.060~+0.004)</span></td><td>기온 동률, 바람은 ICON, 강수는 IFS가 소폭 앞서지만 유의하지 않음</td></tr>
+          <tr><td class="mono">D4-7</td><td>ICON − ECMWF AIFS</td><td class="n"><strong>+0.19</strong> <span class="dim">AIFS 우세</span></td><td class="n"><strong>−0.09</strong></td><td class="n"><strong>−0.050</strong> <span class="dim">AIFS 우세</span></td><td>4~7일은 AIFS가 기온·강수 우세</td></tr>
+        </tbody>
+      </table></div>
+
+      <h4>지역별 상위 모델 (1~3일, 모든 모델 공통 표본)</h4>
+      <div class="table-wrap"><table>
+        <thead><tr><th>지역 (지점 수)</th><th>기온 MAE 상위 3</th><th>풍속 MAE 상위 3</th><th>12h 강수 ETS 상위 3</th></tr></thead>
+        <tbody>
+          <tr><td>수도권 (4)</td><td>AIFS 1.05 · 블렌드 1.17 · ICON 1.28</td><td>블렌드 · AIGFS · IFS 9km</td><td>GEM 0.33 · IFS 0.25° 0.33 · IFS 9km 0.32 <span class="dim">(ICON 0.27, 강수 사례 114건으로 적음)</span></td></tr>
+          <tr><td>강원 (4)</td><td>AIFS 1.33 · 블렌드 1.35 · ICON 1.35</td><td>AIGFS · 블렌드 · GFS</td><td>ARPEGE 0.41 · <strong>ICON 0.38</strong> · UKMO 0.37</td></tr>
+          <tr><td>충청 (6)</td><td>블렌드 1.24 · AIFS 1.27 · ICON 1.28</td><td><strong>ICON</strong> · AIGFS · 블렌드</td><td>MSM 0.48 · UKMO 0.47 · GEM 0.44 <span class="dim">(ICON 0.44)</span></td></tr>
+          <tr><td>영남 (8)</td><td>블렌드 1.06 · AIFS 1.10 · ICON 1.13</td><td>AIGFS · IFS 0.25° · AIFS</td><td><strong>ICON 0.52</strong> · 블렌드 0.47 · GEM 0.46</td></tr>
+          <tr><td>호남 (7)</td><td>블렌드 1.10 · ARPEGE 1.18 · ICON 1.19</td><td><strong>ICON</strong> · 블렌드 · ARPEGE</td><td><strong>ICON 0.52</strong> · GEM 0.51 · GSM 0.51</td></tr>
+          <tr><td>제주 (3)</td><td>AIFS 1.15 · 블렌드 1.21 · ICON 1.28</td><td><strong>ICON</strong> · AIGFS · IFS 0.25°</td><td><strong>ICON 0.42</strong> · UKMO 0.40 · GSM 0.39</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p>ICON은 <strong>모든 지역에서 기온 상위 3위</strong> 안에 들었습니다. 강수는 영남·호남·제주에서 1위, 강원에서 2위였습니다. 수도권은 강수 관측 지점(인천·수원)이 적어 판단을 보류합니다.</p></div>
+
+      <h4>그 밖의 발견</h4>
+      <div class="prose">
+        <ul>
+          <li><strong>바람은 대부분의 모델이 관측보다 0.5~1.0 m/s 강하게 예보합니다</strong>(ICON +0.2, AIGFS −0.1은 예외). 관측소 주변 차폐 때문일 가능성이 큽니다. 골프장은 구릉·개활지라 노출 조건이 달라서 일괄 보정은 위험하고, 인근 AWS와 사용자 피드백이 쌓이면 지점별로 보정합니다.</li>
+          <li><strong>풍속은 "어제 같은 시각의 바람"과 비교해도 모델의 우위가 작습니다</strong>(스킬 −0.5~+0.2). 국지 지형 영향이 커서 수치모델의 한계가 뚜렷하므로, 앱에서는 풍속 범위와 돌풍을 함께 보여줍니다.</li>
+          <li><strong>기온은 대부분의 모델이 낮게 예보합니다</strong>(IFS −0.46, GFS −0.65 °C). AIFS·ARPEGE·GSM은 높게 예보합니다. 편차가 일정하므로 지역별 편차 보정만으로 오차를 더 줄일 수 있습니다.</li>
+          <li><strong>JMA MSM(5 km)은 해상도가 높지만</strong> 3일 이내 기온·바람 오차가 ICON보다 큽니다. 강수 유무는 상위권(ETS 0.435, FBI 1.15)이라 강수 다수결의 구성원으로 씁니다.</li>
+        </ul>
+      </div>
+
+      <h3>앱의 모델 신뢰도 산출 방식</h3>
+      <div class="prose"><p>검증 결과를 0~100점과 별점(1~5)으로 바꿉니다. 출시 후에는 <strong>기상청 API허브 ASOS/AWS 실측으로 매일 갱신</strong>하고, 권역 × 모델 × 리드타임별 <strong>최근 90일 롤링</strong> 값을 씁니다.</p></div>
+<pre>강수점수 = clamp(100 × ETS(12h, ≥1mm) / 0.5)        # ETS 0 → 0점, 0.5 → 100점
+기온점수 = clamp(100 × (3.0 − MAE_기온) / 2.0)      # 3.0 °C → 0점, 1.0 °C → 100점
+바람점수 = clamp(100 × (2.0 − MAE_풍속) / 1.2)      # 2.0 m/s → 0점, 0.8 m/s → 100점
+신뢰도   = 0.45 × 강수점수 + 0.35 × 기온점수 + 0.20 × 바람점수
+별점     = ≥85 ★5 · ≥70 ★4 · ≥55 ★3 · ≥40 ★2 · 그 외 ★1</pre>
+      <h4>이번 검증 데이터(전국)에 적용한 예</h4>
+      <div class="table-wrap"><table id="rel-table">
+        <thead><tr><th>모델</th><th class="n">D+1</th><th class="n">D+2</th><th class="n">D+3</th><th class="n">D+4</th><th class="n">D+5</th><th class="n">D+6</th><th class="n">D+7</th><th class="n">D+8</th><th class="n">D+10</th><th class="n">D+12</th><th class="n">D+15</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <div class="prose"><p>이와 별도로 <strong>"오늘 예보의 확실성"</strong>을 보여줍니다. 과거 성적이 아니라 이번 예보에서 모델들이 얼마나 일치하는지입니다. 같은 시각 모델들의 기온 표준편차와 강수 유무 일치율로 계산해 높음·보통·낮음 3단계로 표시합니다.</p></div>
+
+      <h3>한계와 후속 검증</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>한계</th><th>영향</th><th>후속 조치</th></tr></thead>
+        <tbody>
+          <tr><td>기간이 3개월(2026-08~11)</td><td>겨울 강설·봄철·장마 전반은 미반영. 계절에 따라 순위가 바뀔 수 있음</td><td>출시 후 자동 검증으로 <strong>계절별</strong> 성적 축적. Open-Meteo Previous Runs API(2024~)로 1년 이상 추가 검증</td></tr>
+          <tr><td>기상청 모델(KIM)·기상청 예보 미포함</td><td>"한국 모델" 비교 공백</td><td>기상청 단기예보를 매 발표 수집·보관해 같은 지표로 비교</td></tr>
+          <tr><td>관측소 위치 ≠ 골프장</td><td>구릉·산간 골프장의 대표성 제한</td><td>골프장 인근 AWS 매핑, 대관령 같은 고지대 결과는 따로 표시</td></tr>
+          <tr><td>강수 관측 창 1시간 차이</td><td>모든 모델에 같은 조건이라 순위 영향은 작음</td><td>기상청 API허브 시간강수로 교체</td></tr>
+          <tr><td>블렌드는 단순 평균</td><td>성적 가중 시 추가 개선 여지</td><td>지역·리드타임별 가중치 학습(기간을 나눠 과적합 방지)</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 4 -->
+    <section id="s4">
+      <div class="sec-head"><span class="num">04</span><h2>데이터 소스</h2></div>
+      <h3>기상 데이터: 모델 예보</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>모델</th><th>기관</th><th>수평 해상도</th><th>예보 기간 (00/12Z)</th><th>시간 간격</th><th>실행</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>ECMWF IFS HRES</td><td>ECMWF</td><td>9 km (O1280)</td><td>15일 (06/18Z 6일)</td><td>1h → 90h 이후 3h → 144h 이후 6h</td><td>4회/일</td><td>2025-10부터 9 km 오픈데이터</td></tr>
+          <tr><td>ECMWF IFS 0.25°</td><td>ECMWF</td><td>~25 km</td><td>15일</td><td>3h → 6h</td><td>4회/일</td><td></td></tr>
+          <tr><td>ECMWF AIFS Single</td><td>ECMWF</td><td>0.25°</td><td>15일</td><td>6h</td><td>4회/일</td><td>AI 모델 (2025-02 운영)</td></tr>
+          <tr class="hl"><td><strong>DWD ICON</strong></td><td>독일 기상청</td><td>13 km (0.125° 재격자)</td><td><strong>7.5일 (180h)</strong>, 06/18Z 5일</td><td>1h → 78h 이후 3h</td><td>4회/일</td><td>사용자 선호 모델</td></tr>
+          <tr><td>NCEP GFS</td><td>미국 NOAA</td><td>0.11° (~13 km)</td><td>16일</td><td>1h → 120h 이후 3h</td><td>4회/일</td><td></td></tr>
+          <tr><td>NCEP AIGFS</td><td>미국 NOAA</td><td>0.25°</td><td>~16일</td><td>6h</td><td>4회/일</td><td>AI 모델</td></tr>
+          <tr><td>UKMO Global</td><td>영국 기상청</td><td>10 km</td><td>7일 (06/18Z 2.5일)</td><td>1h → 3h → 6h</td><td>4회/일</td><td></td></tr>
+          <tr><td>JMA MSM</td><td>일본 기상청</td><td>5 km (한반도 포함)</td><td>3.25일 (78h)</td><td>1h</td><td>8회/일</td><td>영역 모델</td></tr>
+          <tr><td>JMA GSM</td><td>일본 기상청</td><td>0.5°</td><td>11일</td><td>6h</td><td>4회/일</td><td></td></tr>
+          <tr><td>CMA GRAPES</td><td>중국 기상청</td><td>0.125°</td><td>5일 (아카이브 기준)</td><td>3h</td><td>4회/일</td><td></td></tr>
+          <tr><td>Météo-France ARPEGE</td><td>프랑스 기상청</td><td>0.25°</td><td>4.25일</td><td>1h → 3h</td><td>4회/일</td><td></td></tr>
+          <tr><td>CMC GEM</td><td>캐나다 기상청</td><td>15 km</td><td>10일</td><td>1h → 3h</td><td>2회/일</td><td></td></tr>
+          <tr class="hl"><td><strong>기상청 단기예보</strong></td><td>KMA</td><td>5 km 격자 (nx, ny)</td><td>약 5일 (5일차 일부 정성 표현)</td><td>1h</td><td>8회/일 (02·05·…·23시)</td><td>data.go.kr, 예보관 보정 결과</td></tr>
+          <tr><td><strong>기상청 중기예보</strong></td><td>KMA</td><td>시·도 권역 → 2026-11 디지털 중기예보 5 km 도입 예정</td><td>4~10일</td><td>일 단위 (디지털: 3h/6h)</td><td>2회/일</td><td>API 제공 범위 확인 필요</td></tr>
+          <tr><td>KIM (한국형 수치모델)</td><td>KMA</td><td>8 km 전구</td><td>12일</td><td></td><td>2회/일</td><td>2026년 KMA-UM 종료 후 단독 운영. 원시자료 외부 제공 범위 확인 필요</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>KMA 모델 접근성 변화</b><p>Open-Meteo가 제공하던 KMA GDPS/LDPS(UM 기반)는 2026-03-31 이후 갱신이 멈췄습니다(아카이브 메타데이터상 마지막 자료 2026-04-04). 기상청이 KMA-UM을 종료하고 KIM 단독 운영으로 바꾼 시기와 겹칩니다. 그래서 "기상청" 선택지는 <strong>기상청 단기·중기예보 API</strong>로 제공하고, KIM 원시자료는 기상청 API허브·기상자료개방포털 제공 여부를 확인한 뒤 추가합니다.</p></div>
+
+      <h3>제공 경로 비교</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>경로</th><th>장점</th><th>단점</th><th>권장 용도</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Open-Meteo 상업 API</strong><br><span class="dim">Standard $29/월·100만 호출, Professional $99/월</span></td><td>12개 이상 모델을 한 API로, 고도 보정·변수 통일</td><td>외부 의존, 호출량 과금</td><td><strong>MVP 포인트 예보</strong></td></tr>
+          <tr><td><strong>Open-Meteo 오픈데이터</strong><br><span class="dim">AWS <code>s3://openmeteo</code></span></td><td>호출 과금 없음, 실행별(<code>data_run</code>)·지도용(<code>data_spatial</code>) 원본, CC BY 4.0</td><td>처리 파이프라인을 직접 운영</td><td><strong>지도 타일 생성</strong>, 검증, 장기적으로 포인트 예보 자체 호스팅</td></tr>
+          <tr><td>각 기관 원본 GRIB</td><td>가장 원천</td><td>변환 부담 큼</td><td>필요 시</td></tr>
+          <tr><td>기상청 공공데이터 (data.go.kr)</td><td>공식 예보, 한국어 날씨 표현</td><td>일일 호출 한도(개발계정 1만 회/일, 운영계정 상향 신청), 격자 5 km</td><td>"기상청 예보" 선택지</td></tr>
+          <tr><td>기상청 API허브</td><td>ASOS/AWS 실측, 레이더·위성</td><td>키 발급 필요</td><td><strong>실측(현재 날씨)·검증</strong></td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose"><p><strong>실측 자료:</strong> 기상청 ASOS(약 100곳)·AWS(약 500곳). 골프장 반경 10~20 km 안의 AWS를 연결해 "지금 골프장 근처 날씨"와 검증에 씁니다. 이번 사전 검증에서는 네트워크 제약으로 NOAA GHCNh(기상청 ASOS 전문 포함)를 썼습니다.</p></div>
+
+      <h3>골프장 마스터 데이터</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>소스</th><th>내용</th><th>용도</th><th>주의</th></tr></thead>
+        <tbody>
+          <tr><td>행정안전부 지방행정 인허가 데이터 "골프장" 업종<br><span class="dim">2026-01부터 공공데이터포털 API로 이관</span></td><td>사업장명, 영업상태, 주소, 인허가일, 좌표(X, Y)</td><td><strong>기본 목록과 좌표</strong></td><td>좌표계 <strong>EPSG:5174</strong>(Bessel 중부원점 TM, 보정계수 미적용). 일부 지자체 자료는 EPSG:2097이라 파일별 확인 후 WGS84로 변환</td></tr>
+          <tr><td>한국골프장경영협회(KGBA) 회원사 목록·연감</td><td>회원제/대중제, 홀 수, 휴장 정보</td><td>분류·보강</td><td>공개 범위 확인</td></tr>
+          <tr><td>OpenStreetMap <code>leisure=golf_course</code></td><td>코스 영역 폴리곤, 일부 홀 배치</td><td>코스 중심점·면적·지도 표시</td><td>ODbL: 출처 표시, 파생 DB를 공개하면 같은 조건</td></tr>
+          <tr><td>국토지리정보원 수치표고(DEM) / Copernicus DEM</td><td>고도</td><td>코스 대표 고도 → 기온 고도 보정</td><td></td></tr>
+          <tr><td>카카오·네이버·구글 장소 API</td><td>장소 ID, 전화, 링크</td><td><strong>검수 보조·딥링크만</strong></td><td>카카오 로컬 결과의 DB화 금지, 구글은 좌표 30일 캐시 한도(place_id만 영구 저장) → <strong>좌표의 원천은 공공데이터</strong></td></tr>
+          <tr><td>경기도 골프장 현황(경기데이터드림)</td><td>WGS84 좌표</td><td>경기권 교차 검증</td><td>경기도만</td></tr>
+        </tbody>
+      </table></div>
+      <h4>골프장 DB 구축 절차</h4>
+      <div class="prose">
+        <ol>
+          <li>인허가 데이터에서 영업 중인 골프장을 추출하고 EPSG:5174 → EPSG:4326으로 변환(<code>pyproj</code>).</li>
+          <li>KGBA 목록과 <strong>명칭을 정규화해 매칭</strong>("CC/C.C/컨트리클럽/골프클럽/GC/골프앤리조트" 제거, 공백·특수문자 제거).</li>
+          <li>OSM 골프장 폴리곤과 공간 조인(클럽하우스 점이 폴리곤 안이나 1 km 이내) → <strong>코스 중심점</strong>, 면적, 대표 고도(폴리곤 안 DEM 중앙값) 계산.</li>
+          <li>VWorld 위성지도 위에 띄워 <strong>수작업 검수</strong>(546곳, 1인 2~3일). 신규·폐업은 인허가 데이터 월 1회 동기화와 사용자 제보로 반영.</li>
+          <li>별칭 사전 구축: 공식명, 약칭, 구 명칭, 영문명(예: <code>Bear Creek</code>), 흔한 오타.</li>
+        </ol>
+      </div>
+
+      <h3>지도 데이터</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>후보</th><th>한국 상세도</th><th>비용</th><th>기상 오버레이</th><th>평가</th></tr></thead>
+        <tbody>
+          <tr class="hl"><td><strong>VWorld (국토교통부)</strong></td><td>매우 높음. 일반·<strong>위성·하이브리드</strong> WMTS (EPSG:3857)</td><td>무료(키 발급, 출처 표시)</td><td>MapLibre에 래스터 소스로 바로 사용</td><td><strong>기본 배경지도로 채택</strong></td></tr>
+          <tr><td>구글 지도</td><td>국내 상세도 제한적. 2026-02 정부가 1:5,000 지도 국외 반출을 조건부 승인(보안시설 블러, 국내 파트너 처리 등), 2026-10 기준 반영 진행 중</td><td>Maps JS 사용량 과금</td><td>deck.gl <code>GoogleMapsOverlay</code>로 가능</td><td>2차 옵션. 반출 반영 후 재평가</td></tr>
+          <tr><td>네이버 지도 (NCP Maps)</td><td>매우 높음</td><td>2025년 신규 Maps 상품 개편, 무료 한도는 대표 계정 기준</td><td>커스텀 WebGL 레이어 연동이 번거로움</td><td><strong>길찾기 딥링크</strong></td></tr>
+          <tr><td>카카오맵</td><td>매우 높음</td><td>2026-07부터 무료 한도는 계정당 첫 앱만</td><td>타일 좌표계 EPSG:5181이라 MapLibre와 맞지 않음</td><td><strong>길찾기 딥링크</strong></td></tr>
+          <tr><td>OSM 기반 벡터 타일</td><td>중간</td><td>무료~저가</td><td>우수</td><td>라벨·도로 오버레이 보조</td></tr>
+        </tbody>
+      </table></div>
+      <p class="callout"><strong>결론:</strong> MapLibre GL JS + VWorld 위성/하이브리드 배경 + 자체 기상 타일(강수·기온·바람) + deck.gl 바람 파티클. 길찾기는 네이버·카카오·티맵 앱 딥링크로 연결합니다.</p>
+    </section>
+
+    <!-- 5 -->
+    <section id="s5">
+      <div class="sec-head"><span class="num">05</span><h2>기능 상세 설계</h2></div>
+      <h3>골프장 검색 (초성·별칭·퍼지)</h3>
+      <div class="demo" role="search">
+        <label for="q">초성 검색 데모 <span class="dim" style="font-weight:400">· 아래 알고리즘을 그대로 구현한 예시</span></label>
+        <input id="q" type="search" value="ㅂㅇㅋㄹㅋ" autocomplete="off" spellcheck="false" aria-describedby="demo-foot">
+        <div class="chips" aria-label="예시 검색어">
+          <button type="button" data-q="ㅂㅇㅋㄹㅋ">ㅂㅇㅋㄹㅋ</button>
+          <button type="button" data-q="ㄴㅅㅇ">ㄴㅅㅇ</button>
+          <button type="button" data-q="ㅅㅋㅇ72">ㅅㅋㅇ72</button>
+          <button type="button" data-q="베어크ㄹ">베어크ㄹ</button>
+          <button type="button" data-q="잭니클">잭니클</button>
+          <button type="button" data-q="jack">jack</button>
+          <button type="button" data-q="레이크">레이크</button>
+          <button type="button" data-q="ㄴㅇㅂㄹㅈ">ㄴㅇㅂㄹㅈ</button>
+        </div>
+        <ul class="results" id="results" aria-live="polite"></ul>
+        <p class="foot" id="demo-foot">예시 데이터: 골프장 32곳(이름·지역·별칭). 실제 서비스는 546곳 전체를 같은 방식으로 기기 안에서 검색합니다.</p>
+      </div>
+      <h4>인덱스 구조 (골프장 1곳당)</h4>
+<pre>{
+  "id": "gc_0123",
+  "name": "베어크리크 골프클럽",
+  "name_norm": "베어크리크",
+  "aliases": ["베어크리크", "베어크리크CC", "Bear Creek", "베어크릭"],
+  "choseong": ["ㅂㅇㅋㄹㅋ", "ㅂㅇㅋㄹㅋㄱㅍㅋㄹ"],
+  "region": "경기 포천시",
+  "lat": 37.86, "lon": 127.24
+}</pre>
+      <h4>검색 알고리즘</h4>
+      <div class="prose">
+        <p>약 550곳 × 평균 5개 키라 인덱스가 100 KB 미만이고, 입력할 때마다 1 ms 안에 기기에서 검색합니다.</p>
+        <ol>
+          <li>질의 정규화: 소문자화, 공백과 <code>CC/GC/골프장/컨트리클럽</code> 같은 접미어 제거.</li>
+          <li>모든 문자가 자음(ㄱ~ㅎ)이면 <strong>초성 모드</strong>, 섞여 있으면 <strong>혼합 모드</strong>.</li>
+          <li>혼합 모드는 <strong>글자 단위로 비교</strong>합니다. 질의 글자가 자음이면 대상 음절의 초성과, 완성된 글자면 음절과 비교합니다. 마지막 글자는 입력 중일 수 있으므로 자모를 분해해 앞부분만 비교합니다(<code>베어크ㄹ</code>, <code>베어크리</code> 모두 대응). 구현은 토스의 <code>es-hangul</code>(MIT) <code>getChoseong</code>·<code>disassemble</code>을 쓰고, v2에서 빠진 <code>chosungIncludes</code>는 직접 구현합니다.</li>
+          <li>점수: 정확 일치 100 > 이름 접두 90 > 초성 접두 80 > 별칭 일치 75 > 부분 일치 60 > 퍼지(자모 편집거리 2 이하) 40. 동점이면 즐겨찾기 → 최근 조회 → 거리 순.</li>
+          <li>결과가 없으면 서버(PostgreSQL <code>pg_bigm</code> 또는 <code>pg_trgm</code> + 초성 컬럼)에서 퍼지 검색하고, 미등록 골프장 제보 버튼을 보여줍니다.</li>
+        </ol>
+      </div>
+
+      <h3>골프장 상세: 한눈에 보기</h3>
+      <div class="two-col">
+        <div class="mock" aria-label="골프장 상세 화면 예시">
+          <div class="mock-top"><b>베어크리크 GC <span class="dim" style="font-size:13px;font-weight:400">포천</span></b><span class="dim" style="font-size:12px">★ 즐겨찾기 · 길찾기</span></div>
+          <div class="mock-model">모델 <span class="sel">ICON ▾</span> 신뢰도 <span class="stars" aria-label="별 4개">●●●●○</span> <span class="dim">D+3 · 수도권</span></div>
+          <div class="mock-card">
+            <span class="t">11/14(토) 티업 07:00 기준 라운드 예보 (07–12시)</span>
+            <div class="mock-grid">
+              <span>강수 <b>0.4 mm</b></span><span>바람 <b>4→7 m/s</b> 북서</span>
+              <span>기온 <b>6→12 °C</b></span><span>체감 <b>3 °C</b></span>
+            </div>
+            <span>라운드 적합도 <b>72</b>/100 · 모델 간 일치도 <b>높음</b> <span class="dim">(5개 중 4개 무강수)</span></span>
+          </div>
+          <div class="mock-days" aria-label="일별 예보">
+            <div><b>토</b><span>12/3°</span><span>0 mm</span></div>
+            <div><b>일</b><span>9/4°</span><span>6 mm</span></div>
+            <div><b>월</b><span>8/1°</span><span>0 mm</span></div>
+            <div><b>화</b><span>10/2°</span><span>0 mm</span></div>
+            <div class="far"><b>…D+15</b><span>참고</span><span>회색</span></div>
+          </div>
+          <div class="mock-model">시간별 <span class="mock-toggle"><span class="on">1시간</span><span>3시간</span></span> <span class="dim">기온선·강수막대·바람화살표</span></div>
+          <p class="dim" style="font-size:11.5px">화면 예시이며 수치는 실제 예보가 아닙니다.</p>
+        </div>
+        <div class="prose">
+          <ul>
+            <li><strong>요약 카드:</strong> 사용자가 정한 티업 시각(기본 07:00)부터 5시간의 강수 합계·최대 시간 강수·풍속(평균/돌풍)·기온 범위·체감온도.</li>
+            <li><strong>라운드 적합도(0~100):</strong> 강수 40, 바람 25, 체감온도 25, 낙뢰 위험(CAPE·대류성 강수) 10의 가중치. "실제 라운드 어땠나요?" 피드백으로 조정합니다.</li>
+            <li><strong>일별 7일 → 15일 확장:</strong> 8일 이후는 회색·점선과 "참고용" 라벨. 모델의 최대 예보 기간을 넘으면 그 모델 칸을 비웁니다.</li>
+            <li><strong>모델 비교 뷰:</strong> 고른 2~5개 모델의 기온선·강수막대를 겹쳐 보여주고, 다중 모델 평균(블렌드)을 굵은 선으로 표시합니다.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>1시간 / 3시간 단위 보기</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>1시간 모드:</strong> 원자료가 1시간인 구간은 그대로 보여줍니다. 3·6시간 구간(예: ICON 78h 이후, IFS 90h 이후)은 보간값을 흐리게 표시하고 "이 구간은 3시간 자료" 툴팁을 붙입니다. 강수는 3시간 합계를 1시간씩 나누지 않고 3시간 막대 하나로 보여줘 왜곡을 막습니다.</li>
+          <li><strong>3시간 모드:</strong> 00·03·…·21시 칸. 강수는 3시간 합계, 바람은 구간 최대 돌풍과 평균, 기온은 그 시각 값.</li>
+          <li><strong>단위:</strong> 기온 °C, 강수 mm, 풍속 m/s(설정에서 km/h·kt), 풍향 16방위와 화살표. 맞바람/뒷바람 표시는 홀 방위 데이터(OSM <code>golf=hole</code>)를 확보하면 2차로 적용합니다.</li>
+        </ul>
+      </div>
+
+      <h3>모델 선택과 신뢰도 표시</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>선택지:</strong> 추천(블렌드), ECMWF IFS, ICON, GFS, UKMO, JMA MSM(3일), 기상청 단기예보(5일), GEM, AIFS/AIGFS(AI), 기타.</li>
+          <li><strong>신뢰도 배지:</strong> 골프장 권역 × 리드타임 × 변수의 최근 90일 성적을 5단계로 보여줍니다. 탭하면 근거를 보여줍니다. 예: "ICON · D+3 · 전국: 기온 평균오차 1.32 °C, 12시간 강수 ETS 0.42, 풍속 평균오차 1.02 m/s (2026-08-10~11-06, 기온 17,480쌍)".</li>
+          <li><strong>오늘 예보의 확실성:</strong> 모델 간 스프레드(기온 표준편차, 강수 유무 일치율) 또는 ECMWF 앙상블 스프레드 → 높음·보통·낮음.</li>
+        </ul>
+      </div>
+
+      <h3>지도 화면 (Ventusky 스타일)</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>레이어</th><th>표현</th><th>원천</th></tr></thead>
+        <tbody>
+          <tr><td>강수 (1h/3h 합계)</td><td>컬러 래스터 + 레이더 실황(선택)</td><td>모델 격자, 기상청 레이더(API허브)</td></tr>
+          <tr><td>기온 2 m</td><td>컬러 래스터 + 등온선</td><td>모델 격자</td></tr>
+          <tr><td>바람 10 m / 돌풍</td><td><strong>WebGL 파티클 애니메이션</strong> + 풍속 색</td><td>u/v 격자</td></tr>
+          <tr><td>구름량, 기압</td><td>래스터 / 등압선</td><td>모델 격자</td></tr>
+          <tr><td>골프장 마커</td><td>줌별 클러스터, 마커에 당일 아이콘·기온</td><td>미리 계산한 포인트 예보</td></tr>
+        </tbody>
+      </table></div>
+      <div class="prose">
+        <ul>
+          <li>시간 슬라이더(1h/3h 간격, 재생 버튼), 모델 선택, 범례, 지점을 탭하면 미니 예보 팝업.</li>
+          <li><strong>타일 생성:</strong> Open-Meteo <code>data_spatial</code>(유효시각별 전구 파일, ICON은 1개 시각에 약 155 MB)에서 <strong>한반도 주변만 부분 읽기</strong> → 값을 인코딩한 PNG/WebP 타일(z4~z10) → 객체 스토리지 + CDN. 바람은 u·v를 R·G 채널에 담은 텍스처 한 장(시각당)으로 보내고, 파티클 계산은 기기에서 합니다.</li>
+          <li><strong>구현 후보:</strong> <code>deck.gl</code> + <code>weatherlayers-gl</code>(라이선스·유료 기능 확인), 또는 자체 WebGL 파티클(<code>webgl-wind</code> 방식).</li>
+        </ul>
+      </div>
+
+      <h3>부가 기능 (2차)</h3>
+      <div class="prose">
+        <ul>
+          <li>즐겨찾기·라운드 등록 → D-3·D-1·당일 아침 <strong>예보 변화 푸시 알림</strong>(예: "토요일 강수 예보가 0 mm에서 8 mm로 바뀌었어요").</li>
+          <li>일출·일몰(첫 티업·야간 라운드), 미세먼지(에어코리아), 낙뢰(기상청 낙뢰 API), 체감온도·자외선.</li>
+          <li>"실제 날씨 어땠나요?" 피드백 → 적합도 지수 개선과 지점별 보정 자료.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section id="s6">
+      <div class="sec-head"><span class="num">06</span><h2>시스템 아키텍처</h2></div>
+<pre class="mermaid">
+flowchart LR
+  subgraph SRC["데이터 원천"]
+    OM["Open-Meteo 상업 API"]
+    KMA["기상청 단기·중기예보 (data.go.kr)"]
+    S3["AWS openmeteo data_spatial"]
+    HUB["기상청 API허브 ASOS·AWS"]
+  end
+  subgraph JOB["수집·처리 워커 (Python)"]
+    P1["포인트 예보 생성: 골프장 546곳 × 모델"]
+    P2["기상청 예보 매핑: 5 km 격자"]
+    P3["지도 타일 생성"]
+    P4["실측 수집 → 검증·신뢰도"]
+  end
+  OM --> P1
+  KMA --> P2
+  S3 --> P3
+  HUB --> P4
+  P1 --> CDN[("객체 스토리지 + CDN: 예보 JSON · 타일")]
+  P2 --> CDN
+  P3 --> CDN
+  P4 --> DB[("PostgreSQL + PostGIS")]
+  DB --> API["API 서버 (FastAPI)"]
+  CDN --> APP["웹 PWA → 모바일 앱"]
+  API --> APP
+</pre>
+      <h3>기술 스택</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>영역</th><th>선택</th><th>이유</th></tr></thead>
+        <tbody>
+          <tr><td>프론트</td><td><strong>Next.js (TypeScript) PWA</strong>, MapLibre GL JS, deck.gl, ECharts/visx</td><td>웹을 먼저 출시해 검증, 지도·차트 생태계</td></tr>
+          <tr><td>모바일</td><td>Expo(React Native) 또는 Capacitor로 PWA 래핑</td><td>코드 재사용, 푸시 알림</td></tr>
+          <tr><td>백엔드 API</td><td><strong>FastAPI (Python)</strong></td><td>수집·검증 코드와 언어 통일</td></tr>
+          <tr><td>수집·처리</td><td>Python(<code>omfiles</code>, <code>xarray</code>, <code>pyproj</code>, <code>pandas</code>), Cloud Run Jobs / AWS ECS 예약 작업(초기엔 GitHub Actions cron도 가능)</td><td>모델 실행 감시 기반 처리</td></tr>
+          <tr><td>DB</td><td>PostgreSQL 16 + PostGIS (+ <code>pg_bigm</code>)</td><td>공간 질의, 검색 폴백, 검증 통계</td></tr>
+          <tr><td>저장·배포</td><td>S3 또는 Cloudflare R2 + CDN</td><td>예보 JSON·타일을 정적 파일로 → 저비용·고가용</td></tr>
+          <tr><td>모니터링</td><td>Sentry, Grafana(수집 지연·실패율), 검증 대시보드</td><td></td></tr>
+        </tbody>
+      </table></div>
+      <h3>데이터 흐름과 갱신 주기</h3>
+      <div class="prose">
+        <ol>
+          <li><strong>모델 실행 감시:</strong> 각 모델 메타(<code>/data/{model}/static/meta.json</code>의 <code>last_run_initialisation_time</code>)를 5~10분마다 확인하고, 새 실행이면 그 모델만 다시 계산.</li>
+          <li><strong>포인트 예보 생성:</strong> 골프장 좌표·대표 고도로 Open-Meteo에 여러 지점을 한 번에 요청 → 기온, 체감온도, 강수, 강수확률(앙상블), 풍속·풍향·돌풍, 구름량, CAPE, 날씨코드 → 1h/3h JSON 저장(gzip 약 30~60 KB).</li>
+          <li><strong>블렌드 생성:</strong> 같은 시각에 있는 모델들의 검증 성적 가중 평균(초기에는 3장 결과의 상위 모델 단순 평균) → <code>blend.json</code>.</li>
+          <li><strong>기상청 예보:</strong> 골프장별 (nx, ny)를 미리 매핑하고 발표 시각 10분 뒤 수집.</li>
+          <li><strong>검증:</strong> 매일 새벽 전날 실측과 지난 15일 예보를 대조 → 권역 × 모델 × 리드타임 × 변수별 최근 30/90일 통계 갱신 → 신뢰도 배지 갱신.</li>
+        </ol>
+      </div>
+      <h3>규모 산정</h3>
+      <div class="prose">
+        <ul>
+          <li><strong>Open-Meteo 호출량:</strong> 546곳 ÷ 한 요청당 50곳 ≈ 11요청 × 모델 12 × 하루 4회 ≈ 530요청/일. 변수·기간 가중(변수 10개 초과, 2주 초과 시)을 감안해도 <strong>월 100만 호출 한도 안</strong>.</li>
+          <li><strong>저장량:</strong> 예보 JSON 546 × 13(모델+블렌드) × 50 KB ≈ 355 MB/세대, 최근 3세대 보관. 지도 타일은 모델 3 × 변수 4 × 시각 72 × 타일 약 300장 × 20 KB ≈ 5 GB/세대.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section id="s7">
+      <div class="sec-head"><span class="num">07</span><h2>데이터 모델</h2></div>
+<pre>-- 골프장
+CREATE TABLE golf_course (
+  id            text PRIMARY KEY,            -- gc_0123
+  name          text NOT NULL,               -- 공식명
+  name_norm     text NOT NULL,               -- 접미어 제거 정규화명
+  choseong      text NOT NULL,               -- 정규화명 초성
+  type          text,                        -- 회원제 / 비회원제 / 군 / 기타
+  holes         int,
+  status        text NOT NULL,               -- 운영 / 휴장 / 건설 / 폐업
+  address       text,
+  sido          text, sigungu text,
+  clubhouse     geography(Point, 4326),
+  course_area   geography(MultiPolygon, 4326),
+  centroid      geography(Point, 4326),      -- 예보 산출 지점
+  elevation_m   real,                        -- 코스 대표 고도 (DEM 중앙값)
+  kma_nx int, kma_ny int,                    -- 기상청 단기예보 격자
+  region_code   text,                        -- 검증 권역
+  nearest_aws   text[],                      -- 인근 AWS/ASOS 지점
+  source        jsonb,                       -- 인허가 관리번호, KGBA, OSM id, 외부 place id
+  updated_at    timestamptz DEFAULT now()
+);
+CREATE TABLE golf_course_alias (course_id text REFERENCES golf_course, alias text,
+                                alias_choseong text, kind text);
+
+-- 모델과 실행
+CREATE TABLE weather_model (id text PRIMARY KEY, name text, provider text, resolution_km real,
+                            max_lead_h int, steps jsonb, license text);
+CREATE TABLE model_run (model_id text, init_time timestamptz, available_at timestamptz,
+                        PRIMARY KEY (model_id, init_time));
+
+-- 관측과 검증
+CREATE TABLE observation (station_id text, valid_time timestamptz, t2m real, wind real, gust real,
+                          precip_1h real, PRIMARY KEY (station_id, valid_time));
+CREATE TABLE verification_stat (
+  model_id text, region_code text, lead_day int, variable text, metric text,
+  period_start date, period_end date, value real, n int,
+  PRIMARY KEY (model_id, region_code, lead_day, variable, metric, period_end));
+
+-- 사용자
+CREATE TABLE app_user (id uuid PRIMARY KEY, created_at timestamptz, settings jsonb);
+CREATE TABLE favorite (user_id uuid, course_id text, tee_time time, PRIMARY KEY (user_id, course_id));
+CREATE TABLE round_plan (id uuid PRIMARY KEY, user_id uuid, course_id text,
+                         tee_off timestamptz, notify jsonb);</pre>
+      <h4>예보 JSON (정적 파일) 예: <code>/fc/gc_0123/ecmwf_ifs.json</code></h4>
+<pre>{
+  "course_id": "gc_0123", "model": "ecmwf_ifs", "init": "2026-11-10T00:00Z",
+  "generated": "2026-11-10T07:12Z", "elevation_m": 210,
+  "hourly":  {"time": ["2026-11-10T09:00+09:00", "..."], "t2m": [8.1], "apparent": [5.2],
+              "precip": [0.0], "wind": [3.4], "gust": [7.9], "wdir": [315], "cloud": [40],
+              "step_h": [1]},
+  "3hourly": {"time": ["..."], "precip_sum": [0.0], "wind_max": [5.1], "gust_max": [9.8]},
+  "daily":   {"date": ["2026-11-10"], "tmin": [3.2], "tmax": [12.4], "precip_sum": [0.0],
+              "wind_max": [6.0], "round_index": [78]},
+  "reliability": {"region": "수도권", "by_lead_day": [{"day": 1, "score": 4}]}
+}</pre>
+    </section>
+
+    <!-- 8 -->
+    <section id="s8">
+      <div class="sec-head"><span class="num">08</span><h2>API 설계</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>메서드</th><th>경로</th><th>설명</th></tr></thead>
+        <tbody>
+          <tr><td class="mono">GET</td><td><code>/v1/courses?updated_since=</code></td><td>골프장 목록(검색 인덱스용, CDN 캐시)</td></tr>
+          <tr><td class="mono">GET</td><td><code>/v1/courses/{id}</code></td><td>상세(좌표, 고도, 권역, 인근 관측소)</td></tr>
+          <tr><td class="mono">GET</td><td><code>/v1/search?q=ㅂㅇㅋㄹㅋ</code></td><td>서버 폴백 검색</td></tr>
+          <tr><td class="mono">GET</td><td><code>/fc/{id}/{model}.json</code> <span class="tag">CDN</span></td><td>모델별 포인트 예보</td></tr>
+          <tr><td class="mono">GET</td><td><code>/fc/{id}/compare.json</code> <span class="tag">CDN</span></td><td>다중 모델 비교·블렌드·스프레드</td></tr>
+          <tr><td class="mono">GET</td><td><code>/v1/models</code></td><td>모델 메타(해상도, 최대 예보 기간, 최신 실행 시각)</td></tr>
+          <tr><td class="mono">GET</td><td><code>/v1/reliability?region=&amp;model=&amp;variable=</code></td><td>신뢰도 성적표</td></tr>
+          <tr><td class="mono">GET</td><td><code>/tiles/{model}/{run}/{var}/{time}/{z}/{x}/{y}.png</code> <span class="tag">CDN</span></td><td>지도 기상 타일</td></tr>
+          <tr><td class="mono">GET</td><td><code>/v1/obs/nearby?course_id=</code></td><td>인근 AWS 실황</td></tr>
+          <tr><td class="mono">POST</td><td><code>/v1/favorites</code>, <code>/v1/rounds</code></td><td>즐겨찾기·라운드 등록(알림)</td></tr>
+          <tr><td class="mono">POST</td><td><code>/v1/feedback</code></td><td>"실제 날씨 어땠나요" 피드백, 골프장 정보 오류 제보</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 9 -->
+    <section id="s9">
+      <div class="sec-head"><span class="num">09</span><h2>화면 설계</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>화면</th><th>구성</th></tr></thead>
+        <tbody>
+          <tr><td><strong>홈</strong></td><td>검색창(초성 안내 "예: ㅂㅇㅋㄹㅋ"), 즐겨찾기 골프장 카드(이번 주말 요약), 최근 본 골프장, 지도에서 보기</td></tr>
+          <tr><td><strong>검색 결과</strong></td><td>이름·지역·오늘 날씨 미니 아이콘, 초성이 맞은 부분 강조</td></tr>
+          <tr><td><strong>골프장 상세</strong></td><td>5장의 구성. 상단에 모델 선택기와 신뢰도 배지 고정</td></tr>
+          <tr><td><strong>모델 비교</strong></td><td>모델 체크박스, 기온/강수/바람 탭, 블렌드 굵은 선</td></tr>
+          <tr><td><strong>지도</strong></td><td>전체 화면 지도, 아래 시간 슬라이더, 오른쪽 레이어·모델 선택, 골프장 마커</td></tr>
+          <tr><td><strong>신뢰도 성적표</strong></td><td>권역 선택 → 모델 × 리드타임 히트맵(기온 MAE, 강수 ETS, 풍속 MAE), 방법 설명</td></tr>
+          <tr><td><strong>설정</strong></td><td>단위, 기본 티업 시각, 기본 모델, 알림, 다크 모드</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 10 -->
+    <section id="s10">
+      <div class="sec-head"><span class="num">10</span><h2>개발 로드맵</h2></div>
+      <div class="gantt" aria-label="단계별 일정 (주)">
+        <div class="g-scale"><div></div><div><span>0주</span><span>5</span><span>10</span><span>15</span><span>17주~</span></div></div>
+        <div class="g-row"><span>0. 데이터 기반</span><div class="g-track"><div class="g-bar" style="left:0%;width:10%">2주</div></div></div>
+        <div class="g-row"><span>1. MVP (웹 PWA)</span><div class="g-track"><div class="g-bar" style="left:10%;width:25%">5주</div></div></div>
+        <div class="g-row"><span>2. 지도 고도화</span><div class="g-track"><div class="g-bar" style="left:35%;width:20%">4주</div></div></div>
+        <div class="g-row"><span>3. 신뢰도·블렌드</span><div class="g-track"><div class="g-bar" style="left:55%;width:15%">3주</div></div></div>
+        <div class="g-row"><span>4. 앱 출시</span><div class="g-track"><div class="g-bar" style="left:70%;width:15%">3주</div></div></div>
+        <div class="g-row"><span>5. 확장</span><div class="g-track"><div class="g-bar ongoing" style="left:85%;width:15%">지속</div></div></div>
+      </div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>단계</th><th>기간</th><th>산출물</th><th>완료 기준</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0. 데이터 기반</strong></td><td class="mono">2주</td><td>골프장 DB v1(546곳 좌표·고도·별칭), API 키(data.go.kr·API허브·VWorld), Open-Meteo 상업 구독, 검증 파이프라인 이식</td><td>무작위 50곳 좌표 오차 300 m 이내, 초성 검색 첫 결과 적중 95% 이상</td></tr>
+          <tr><td><strong>1. MVP (웹 PWA)</strong></td><td class="mono">5주</td><td>검색, 골프장 상세(7~15일, 1h/3h, 모델 선택, 신뢰도 배지), 기상청 단기예보, 골프장 마커 지도와 정적 강수·기온 레이어</td><td>베타 테스터 30명, 상세 화면 LCP 1.5초 이내</td></tr>
+          <tr><td><strong>2. 지도 고도화</strong></td><td class="mono">4주</td><td>바람 파티클, 시간 슬라이더 애니메이션, 모델별 타일, 레이더 실황</td><td>모바일 30 fps 이상</td></tr>
+          <tr><td><strong>3. 신뢰도·블렌드</strong></td><td class="mono">3주</td><td>매일 자동 검증(ASOS/AWS), 권역별 성적표, 성적 가중 블렌드</td><td>블렌드 기온 MAE가 단일 최고 모델과 같거나 낮음</td></tr>
+          <tr><td><strong>4. 앱 출시</strong></td><td class="mono">3주</td><td>Expo 앱, 푸시 알림(라운드 예보 변화), 즐겨찾기 동기화</td><td>스토어 심사 통과</td></tr>
+          <tr><td><strong>5. 확장</strong></td><td class="mono">지속</td><td>홀 방위 기반 맞바람/뒷바람, 낙뢰·미세먼지, 피드백 기반 지점 보정(MOS), 해외 골프장</td><td></td></tr>
+        </tbody>
+      </table></div>
+      <p class="dim" style="font-size: var(--step--1)">인력 가정: 풀스택 1명 + 데이터·백엔드 1명이면 약 4개월. 1인 개발이면 MVP까지 약 2.5개월.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="s11">
+      <div class="sec-head"><span class="num">11</span><h2>비용 추정 (월, MVP~초기 운영)</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>항목</th><th class="n">예상 비용</th><th>비고</th></tr></thead>
+        <tbody>
+          <tr><td>Open-Meteo 상업 API</td><td class="n">$29 ~ $99</td><td>Standard(100만 호출)로 시작</td></tr>
+          <tr><td>컴퓨팅 (수집·타일 생성 워커, API)</td><td class="n">$30 ~ $120</td><td>Cloud Run/ECS, 타일 생성이 가장 무거움</td></tr>
+          <tr><td>DB (관리형 PostgreSQL 소형)</td><td class="n">$15 ~ $50</td><td>Supabase/RDS/Neon</td></tr>
+          <tr><td>스토리지 + CDN</td><td class="n">$5 ~ $40</td><td>R2는 송신료 없음</td></tr>
+          <tr><td>지도 (VWorld)</td><td class="n">무료</td><td>출처 표시</td></tr>
+          <tr><td>기상청 API</td><td class="n">무료</td><td>운영계정 트래픽 상향 신청</td></tr>
+          <tr><td>도메인·모니터링</td><td class="n">$10 ~ $30</td><td></td></tr>
+          <tr class="hl"><td><strong>합계</strong></td><td class="n"><strong>$90 ~ $330</strong></td><td>약 12만~45만 원. 사용자가 늘면 CDN 비중 증가</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 12 -->
+    <section id="s12">
+      <div class="sec-head"><span class="num">12</span><h2>라이선스·법률 체크리스트</h2></div>
+      <ul class="check" id="checklist">
+        <li><label><input type="checkbox" id="chk1"><span><strong>Open-Meteo:</strong> 무료 API는 비상업 전용이라 상업 서비스는 <strong>유료 구독 필수</strong>. 데이터는 CC BY 4.0이므로 "Weather data by Open-Meteo.com"과 원 기관(ECMWF, DWD, NOAA, JMA, UKMO, MF, CMC, CMA) 출처 표시.</span></label></li>
+        <li><label><input type="checkbox" id="chk2"><span><strong>JMA 자료:</strong> Open-Meteo가 라이선스 문제로 변수를 제한해 제공. 상업 재배포 조건 확인.</span></label></li>
+        <li><label><input type="checkbox" id="chk3"><span><strong>기상청 공공데이터:</strong> 공공누리 유형 확인(대부분 출처 표시), 이용허락 범위 안에서 가공 사실 표시.</span></label></li>
+        <li><label><input type="checkbox" id="chk4"><span><strong>VWorld:</strong> 이용약관과 출처 표시, 항공영상의 해외 제공 제한 여부 확인.</span></label></li>
+        <li><label><input type="checkbox" id="chk5"><span><strong>카카오·네이버·구글 장소 데이터:</strong> 카카오 로컬 결과 DB화 금지, 구글 Places 콘텐츠는 구글 지도와 함께 표시해야 하고 좌표 캐시는 30일까지 → 마스터 좌표는 공공데이터 기반.</span></label></li>
+        <li><label><input type="checkbox" id="chk6"><span><strong>OSM(ODbL):</strong> 출처 표시, 파생 DB를 공개 배포하면 같은 라이선스 조건.</span></label></li>
+        <li><label><input type="checkbox" id="chk7"><span><strong>위치정보법:</strong> "내 주변 골프장"에서 사용자 위치를 서버로 보내 처리하면 <strong>위치기반서비스사업 신고</strong>(방송통신위원회) 대상. MVP는 위치를 기기 안에서만 쓰고, 서버 처리가 필요해지면 신고 후 도입.</span></label></li>
+        <li><label><input type="checkbox" id="chk8"><span>개인정보처리방침, 앱스토어 정책, 골프장 상표·로고 사용 금지(명칭만 사용).</span></label></li>
+        <li><label><input type="checkbox" id="chk9"><span><strong>예보 면책 문구:</strong> "예보는 참고용이며 실제 날씨와 다를 수 있습니다. 특보는 기상청 발표를 따르세요."</span></label></li>
+      </ul>
+      <p class="dim" style="font-size: var(--step--1)">체크 표시는 이 브라우저에만 저장됩니다.</p>
+    </section>
+
+    <!-- 13 -->
+    <section id="s13">
+      <div class="sec-head"><span class="num">13</span><h2>리스크와 대응</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>리스크</th><th>영향</th><th>대응</th></tr></thead>
+        <tbody>
+          <tr><td>Open-Meteo 장애·정책 변경</td><td>포인트 예보 중단</td><td>AWS 오픈데이터로 <strong>자체 호스팅 전환 경로</strong> 확보(같은 데이터·파일 형식), 기상청 예보 병행</td></tr>
+          <tr><td>기상청 KIM 원시자료 미제공</td><td>"한국 모델" 선택지 부재</td><td>기상청 단기·중기예보를 "기상청" 선택지로 제공, KIM 공개 시 추가</td></tr>
+          <tr><td>여름철 국지성 소나기</td><td>단일 모델의 강수 적중 저하</td><td>다중 모델·앙상블 확률, 레이더 실황, "확실성" 표시로 기대치 관리</td></tr>
+          <tr><td>산간 골프장의 고도·계곡 효과</td><td>기온·바람 오차</td><td>코스 대표 고도 보정, 인근 AWS 실측 기반 편차 보정(장기적으로 MOS)</td></tr>
+          <tr><td>골프장 정보 변경(개명·폐업)</td><td>검색·좌표 오류</td><td>인허가 데이터 월간 동기화, 사용자 제보, 운영자 검수 화면</td></tr>
+          <tr><td>구글 지도 국내 데이터 제약</td><td>지도 품질</td><td>VWorld 기본, 구글은 보조</td></tr>
+          <tr><td>검증 표본의 계절 편향</td><td>신뢰도 왜곡</td><td><strong>계절별·최근 90일</strong> 성적과 표본 수를 함께 공개</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 14 -->
+    <section id="s14">
+      <div class="sec-head"><span class="num">14</span><h2>성공 지표 (KPI)</h2></div>
+      <div class="table-wrap"><table>
+        <thead><tr><th>지표</th><th>목표 (출시 3개월)</th></tr></thead>
+        <tbody>
+          <tr><td>초성 검색 첫 결과 적중률</td><td>95% 이상</td></tr>
+          <tr><td>골프장 상세 진입 후 모델 비교 사용률</td><td>25% 이상</td></tr>
+          <tr><td>주간 재방문율 (WAU/MAU)</td><td>40% 이상 (주말 라운드 주기)</td></tr>
+          <tr><td>예보 반영 지연 (새 실행 공개 → 반영)</td><td>중앙값 20분 이내</td></tr>
+          <tr><td>블렌드 예보 기온 MAE (D+1~3)</td><td>단일 최고 모델 이하</td></tr>
+          <tr><td>사용자 "예보 맞았어요" 비율</td><td>70% 이상</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- 15 -->
+    <section id="s15">
+      <div class="sec-head"><span class="num">15</span><h2>바로 다음에 할 일</h2></div>
+      <div class="prose">
+        <ol>
+          <li>공공데이터포털에서 <strong>골프장 인허가 API·기상청 단기예보·중기예보</strong> 활용 신청, <strong>기상청 API허브</strong> 키 발급, <strong>VWorld</strong> 키 발급.</li>
+          <li>인허가 데이터로 골프장 DB v0 생성(EPSG:5174 → WGS84) → OSM 폴리곤 결합 → 지도 위에서 끌어 고치는 검수 도구 제작.</li>
+          <li>Open-Meteo 상업 구독 플랜 결정(호출량 시뮬레이션) 또는 AWS 오픈데이터 자체 처리 시범 구현.</li>
+          <li>3장의 검증 파이프라인을 <strong>기상청 API허브 ASOS/AWS 실측</strong>으로 바꿔 매일 자동 실행(현재 검증은 2026년 8~11월, 3개월 표본).</li>
+          <li>Next.js PWA 골격, 검색, 골프장 상세 화면 시제품.</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>예보 자료: Open-Meteo 오픈데이터(ECMWF, DWD, NOAA, UKMO, JMA, CMA, Météo-France, CMC), CC BY 4.0. 관측: NOAA GHCNh(기상청 ASOS 전문 포함).</p>
+    <p>골프장 통계: 한국골프장경영협회(2026-01-01 기준). 지도·정책 현황은 2026-11-10 기준 조사이며 바뀔 수 있습니다.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  const DATA = {"t2m":{"BLEND4":[1.09,1.17,1.23,1.29,1.35,1.43,1.59,null,null,null,null,null,null,null,null],"cma_grapes_global":[1.69,1.72,1.76,1.83,1.89,null,null,null,null,null,null,null,null,null,null],"cmc_gem_gdps_15km":[1.38,1.5,1.65,1.82,1.86,2.01,2.24,2.41,2.57,2.64,null,null,null,null,null],"dwd_icon":[1.14,1.23,1.32,1.41,1.51,1.66,1.89,null,null,null,null,null,null,null,null],"ecmwf_aifs025_single":[1.15,1.18,1.21,1.3,1.36,1.48,1.65,1.79,2.02,2.16,2.21,2.47,2.64,2.73,2.83],"ecmwf_ifs":[1.28,1.36,1.43,1.49,1.55,1.59,1.81,1.97,2.23,2.46,2.65,2.82,2.82,2.92,2.99],"ecmwf_ifs025":[1.4,1.47,1.54,1.6,1.65,1.68,1.9,2.07,2.32,2.53,2.72,2.89,2.88,2.99,3.05],"jma_gsm":[1.72,1.81,1.87,1.97,2.04,2.18,2.3,2.42,2.46,2.65,2.69,null,null,null,null],"jma_msm":[1.5,1.57,1.63,null,null,null,null,null,null,null,null,null,null,null,null],"meteofrance_arpege_world025":[1.45,1.55,1.61,1.75,null,null,null,null,null,null,null,null,null,null,null],"ncep_aigfs025":[1.44,1.55,1.63,1.71,1.79,2.0,2.16,2.37,2.51,2.59,2.74,2.82,3.05,3.25,3.48],"ncep_gfs013":[1.48,1.57,1.63,1.72,1.82,1.99,2.2,2.26,2.43,2.52,2.67,2.86,3.07,3.04,3.03],"ukmo_global_deterministic_10km":[1.36,1.45,1.5,1.58,1.63,1.73,1.91,null,null,null,null,null,null,null,null]},"wind":{"BLEND4":[0.99,0.99,1.01,1.03,1.09,1.19,1.34,null,null,null,null,null,null,null,null],"cma_grapes_global":[1.27,1.29,1.31,1.3,1.3,null,null,null,null,null,null,null,null,null,null],"cmc_gem_gdps_15km":[1.09,1.12,1.14,1.17,1.26,1.37,1.49,1.49,1.55,1.57,null,null,null,null,null],"dwd_icon":[0.96,0.97,1.02,1.09,1.14,1.2,1.3,null,null,null,null,null,null,null,null],"ecmwf_aifs025_single":[1.11,1.09,1.1,1.12,1.17,1.3,1.44,1.49,1.49,1.52,1.71,1.79,1.59,1.61,1.66],"ecmwf_ifs":[1.1,1.1,1.11,1.14,1.18,1.25,1.39,1.54,1.62,1.69,1.69,1.74,1.61,1.55,1.57],"ecmwf_ifs025":[1.08,1.09,1.09,1.12,1.16,1.19,1.32,1.47,1.55,1.62,1.63,1.7,1.57,1.52,1.54],"jma_gsm":[1.6,1.62,1.65,1.62,1.69,1.8,1.87,1.95,1.98,2.04,1.93,null,null,null,null],"jma_msm":[1.42,1.44,1.49,null,null,null,null,null,null,null,null,null,null,null,null],"meteofrance_arpege_world025":[1.37,1.37,1.42,1.43,null,null,null,null,null,null,null,null,null,null,null],"ncep_aigfs025":[0.93,0.91,0.94,0.95,1.04,1.21,1.29,1.29,1.27,1.24,1.25,1.4,1.31,1.32,1.37],"ncep_gfs013":[1.24,1.23,1.24,1.28,1.46,1.75,2.07,2.1,2.0,2.06,1.74,1.9,1.9,2.03,2.1],"ukmo_global_deterministic_10km":[1.22,1.26,1.29,1.31,1.36,1.47,1.57,null,null,null,null,null,null,null,null]},"ets":{"BLEND4":[0.447,0.449,0.397,0.352,0.296,0.215,0.143,null,null,null,null,null,null,null,null],"cma_grapes_global":[0.391,0.378,0.304,0.216,0.162,null,null,null,null,null,null,null,null,null,null],"cmc_gem_gdps_15km":[0.44,0.453,0.37,0.267,0.252,0.244,0.157,0.141,0.095,0.071,null,null,null,null,null],"dwd_icon":[0.497,0.469,0.42,0.339,0.294,0.23,0.072,null,null,null,null,null,null,null,null],"ecmwf_aifs025_single":[0.375,0.378,0.37,0.342,0.299,0.261,0.192,0.158,0.098,0.122,0.07,0.025,0.013,0.019,0.055],"ecmwf_ifs":[0.37,0.421,0.415,0.358,0.276,0.214,0.18,0.124,0.104,0.05,-0.013,-0.006,-0.003,0.01,0.002],"ecmwf_ifs025":[0.366,0.396,0.402,0.339,0.263,0.219,0.177,0.115,0.104,0.05,-0.009,-0.008,-0.001,0.008,-0.004],"jma_gsm":[0.437,0.45,0.38,0.31,0.226,0.126,0.123,0.092,0.101,0.07,-0.006,null,null,null,null],"jma_msm":[0.477,0.458,0.37,null,null,null,null,null,null,null,null,null,null,null,null],"meteofrance_arpege_world025":[0.466,0.456,0.39,0.264,null,null,null,null,null,null,null,null,null,null,null],"ncep_aigfs025":[0.4,0.386,0.348,0.287,0.281,0.231,0.159,0.124,0.099,0.086,0.028,0.004,0.02,0.032,0.022],"ncep_gfs013":[0.429,0.393,0.34,0.257,0.164,0.108,0.056,0.038,0.033,0.044,-0.011,-0.014,-0.01,-0.02,0.012],"ukmo_global_deterministic_10km":[0.491,0.473,0.366,0.331,0.29,0.211,0.137,null,null,null,null,null,null,null,null]}};
+  const NAMES = {
+    BLEND4: "블렌드(4모델)", dwd_icon: "DWD ICON", ecmwf_ifs: "ECMWF IFS 9km", ecmwf_aifs025_single: "ECMWF AIFS (AI)",
+    ecmwf_ifs025: "ECMWF IFS 0.25°", ncep_gfs013: "NCEP GFS", ncep_aigfs025: "NCEP AIGFS (AI)", jma_gsm: "JMA GSM",
+    jma_msm: "JMA MSM 5km", ukmo_global_deterministic_10km: "UKMO 10km", cma_grapes_global: "CMA GRAPES",
+    meteofrance_arpege_world025: "MF ARPEGE", cmc_gem_gdps_15km: "CMC GEM"
+  };
+  const HL = { dwd_icon: "icon", ecmwf_ifs: "ifs", BLEND4: "blend", ecmwf_aifs025_single: "aifs" };
+  const HL_ORDER = ["ecmwf_aifs025_single", "ecmwf_ifs", "BLEND4", "dwd_icon"];
+  const PANELS = [
+    { key: "t2m", title: "기온 2 m 평균절대오차", sub: "°C · 낮을수록 좋음", low: true, fmt: 2 },
+    { key: "wind", title: "풍속 10 m 평균절대오차", sub: "m/s · 낮을수록 좋음", low: true, fmt: 2 },
+    { key: "ets", title: "12시간 강수 ≥1 mm 적중 ETS", sub: "높을수록 좋음 · 0 = 우연 수준", low: false, fmt: 3 }
+  ];
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+
+  function niceTicks(lo, hi, n) {
+    const span = hi - lo || 1, raw = span / n, mag = Math.pow(10, Math.floor(Math.log10(raw))), r = raw / mag;
+    const step = (r >= 7.5 ? 10 : r >= 3.5 ? 5 : r >= 1.5 ? 2 : 1) * mag;
+    const t0 = Math.floor(lo / step) * step, t1 = Math.ceil(hi / step) * step, out = [];
+    for (let v = t0; v <= t1 + step / 2; v += step) out.push(+v.toFixed(6));
+    return { t0, t1, ticks: out, step };
+  }
+
+  function drawPanel(cfg, host) {
+    const series = DATA[cfg.key];
+    const W = 320, H = 228, m = { l: 34, r: 10, t: 10, b: 32 };
+    let vals = [];
+    Object.values(series).forEach(a => a.forEach(v => { if (v != null) vals.push(v); }));
+    const tk = niceTicks(Math.min(...vals), Math.max(...vals), 5);
+    const x = d => m.l + (d - 1) / 14 * (W - m.l - m.r);
+    const y = v => m.t + (tk.t1 - v) / (tk.t1 - tk.t0) * (H - m.t - m.b);
+
+    const wrap = document.createElement("div"); wrap.className = "panel";
+    wrap.innerHTML = '<h4>' + cfg.title + '</h4><div class="sub">' + cfg.sub + '</div>';
+    host.appendChild(wrap);
+    const svg = el("svg", { viewBox: "0 0 " + W + " " + H, role: "img", "aria-label": cfg.title + " 리드타임별 그래프", tabindex: "0" }, wrap);
+    const g = el("g", { class: "grid" }, svg);
+    tk.ticks.forEach(v => {
+      el("line", { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v) }, g);
+      const t = el("text", { x: m.l - 6, y: y(v) + 3.5, "text-anchor": "end", class: "ax" }, svg); t.textContent = v.toFixed(tk.step < 0.1 ? 2 : 1);
+    });
+    if (cfg.key === "ets") el("line", { x1: m.l, x2: W - m.r, y1: y(0), y2: y(0), class: "base", "stroke-width": 1.2 }, svg);
+    [1, 3, 5, 7, 9, 11, 13, 15].forEach(d => { const t = el("text", { x: x(d), y: H - m.b + 15, "text-anchor": "middle", class: "ax" }, svg); t.textContent = d; });
+    const xl = el("text", { x: (m.l + W - m.r) / 2, y: H - 3, "text-anchor": "middle", class: "ax" }, svg); xl.textContent = "예보 리드타임 (일)";
+
+    const path = arr => { let s = "", pen = false; arr.forEach((v, i) => { if (v == null) { pen = false; return; } s += (pen ? "L" : "M") + x(i + 1).toFixed(1) + " " + y(v).toFixed(1) + " "; pen = true; }); return s; };
+    Object.keys(series).forEach(k => { if (!HL[k]) el("path", { d: path(series[k]), class: "ln other" }, svg); });
+    const labels = [];
+    HL_ORDER.forEach(k => {
+      const arr = series[k]; if (!arr) return;
+      el("path", { d: path(arr), class: "ln hl k-" + HL[k] }, svg);
+      let last = -1;
+      arr.forEach((v, i) => { if (v != null) { el("circle", { cx: x(i + 1), cy: y(v), r: 3.1, class: "pt f-" + HL[k] }, svg); last = i; } });
+      if (last >= 0) labels.push({ k, d: last + 1, py: y(arr[last]) });
+    });
+    // label repel among labels ending on the same day
+    const byDay = {}; labels.forEach(l => (byDay[l.d] = byDay[l.d] || []).push(l));
+    Object.values(byDay).forEach(grp => { grp.sort((a, b) => a.py - b.py); for (let i = 1; i < grp.length; i++) if (grp[i].py - grp[i - 1].py < 12) grp[i].py = grp[i - 1].py + 12; });
+    labels.forEach(l => {
+      const short = { dwd_icon: "ICON", ecmwf_ifs: "IFS 9km", BLEND4: "블렌드", ecmwf_aifs025_single: "AIFS" }[l.k];
+      const right = l.d >= 13;
+      const t = el("text", { x: x(l.d) + (right ? -6 : 6), y: l.py + 3.5, "text-anchor": right ? "end" : "start", class: "dl" }, svg);
+      t.textContent = short;
+      if (right) t.setAttribute("y", l.py - 7);
+    });
+
+    // hover layer
+    const xh = el("line", { x1: 0, x2: 0, y1: m.t, y2: H - m.b, class: "xh", visibility: "hidden" }, svg);
+    const hit = el("rect", { x: m.l - 8, y: m.t, width: W - m.l - m.r + 16, height: H - m.t - m.b, fill: "transparent" }, svg);
+    const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; wrap.appendChild(tip);
+    let cur = null;
+    function show(d) {
+      cur = Math.max(1, Math.min(15, d));
+      xh.setAttribute("x1", x(cur)); xh.setAttribute("x2", x(cur)); xh.setAttribute("visibility", "visible");
+      const rows = Object.keys(series).map(k => ({ k, v: series[k][cur - 1] })).filter(r => r.v != null)
+        .sort((a, b) => cfg.low ? a.v - b.v : b.v - a.v);
+      tip.innerHTML = '<b>D+' + cur + '</b>' + rows.map(r => {
+        const c = HL[r.k] ? "c-" + HL[r.k] : "c-other";
+        return '<div class="row' + (HL[r.k] ? ' h' : '') + '"><span><i class="sw ' + c + '"></i>' + NAMES[r.k] + '</span><span>' + r.v.toFixed(cfg.fmt) + '</span></div>';
+      }).join("");
+      tip.hidden = false;
+      const box = svg.getBoundingClientRect(), wbox = wrap.getBoundingClientRect();
+      const px = box.left - wbox.left + x(cur) / W * box.width;
+      const tw = tip.offsetWidth;
+      let left = px + 12; if (left + tw > wrap.clientWidth - 4) left = px - tw - 12; if (left < 4) left = 4;
+      tip.style.left = left + "px"; tip.style.top = (box.top - wbox.top + 8) + "px";
+    }
+    function hide() { tip.hidden = true; xh.setAttribute("visibility", "hidden"); }
+    function fromEvent(ev) { const box = svg.getBoundingClientRect(); const sx = (ev.clientX - box.left) / box.width * W; return Math.round((sx - m.l) / (W - m.l - m.r) * 14 + 1); }
+    hit.addEventListener("pointermove", ev => show(fromEvent(ev)));
+    hit.addEventListener("pointerdown", ev => show(fromEvent(ev)));
+    hit.addEventListener("pointerleave", ev => { if (ev.pointerType === "mouse") hide(); });
+    svg.addEventListener("keydown", ev => {
+      if (ev.key === "ArrowRight") { show((cur || 0) + 1); ev.preventDefault(); }
+      else if (ev.key === "ArrowLeft") { show((cur || 2) - 1); ev.preventDefault(); }
+      else if (ev.key === "Escape") hide();
+    });
+    svg.addEventListener("blur", hide);
+  }
+
+  const host = document.getElementById("charts");
+  PANELS.forEach(p => drawPanel(p, host));
+
+  // table view of the chart data
+  const tv = document.getElementById("chart-tables");
+  PANELS.forEach(p => {
+    const s = DATA[p.key];
+    const order = Object.keys(s).sort((a, b) => p.low ? s[a][0] - s[b][0] : s[b][0] - s[a][0]);
+    let h = '<h4 style="margin:0">' + p.title + ' <span class="dim" style="font-weight:400;font-size:12px">' + p.sub + '</span></h4><div class="table-wrap"><table><thead><tr><th>모델</th>';
+    for (let d = 1; d <= 15; d++) h += '<th class="n">D' + d + '</th>';
+    h += '</tr></thead><tbody>';
+    order.forEach(k => { h += '<tr' + (HL[k] ? ' class="hl"' : '') + '><td>' + NAMES[k] + '</td>' + s[k].map(v => '<td class="n">' + (v == null ? '—' : v.toFixed(p.fmt)) + '</td>').join('') + '</tr>'; });
+    tv.insertAdjacentHTML("beforeend", h + '</tbody></table></div>');
+  });
+
+  // reliability score table (computed from the same verification data)
+  const lin = (v, a, b) => Math.max(0, Math.min(100, 100 * (v - a) / (b - a)));
+  const relModels = ["dwd_icon", "BLEND4", "ukmo_global_deterministic_10km", "cmc_gem_gdps_15km", "ecmwf_aifs025_single", "ncep_aigfs025", "ecmwf_ifs", "jma_msm", "ncep_gfs013", "jma_gsm"];
+  const relDays = [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 15];
+  const tb = document.querySelector("#rel-table tbody");
+  relModels.forEach(k => {
+    let row = '<tr><td>' + NAMES[k] + '</td>';
+    relDays.forEach(d => {
+      const t = DATA.t2m[k][d - 1], w = DATA.wind[k][d - 1], e = DATA.ets[k][d - 1];
+      if (t == null || w == null || e == null) { row += '<td class="r dim">—</td>'; return; }
+      const sc = Math.round(0.45 * lin(e, 0, 0.5) + 0.35 * lin(t, 3, 1) + 0.20 * lin(w, 2, 0.8));
+      const cls = sc >= 85 ? "r5" : sc >= 70 ? "r4" : sc >= 55 ? "r3" : sc >= 40 ? "r2" : "";
+      row += '<td class="r ' + cls + '" title="별 ' + (sc >= 85 ? 5 : sc >= 70 ? 4 : sc >= 55 ? 3 : sc >= 40 ? 2 : 1) + '개">' + sc + '</td>';
+    });
+    tb.insertAdjacentHTML("beforeend", row + '</tr>');
+  });
+
+  // lead-time ruler ticks
+  const ticks = document.getElementById("ticks");
+  for (let d = 0; d <= 15; d++) {
+    const s = document.createElement("span"); s.style.left = (d / 15 * 100) + "%"; s.textContent = d; if (d === 15) s.className = "last"; ticks.appendChild(s);
+  }
+  const ie = document.createElement("span"); ie.className = "icon-end"; ie.style.left = (7.5 / 15 * 100) + "%"; ie.textContent = "ICON 예보 끝 (180h)"; ticks.appendChild(ie);
+
+  // chosung search demo
+  const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+  const isSyl = c => { const n = c.charCodeAt(0); return n >= 0xAC00 && n <= 0xD7A3; };
+  const cho = c => isSyl(c) ? CHO[Math.floor((c.charCodeAt(0) - 0xAC00) / 588)] : c;
+  const dec = c => { const n = c.charCodeAt(0) - 0xAC00; return { c: Math.floor(n / 588), v: Math.floor((n % 588) / 28), j: n % 28 }; };
+  const norm = s => s.toLowerCase().replace(/\s+/g, "").replace(/(컨트리클럽|골프클럽|골프앤리조트|골프장|c\.c\.?|cc|gc)$/i, "");
+  const COURSES = [
+    ["베어크리크 골프클럽", "경기 포천", ["베어크릭", "bear creek"]],
+    ["베어크리크 춘천", "강원 춘천", ["베어크리크춘천"]],
+    ["남서울CC", "경기 성남", ["남서울컨트리클럽"]],
+    ["클럽72", "인천 중구", ["스카이72", "sky72"]],
+    ["잭니클라우스 GC 코리아", "인천 연수구", ["jack nicklaus", "잭니클라우스"]],
+    ["레이크사이드CC", "경기 용인", ["lakeside"]],
+    ["레이크우드CC", "경기 양주", ["lakewood"]],
+    ["안양CC", "경기 군포", ["안양컨트리클럽"]],
+    ["이스트밸리CC", "경기 광주", ["east valley"]],
+    ["남촌CC", "경기 광주", []],
+    ["서원밸리CC", "경기 파주", []],
+    ["오크밸리CC", "강원 원주", ["oak valley"]],
+    ["비발디파크CC", "강원 홍천", ["vivaldi"]],
+    ["핀크스GC", "제주 서귀포", ["pinx"]],
+    ["해비치CC 제주", "제주 서귀포", ["haevichi"]],
+    ["클럽 나인브릿지", "제주 서귀포", ["나인브릿지", "nine bridges"]],
+    ["해슬리 나인브릿지", "경기 여주", ["haesley"]],
+    ["엘리시안 강촌CC", "강원 춘천", ["엘리시안"]],
+    ["휘닉스CC", "강원 평창", ["phoenix"]],
+    ["우정힐스CC", "충남 천안", ["woo jeong hills"]],
+    ["아난티 남해", "경남 남해", ["ananti"]],
+    ["사우스케이프 오너스클럽", "경남 남해", ["south cape"]],
+    ["트리니티클럽", "경기 여주", ["trinity"]],
+    ["88CC", "경기 용인", ["팔팔cc", "팔팔컨트리클럽"]],
+    ["곤지암CC", "경기 광주", []],
+    ["송추CC", "경기 양주", []],
+    ["뉴서울CC", "경기 광주", []],
+    ["화산CC", "경기 용인", []],
+    ["블루원 용인CC", "경기 용인", ["blue one"]],
+    ["정산CC", "경남 김해", []],
+    ["아시아드CC", "부산 기장", ["asiad"]],
+    ["블랙스톤 제주", "제주 제주시", ["blackstone"]]
+  ];
+  const INDEX = COURSES.map(([name, region, aliases]) => ({ name, region, keys: [{ k: norm(name), alias: null }].concat(aliases.map(a => ({ k: norm(a), alias: a }))) }));
+  function charMatch(q, k, last) {
+    if (q === k) return true;
+    if (CHO.includes(q)) return cho(k) === q;
+    if (last && isSyl(q) && isSyl(k)) { const a = dec(q), b = dec(k); return a.j === 0 && a.c === b.c && a.v === b.v; }
+    return false;
+  }
+  function matchAt(q, key) {
+    for (let i = 0; i + q.length <= key.length; i++) {
+      let ok = true;
+      for (let j = 0; j < q.length; j++) if (!charMatch(q[j], key[i + j], j === q.length - 1)) { ok = false; break; }
+      if (ok) return i;
+    }
+    return -1;
+  }
+  function search(raw) {
+    const q = norm(raw); if (!q) return [];
+    const allCho = [...q].every(c => CHO.includes(c));
+    const out = [];
+    INDEX.forEach(c => {
+      let best = null;
+      c.keys.forEach(({ k, alias }) => {
+        const i = matchAt(q, k); if (i < 0) return;
+        let s = k === q ? 100 : i === 0 ? (allCho ? 80 : 90) : 60;
+        if (alias) s -= 10;
+        const why = (allCho ? "초성 " : "") + (i === 0 ? "앞부분 일치" : "부분 일치") + (alias ? " · 별칭 '" + alias + "'" : "");
+        if (!best || s > best.s) best = { s, why };
+      });
+      if (best) out.push({ name: c.name, region: c.region, ...best });
+    });
+    return out.sort((a, b) => b.s - a.s || a.name.localeCompare(b.name, "ko")).slice(0, 6);
+  }
+  const qi = document.getElementById("q"), ul = document.getElementById("results");
+  function render() {
+    const r = search(qi.value);
+    ul.innerHTML = r.length ? r.map(x => '<li><span class="nm">' + x.name + ' <span class="rg">' + x.region + '</span></span><span class="sc">' + x.s + '점</span><span class="why">' + x.why + '</span></li>').join("")
+      : '<li><span class="nm dim">일치하는 골프장이 없습니다</span><span></span><span class="why">실제 서비스에서는 서버 퍼지 검색과 미등록 골프장 제보로 이어집니다.</span></li>';
+  }
+  qi.addEventListener("input", render);
+  document.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => { qi.value = b.dataset.q; render(); qi.focus(); }));
+  render();
+
+  // checklist persistence (per-viewer convenience)
+  document.querySelectorAll("#checklist input").forEach(cb => {
+    try { cb.checked = localStorage.getItem("teeup-" + cb.id) === "1"; } catch (e) {}
+    cb.addEventListener("change", () => { try { localStorage.setItem("teeup-" + cb.id, cb.checked ? "1" : "0"); } catch (e) {} });
+  });
+
+  // table of contents highlight
+  const links = [...document.querySelectorAll("nav.toc a")];
+  const map = new Map(links.map(a => [a.getAttribute("href").slice(1), a]));
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => { if (en.isIntersecting) { links.forEach(a => a.classList.remove("active")); const a = map.get(en.target.id); if (a) a.classList.add("active"); } });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    document.querySelectorAll("main section").forEach(s => io.observe(s));
+  }
+})();
+</script>
