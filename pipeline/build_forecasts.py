@@ -155,7 +155,8 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default=os.path.join(HERE, "..", "site", "data")); ap.add_argument("--limit", type=int); ap.add_argument("--source", default="s3", choices=["s3", "api"])
     a = ap.parse_args()
     src = json.load(open(os.path.join(HERE, "..", "data", "golf-courses", "courses.json")))
-    courses = [c for c in src["courses"] if c["name"]]       # nameless areas cannot be searched; they wait for review
+    # nameless areas cannot be searched; a course whose reviewed coordinate disagrees with its address would get the wrong forecast
+    courses = [c for c in src["courses"] if c["name"] and "좌표확인" not in c["review"]]
     if a.limit: courses = courses[:a.limit]
     os.makedirs(os.path.join(a.out, "fc"), exist_ok=True)
     now = dt.datetime.now(KST)

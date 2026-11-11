@@ -1,0 +1,1783 @@
+{
+"courses": {
+"lic-302012006000001": {
+"verdict": "ok"
+},
+"lic-302012007000004": {
+"verdict": "ok"
+},
+"lic-302012007000005": {
+"verdict": "ok"
+},
+"lic-302012007000019": {
+"verdict": "ok"
+},
+"lic-302012008000003": {
+"verdict": "ok"
+},
+"lic-302012008000004": {
+"verdict": "ok"
+},
+"lic-302012008000037": {
+"verdict": "ok"
+},
+"lic-302012008000041": {
+"verdict": "ok"
+},
+"lic-302012008000054": {
+"verdict": "ok"
+},
+"lic-302012009000001": {
+"verdict": "ok"
+},
+"lic-302012010000002": {
+"verdict": "ok"
+},
+"lic-302012011000003": {
+"verdict": "ok"
+},
+"lic-302012011000014": {
+"verdict": "ok"
+},
+"lic-302012011000037": {
+"verdict": "ok"
+},
+"lic-302012013000004": {
+"verdict": "ok"
+},
+"lic-302012014000007": {
+"verdict": "ok"
+},
+"lic-302012015000005": {
+"verdict": "ok"
+},
+"lic-302012016000001": {
+"verdict": "ok"
+},
+"lic-302012016000002": {
+"verdict": "ok"
+},
+"lic-302012019000004": {
+"verdict": "ok"
+},
+"lic-302012019000005": {
+"verdict": "ok"
+},
+"lic-302012020000001": {
+"verdict": "ok"
+},
+"lic-5700000-CDFH2302012026000001": {
+"verdict": "remove"
+},
+"lic-5815000-CDFH2302012026000001": {
+"verdict": "remove"
+},
+"lic-6270000-302012026000001": {
+"verdict": "ok"
+},
+"lic-6280000-302012021000002": {
+"verdict": "ok"
+},
+"lic-6430000-302012021000002": {
+"verdict": "remove"
+},
+"lic-6440000-302012023000001": {
+"verdict": "ok"
+},
+"lic-6440000-302012026000001": {
+"verdict": "ok"
+},
+"lic-6470000-302012008000008": {
+"verdict": "ok"
+},
+"lic-6480000-302012012000001": {
+"verdict": "ok"
+},
+"lic-6500000-302012008000008": {
+"verdict": "ok"
+},
+"lic-6530000-302012012000001": {
+"verdict": "ok"
+},
+"lic-6530000-302012023000001": {
+"verdict": "ok"
+},
+"lic-6530000-302012026000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302011987000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302011992000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012001000001": {
+"name": "안양컨트리클럽",
+"verdict": "ok"
+},
+"lic-CDFH2302012003000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012006000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012008000002": {
+"verdict": "ok"
+},
+"lic-CDFH2302012011000002": {
+"verdict": "ok"
+},
+"lic-CDFH2302012012000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012013000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012019000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012023000001": {
+"verdict": "ok"
+},
+"lic-CDFH2302012025000001": {
+"verdict": "ok"
+},
+"osm-w1004627308": {
+"verdict": "ok"
+},
+"osm-w1009205888": {
+"verdict": "ok"
+},
+"osm-w1009206725": {
+"verdict": "ok"
+},
+"osm-w1025058636": {
+"verdict": "ok"
+},
+"osm-w1029215407": {
+"verdict": "ok"
+},
+"osm-w1056137199": {
+"verdict": "ok"
+},
+"osm-w1060267546": {
+"verdict": "ok"
+},
+"osm-w107394848": {
+"verdict": "remove"
+},
+"osm-w1075278597": {
+"verdict": "ok"
+},
+"osm-w108303388": {
+"verdict": "ok"
+},
+"osm-w109055511": {
+"verdict": "ok"
+},
+"osm-w1135090255": {
+"verdict": "ok"
+},
+"osm-w1160178277": {
+"verdict": "ok"
+},
+"osm-w1174508305": {
+"verdict": "ok"
+},
+"osm-w1187985758": {
+"verdict": "ok"
+},
+"osm-w1188529885": {
+"verdict": "ok"
+},
+"osm-w1192397793": {
+"verdict": "ok"
+},
+"osm-w1196810234": {
+"verdict": "ok"
+},
+"osm-w1200585166": {
+"verdict": "ok"
+},
+"osm-w1203006849": {
+"verdict": "ok"
+},
+"osm-w120410414": {
+"verdict": "ok"
+},
+"osm-w1205147519": {
+"verdict": "ok"
+},
+"osm-w1205705685": {
+"verdict": "ok"
+},
+"osm-w1213004518": {
+"verdict": "ok"
+},
+"osm-w1213004519": {
+"verdict": "ok"
+},
+"osm-w1213008164": {
+"verdict": "ok"
+},
+"osm-w122741297": {
+"verdict": "ok"
+},
+"osm-w1229671121": {
+"verdict": "ok"
+},
+"osm-w1229876537": {
+"verdict": "ok"
+},
+"osm-w1233233750": {
+"verdict": "ok"
+},
+"osm-w123661749": {
+"verdict": "ok"
+},
+"osm-w1239271302": {
+"verdict": "ok"
+},
+"osm-w1240165042": {
+"verdict": "ok"
+},
+"osm-w1256123534": {
+"verdict": "ok"
+},
+"osm-w126591210": {
+"verdict": "ok"
+},
+"osm-w1298027798": {
+"verdict": "ok"
+},
+"osm-w1298240650": {
+"verdict": "ok"
+},
+"osm-w130172399": {
+"verdict": "ok"
+},
+"osm-w1303176514": {
+"verdict": "ok"
+},
+"osm-w1303272662": {
+"verdict": "ok"
+},
+"osm-w1304933682": {
+"verdict": "ok"
+},
+"osm-w130539444": {
+"verdict": "ok"
+},
+"osm-w1318032562": {
+"verdict": "ok"
+},
+"osm-w1318760088": {
+"verdict": "remove"
+},
+"osm-w132579213": {
+"verdict": "ok"
+},
+"osm-w1331956429": {
+"verdict": "ok"
+},
+"osm-w1337853322": {
+"verdict": "ok"
+},
+"osm-w1349210439": {
+"verdict": "ok"
+},
+"osm-w1365304735": {
+"verdict": "ok"
+},
+"osm-w1381838124": {
+"verdict": "ok"
+},
+"osm-w1396251053": {
+"verdict": "ok"
+},
+"osm-w1410516120": {
+"verdict": "ok"
+},
+"osm-w142488507": {
+"verdict": "ok"
+},
+"osm-w1446853665": {
+"verdict": "ok"
+},
+"osm-w1447563632": {
+"verdict": "ok"
+},
+"osm-w1449512742": {
+"verdict": "ok"
+},
+"osm-w1456013376": {
+"verdict": "remove"
+},
+"osm-w1460436387": {
+"verdict": "ok"
+},
+"osm-w1463269431": {
+"verdict": "ok"
+},
+"osm-w1484566237": {
+"verdict": "ok"
+},
+"osm-w1575626221": {
+"verdict": "ok"
+},
+"osm-w170608708": {
+"verdict": "ok"
+},
+"osm-w173465417": {
+"verdict": "ok"
+},
+"osm-w181563710": {
+"verdict": "ok"
+},
+"osm-w205148563": {
+"verdict": "ok"
+},
+"osm-w242463823": {
+"verdict": "ok"
+},
+"osm-w243599380": {
+"verdict": "ok"
+},
+"osm-w246152659": {
+"verdict": "remove"
+},
+"osm-w248407166": {
+"verdict": "ok"
+},
+"osm-w250709266": {
+"verdict": "ok"
+},
+"osm-w251716882": {
+"verdict": "ok"
+},
+"osm-w252253845": {
+"verdict": "ok"
+},
+"osm-w253055978": {
+"verdict": "ok"
+},
+"osm-w253274446": {
+"verdict": "ok"
+},
+"osm-w253456063": {
+"verdict": "ok"
+},
+"osm-w276156803": {
+"verdict": "remove"
+},
+"osm-w288996325": {
+"verdict": "ok"
+},
+"osm-w289411211": {
+"verdict": "ok"
+},
+"osm-w289411212": {
+"verdict": "ok"
+},
+"osm-w295407270": {
+"verdict": "ok"
+},
+"osm-w298032137": {
+"verdict": "remove"
+},
+"osm-w298138854": {
+"verdict": "remove"
+},
+"osm-w298477530": {
+"verdict": "remove"
+},
+"osm-w299708233": {
+"verdict": "ok"
+},
+"osm-w299801383": {
+"verdict": "ok"
+},
+"osm-w301054807": {
+"verdict": "ok"
+},
+"osm-w305670809": {
+"verdict": "ok"
+},
+"osm-w306090506": {
+"verdict": "ok"
+},
+"osm-w310012981": {
+"verdict": "ok"
+},
+"osm-w310195481": {
+"verdict": "ok"
+},
+"osm-w310852063": {
+"verdict": "ok"
+},
+"osm-w320322458": {
+"verdict": "remove"
+},
+"osm-w324443108": {
+"verdict": "ok"
+},
+"osm-w339506188": {
+"verdict": "ok"
+},
+"osm-w342009744": {
+"verdict": "remove"
+},
+"osm-w344112666": {
+"verdict": "remove"
+},
+"osm-w347425575": {
+"verdict": "remove"
+},
+"osm-w347466547": {
+"verdict": "remove"
+},
+"osm-w347478560": {
+"verdict": "remove"
+},
+"osm-w351744677": {
+"verdict": "ok"
+},
+"osm-w351744682": {
+"verdict": "ok"
+},
+"osm-w353738156": {
+"verdict": "remove"
+},
+"osm-w353744101": {
+"verdict": "remove"
+},
+"osm-w356275835": {
+"verdict": "ok"
+},
+"osm-w356858752": {
+"verdict": "ok"
+},
+"osm-w358722360": {
+"verdict": "ok"
+},
+"osm-w359363977": {
+"verdict": "ok"
+},
+"osm-w366335418": {
+"verdict": "ok"
+},
+"osm-w368959915": {
+"verdict": "ok"
+},
+"osm-w368960232": {
+"verdict": "ok"
+},
+"osm-w368960374": {
+"verdict": "ok"
+},
+"osm-w368960896": {
+"verdict": "ok"
+},
+"osm-w368961391": {
+"verdict": "ok"
+},
+"osm-w368961571": {
+"verdict": "ok"
+},
+"osm-w368961733": {
+"verdict": "ok"
+},
+"osm-w368961932": {
+"verdict": "ok"
+},
+"osm-w368962149": {
+"verdict": "ok"
+},
+"osm-w368962525": {
+"verdict": "ok"
+},
+"osm-w368963041": {
+"verdict": "ok"
+},
+"osm-w368963116": {
+"verdict": "ok"
+},
+"osm-w368963715": {
+"verdict": "ok"
+},
+"osm-w368963929": {
+"verdict": "ok"
+},
+"osm-w368964057": {
+"verdict": "ok"
+},
+"osm-w368964710": {
+"verdict": "ok"
+},
+"osm-w368965738": {
+"verdict": "ok"
+},
+"osm-w368966190": {
+"verdict": "ok"
+},
+"osm-w369786684": {
+"verdict": "ok"
+},
+"osm-w369959208": {
+"verdict": "ok"
+},
+"osm-w370041924": {
+"verdict": "remove"
+},
+"osm-w370131616": {
+"verdict": "ok"
+},
+"osm-w370281786": {
+"verdict": "ok"
+},
+"osm-w371732050": {
+"verdict": "ok"
+},
+"osm-w375194479": {
+"verdict": "ok"
+},
+"osm-w376628275": {
+"verdict": "ok"
+},
+"osm-w376925267": {
+"verdict": "ok"
+},
+"osm-w376925496": {
+"verdict": "ok"
+},
+"osm-w377650725": {
+"verdict": "ok"
+},
+"osm-w377809092": {
+"verdict": "ok"
+},
+"osm-w377924549": {
+"verdict": "ok"
+},
+"osm-w378017665": {
+"verdict": "ok"
+},
+"osm-w378019386": {
+"verdict": "ok"
+},
+"osm-w378020836": {
+"verdict": "ok"
+},
+"osm-w378021752": {
+"verdict": "ok"
+},
+"osm-w378023817": {
+"verdict": "ok"
+},
+"osm-w378024810": {
+"verdict": "ok"
+},
+"osm-w378026237": {
+"verdict": "ok"
+},
+"osm-w378093773": {
+"verdict": "ok"
+},
+"osm-w378243002": {
+"verdict": "ok"
+},
+"osm-w378243761": {
+"verdict": "ok"
+},
+"osm-w378243930": {
+"verdict": "ok"
+},
+"osm-w378243995": {
+"verdict": "ok"
+},
+"osm-w378252137": {
+"verdict": "ok"
+},
+"osm-w378414559": {
+"verdict": "ok"
+},
+"osm-w378528287": {
+"verdict": "ok"
+},
+"osm-w378723983": {
+"verdict": "ok"
+},
+"osm-w378748953": {
+"verdict": "ok"
+},
+"osm-w378748955": {
+"verdict": "ok"
+},
+"osm-w378963440": {
+"verdict": "ok"
+},
+"osm-w379036299": {
+"verdict": "ok"
+},
+"osm-w379620543": {
+"verdict": "ok"
+},
+"osm-w379966131": {
+"verdict": "ok"
+},
+"osm-w379967883": {
+"verdict": "ok"
+},
+"osm-w380023077": {
+"verdict": "ok"
+},
+"osm-w380269266": {
+"verdict": "ok"
+},
+"osm-w380274941": {
+"verdict": "ok"
+},
+"osm-w380275460": {
+"verdict": "ok"
+},
+"osm-w380276785": {
+"verdict": "ok"
+},
+"osm-w380278946": {
+"verdict": "ok"
+},
+"osm-w380404841": {
+"verdict": "ok"
+},
+"osm-w380914535": {
+"verdict": "remove"
+},
+"osm-w387274002": {
+"verdict": "ok"
+},
+"osm-w387941564": {
+"verdict": "ok"
+},
+"osm-w388119096": {
+"verdict": "ok"
+},
+"osm-w388129428": {
+"verdict": "ok"
+},
+"osm-w388343732": {
+"verdict": "ok"
+},
+"osm-w388347014": {
+"verdict": "ok"
+},
+"osm-w388347017": {
+"verdict": "ok"
+},
+"osm-w388594939": {
+"verdict": "ok"
+},
+"osm-w388753113": {
+"verdict": "ok"
+},
+"osm-w388760235": {
+"verdict": "ok"
+},
+"osm-w388772671": {
+"verdict": "ok"
+},
+"osm-w389250034": {
+"verdict": "ok"
+},
+"osm-w389263469": {
+"verdict": "ok"
+},
+"osm-w389268691": {
+"verdict": "ok"
+},
+"osm-w389268855": {
+"verdict": "ok"
+},
+"osm-w389268856": {
+"verdict": "ok"
+},
+"osm-w389269619": {
+"verdict": "ok"
+},
+"osm-w389269621": {
+"verdict": "ok"
+},
+"osm-w389269626": {
+"verdict": "ok"
+},
+"osm-w389269714": {
+"verdict": "ok"
+},
+"osm-w389309257": {
+"verdict": "ok"
+},
+"osm-w389394676": {
+"verdict": "ok"
+},
+"osm-w389399840": {
+"verdict": "ok"
+},
+"osm-w389426876": {
+"verdict": "ok"
+},
+"osm-w389428315": {
+"verdict": "ok"
+},
+"osm-w389445363": {
+"verdict": "ok"
+},
+"osm-w389445893": {
+"verdict": "ok"
+},
+"osm-w389457955": {
+"verdict": "ok"
+},
+"osm-w389488559": {
+"verdict": "ok"
+},
+"osm-w389490246": {
+"verdict": "ok"
+},
+"osm-w389491611": {
+"verdict": "ok"
+},
+"osm-w389493321": {
+"verdict": "ok"
+},
+"osm-w389493322": {
+"verdict": "ok"
+},
+"osm-w389493323": {
+"verdict": "ok"
+},
+"osm-w389580686": {
+"verdict": "ok"
+},
+"osm-w389595992": {
+"verdict": "ok"
+},
+"osm-w389621419": {
+"verdict": "ok"
+},
+"osm-w389774082": {
+"verdict": "ok"
+},
+"osm-w389927508": {
+"verdict": "ok"
+},
+"osm-w389977446": {
+"verdict": "ok"
+},
+"osm-w390545752": {
+"verdict": "ok"
+},
+"osm-w391045338": {
+"verdict": "ok"
+},
+"osm-w391307049": {
+"verdict": "ok"
+},
+"osm-w391440049": {
+"verdict": "ok"
+},
+"osm-w391445387": {
+"verdict": "ok"
+},
+"osm-w391489343": {
+"verdict": "ok"
+},
+"osm-w391489398": {
+"verdict": "ok"
+},
+"osm-w391489687": {
+"verdict": "ok"
+},
+"osm-w391489688": {
+"verdict": "ok"
+},
+"osm-w391490624": {
+"verdict": "ok"
+},
+"osm-w391692610": {
+"verdict": "ok"
+},
+"osm-w391816707": {
+"verdict": "ok"
+},
+"osm-w391816718": {
+"verdict": "ok"
+},
+"osm-w391816720": {
+"verdict": "ok"
+},
+"osm-w391816723": {
+"verdict": "ok"
+},
+"osm-w391816726": {
+"verdict": "ok"
+},
+"osm-w392700177": {
+"verdict": "ok"
+},
+"osm-w392800292": {
+"verdict": "ok"
+},
+"osm-w392813130": {
+"verdict": "ok"
+},
+"osm-w393274884": {
+"verdict": "ok"
+},
+"osm-w393889907": {
+"verdict": "ok"
+},
+"osm-w393920831": {
+"verdict": "ok"
+},
+"osm-w393922184": {
+"verdict": "ok"
+},
+"osm-w396057263": {
+"verdict": "ok"
+},
+"osm-w396059627": {
+"verdict": "ok"
+},
+"osm-w398942362": {
+"verdict": "ok"
+},
+"osm-w399572222": {
+"verdict": "ok"
+},
+"osm-w399702305": {
+"verdict": "ok"
+},
+"osm-w399702828": {
+"verdict": "ok"
+},
+"osm-w399703511": {
+"verdict": "ok"
+},
+"osm-w399718416": {
+"verdict": "ok"
+},
+"osm-w400849249": {
+"verdict": "ok"
+},
+"osm-w400852434": {
+"verdict": "ok"
+},
+"osm-w401023766": {
+"verdict": "ok"
+},
+"osm-w404548547": {
+"verdict": "ok"
+},
+"osm-w415787415": {
+"verdict": "ok"
+},
+"osm-w415815570": {
+"verdict": "ok"
+},
+"osm-w415888498": {
+"verdict": "ok"
+},
+"osm-w427795535": {
+"verdict": "ok"
+},
+"osm-w446830468": {
+"verdict": "ok"
+},
+"osm-w447703438": {
+"verdict": "ok"
+},
+"osm-w447703445": {
+"name": "클럽72 오션코스",
+"verdict": "ok"
+},
+"osm-w456045308": {
+"verdict": "remove"
+},
+"osm-w466141930": {
+"verdict": "ok"
+},
+"osm-w466206110": {
+"verdict": "ok"
+},
+"osm-w468589803": {
+"verdict": "ok"
+},
+"osm-w468996815": {
+"verdict": "ok"
+},
+"osm-w469029834": {
+"verdict": "remove"
+},
+"osm-w470665698": {
+"verdict": "ok"
+},
+"osm-w471304660": {
+"verdict": "ok"
+},
+"osm-w471309620": {
+"verdict": "ok"
+},
+"osm-w471480535": {
+"verdict": "ok"
+},
+"osm-w471497105": {
+"verdict": "ok"
+},
+"osm-w471870266": {
+"verdict": "ok"
+},
+"osm-w471913617": {
+"verdict": "ok"
+},
+"osm-w471998659": {
+"verdict": "ok"
+},
+"osm-w473169561": {
+"verdict": "ok"
+},
+"osm-w474855108": {
+"verdict": "ok"
+},
+"osm-w475320930": {
+"verdict": "ok"
+},
+"osm-w476287205": {
+"verdict": "ok"
+},
+"osm-w477932052": {
+"verdict": "ok"
+},
+"osm-w477983957": {
+"verdict": "remove"
+},
+"osm-w478868551": {
+"verdict": "remove"
+},
+"osm-w479424574": {
+"verdict": "remove"
+},
+"osm-w484096107": {
+"verdict": "ok"
+},
+"osm-w484098140": {
+"verdict": "ok"
+},
+"osm-w485639654": {
+"verdict": "ok"
+},
+"osm-w486047902": {
+"name": "클럽72 골프장",
+"verdict": "ok"
+},
+"osm-w487667372": {
+"verdict": "ok"
+},
+"osm-w490452692": {
+"verdict": "ok"
+},
+"osm-w509423306": {
+"verdict": "remove"
+},
+"osm-w513380428": {
+"verdict": "ok"
+},
+"osm-w514081203": {
+"verdict": "ok"
+},
+"osm-w514085723": {
+"verdict": "ok"
+},
+"osm-w516452418": {
+"verdict": "ok"
+},
+"osm-w521310826": {
+"verdict": "ok"
+},
+"osm-w523105765": {
+"verdict": "ok"
+},
+"osm-w523450328": {
+"verdict": "ok"
+},
+"osm-w523557134": {
+"verdict": "ok"
+},
+"osm-w523812158": {
+"verdict": "ok"
+},
+"osm-w524204553": {
+"verdict": "ok"
+},
+"osm-w524436181": {
+"verdict": "ok"
+},
+"osm-w524448807": {
+"verdict": "ok"
+},
+"osm-w524449266": {
+"verdict": "ok"
+},
+"osm-w524450806": {
+"verdict": "ok"
+},
+"osm-w524450807": {
+"verdict": "ok"
+},
+"osm-w524450808": {
+"verdict": "ok"
+},
+"osm-w524471443": {
+"verdict": "ok"
+},
+"osm-w524541809": {
+"verdict": "ok"
+},
+"osm-w524541821": {
+"verdict": "ok"
+},
+"osm-w524687818": {
+"verdict": "ok"
+},
+"osm-w524730161": {
+"verdict": "ok"
+},
+"osm-w525071803": {
+"verdict": "ok"
+},
+"osm-w525432823": {
+"verdict": "ok"
+},
+"osm-w525662303": {
+"verdict": "ok"
+},
+"osm-w525665891": {
+"verdict": "ok"
+},
+"osm-w527092703": {
+"verdict": "ok"
+},
+"osm-w527588732": {
+"verdict": "ok"
+},
+"osm-w530133278": {
+"verdict": "ok"
+},
+"osm-w536796898": {
+"verdict": "ok"
+},
+"osm-w540940807": {
+"verdict": "ok"
+},
+"osm-w541600442": {
+"verdict": "ok"
+},
+"osm-w541710723": {
+"verdict": "ok"
+},
+"osm-w541764183": {
+"verdict": "remove"
+},
+"osm-w541806050": {
+"verdict": "ok"
+},
+"osm-w541810105": {
+"verdict": "ok"
+},
+"osm-w543365571": {
+"verdict": "ok"
+},
+"osm-w543805238": {
+"verdict": "remove"
+},
+"osm-w545288525": {
+"verdict": "ok"
+},
+"osm-w545370453": {
+"verdict": "ok"
+},
+"osm-w545744182": {
+"verdict": "ok"
+},
+"osm-w545967310": {
+"verdict": "ok"
+},
+"osm-w545967328": {
+"name": "소노펠리체CC 비발티파크 EAST",
+"verdict": "ok"
+},
+"osm-w546206790": {
+"verdict": "remove"
+},
+"osm-w546212848": {
+"verdict": "ok"
+},
+"osm-w546212852": {
+"verdict": "ok"
+},
+"osm-w546212853": {
+"verdict": "ok"
+},
+"osm-w546372758": {
+"verdict": "ok"
+},
+"osm-w547145443": {
+"verdict": "ok"
+},
+"osm-w548033344": {
+"verdict": "ok"
+},
+"osm-w548252089": {
+"verdict": "ok"
+},
+"osm-w548423879": {
+"verdict": "ok"
+},
+"osm-w551025577": {
+"verdict": "ok"
+},
+"osm-w551202442": {
+"verdict": "remove"
+},
+"osm-w553345524": {
+"verdict": "ok"
+},
+"osm-w553993961": {
+"verdict": "ok"
+},
+"osm-w554036364": {
+"verdict": "ok"
+},
+"osm-w557827368": {
+"verdict": "ok"
+},
+"osm-w557830756": {
+"verdict": "ok"
+},
+"osm-w558442586": {
+"verdict": "ok"
+},
+"osm-w560875452": {
+"verdict": "remove"
+},
+"osm-w563375183": {
+"verdict": "ok"
+},
+"osm-w564192771": {
+"verdict": "ok"
+},
+"osm-w564193367": {
+"verdict": "remove"
+},
+"osm-w566861473": {
+"verdict": "ok"
+},
+"osm-w572072541": {
+"verdict": "ok"
+},
+"osm-w572746672": {
+"verdict": "ok"
+},
+"osm-w573971671": {
+"verdict": "ok"
+},
+"osm-w574761837": {
+"verdict": "ok"
+},
+"osm-w582796107": {
+"verdict": "ok"
+},
+"osm-w583675669": {
+"verdict": "ok"
+},
+"osm-w583675671": {
+"verdict": "ok"
+},
+"osm-w584454936": {
+"verdict": "ok"
+},
+"osm-w586153130": {
+"verdict": "ok"
+},
+"osm-w589103855": {
+"verdict": "ok"
+},
+"osm-w589103856": {
+"verdict": "ok"
+},
+"osm-w589103898": {
+"verdict": "ok"
+},
+"osm-w589107484": {
+"verdict": "ok"
+},
+"osm-w589107941": {
+"verdict": "ok"
+},
+"osm-w589108539": {
+"verdict": "ok"
+},
+"osm-w589300004": {
+"verdict": "ok"
+},
+"osm-w589692489": {
+"verdict": "ok"
+},
+"osm-w593260890": {
+"verdict": "ok"
+},
+"osm-w601810069": {
+"verdict": "ok"
+},
+"osm-w604152593": {
+"verdict": "ok"
+},
+"osm-w615388581": {
+"verdict": "ok"
+},
+"osm-w615389285": {
+"verdict": "ok"
+},
+"osm-w615390835": {
+"verdict": "ok"
+},
+"osm-w616126833": {
+"verdict": "ok"
+},
+"osm-w616129406": {
+"verdict": "ok"
+},
+"osm-w617106042": {
+"verdict": "ok"
+},
+"osm-w617691985": {
+"verdict": "ok"
+},
+"osm-w619064335": {
+"verdict": "ok"
+},
+"osm-w619259611": {
+"verdict": "ok"
+},
+"osm-w620414034": {
+"verdict": "ok"
+},
+"osm-w621523752": {
+"verdict": "ok"
+},
+"osm-w621557551": {
+"verdict": "ok"
+},
+"osm-w625107919": {
+"verdict": "ok"
+},
+"osm-w625109492": {
+"verdict": "ok"
+},
+"osm-w625485429": {
+"verdict": "ok"
+},
+"osm-w625580437": {
+"verdict": "ok"
+},
+"osm-w625850268": {
+"verdict": "ok"
+},
+"osm-w625850269": {
+"verdict": "ok"
+},
+"osm-w627593170": {
+"verdict": "ok"
+},
+"osm-w627610784": {
+"verdict": "ok"
+},
+"osm-w630681048": {
+"verdict": "ok"
+},
+"osm-w631047565": {
+"verdict": "remove"
+},
+"osm-w631051035": {
+"verdict": "ok"
+},
+"osm-w631054660": {
+"verdict": "ok"
+},
+"osm-w631059498": {
+"verdict": "ok"
+},
+"osm-w631060921": {
+"verdict": "ok"
+},
+"osm-w631064953": {
+"verdict": "ok"
+},
+"osm-w631125417": {
+"verdict": "ok"
+},
+"osm-w631666411": {
+"verdict": "ok"
+},
+"osm-w632238706": {
+"verdict": "ok"
+},
+"osm-w632581895": {
+"verdict": "ok"
+},
+"osm-w633130195": {
+"verdict": "ok"
+},
+"osm-w633497271": {
+"verdict": "ok"
+},
+"osm-w634048706": {
+"verdict": "ok"
+},
+"osm-w634957667": {
+"verdict": "ok"
+},
+"osm-w635470186": {
+"verdict": "ok"
+},
+"osm-w636992707": {
+"verdict": "ok"
+},
+"osm-w637363615": {
+"verdict": "ok"
+},
+"osm-w641444650": {
+"verdict": "ok"
+},
+"osm-w641656095": {
+"verdict": "ok"
+},
+"osm-w641786578": {
+"verdict": "ok"
+},
+"osm-w642407923": {
+"verdict": "ok"
+},
+"osm-w642736074": {
+"verdict": "ok"
+},
+"osm-w642775311": {
+"verdict": "ok"
+},
+"osm-w642932126": {
+"verdict": "remove"
+},
+"osm-w642986592": {
+"verdict": "ok"
+},
+"osm-w643204152": {
+"verdict": "ok"
+},
+"osm-w643232453": {
+"verdict": "ok"
+},
+"osm-w643235183": {
+"verdict": "ok"
+},
+"osm-w643237642": {
+"verdict": "ok"
+},
+"osm-w643550314": {
+"verdict": "ok"
+},
+"osm-w644511057": {
+"verdict": "remove"
+},
+"osm-w645101379": {
+"verdict": "ok"
+},
+"osm-w645101383": {
+"verdict": "ok"
+},
+"osm-w645357358": {
+"verdict": "ok"
+},
+"osm-w645512668": {
+"verdict": "ok"
+},
+"osm-w645702323": {
+"verdict": "ok"
+},
+"osm-w646492764": {
+"verdict": "ok"
+},
+"osm-w646980680": {
+"verdict": "ok"
+},
+"osm-w647487606": {
+"verdict": "remove"
+},
+"osm-w647858666": {
+"verdict": "ok"
+},
+"osm-w647934159": {
+"verdict": "ok"
+},
+"osm-w647973514": {
+"verdict": "ok"
+},
+"osm-w648932087": {
+"verdict": "ok"
+},
+"osm-w650395851": {
+"verdict": "ok"
+},
+"osm-w650704486": {
+"verdict": "ok"
+},
+"osm-w652088377": {
+"verdict": "ok"
+},
+"osm-w653860298": {
+"verdict": "ok"
+},
+"osm-w655049393": {
+"verdict": "ok"
+},
+"osm-w656039779": {
+"verdict": "ok"
+},
+"osm-w657739997": {
+"verdict": "ok"
+},
+"osm-w659406991": {
+"verdict": "ok"
+},
+"osm-w666566985": {
+"verdict": "ok"
+},
+"osm-w669427797": {
+"verdict": "ok"
+},
+"osm-w669452632": {
+"verdict": "ok"
+},
+"osm-w671760849": {
+"verdict": "ok"
+},
+"osm-w671763353": {
+"verdict": "ok"
+},
+"osm-w671763964": {
+"verdict": "ok"
+},
+"osm-w67971651": {
+"verdict": "ok"
+},
+"osm-w686201114": {
+"verdict": "ok"
+},
+"osm-w689019071": {
+"verdict": "ok"
+},
+"osm-w68913380": {
+"verdict": "ok"
+},
+"osm-w690618087": {
+"verdict": "ok"
+},
+"osm-w691343112": {
+"verdict": "ok"
+},
+"osm-w693076638": {
+"verdict": "ok"
+},
+"osm-w693438891": {
+"verdict": "ok"
+},
+"osm-w693455670": {
+"verdict": "ok"
+},
+"osm-w708683097": {
+"verdict": "ok"
+},
+"osm-w708940453": {
+"verdict": "remove"
+},
+"osm-w713801223": {
+"name": "플라자CC 제주",
+"verdict": "ok"
+},
+"osm-w735355770": {
+"verdict": "ok"
+},
+"osm-w741979192": {
+"verdict": "ok"
+},
+"osm-w752038372": {
+"verdict": "ok"
+},
+"osm-w756749258": {
+"verdict": "ok"
+},
+"osm-w778930978": {
+"verdict": "ok"
+},
+"osm-w804479296": {
+"verdict": "ok"
+},
+"osm-w807398174": {
+"verdict": "remove"
+},
+"osm-w877556250": {
+"verdict": "ok"
+},
+"osm-w893914230": {
+"verdict": "ok"
+},
+"osm-w894283354": {
+"verdict": "ok"
+},
+"osm-w903227157": {
+"verdict": "ok"
+},
+"osm-w922840150": {
+"verdict": "ok"
+},
+"osm-w927003508": {
+"verdict": "remove"
+},
+"osm-w927003510": {
+"verdict": "ok"
+},
+"osm-w95038747": {
+"verdict": "ok"
+},
+"osm-w95469920": {
+"verdict": "ok"
+},
+"osm-w964966373": {
+"verdict": "ok"
+},
+"osm-w972255795": {
+"verdict": "ok"
+}
+},
+"exported": "2026-11-12",
+"licences": {
+"4070000-CDFH2302011991000001": {
+"verdict": "exclude"
+},
+"4070000-CDFH2302011996000002": {
+"verdict": "exclude"
+},
+"4070000-CDFH2302012010000002": {
+"verdict": "exclude"
+},
+"4070000-CDFH2302012014000001": {
+"lat": 37.1770665958938,
+"lon": 127.524470519014,
+"verdict": "new"
+},
+"4281000-CDFH2302011989000001": {
+"lat": 37.676042,
+"lon": 128.700408,
+"verdict": "new"
+},
+"5020000-CDFH2302011989000001": {
+"verdict": "exclude"
+},
+"5050000-CDFH2302012006000001": {
+"lat": 35.816392,
+"lon": 129.502217,
+"note": "골프존카운티 감포",
+"verdict": "new"
+},
+"6130000-302012007000010": {
+"lat": 35.146937,
+"lon": 126.873489,
+"verdict": "new"
+},
+"6130000-302012010000001": {
+"verdict": "exclude"
+},
+"6130000-302012011000006": {
+"lat": 34.89683,
+"lon": 126.73994,
+"verdict": "new"
+},
+"6130000-302012011000007": {
+"verdict": "exclude"
+},
+"6130000-302012011000008": {
+"verdict": "exclude"
+},
+"6130000-302012012000001": {
+"lat": 35.014013,
+"lon": 126.818946,
+"verdict": "new"
+},
+"6130000-302012012000005": {
+"lat": 35.166806,
+"lon": 126.771964,
+"verdict": "new"
+},
+"6130000-302012013000001": {
+"lat": 34.697086527923425,
+"lon": 126.2638298730371,
+"verdict": "new"
+},
+"6130000-302012014000001": {
+"lat": 35.296903,
+"lon": 126.500475,
+"verdict": "new"
+},
+"6260000-302012016000001": {
+"lat": 35.251784,
+"lon": 129.20702,
+"verdict": "new"
+},
+"6270000-302012013000006": {
+"verdict": "exclude"
+},
+"6430000-302012007000003": {
+"verdict": "exclude"
+},
+"6430000-302012007000004": {
+"lat": 36.66546055763017,
+"lon": 127.31895885975031,
+"verdict": "new"
+},
+"6430000-302012007000012": {
+"lat": 36.54602165250386,
+"lon": 127.39217872427612,
+"verdict": "new"
+},
+"6430000-302012008000002": {
+"lat": 36.61643622861368,
+"lon": 127.618228034197,
+"verdict": "new"
+},
+"6430000-302012009000004": {
+"lat": 36.7363809222033,
+"lon": 127.428033429174,
+"verdict": "new"
+},
+"6430000-302012010000002": {
+"lat": 36.682785701812215,
+"lon": 127.60365484222123,
+"verdict": "new"
+},
+"6430000-302012024000002": {
+"lat": 36.92959390325776,
+"lon": 127.77901040655142,
+"verdict": "new"
+},
+"6440000-302012007000010": {
+"verdict": "exclude"
+},
+"6440000-302012008000003": {
+"verdict": "exclude"
+},
+"6440000-302012009000004": {
+"lat": 36.846191849043095,
+"lon": 126.91865178510166,
+"verdict": "new"
+},
+"6440000-302012010000001": {
+"verdict": "exclude"
+},
+"6440000-302012010000002": {
+"lat": 36.5036543820055,
+"lon": 127.163327403034,
+"verdict": "new"
+},
+"6440000-302012015000001": {
+"lat": 36.4095826640549,
+"lon": 127.190770517306,
+"verdict": "new"
+},
+"6440000-302012024000001": {
+"lat": 36.5036543820055,
+"lon": 127.163327403034,
+"verdict": "new"
+},
+"6440000-302012025000001": {
+"lat": 36.6743241071135,
+"lon": 126.669817658607,
+"verdict": "new"
+},
+"6470000-302012008000047": {
+"verdict": "exclude"
+},
+"6470000-302012008000064": {
+"lat": 36.252454,
+"lon": 129.360121,
+"verdict": "new"
+},
+"6470000-302012009000004": {
+"verdict": "exclude"
+},
+"6470000-302012010000001": {
+"lat": 36.216851,
+"lon": 129.344036,
+"verdict": "new"
+},
+"6470000-302012013000006": {
+"lat": 36.122679,
+"lon": 128.704371,
+"verdict": "new"
+},
+"6470000-302012026000001": {
+"lat": 36.049386,
+"lon": 128.333217,
+"verdict": "new"
+},
+"6520000-CDFH2302011995100001": {
+"verdict": "exclude"
+},
+"6530000-302012011000004": {
+"lat": 37.45297719813892,
+"lon": 127.82973109720189,
+"verdict": "new"
+},
+"6530000-302012013000004": {
+"lat": 37.88023414794093,
+"lon": 127.79005585474515,
+"verdict": "new"
+},
+"6530000-302012019000001": {
+"course_id": "osm-w473169561",
+"lat": 37.629003,
+"lon": 128.705002,
+"verdict": "attach"
+},
+"6530000-302012023000003": {
+"lat": 37.202911144836875,
+"lon": 128.04315453818108,
+"verdict": "new"
+},
+"6530000-302012024000001": {
+"verdict": "exclude"
+},
+"6530000-302012024000002": {
+"lat": 37.45297719813892,
+"lon": 127.82973109720189,
+"verdict": "new"
+},
+"6540000-302012011000001": {
+"lat": 35.83132187334319,
+"lon": 127.6365539423434,
+"verdict": "new"
+},
+"6540000-302012012000006": {
+"lat": 35.83132187334319,
+"lon": 127.6365539423434,
+"verdict": "new"
+}
+},
+"source": "tools/review (https://claude.ai/artifact/MRMdqVM8GArQRHcANip5jh)"
+}

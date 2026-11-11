@@ -8,7 +8,7 @@ Outputs: courses.json (app/search index), courses.csv (review sheet), unresolved
 
 Official name, status and membership type come from the licence data; area, centroid and elevation from OSM.
 """
-import json, re, glob, os, sys, time, statistics, urllib.request, urllib.parse, csv, random
+import json, math, re, glob, os, sys, time, statistics, urllib.request, urllib.parse, csv, random
 import shapely
 from shapely.geometry import Polygon, LineString, Point, shape
 from shapely.ops import polygonize, unary_union
@@ -148,6 +148,66 @@ def best_name(lics):
     c = sorted({l["name"] for l in lics if l["name"]}, key=lambda n: (not re.search(r"(CC|GC|클럽|골프|리조트)", n, re.I), len(n)))
     return c[0] if c else ""
 
+def apply_overrides(recs, samples, unresolved, region):
+    """Apply the manual review (overrides.json): removals, renames, and placement of licences that had no location.
+    `samples` (elevation sample points, in record order) is rebuilt to match. Returns (records, summary)."""
+    path = os.path.join(HERE, "overrides.json")
+    if not os.path.exists(path): return recs, {}
+    ov = json.load(open(path)); n = dict(removed=0, renamed=0, confirmed=0, attached=0, added=0, excluded=0, near_existing=0, check=0)
+    pts, i = {}, 0
+    for r in recs: pts[id(r)] = samples[i:i + r["_n"]]; i += r["_n"]
+    def uid_of(r): return r.get("_uid") or r["id"]
+    look = {}
+    for r in recs: look.setdefault(r["id"], []).append(r); look.setdefault(uid_of(r), []).append(r)
+    kept = []
+    for r in recs:
+        o = ov["courses"].get(uid_of(r)) or (ov["courses"].get(r["id"]) if len(look[r["id"]]) == 1 else None)
+        if not o: kept.append(r); continue
+        if o["verdict"] in ("remove", "duplicate"): n["removed"] += 1; continue
+        if o.get("name"):
+            if r["name"] and r["name"] != o["name"]: r["aliases"] = sorted(set(r["aliases"]) | {r["name"]})
+            r["name"] = o["name"]; n["renamed"] += 1
+        if o.get("lat"): r["lat"], r["lon"], r["position"] = round(o["lat"], 5), round(o["lon"], 5), "검수 좌표"; pts[id(r)] = [(r["lat"], r["lon"])]
+        r["review"] = [f for f in r["review"] if f == "이름없음" and not r["name"]]; r["reviewed"] = True; n["confirmed"] += 1
+        kept.append(r)
+    lic = {l["uid"]: l for l in unresolved}
+    def attach(r, l):
+        r["licence_ids"] = sorted(set(r["licence_ids"]) | {l["uid"]})
+        if l["name"] and l["name"] != r["name"]: r["aliases"] = sorted(set(r["aliases"]) | {l["name"]})
+        if l["kind"]: r["type"] = sorted(set(r["type"]) | {l["kind"]})
+        if not r["address"]: r["address"] = l["addr"]
+        if not r["tel"]: r["tel"] = l["tel"]
+    def km(a, b, c, d): return math.hypot((d - b) * 111.32 * math.cos(math.radians((a + c) / 2)), (c - a) * 110.57)
+    still = []
+    for u, o in sorted(ov["licences"].items()):
+        l = lic.get(u)
+        if not l: continue
+        if o["verdict"] == "exclude": n["excluded"] += 1; continue
+        if o["verdict"] == "attach":
+            t = [r for r in kept if uid_of(r) == o.get("course_id") or r["id"] == o.get("course_id")]
+            if t: attach(t[0], l); n["attached"] += 1
+            else: still.append(l)
+            continue
+        if o["verdict"] == "new" and o.get("lat"):
+            near = sorted((km(o["lat"], o["lon"], r["lat"], r["lon"]), k) for k, r in enumerate(kept))
+            sd, sg = region(o["lon"], o["lat"]); asd, asg = addr_region(l["addr"])
+            if near and near[0][0] < 1.5:                       # the reviewer's point falls on a course that is already listed
+                t = kept[near[0][1]]
+                same_area = bool(asg) and t["sigungu"].replace(" ", "").startswith(asg.split()[0])
+                if same_area or compatible(l["norm"], normalize(t["name"])) or any(compatible(l["norm"], normalize(a)) for a in t["aliases"]):
+                    attach(t, l); n["near_existing"] += 1; continue
+            flags = [] if (asg and sg.replace(" ", "").startswith(asg.split()[0])) or (asd and asd[:2] == sd[:2] and not asg) else ["좌표확인"]
+            n["check"] += bool(flags)
+            r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=l["name"], aliases=[], type=[l["kind"]] if l["kind"] else [], status=l["status"], sido=sd, sigungu=sg,
+                     address=l["addr"], tel=l["tel"], lat=round(o["lat"], 5), lon=round(o["lon"], 5), position="검수 좌표", area_ha=None, website="", osm_ids=[],
+                     licence_ids=[l["uid"]], match="검수", review=flags, reviewed=True, _n=1)
+            pts[id(r)] = [(r["lat"], r["lon"])]; kept.append(r); n["added"] += 1
+    samples[:] = [p for r in kept for p in pts[id(r)]]
+    for r in kept: r["_n"] = len(pts[id(r)])
+    done = set(ov["licences"])
+    unresolved[:] = [l for l in unresolved if l["uid"] not in done] + still
+    return kept, n
+
 def main():
     random.seed(20261111)
     polys = load_polygons(); groups = cluster(polys)
@@ -254,6 +314,7 @@ def main():
                  lat=round(lat, 5), lon=round(lon, 5), position="인허가 주소 좌표", area_ha=None, website="", osm_ids=[],
                  licence_ids=sorted(a["uid"] for a in g), match="", review=["영역없음"]), [(lat, lon)])
 
+    recs, n_over = apply_overrides(recs, samples, unresolved, region)
     counts = {}
     for r in recs: counts[r["id"]] = counts.get(r["id"], 0) + 1
     for r in recs:                      # ids stay short unless two municipalities reuse a management number
@@ -273,10 +334,10 @@ def main():
         if len(rs) > 1:
             for r in rs: r["review"].append("동명")
     recs.sort(key=lambda r: (r["sido"], r["sigungu"], r["name"]))
-    meta = dict(version="v1", generated=time.strftime("%Y-%m-%d"), count=len(recs),
+    meta = dict(version="v2" if n_over else "v1", generated=time.strftime("%Y-%m-%d"), count=len(recs),
                 sources=["행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), " + fetched, "OpenStreetMap contributors (ODbL), leisure=golf_course"],
                 admin_boundaries=os.path.basename(adm_file), elevation="Copernicus GLO-90 via Open-Meteo", min_area_ha=MIN_HA,
-                licences_active=len(lics), licences_placed=len(lics) - len(unresolved), licences_unresolved=len(unresolved))
+                licences_active=len(lics), licences_unresolved=len(unresolved), review=n_over)
     json.dump(dict(meta=meta, courses=recs), open(os.path.join(HERE, "courses.json"), "w"), ensure_ascii=False, indent=1)
     cols = ["id", "name", "choseong", "type", "status", "sido", "sigungu", "lat", "lon", "position", "elevation_m", "area_ha", "kma_nx", "kma_ny", "address", "tel", "aliases", "match", "review"]
     with open(os.path.join(HERE, "courses.csv"), "w", newline="", encoding="utf-8-sig") as f:

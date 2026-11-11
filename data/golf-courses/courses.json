@@ -1,8 +1,8 @@
 {
  "meta": {
-  "version": "v1",
+  "version": "v2",
   "generated": "2026-11-11",
-  "count": 520,
+  "count": 496,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -11,44 +11,19 @@
   "elevation": "Copernicus GLO-90 via Open-Meteo",
   "min_area_ha": 10.0,
   "licences_active": 625,
-  "licences_placed": 577,
-  "licences_unresolved": 48
+  "licences_unresolved": 0,
+  "review": {
+   "removed": 40,
+   "renamed": 5,
+   "confirmed": 480,
+   "attached": 1,
+   "added": 16,
+   "excluded": 16,
+   "near_existing": 15,
+   "check": 2
+  }
  },
  "courses": [
-  {
-   "id": "osm-w353744101",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "강원특별자치도",
-   "sigungu": "강릉시",
-   "address": "",
-   "tel": "",
-   "lat": 37.75321,
-   "lon": 128.95837,
-   "position": "코스영역 중심",
-   "area_ha": 29.5,
-   "website": "",
-   "osm_ids": [
-    "w353744101"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 4,
-   "elevation_range_m": [
-    3,
-    8
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 94,
-   "kma_ny": 132
-  },
   {
    "id": "osm-w470665698",
    "name": "메이플비치 골프&리조트",
@@ -74,6 +49,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 9,
    "elevation_range_m": [
     5,
@@ -112,6 +88,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 35,
    "elevation_range_m": [
     22,
@@ -144,9 +121,8 @@
     "6530000-302012008000004"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 168,
    "elevation_range_m": [
     168,
@@ -185,6 +161,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 62,
    "elevation_range_m": [
     39,
@@ -217,9 +194,8 @@
     "6530000-302012012000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 168,
    "elevation_range_m": [
     168,
@@ -252,9 +228,8 @@
     "6530000-302012011000037"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 601,
    "elevation_range_m": [
     601,
@@ -285,9 +260,8 @@
     "6530000-302012009000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 46,
    "elevation_range_m": [
     46,
@@ -297,76 +271,6 @@
    "choseong": "ㅍㅇㄹㅈ",
    "kma_nx": 86,
    "kma_ny": 142
-  },
-  {
-   "id": "osm-w479424574",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "강원특별자치도",
-   "sigungu": "동해시",
-   "address": "",
-   "tel": "",
-   "lat": 37.509,
-   "lon": 129.12885,
-   "position": "코스영역 중심",
-   "area_ha": 25.0,
-   "website": "",
-   "osm_ids": [
-    "w479424574"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 12,
-   "elevation_range_m": [
-    7,
-    40
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 97,
-   "kma_ny": 126
-  },
-  {
-   "id": "osm-w564193367",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "강원특별자치도",
-   "sigungu": "삼척시",
-   "address": "",
-   "tel": "",
-   "lat": 37.23941,
-   "lon": 128.90651,
-   "position": "코스영역 중심",
-   "area_ha": 17.1,
-   "website": "",
-   "osm_ids": [
-    "w564193367"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 888,
-   "elevation_range_m": [
-    827,
-    940
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 93,
-   "kma_ny": 120
   },
   {
    "id": "osm-w466141930",
@@ -395,6 +299,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 480,
    "elevation_range_m": [
     431,
@@ -432,6 +337,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 64,
    "elevation_range_m": [
     40,
@@ -469,10 +375,8 @@
     "6530000-302012007000018"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 18,
    "elevation_range_m": [
     1,
@@ -510,9 +414,8 @@
     "6530000-302012007000007"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 42,
    "elevation_range_m": [
     29,
@@ -552,6 +455,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 74,
    "elevation_range_m": [
     39,
@@ -590,6 +494,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 262,
    "elevation_range_m": [
     238,
@@ -599,40 +504,6 @@
    "choseong": "ㄷㄱㅅㅅㅌ",
    "kma_nx": 86,
    "kma_ny": 120
-  },
-  {
-   "id": "osm-w456045308",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "강원특별자치도",
-   "sigungu": "원주시",
-   "address": "",
-   "tel": "",
-   "lat": 37.44574,
-   "lon": 127.97621,
-   "position": "코스영역 중심",
-   "area_ha": 38.9,
-   "website": "",
-   "osm_ids": [
-    "w456045308"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 125,
-   "elevation_range_m": [
-    111,
-    145
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 77,
-   "kma_ny": 124
   },
   {
    "id": "lic-6530000-302012026000001",
@@ -654,9 +525,8 @@
     "6530000-302012026000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 174,
    "elevation_range_m": [
     174,
@@ -693,6 +563,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 110,
    "elevation_range_m": [
     91,
@@ -731,6 +602,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 167,
    "elevation_range_m": [
     142,
@@ -770,6 +642,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 322,
    "elevation_range_m": [
     253,
@@ -779,6 +652,40 @@
    "choseong": "ㅅㅊㄹ21",
    "kma_nx": 75,
    "kma_ny": 121
+  },
+  {
+   "id": "lic-302012023000003",
+   "name": "오로라 골프 앤 리조트",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "강원특별자치도",
+   "sigungu": "원주시",
+   "address": "강원특별자치도 원주시 신림면 구학산로 1520-0",
+   "tel": "",
+   "lat": 37.20291,
+   "lon": 128.04315,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6530000-302012023000003"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 499,
+   "elevation_range_m": [
+    499,
+    499
+   ],
+   "name_norm": "오로라",
+   "choseong": "ㅇㄹㄹ",
+   "kma_nx": 78,
+   "kma_ny": 119
   },
   {
    "id": "osm-w1410516120",
@@ -808,10 +715,8 @@
     "6530000-302012010000004"
    ],
    "match": "이름+좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 268,
    "elevation_range_m": [
     253,
@@ -844,9 +749,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 254,
    "elevation_range_m": [
     161,
@@ -887,9 +791,8 @@
     "6530000-302012018000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 236,
    "elevation_range_m": [
     136,
@@ -924,9 +827,8 @@
     "6530000-302012010000005"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 177,
    "elevation_range_m": [
     167,
@@ -966,6 +868,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 269,
    "elevation_range_m": [
     239,
@@ -1003,6 +906,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 531,
    "elevation_range_m": [
     509,
@@ -1042,9 +946,8 @@
     "6530000-302012009000004"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 1068,
    "elevation_range_m": [
     1036,
@@ -1083,6 +986,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 180,
    "elevation_range_m": [
     156,
@@ -1092,41 +996,6 @@
    "choseong": "ㅎㅌㄱ",
    "kma_nx": 65,
    "kma_ny": 140
-  },
-  {
-   "id": "osm-w546206790",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "강원특별자치도",
-   "sigungu": "춘천시",
-   "address": "",
-   "tel": "",
-   "lat": 37.87663,
-   "lon": 127.79361,
-   "position": "코스영역 중심",
-   "area_ha": 22.3,
-   "website": "",
-   "osm_ids": [
-    "w546206790"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 184,
-   "elevation_range_m": [
-    163,
-    218
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 74,
-   "kma_ny": 134
   },
   {
    "id": "osm-w671763353",
@@ -1157,6 +1026,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 221,
    "elevation_range_m": [
     168,
@@ -1195,6 +1065,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 235,
    "elevation_range_m": [
     191,
@@ -1233,6 +1104,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 140,
    "elevation_range_m": [
     114,
@@ -1268,6 +1140,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 266,
    "elevation_range_m": [
     232,
@@ -1304,6 +1177,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 194,
    "elevation_range_m": [
     175,
@@ -1340,6 +1214,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 298,
    "elevation_range_m": [
     275,
@@ -1349,6 +1224,38 @@
    "choseong": "ㅂㅇㅋㄹㅋㅊㅊ",
    "kma_nx": 72,
    "kma_ny": 131
+  },
+  {
+   "id": "lic-6530000-302012013000004",
+   "name": "스프링베일리조트",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "강원특별자치도",
+   "sigungu": "춘천시",
+   "address": "강원특별자치도 춘천시 동면 금베이길 93-27",
+   "tel": "",
+   "lat": 37.88023,
+   "lon": 127.79006,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6530000-302012013000004"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 213,
+   "elevation_range_m": [
+    213,
+    213
+   ],
+   "name_norm": "스프링베일",
+   "choseong": "ㅅㅍㄹㅂㅇ",
+   "kma_nx": 74,
+   "kma_ny": 134
   },
   {
    "id": "osm-w393922184",
@@ -1380,9 +1287,8 @@
     "6530000-302012012000005"
    ],
    "match": "이름+좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 161,
    "elevation_range_m": [
     144,
@@ -1419,6 +1325,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 221,
    "elevation_range_m": [
     188,
@@ -1451,9 +1358,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 207,
    "elevation_range_m": [
     152,
@@ -1492,6 +1398,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 174,
    "elevation_range_m": [
     132,
@@ -1524,9 +1431,8 @@
     "6530000-302012011000014"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 189,
    "elevation_range_m": [
     189,
@@ -1564,6 +1470,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 957,
    "elevation_range_m": [
     929,
@@ -1577,7 +1484,9 @@
   {
    "id": "osm-w473169561",
    "name": "알펜시아 700 골프클럽",
-   "aliases": [],
+   "aliases": [
+    "용평리조트"
+   ],
    "type": [],
    "status": "영업",
    "sido": "강원특별자치도",
@@ -1593,10 +1502,12 @@
     "w473169561"
    ],
    "licence_ids": [
-    "6530000-302012009000006"
+    "6530000-302012009000006",
+    "6530000-302012019000001"
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 757,
    "elevation_range_m": [
     740,
@@ -1632,6 +1543,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 784,
    "elevation_range_m": [
     772,
@@ -1664,9 +1576,8 @@
     "6530000-302012014000007"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 718,
    "elevation_range_m": [
     718,
@@ -1703,8 +1614,9 @@
    ],
    "match": "",
    "review": [
-    "영역없음"
+    "동명"
    ],
+   "reviewed": true,
    "elevation_m": 753,
    "elevation_range_m": [
     753,
@@ -1716,38 +1628,38 @@
    "kma_ny": 129
   },
   {
-   "id": "osm-w477983957",
-   "name": "태기산CC",
+   "id": "lic-CDFH2302011989000001",
+   "name": "용평리조트골프클럽",
    "aliases": [],
    "type": [],
-   "status": "",
+   "status": "영업",
    "sido": "강원특별자치도",
    "sigungu": "평창군",
-   "address": "",
-   "tel": "",
-   "lat": 37.58521,
-   "lon": 128.3191,
-   "position": "코스영역 중심",
-   "area_ha": 13.8,
+   "address": "강원특별자치도 평창군 대관령면 수하리",
+   "tel": "033-335-5757",
+   "lat": 37.67604,
+   "lon": 128.70041,
+   "position": "검수 좌표",
+   "area_ha": null,
    "website": "",
-   "osm_ids": [
-    "w477983957"
+   "osm_ids": [],
+   "licence_ids": [
+    "4281000-CDFH2302011989000001"
    ],
-   "licence_ids": [],
-   "match": "",
+   "match": "검수",
    "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
+    "동명"
    ],
-   "elevation_m": 692,
+   "reviewed": true,
+   "elevation_m": 749,
    "elevation_range_m": [
-    671,
-    735
+    749,
+    749
    ],
-   "name_norm": "태기산",
-   "choseong": "ㅌㄱㅅ",
-   "kma_nx": 83,
-   "kma_ny": 128
+   "name_norm": "용평",
+   "choseong": "ㅇㅍ",
+   "kma_nx": 89,
+   "kma_ny": 130
   },
   {
    "id": "osm-w477932052",
@@ -1781,6 +1693,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 679,
    "elevation_range_m": [
     652,
@@ -1792,7 +1705,7 @@
    "kma_ny": 128
   },
   {
-   "id": "lic-302012010000002",
+   "id": "lic-6530000-302012010000002",
    "name": "비콘힐스 골프클럽",
    "aliases": [],
    "type": [],
@@ -1811,9 +1724,8 @@
     "6530000-302012010000002"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 326,
    "elevation_range_m": [
     326,
@@ -1852,6 +1764,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 243,
    "elevation_range_m": [
     167,
@@ -1888,6 +1801,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 697,
    "elevation_range_m": [
     686,
@@ -1929,9 +1843,8 @@
     "6530000-302012013000005"
    ],
    "match": "이름+좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 392,
    "elevation_range_m": [
     345,
@@ -1944,9 +1857,10 @@
   },
   {
    "id": "osm-w545967328",
-   "name": "소노펠리체CC 비발디파크",
+   "name": "소노펠리체CC 비발티파크 EAST",
    "aliases": [
-    "Sono Felice Country Club - Vivaldi Park East"
+    "Sono Felice Country Club - Vivaldi Park East",
+    "소노펠리체CC 비발디파크"
    ],
    "type": [],
    "status": "",
@@ -1965,16 +1879,15 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 295,
    "elevation_range_m": [
     196,
     319
    ],
-   "name_norm": "소노펠리체cc비발디파크",
-   "choseong": "ㅅㄴㅍㄹㅊccㅂㅂㄷㅍㅋ",
+   "name_norm": "소노펠리체cc비발티파크east",
+   "choseong": "ㅅㄴㅍㄹㅊccㅂㅂㅌㅍㅋeast",
    "kma_nx": 72,
    "kma_ny": 129
   },
@@ -2000,9 +1913,8 @@
     "6530000-302012023000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 208,
    "elevation_range_m": [
     208,
@@ -2041,6 +1953,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 229,
    "elevation_range_m": [
     165,
@@ -2079,6 +1992,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 299,
    "elevation_range_m": [
     277,
@@ -2115,6 +2029,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 253,
    "elevation_range_m": [
     223,
@@ -2123,6 +2038,43 @@
    "name_norm": "동원썬밸리",
    "choseong": "ㄷㅇㅆㅂㄹ",
    "kma_nx": 74,
+   "kma_ny": 125
+  },
+  {
+   "id": "lic-302012011000004",
+   "name": "벨라스톤 컨트리클럽",
+   "aliases": [
+    "벨라45 마스터스 컨트리클럽"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "강원특별자치도",
+   "sigungu": "횡성군",
+   "address": "강원특별자치도 횡성군 서원면 옥계9길 124",
+   "tel": "",
+   "lat": 37.45298,
+   "lon": 127.82973,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6530000-302012011000004",
+    "6530000-302012024000002"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 268,
+   "elevation_range_m": [
+    268,
+    268
+   ],
+   "name_norm": "벨라스톤",
+   "choseong": "ㅂㄹㅅㅌ",
+   "kma_nx": 75,
    "kma_ny": 125
   },
   {
@@ -2151,6 +2103,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 210,
    "elevation_range_m": [
     187,
@@ -2186,6 +2139,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 407,
    "elevation_range_m": [
     374,
@@ -2216,9 +2170,8 @@
     "6530000-302012007000019"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 656,
    "elevation_range_m": [
     656,
@@ -2256,6 +2209,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 341,
    "elevation_range_m": [
     304,
@@ -2288,9 +2242,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 274,
    "elevation_range_m": [
     249,
@@ -2326,9 +2279,8 @@
     "4160000-CDFH2302012002000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 251,
    "elevation_range_m": [
     176,
@@ -2364,6 +2316,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 224,
    "elevation_range_m": [
     146,
@@ -2400,6 +2353,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 265,
    "elevation_range_m": [
     226,
@@ -2436,6 +2390,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 349,
    "elevation_range_m": [
     253,
@@ -2469,6 +2424,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 155,
    "elevation_range_m": [
     99,
@@ -2504,9 +2460,8 @@
     "4160000-CDFH2302012003000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 199,
    "elevation_range_m": [
     187,
@@ -2516,43 +2471,6 @@
    "choseong": "ㅍㄹㅅㅌㅂㄹ",
    "kma_nx": 68,
    "kma_ny": 129
-  },
-  {
-   "id": "osm-w551202442",
-   "name": "1.2.3",
-   "aliases": [
-    "123 GC"
-   ],
-   "type": [],
-   "status": "영업",
-   "sido": "경기도",
-   "sigungu": "고양시덕양구",
-   "address": "경기도 고양시 덕양구 통일로 43-168  (동산동)",
-   "tel": "02-359-0123",
-   "lat": 37.64024,
-   "lon": 126.90561,
-   "position": "코스영역 중심",
-   "area_ha": 15.8,
-   "website": "",
-   "osm_ids": [
-    "w551202442"
-   ],
-   "licence_ids": [
-    "3940000-CDFH2302011991000001"
-   ],
-   "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 56,
-   "elevation_range_m": [
-    34,
-    66
-   ],
-   "name_norm": "123",
-   "choseong": "123",
-   "kma_nx": 59,
-   "kma_ny": 128
   },
   {
    "id": "osm-w551025577",
@@ -2578,9 +2496,8 @@
     "3940000-CDFH2302012011000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 40,
    "elevation_range_m": [
     30,
@@ -2616,6 +2533,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 56,
    "elevation_range_m": [
     48,
@@ -2652,6 +2570,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 210,
    "elevation_range_m": [
     174,
@@ -2691,6 +2610,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 56,
    "elevation_range_m": [
     45,
@@ -2726,9 +2646,8 @@
     "3940000-CDFH2302012010000001"
    ],
    "match": "이름",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 27,
    "elevation_range_m": [
     12,
@@ -2765,6 +2684,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 261,
    "elevation_range_m": [
     222,
@@ -2798,6 +2718,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 240,
    "elevation_range_m": [
     214,
@@ -2834,6 +2755,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 262,
    "elevation_range_m": [
     210,
@@ -2870,6 +2792,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 213,
    "elevation_range_m": [
     182,
@@ -2906,6 +2829,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 226,
    "elevation_range_m": [
     161,
@@ -2940,9 +2864,8 @@
     "5540000-CDFH2302011987000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 163,
    "elevation_range_m": [
     130,
@@ -2977,9 +2900,8 @@
     "5540000-CDFH2302011994000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 332,
    "elevation_range_m": [
     300,
@@ -3015,6 +2937,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 357,
    "elevation_range_m": [
     253,
@@ -3027,8 +2950,10 @@
   },
   {
    "id": "lic-CDFH2302012001000001",
-   "name": "삼성물산안양컨트리클럽",
-   "aliases": [],
+   "name": "안양컨트리클럽",
+   "aliases": [
+    "삼성물산안양컨트리클럽"
+   ],
    "type": [],
    "status": "영업",
    "sido": "경기도",
@@ -3045,16 +2970,15 @@
     "4020000-CDFH2302012001000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 64,
    "elevation_range_m": [
     64,
     64
    ],
-   "name_norm": "삼성물산안양",
-   "choseong": "ㅅㅅㅁㅅㅇㅇ",
+   "name_norm": "안양",
+   "choseong": "ㅇㅇ",
    "kma_nx": 59,
    "kma_ny": 122
   },
@@ -3082,9 +3006,8 @@
     "4090000-CDFH2302011995000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 21,
    "elevation_range_m": [
     8,
@@ -3120,9 +3043,8 @@
     "3990000-CDFH2302012002000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 214,
    "elevation_range_m": [
     181,
@@ -3158,9 +3080,8 @@
     "3990000-CDFH2302012009000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 207,
    "elevation_range_m": [
     167,
@@ -3196,6 +3117,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 331,
    "elevation_range_m": [
     223,
@@ -3234,6 +3156,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 137,
    "elevation_range_m": [
     76,
@@ -3272,9 +3195,8 @@
     "3990000-CDFH2302012007000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 167,
    "elevation_range_m": [
     137,
@@ -3284,41 +3206,6 @@
    "choseong": "ㅎㅂㅊ",
    "kma_nx": 65,
    "kma_ny": 128
-  },
-  {
-   "id": "osm-w298138854",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "동두천시",
-   "address": "",
-   "tel": "",
-   "lat": 37.9238,
-   "lon": 127.05949,
-   "position": "코스영역 중심",
-   "area_ha": 15.9,
-   "website": "",
-   "osm_ids": [
-    "w298138854"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 61,
-   "elevation_range_m": [
-    59,
-    62
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 61,
-   "kma_ny": 134
   },
   {
    "id": "osm-w391489343",
@@ -3346,6 +3233,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 324,
    "elevation_range_m": [
     249,
@@ -3355,75 +3243,6 @@
    "choseong": "ㅈㅇㄹㅈㅌㅋㄹㅇㄷ",
    "kma_nx": 62,
    "kma_ny": 135
-  },
-  {
-   "id": "osm-w927003508",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "부천시오정구",
-   "address": "",
-   "tel": "",
-   "lat": 37.5406,
-   "lon": 126.80349,
-   "position": "코스영역 중심",
-   "area_ha": 12.9,
-   "website": "",
-   "osm_ids": [
-    "w927003508"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 16,
-   "elevation_range_m": [
-    7,
-    20
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 57,
-   "kma_ny": 126
-  },
-  {
-   "id": "osm-w541764183",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "성남시분당구",
-   "address": "",
-   "tel": "",
-   "lat": 37.38146,
-   "lon": 127.03735,
-   "position": "코스영역 중심",
-   "area_ha": 25.2,
-   "website": "",
-   "osm_ids": [
-    "w541764183"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 294,
-   "elevation_range_m": [
-    247,
-    313
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 61,
-   "kma_ny": 123
   },
   {
    "id": "osm-w487667372",
@@ -3450,9 +3269,8 @@
     "3780000-CDFH2302011971000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 133,
    "elevation_range_m": [
     80,
@@ -3483,9 +3301,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 28,
    "elevation_range_m": [
     23,
@@ -3521,6 +3338,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     4,
@@ -3555,9 +3373,8 @@
     "4010000-CDFH2302012015000001"
    ],
    "match": "이름",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 23,
    "elevation_range_m": [
     21,
@@ -3588,9 +3405,8 @@
     "3930000-CDFH2302012013000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 38,
    "elevation_range_m": [
     38,
@@ -3621,9 +3437,8 @@
     "3930000-CDFH2302012012000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 19,
    "elevation_range_m": [
     19,
@@ -3660,6 +3475,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 51,
    "elevation_range_m": [
     29,
@@ -3696,6 +3512,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 295,
    "elevation_range_m": [
     185,
@@ -3731,6 +3548,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 110,
    "elevation_range_m": [
     92,
@@ -3768,6 +3586,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 148,
    "elevation_range_m": [
     94,
@@ -3804,6 +3623,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 271,
    "elevation_range_m": [
     240,
@@ -3840,6 +3660,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 205,
    "elevation_range_m": [
     159,
@@ -3876,6 +3697,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 187,
    "elevation_range_m": [
     163,
@@ -3912,6 +3734,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 153,
    "elevation_range_m": [
     99,
@@ -3948,6 +3771,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 152,
    "elevation_range_m": [
     105,
@@ -3978,9 +3802,8 @@
     "4080000-CDFH2302012025000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 170,
    "elevation_range_m": [
     170,
@@ -4016,6 +3839,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 163,
    "elevation_range_m": [
     109,
@@ -4054,9 +3878,8 @@
     "6410000-302012021100001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 154,
    "elevation_range_m": [
     132,
@@ -4092,6 +3915,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 106,
    "elevation_range_m": [
     88,
@@ -4128,6 +3952,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 106,
    "elevation_range_m": [
     99,
@@ -4164,6 +3989,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 188,
    "elevation_range_m": [
     169,
@@ -4200,6 +4026,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 252,
    "elevation_range_m": [
     197,
@@ -4236,6 +4063,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 229,
    "elevation_range_m": [
     202,
@@ -4272,6 +4100,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 222,
    "elevation_range_m": [
     181,
@@ -4307,6 +4136,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 118,
    "elevation_range_m": [
     86,
@@ -4343,6 +4173,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 136,
    "elevation_range_m": [
     84,
@@ -4379,6 +4210,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 113,
    "elevation_range_m": [
     94,
@@ -4414,9 +4246,8 @@
     "5700000-CDFH2302012011000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 107,
    "elevation_range_m": [
     80,
@@ -4447,9 +4278,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 134,
    "elevation_range_m": [
     95,
@@ -4485,6 +4315,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 316,
    "elevation_range_m": [
     282,
@@ -4525,6 +4356,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 157,
    "elevation_range_m": [
     115,
@@ -4562,6 +4394,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 117,
    "elevation_range_m": [
     104,
@@ -4598,6 +4431,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 155,
    "elevation_range_m": [
     123,
@@ -4632,9 +4466,8 @@
     "5700000-CDFH2302012006000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 84,
    "elevation_range_m": [
     68,
@@ -4671,6 +4504,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 148,
    "elevation_range_m": [
     105,
@@ -4706,6 +4540,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 111,
    "elevation_range_m": [
     97,
@@ -4742,6 +4577,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 165,
    "elevation_range_m": [
     120,
@@ -4778,6 +4614,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 233,
    "elevation_range_m": [
     111,
@@ -4813,6 +4650,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 105,
    "elevation_range_m": [
     79,
@@ -4849,6 +4687,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 130,
    "elevation_range_m": [
     107,
@@ -4885,6 +4724,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 119,
    "elevation_range_m": [
     93,
@@ -4920,9 +4760,8 @@
     "5700000-CDFH2302011993000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 135,
    "elevation_range_m": [
     97,
@@ -4959,6 +4798,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 243,
    "elevation_range_m": [
     168,
@@ -4994,6 +4834,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 91,
    "elevation_range_m": [
     73,
@@ -5030,6 +4871,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 107,
    "elevation_range_m": [
     94,
@@ -5039,39 +4881,6 @@
    "choseong": "ㅎㅅㄹㄴㅇㅂㄹㅈ",
    "kma_nx": 71,
    "kma_ny": 120
-  },
-  {
-   "id": "lic-5700000-CDFH2302012026000001",
-   "name": "헤르몬GC",
-   "aliases": [],
-   "type": [],
-   "status": "영업",
-   "sido": "경기도",
-   "sigungu": "여주시",
-   "address": "경기도 여주시 북내면 운촌길 48-55",
-   "tel": "",
-   "lat": 37.32644,
-   "lon": 127.70906,
-   "position": "인허가 주소 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "5700000-CDFH2302012026000001"
-   ],
-   "match": "",
-   "review": [
-    "영역없음"
-   ],
-   "elevation_m": 75,
-   "elevation_range_m": [
-    75,
-    75
-   ],
-   "name_norm": "헤르몬",
-   "choseong": "ㅎㄹㅁ",
-   "kma_nx": 72,
-   "kma_ny": 122
   },
   {
    "id": "osm-w631666411",
@@ -5096,6 +4905,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 81,
    "elevation_range_m": [
     40,
@@ -5130,10 +4940,8 @@
     "4050000-CDFH2302011984000002"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 180,
    "elevation_range_m": [
     153,
@@ -5169,6 +4977,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 128,
    "elevation_range_m": [
     83,
@@ -5202,6 +5011,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 111,
    "elevation_range_m": [
     100,
@@ -5236,9 +5046,8 @@
     "4050000-CDFH2302011996000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 127,
    "elevation_range_m": [
     111,
@@ -5276,6 +5085,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 109,
    "elevation_range_m": [
     81,
@@ -5311,6 +5121,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 191,
    "elevation_range_m": [
     151,
@@ -5349,9 +5160,8 @@
     "4050000-CDFH2302011997000002"
    ],
    "match": "이름+좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 216,
    "elevation_range_m": [
     164,
@@ -5386,9 +5196,8 @@
     "4050000-CDFH2302011998000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 100,
    "elevation_range_m": [
     67,
@@ -5426,6 +5235,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 200,
    "elevation_range_m": [
     112,
@@ -5456,9 +5266,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 147,
    "elevation_range_m": [
     135,
@@ -5492,6 +5301,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 164,
    "elevation_range_m": [
     99,
@@ -5526,9 +5336,8 @@
     "4050000-CDFH2302011992000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 223,
    "elevation_range_m": [
     157,
@@ -5564,9 +5373,8 @@
     "4050000-CDFH2302012012000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 167,
    "elevation_range_m": [
     144,
@@ -5600,6 +5408,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 207,
    "elevation_range_m": [
     153,
@@ -5637,9 +5446,8 @@
     "4050000-CDFH2302012003000001"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 191,
    "elevation_range_m": [
     144,
@@ -5675,6 +5483,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 164,
    "elevation_range_m": [
     135,
@@ -5713,6 +5522,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 251,
    "elevation_range_m": [
     199,
@@ -5743,9 +5553,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 146,
    "elevation_range_m": [
     105,
@@ -5781,6 +5590,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 203,
    "elevation_range_m": [
     151,
@@ -5815,9 +5625,8 @@
     "4050000-CDFH2302011981000001"
    ],
    "match": "좌표",
-   "review": [
-    "동명"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 71,
    "elevation_range_m": [
     41,
@@ -5851,6 +5660,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 126,
    "elevation_range_m": [
     109,
@@ -5887,6 +5697,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 159,
    "elevation_range_m": [
     126,
@@ -5920,6 +5731,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 170,
    "elevation_range_m": [
     137,
@@ -5929,75 +5741,6 @@
    "choseong": "ㅎㅅ",
    "kma_nx": 64,
    "kma_ny": 118
-  },
-  {
-   "id": "osm-w370041924",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "이천시",
-   "address": "",
-   "tel": "",
-   "lat": 37.20665,
-   "lon": 127.4627,
-   "position": "코스영역 중심",
-   "area_ha": 23.5,
-   "website": "",
-   "osm_ids": [
-    "w370041924"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 91,
-   "elevation_range_m": [
-    74,
-    100
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 68,
-   "kma_ny": 119
-  },
-  {
-   "id": "osm-w631047565",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "이천시",
-   "address": "",
-   "tel": "",
-   "lat": 37.26546,
-   "lon": 127.36181,
-   "position": "코스영역 중심",
-   "area_ha": 43.3,
-   "website": "",
-   "osm_ids": [
-    "w631047565"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 123,
-   "elevation_range_m": [
-    109,
-    142
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 67,
-   "kma_ny": 120
   },
   {
    "id": "osm-w289411212",
@@ -6026,6 +5769,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 227,
    "elevation_range_m": [
     153,
@@ -6062,6 +5806,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 73,
    "elevation_range_m": [
     65,
@@ -6098,6 +5843,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 135,
    "elevation_range_m": [
     88,
@@ -6112,7 +5858,8 @@
    "id": "osm-w641444650",
    "name": "마이다스 레이크 이천 골프& 리조트",
    "aliases": [
-    "마이다스레이크이천 골프앤리조트"
+    "마이다스레이크이천 골프앤리조트",
+    "이천마이다스골프앤리조트"
    ],
    "type": [],
    "status": "영업",
@@ -6129,10 +5876,12 @@
     "w641444650"
    ],
    "licence_ids": [
+    "4070000-CDFH2302012014000001",
     "4070000-CDFH2302012014000002"
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 93,
    "elevation_range_m": [
     80,
@@ -6166,9 +5915,8 @@
     "4070000-CDFH2302012008000002"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 205,
    "elevation_range_m": [
     205,
@@ -6204,6 +5952,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 126,
    "elevation_range_m": [
     112,
@@ -6240,6 +5989,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 173,
    "elevation_range_m": [
     141,
@@ -6276,6 +6026,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 147,
    "elevation_range_m": [
     87,
@@ -6312,6 +6063,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 109,
    "elevation_range_m": [
     89,
@@ -6348,6 +6100,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 176,
    "elevation_range_m": [
     122,
@@ -6384,6 +6137,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 139,
    "elevation_range_m": [
     102,
@@ -6423,9 +6177,8 @@
     "4060000-CDFH2302012004000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 117,
    "elevation_range_m": [
     88,
@@ -6461,6 +6214,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 102,
    "elevation_range_m": [
     55,
@@ -6496,10 +6250,8 @@
     "4060000-CDFH2302012008000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 51,
    "elevation_range_m": [
     38,
@@ -6536,6 +6288,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 135,
    "elevation_range_m": [
     110,
@@ -6569,6 +6322,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 115,
    "elevation_range_m": [
     110,
@@ -6605,6 +6359,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 175,
    "elevation_range_m": [
     104,
@@ -6614,40 +6369,6 @@
    "choseong": "ㅎㅂㅅㅅㅇ",
    "kma_nx": 58,
    "kma_ny": 130
-  },
-  {
-   "id": "osm-w478868551",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경기도",
-   "sigungu": "평택시",
-   "address": "",
-   "tel": "",
-   "lat": 36.99798,
-   "lon": 126.82447,
-   "position": "코스영역 중심",
-   "area_ha": 72.8,
-   "website": "",
-   "osm_ids": [
-    "w478868551"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 23,
-   "elevation_range_m": [
-    13,
-    50
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 57,
-   "kma_ny": 114
   },
   {
    "id": "osm-w356275835",
@@ -6669,9 +6390,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 9,
    "elevation_range_m": [
     8,
@@ -6704,9 +6424,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 5,
    "elevation_range_m": [
     5,
@@ -6737,10 +6456,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 23,
    "elevation_range_m": [
     6,
@@ -6771,10 +6488,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 6,
    "elevation_range_m": [
     6,
@@ -6811,6 +6526,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 337,
    "elevation_range_m": [
     240,
@@ -6844,6 +6560,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 289,
    "elevation_range_m": [
     224,
@@ -6880,6 +6597,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 336,
    "elevation_range_m": [
     229,
@@ -6915,6 +6633,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 169,
    "elevation_range_m": [
     150,
@@ -6950,6 +6669,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 306,
    "elevation_range_m": [
     245,
@@ -6988,6 +6708,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 216,
    "elevation_range_m": [
     168,
@@ -7023,6 +6744,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 287,
    "elevation_range_m": [
     226,
@@ -7060,6 +6782,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 138,
    "elevation_range_m": [
     125,
@@ -7095,6 +6818,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 198,
    "elevation_range_m": [
     155,
@@ -7130,6 +6854,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 402,
    "elevation_range_m": [
     316,
@@ -7160,9 +6885,8 @@
     "5600000-CDFH2302011992000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 268,
    "elevation_range_m": [
     268,
@@ -7193,9 +6917,8 @@
     "5600000-CDFH2302012023000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 185,
    "elevation_range_m": [
     185,
@@ -7226,9 +6949,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 70,
    "elevation_range_m": [
     39,
@@ -7264,6 +6986,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 102,
    "elevation_range_m": [
     73,
@@ -7299,6 +7022,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 59,
    "elevation_range_m": [
     41,
@@ -7334,6 +7058,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 148,
    "elevation_range_m": [
     126,
@@ -7372,9 +7097,8 @@
     "4050000-CDFH2302011994000001"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 177,
    "elevation_range_m": [
     162,
@@ -7405,9 +7129,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 151,
    "elevation_range_m": [
     129,
@@ -7442,9 +7165,8 @@
     "5530000-CDFH2302012009000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 6,
    "elevation_range_m": [
     5,
@@ -7482,6 +7204,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 51,
    "elevation_range_m": [
     26,
@@ -7517,9 +7240,8 @@
     "5530000-CDFH2302012008000001"
    ],
    "match": "이름+좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 51,
    "elevation_range_m": [
     41,
@@ -7550,9 +7272,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 60,
    "elevation_range_m": [
     38,
@@ -7587,9 +7308,8 @@
     "5530000-CDFH2302011996000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 69,
    "elevation_range_m": [
     61,
@@ -7620,9 +7340,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 99,
    "elevation_range_m": [
     69,
@@ -7659,6 +7378,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 42,
    "elevation_range_m": [
     0,
@@ -7670,7 +7390,7 @@
    "kma_ny": 72
   },
   {
-   "id": "lic-302012013000004",
+   "id": "lic-6480000-302012013000004",
    "name": "거제뷰컨트리클럽",
    "aliases": [],
    "type": [],
@@ -7689,9 +7409,8 @@
     "6480000-302012013000004"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 155,
    "elevation_range_m": [
     155,
@@ -7724,9 +7443,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 407,
    "elevation_range_m": [
     360,
@@ -7759,9 +7477,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 576,
    "elevation_range_m": [
     525,
@@ -7794,9 +7511,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 73,
    "elevation_range_m": [
     27,
@@ -7833,9 +7549,8 @@
     "6480000-302012010000004"
    ],
    "match": "이름",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 60,
    "elevation_range_m": [
     42,
@@ -7876,6 +7591,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 306,
    "elevation_range_m": [
     224,
@@ -7914,6 +7630,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 213,
    "elevation_range_m": [
     182,
@@ -7946,9 +7663,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 230,
    "elevation_range_m": [
     207,
@@ -7984,9 +7700,8 @@
     "6480000-302012008000008"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 136,
    "elevation_range_m": [
     52,
@@ -8019,9 +7734,8 @@
     "6480000-302012007000004"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     4,
@@ -8057,6 +7771,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 56,
    "elevation_range_m": [
     19,
@@ -8089,9 +7804,8 @@
     "6480000-302012007000005"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 3,
    "elevation_range_m": [
     3,
@@ -8127,6 +7841,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 141,
    "elevation_range_m": [
     113,
@@ -8163,6 +7878,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 264,
    "elevation_range_m": [
     105,
@@ -8193,9 +7909,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 31,
    "elevation_range_m": [
     28,
@@ -8231,9 +7946,8 @@
     "6480000-302012017000002"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 99,
    "elevation_range_m": [
     79,
@@ -8265,9 +7979,8 @@
     "6480000-302012011000003"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 21,
    "elevation_range_m": [
     21,
@@ -8298,9 +8011,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 11,
    "elevation_range_m": [
     8,
@@ -8333,9 +8045,8 @@
     "6480000-302012012000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 121,
    "elevation_range_m": [
     121,
@@ -8371,6 +8082,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 355,
    "elevation_range_m": [
     255,
@@ -8408,6 +8120,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 232,
    "elevation_range_m": [
     205,
@@ -8438,9 +8151,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 223,
    "elevation_range_m": [
     200,
@@ -8478,6 +8190,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 162,
    "elevation_range_m": [
     71,
@@ -8516,6 +8229,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 667,
    "elevation_range_m": [
     614,
@@ -8553,6 +8267,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 210,
    "elevation_range_m": [
     192,
@@ -8592,6 +8307,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 199,
    "elevation_range_m": [
     185,
@@ -8624,9 +8340,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 176,
    "elevation_range_m": [
     122,
@@ -8659,9 +8374,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 12,
    "elevation_range_m": [
     10,
@@ -8700,6 +8414,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 97,
    "elevation_range_m": [
     75,
@@ -8738,6 +8453,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 126,
    "elevation_range_m": [
     100,
@@ -8773,9 +8489,8 @@
     "6480000-302012010000006"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 76,
    "elevation_range_m": [
     33,
@@ -8808,9 +8523,8 @@
     "6480000-302012006000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 98,
    "elevation_range_m": [
     98,
@@ -8820,40 +8534,6 @@
    "choseong": "ㅊㅇ",
    "kma_nx": 90,
    "kma_ny": 77
-  },
-  {
-   "id": "osm-w344112666",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경상남도",
-   "sigungu": "창원시진해구",
-   "address": "",
-   "tel": "",
-   "lat": 35.14454,
-   "lon": 128.69627,
-   "position": "코스영역 중심",
-   "area_ha": 43.8,
-   "website": "",
-   "osm_ids": [
-    "w344112666"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 5,
-   "elevation_range_m": [
-    4,
-    10
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 91,
-   "kma_ny": 75
   },
   {
    "id": "osm-w574761837",
@@ -8875,9 +8555,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     3,
@@ -8916,6 +8595,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 151,
    "elevation_range_m": [
     140,
@@ -8950,9 +8630,8 @@
     "6480000-302012018000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 91,
    "elevation_range_m": [
     66,
@@ -8991,6 +8670,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 199,
    "elevation_range_m": [
     131,
@@ -9021,9 +8701,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 61,
    "elevation_range_m": [
     32,
@@ -9060,6 +8739,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 579,
    "elevation_range_m": [
     517,
@@ -9096,6 +8776,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 500,
    "elevation_range_m": [
     453,
@@ -9131,6 +8812,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 77,
    "elevation_range_m": [
     67,
@@ -9165,9 +8847,8 @@
     "6470000-302012007000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 219,
    "elevation_range_m": [
     186,
@@ -9198,9 +8879,8 @@
     "5050000-CDFH2302011987000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 104,
    "elevation_range_m": [
     104,
@@ -9236,9 +8916,8 @@
     "6470000-302012009000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 82,
    "elevation_range_m": [
     63,
@@ -9284,6 +8963,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 128,
    "elevation_range_m": [
     117,
@@ -9323,6 +9003,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 218,
    "elevation_range_m": [
     149,
@@ -9368,9 +9049,8 @@
     "6470000-302012022000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 422,
    "elevation_range_m": [
     398,
@@ -9407,6 +9087,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 94,
    "elevation_range_m": [
     76,
@@ -9446,6 +9127,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 233,
    "elevation_range_m": [
     169,
@@ -9483,9 +9165,8 @@
     "6470000-302012008000032"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 92,
    "elevation_range_m": [
     59,
@@ -9523,6 +9204,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 436,
    "elevation_range_m": [
     388,
@@ -9532,6 +9214,38 @@
    "choseong": "ㅇㅅㅌㅎ",
    "kma_nx": 103,
    "kma_ny": 88
+  },
+  {
+   "id": "lic-5050000-CDFH2302012006000001",
+   "name": "제이스C.C 시사이드",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "경주시",
+   "address": "경상북도 경주시 감포읍 나정리 산 47",
+   "tel": "054-777-9000",
+   "lat": 35.81639,
+   "lon": 129.50222,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "5050000-CDFH2302012006000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 27,
+   "elevation_range_m": [
+    27,
+    27
+   ],
+   "name_norm": "제이스cc시사이드",
+   "choseong": "ㅈㅇㅅccㅅㅅㅇㄷ",
+   "kma_nx": 105,
+   "kma_ny": 90
   },
   {
    "id": "lic-302012008000041",
@@ -9558,9 +9272,8 @@
     "6470000-302012008000041"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 173,
    "elevation_range_m": [
     173,
@@ -9595,9 +9308,8 @@
     "6470000-302012021000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 395,
    "elevation_range_m": [
     302,
@@ -9636,6 +9348,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 162,
    "elevation_range_m": [
     127,
@@ -9675,6 +9388,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 122,
    "elevation_range_m": [
     78,
@@ -9707,9 +9421,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 120,
    "elevation_range_m": [
     95,
@@ -9740,9 +9453,8 @@
     "6470000-302012019000005"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 58,
    "elevation_range_m": [
     58,
@@ -9773,9 +9485,8 @@
     "6470000-302012019000004"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 61,
    "elevation_range_m": [
     61,
@@ -9813,6 +9524,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 107,
    "elevation_range_m": [
     71,
@@ -9851,6 +9563,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 224,
    "elevation_range_m": [
     204,
@@ -9888,9 +9601,8 @@
     "6470000-302012019000006"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 104,
    "elevation_range_m": [
     101,
@@ -9926,6 +9638,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 328,
    "elevation_range_m": [
     252,
@@ -9965,6 +9678,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 260,
    "elevation_range_m": [
     206,
@@ -9995,9 +9709,8 @@
     "6470000-302012008000054"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 322,
    "elevation_range_m": [
     322,
@@ -10030,9 +9743,8 @@
     "6470000-302012008000003"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 465,
    "elevation_range_m": [
     465,
@@ -10063,9 +9775,8 @@
     "6470000-302012008000037"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 465,
    "elevation_range_m": [
     465,
@@ -10098,9 +9809,8 @@
     "6470000-302012008000008"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 152,
    "elevation_range_m": [
     152,
@@ -10136,6 +9846,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 177,
    "elevation_range_m": [
     153,
@@ -10173,6 +9884,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 237,
    "elevation_range_m": [
     199,
@@ -10211,9 +9923,8 @@
     "6470000-302012008000060"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 75,
    "elevation_range_m": [
     42,
@@ -10249,9 +9960,8 @@
     "6470000-302012014000002"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 137,
    "elevation_range_m": [
     116,
@@ -10288,6 +9998,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 174,
    "elevation_range_m": [
     148,
@@ -10324,6 +10035,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 170,
    "elevation_range_m": [
     148,
@@ -10354,9 +10066,8 @@
     "6470000-302012015000005"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 102,
    "elevation_range_m": [
     102,
@@ -10387,9 +10098,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 140,
    "elevation_range_m": [
     125,
@@ -10399,40 +10109,6 @@
    "choseong": "ㅊㅅㄷㅊㄹㄷㄹㅈ",
    "kma_nx": 96,
    "kma_ny": 93
-  },
-  {
-   "id": "osm-w353738156",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경상북도",
-   "sigungu": "예천군",
-   "address": "",
-   "tel": "",
-   "lat": 36.6342,
-   "lon": 128.36133,
-   "position": "코스영역 중심",
-   "area_ha": 45.5,
-   "website": "",
-   "osm_ids": [
-    "w353738156"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 109,
-   "elevation_range_m": [
-    106,
-    130
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 84,
-   "kma_ny": 107
   },
   {
    "id": "osm-w637363615",
@@ -10462,6 +10138,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 170,
    "elevation_range_m": [
     129,
@@ -10492,9 +10169,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 135,
    "elevation_range_m": [
     51,
@@ -10534,6 +10210,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 132,
    "elevation_range_m": [
     91,
@@ -10569,6 +10246,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 131,
    "elevation_range_m": [
     91,
@@ -10609,6 +10287,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 131,
    "elevation_range_m": [
     101,
@@ -10647,6 +10326,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 472,
    "elevation_range_m": [
     431,
@@ -10681,9 +10361,8 @@
     "6470000-302012016000003"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 240,
    "elevation_range_m": [
     184,
@@ -10723,9 +10402,8 @@
     "6470000-302012022000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 279,
    "elevation_range_m": [
     248,
@@ -10735,6 +10413,38 @@
    "choseong": "ㄱㅅ",
    "kma_nx": 86,
    "kma_ny": 95
+  },
+  {
+   "id": "lic-6470000-302012026000001",
+   "name": "노블레스CC&리조트",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "칠곡군",
+   "address": "경상북도 칠곡군 북삼읍 칠곡대로 96-57",
+   "tel": "",
+   "lat": 36.04939,
+   "lon": 128.33322,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6470000-302012026000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 67,
+   "elevation_range_m": [
+    67,
+    67
+   ],
+   "name_norm": "노블레스",
+   "choseong": "ㄴㅂㄹㅅ",
+   "kma_nx": 84,
+   "kma_ny": 94
   },
   {
    "id": "osm-w647973514",
@@ -10764,6 +10474,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 245,
    "elevation_range_m": [
     131,
@@ -10800,6 +10511,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 126,
    "elevation_range_m": [
     79,
@@ -10840,6 +10552,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 154,
    "elevation_range_m": [
     73,
@@ -10851,49 +10564,18 @@
    "kma_ny": 93
   },
   {
-   "id": "osm-w320322458",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "경상북도",
-   "sigungu": "포항시남구",
-   "address": "",
-   "tel": "",
-   "lat": 35.99151,
-   "lon": 129.42077,
-   "position": "코스영역 중심",
-   "area_ha": 16.3,
-   "website": "",
-   "osm_ids": [
-    "w320322458"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 15,
-   "elevation_range_m": [
-    8,
-    19
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 103,
-   "kma_ny": 94
-  },
-  {
    "id": "osm-w471870266",
    "name": "오션힐스 포항CC",
-   "aliases": [],
-   "type": [],
+   "aliases": [
+    "오션힐스포항CC"
+   ],
+   "type": [
+    "회원제"
+   ],
    "status": "",
    "sido": "경상북도",
    "sigungu": "포항시북구",
-   "address": "",
+   "address": "경상북도 포항시 북구 송라면 대전길 7",
    "tel": "",
    "lat": 36.24476,
    "lon": 129.35138,
@@ -10903,11 +10585,12 @@
    "osm_ids": [
     "w471870266"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6470000-302012008000064"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 93,
    "elevation_range_m": [
     14,
@@ -10947,9 +10630,8 @@
     "6470000-302012008000029"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 37,
    "elevation_range_m": [
     30,
@@ -10964,13 +10646,16 @@
    "id": "osm-w471913617",
    "name": "포항CC",
    "aliases": [
-    "Pohang Country Club"
+    "Pohang Country Club",
+    "포항컨트리클럽"
    ],
-   "type": [],
+   "type": [
+    "회원제"
+   ],
    "status": "",
    "sido": "경상북도",
    "sigungu": "포항시북구",
-   "address": "",
+   "address": "경상북도 포항시 북구 송라면 대전길 7",
    "tel": "",
    "lat": 36.22318,
    "lon": 129.33708,
@@ -10980,11 +10665,12 @@
    "osm_ids": [
     "w471913617"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6470000-302012010000001"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 117,
    "elevation_range_m": [
     99,
@@ -11022,6 +10708,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 135,
    "elevation_range_m": [
     91,
@@ -11033,43 +10720,36 @@
    "kma_ny": 99
   },
   {
-   "id": "osm-w1456013376",
-   "name": "산타크로스골프장",
-   "aliases": [
-    "칼레이트CC"
-   ],
-   "type": [
-    "비회원제"
-   ],
+   "id": "lic-302012013000006",
+   "name": "군위 오펠골프클럽",
+   "aliases": [],
+   "type": [],
    "status": "영업",
    "sido": "대구광역시",
    "sigungu": "군위군",
-   "address": "대구광역시 군위군 소보면 서금로 342-0",
+   "address": "경상북도 군위군 산성면 부흥로 227",
    "tel": "",
-   "lat": 36.21179,
-   "lon": 128.52427,
-   "position": "코스영역 중심",
-   "area_ha": 83.6,
+   "lat": 36.12268,
+   "lon": 128.70437,
+   "position": "검수 좌표",
+   "area_ha": null,
    "website": "",
-   "osm_ids": [
-    "w1456013376"
-   ],
+   "osm_ids": [],
    "licence_ids": [
-    "6270000-302012024000001"
+    "6470000-302012013000006"
    ],
-   "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
-   "elevation_m": 228,
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 158,
    "elevation_range_m": [
-    165,
-    252
+    158,
+    158
    ],
-   "name_norm": "산타크로스",
-   "choseong": "ㅅㅌㅋㄹㅅ",
-   "kma_nx": 87,
-   "kma_ny": 98
+   "name_norm": "군위오펠",
+   "choseong": "ㄱㅇㅇㅍ",
+   "kma_nx": 91,
+   "kma_ny": 96
   },
   {
    "id": "lic-6270000-302012026000001",
@@ -11091,9 +10771,8 @@
     "6270000-302012026000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 82,
    "elevation_range_m": [
     82,
@@ -11133,6 +10812,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 146,
    "elevation_range_m": [
     119,
@@ -11142,112 +10822,6 @@
    "choseong": "ㅇㅈㅅㅋㅇ",
    "kma_nx": 88,
    "kma_ny": 100
-  },
-  {
-   "id": "osm-w298032137",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "대구광역시",
-   "sigungu": "남구",
-   "address": "",
-   "tel": "",
-   "lat": 35.83761,
-   "lon": 128.58767,
-   "position": "코스영역 중심",
-   "area_ha": 16.0,
-   "website": "",
-   "osm_ids": [
-    "w298032137"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 81,
-   "elevation_range_m": [
-    76,
-    95
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 89,
-   "kma_ny": 90
-  },
-  {
-   "id": "osm-w708940453",
-   "name": "냉천개발 윤상락",
-   "aliases": [],
-   "type": [
-    "비회원제"
-   ],
-   "status": "영업",
-   "sido": "대구광역시",
-   "sigungu": "달성군",
-   "address": "대구광역시 달성군 가창면 가창로 1037-9",
-   "tel": "",
-   "lat": 35.79351,
-   "lon": 128.62386,
-   "position": "코스영역 중심",
-   "area_ha": 13.6,
-   "website": "",
-   "osm_ids": [
-    "w708940453"
-   ],
-   "licence_ids": [
-    "6270000-302012011000001"
-   ],
-   "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 238,
-   "elevation_range_m": [
-    156,
-    305
-   ],
-   "name_norm": "냉천개발윤상락",
-   "choseong": "ㄴㅊㄱㅂㅇㅅㄹ",
-   "kma_nx": 89,
-   "kma_ny": 89
-  },
-  {
-   "id": "osm-w276156803",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "대구광역시",
-   "sigungu": "동구",
-   "address": "",
-   "tel": "",
-   "lat": 35.9025,
-   "lon": 128.66077,
-   "position": "코스영역 중심",
-   "area_ha": 26.3,
-   "website": "",
-   "osm_ids": [
-    "w276156803"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 47,
-   "elevation_range_m": [
-    40,
-    64
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 90,
-   "kma_ny": 91
   },
   {
    "id": "osm-w130172399",
@@ -11276,6 +10850,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 648,
    "elevation_range_m": [
     552,
@@ -11285,80 +10860,6 @@
    "choseong": "ㅍㄱ",
    "kma_nx": 91,
    "kma_ny": 93
-  },
-  {
-   "id": "osm-w644511057",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "대전광역시",
-   "sigungu": "유성구",
-   "address": "",
-   "tel": "",
-   "lat": 36.41865,
-   "lon": 127.35021,
-   "position": "코스영역 중심",
-   "area_ha": 23.8,
-   "website": "",
-   "osm_ids": [
-    "w644511057"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 92,
-   "elevation_range_m": [
-    87,
-    103
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 67,
-   "kma_ny": 102
-  },
-  {
-   "id": "osm-w469029834",
-   "name": "사이언스 대덕",
-   "aliases": [
-    "대덕복지센터"
-   ],
-   "type": [
-    "비회원제"
-   ],
-   "status": "영업",
-   "sido": "대전광역시",
-   "sigungu": "유성구",
-   "address": "대전광역시 유성구 유성대로1689번길 69-0, 1층 (전민동,연구단지체육공원)",
-   "tel": "",
-   "lat": 36.40524,
-   "lon": 127.39092,
-   "position": "코스영역 중심",
-   "area_ha": 25.7,
-   "website": "",
-   "osm_ids": [
-    "w469029834"
-   ],
-   "licence_ids": [
-    "6300000-302012006000001"
-   ],
-   "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
-   "elevation_m": 89,
-   "elevation_range_m": [
-    68,
-    99
-   ],
-   "name_norm": "사이언스대덕",
-   "choseong": "ㅅㅇㅇㅅㄷㄷ",
-   "kma_nx": 67,
-   "kma_ny": 102
   },
   {
    "id": "osm-w68913380",
@@ -11387,6 +10888,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 125,
    "elevation_range_m": [
     91,
@@ -11425,6 +10927,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 48,
    "elevation_range_m": [
     37,
@@ -11434,41 +10937,6 @@
    "choseong": "ㅎㅁㄹㄷㄷㅂㄹ",
    "kma_nx": 68,
    "kma_ny": 102
-  },
-  {
-   "id": "osm-w298477530",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "부산광역시",
-   "sigungu": "강서구",
-   "address": "",
-   "tel": "",
-   "lat": 35.1893,
-   "lon": 128.93142,
-   "position": "코스영역 중심",
-   "area_ha": 23.0,
-   "website": "",
-   "osm_ids": [
-    "w298477530"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 2,
-   "elevation_range_m": [
-    1,
-    2
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 95,
-   "kma_ny": 76
   },
   {
    "id": "osm-w415888498",
@@ -11492,9 +10960,8 @@
     "6260000-302012008000003"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 157,
    "elevation_range_m": [
     145,
@@ -11527,9 +10994,8 @@
     "6260000-302012009000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 143,
    "elevation_range_m": [
     118,
@@ -11566,9 +11032,8 @@
     "6260000-302012007000003"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 83,
    "elevation_range_m": [
     51,
@@ -11608,6 +11073,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 142,
    "elevation_range_m": [
     99,
@@ -11617,6 +11083,38 @@
    "choseong": "ㅂㅅㅋㅌㄹㅋㄹ",
    "kma_nx": 98,
    "kma_ny": 78
+  },
+  {
+   "id": "lic-6260000-302012016000001",
+   "name": "기장동원로얄골프장",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "부산광역시",
+   "sigungu": "기장군",
+   "address": "부산광역시 기장군 기장읍 반송로 1345-52",
+   "tel": "051-630-4134",
+   "lat": 35.25178,
+   "lon": 129.20702,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6260000-302012016000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 61,
+   "elevation_range_m": [
+    61,
+    61
+   ],
+   "name_norm": "기장동원로얄",
+   "choseong": "ㄱㅈㄷㅇㄹㅇ",
+   "kma_nx": 100,
+   "kma_ny": 77
   },
   {
    "id": "osm-w756749258",
@@ -11644,6 +11142,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 112,
    "elevation_range_m": [
     71,
@@ -11681,9 +11180,8 @@
     "6260000-302012010000001"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 46,
    "elevation_range_m": [
     40,
@@ -11716,9 +11214,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 43,
    "elevation_range_m": [
     14,
@@ -11758,6 +11255,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 425,
    "elevation_range_m": [
     335,
@@ -11791,6 +11289,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 11,
    "elevation_range_m": [
     7,
@@ -11800,74 +11299,6 @@
    "choseong": "ㅇㅅㅇ27",
    "kma_nx": 57,
    "kma_ny": 126
-  },
-  {
-   "id": "osm-w380914535",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "서울특별시",
-   "sigungu": "노원구",
-   "address": "",
-   "tel": "",
-   "lat": 37.63172,
-   "lon": 127.10657,
-   "position": "코스영역 중심",
-   "area_ha": 70.6,
-   "website": "",
-   "osm_ids": [
-    "w380914535"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 43,
-   "elevation_range_m": [
-    34,
-    50
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 62,
-   "kma_ny": 128
-  },
-  {
-   "id": "osm-w246152659",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "서울특별시",
-   "sigungu": "마포구",
-   "address": "",
-   "tel": "",
-   "lat": 37.57422,
-   "lon": 126.87508,
-   "position": "코스영역 중심",
-   "area_ha": 36.8,
-   "website": "",
-   "osm_ids": [
-    "w246152659"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 96,
-   "elevation_range_m": [
-    74,
-    101
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 58,
-   "kma_ny": 127
   },
   {
    "id": "osm-w389250034",
@@ -11894,6 +11325,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 103,
    "elevation_range_m": [
     62,
@@ -11930,6 +11362,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 232,
    "elevation_range_m": [
     167,
@@ -11966,6 +11399,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 131,
    "elevation_range_m": [
     112,
@@ -11996,9 +11430,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 75,
    "elevation_range_m": [
     52,
@@ -12008,40 +11441,6 @@
    "choseong": "ㅂㅇㅅㅌㅈ",
    "kma_nx": 104,
    "kma_ny": 85
-  },
-  {
-   "id": "osm-w642932126",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "울산광역시",
-   "sigungu": "울주군",
-   "address": "",
-   "tel": "",
-   "lat": 35.36182,
-   "lon": 129.31139,
-   "position": "코스영역 중심",
-   "area_ha": 51.3,
-   "website": "",
-   "osm_ids": [
-    "w642932126"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 31,
-   "elevation_range_m": [
-    26,
-    43
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 102,
-   "kma_ny": 80
   },
   {
    "id": "osm-w601810069",
@@ -12070,10 +11469,8 @@
     "6310000-302012007000002"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 223,
    "elevation_range_m": [
     207,
@@ -12111,6 +11508,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 161,
    "elevation_range_m": [
     138,
@@ -12143,10 +11541,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 235,
    "elevation_range_m": [
     178,
@@ -12183,6 +11579,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 88,
    "elevation_range_m": [
     57,
@@ -12220,6 +11617,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 139,
    "elevation_range_m": [
     91,
@@ -12250,9 +11648,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     4,
@@ -12286,9 +11683,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 36,
    "elevation_range_m": [
     18,
@@ -12327,6 +11723,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     2,
@@ -12364,6 +11761,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 7,
    "elevation_range_m": [
     4,
@@ -12401,6 +11799,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 10,
    "elevation_range_m": [
     8,
@@ -12437,9 +11836,8 @@
     "6280000-302012009000003"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 7,
    "elevation_range_m": [
     7,
@@ -12472,9 +11870,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 7,
    "elevation_range_m": [
     6,
@@ -12513,6 +11910,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 10,
    "elevation_range_m": [
     7,
@@ -12524,7 +11922,7 @@
    "kma_ny": 123
   },
   {
-   "id": "lic-6280000-302012021000002",
+   "id": "lic-302012021000002",
    "name": "드림아일랜드골프장",
    "aliases": [],
    "type": [
@@ -12545,9 +11943,8 @@
     "6280000-302012021000002"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 10,
    "elevation_range_m": [
     10,
@@ -12583,6 +11980,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 10,
    "elevation_range_m": [
     10,
@@ -12592,39 +11990,6 @@
    "choseong": "ㅂㄹㅎccㅇㅈ",
    "kma_nx": 53,
    "kma_ny": 126
-  },
-  {
-   "id": "osm-w486047902",
-   "name": "스카이72 골프장",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "인천광역시",
-   "sigungu": "영종구",
-   "address": "",
-   "tel": "",
-   "lat": 37.45091,
-   "lon": 126.48298,
-   "position": "코스영역 중심",
-   "area_ha": 83.0,
-   "website": "",
-   "osm_ids": [
-    "w486047902"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
-   ],
-   "elevation_m": 33,
-   "elevation_range_m": [
-    16,
-    47
-   ],
-   "name_norm": "스카이72",
-   "choseong": "ㅅㅋㅇ72",
-   "kma_nx": 51,
-   "kma_ny": 124
   },
   {
    "id": "osm-w447703438",
@@ -12651,6 +12016,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     2,
@@ -12662,10 +12028,45 @@
    "kma_ny": 124
   },
   {
-   "id": "osm-w447703445",
-   "name": "인천국제공항스카이칠십이골프장",
+   "id": "osm-w486047902",
+   "name": "클럽72 골프장",
    "aliases": [
     "스카이72 골프장"
+   ],
+   "type": [],
+   "status": "",
+   "sido": "인천광역시",
+   "sigungu": "영종구",
+   "address": "",
+   "tel": "",
+   "lat": 37.45091,
+   "lon": 126.48298,
+   "position": "코스영역 중심",
+   "area_ha": 83.0,
+   "website": "",
+   "osm_ids": [
+    "w486047902"
+   ],
+   "licence_ids": [],
+   "match": "",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 33,
+   "elevation_range_m": [
+    16,
+    47
+   ],
+   "name_norm": "클럽72",
+   "choseong": "ㅋㄹ72",
+   "kma_nx": 51,
+   "kma_ny": 124
+  },
+  {
+   "id": "osm-w447703445",
+   "name": "클럽72 오션코스",
+   "aliases": [
+    "스카이72 골프장",
+    "인천국제공항스카이칠십이골프장"
    ],
    "type": [
     "비회원제"
@@ -12688,16 +12089,15 @@
     "6280000-302012008000003"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 7,
    "elevation_range_m": [
     5,
     33
    ],
-   "name_norm": "인천국제공항스카이칠십이",
-   "choseong": "ㅇㅊㄱㅈㄱㅎㅅㅋㅇㅊㅅㅇ",
+   "name_norm": "클럽72오션코스",
+   "choseong": "ㅋㄹ72ㅇㅅㅋㅅ",
    "kma_nx": 51,
    "kma_ny": 125
   },
@@ -12729,6 +12129,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 17,
    "elevation_range_m": [
     8,
@@ -12759,9 +12160,8 @@
     "5845000-CDFH2302012019000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 56,
    "elevation_range_m": [
     56,
@@ -12799,6 +12199,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 113,
    "elevation_range_m": [
     94,
@@ -12834,6 +12235,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 181,
    "elevation_range_m": [
     150,
@@ -12868,9 +12270,8 @@
     "6130000-302012010000003"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 101,
    "elevation_range_m": [
     90,
@@ -12882,39 +12283,36 @@
    "kma_ny": 77
   },
   {
-   "id": "osm-w347425575",
-   "name": "",
+   "id": "lic-302012012000005",
+   "name": "어등산CC",
    "aliases": [],
    "type": [],
-   "status": "",
+   "status": "영업",
    "sido": "전남광주통합특별시",
    "sigungu": "광산구",
-   "address": "",
+   "address": "전남광주통합특별시 광산구 무진대로 31 (운수동)",
    "tel": "",
-   "lat": 35.11202,
-   "lon": 126.79372,
-   "position": "코스영역 중심",
-   "area_ha": 24.7,
+   "lat": 35.16681,
+   "lon": 126.77196,
+   "position": "검수 좌표",
+   "area_ha": null,
    "website": "",
-   "osm_ids": [
-    "w347425575"
+   "osm_ids": [],
+   "licence_ids": [
+    "6130000-302012012000005"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 13,
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 182,
    "elevation_range_m": [
-    12,
-    15
+    182,
+    182
    ],
-   "name_norm": "",
-   "choseong": "",
+   "name_norm": "어등산",
+   "choseong": "ㅇㄷㅅ",
    "kma_nx": 57,
-   "kma_ny": 73
+   "kma_ny": 74
   },
   {
    "id": "osm-w548033344",
@@ -12936,9 +12334,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 45,
    "elevation_range_m": [
     30,
@@ -12948,41 +12345,6 @@
    "choseong": "ㅇㅋㄹㅇㄱㅅ",
    "kma_nx": 56,
    "kma_ny": 73
-  },
-  {
-   "id": "osm-w560875452",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "전남광주통합특별시",
-   "sigungu": "광양시",
-   "address": "",
-   "tel": "",
-   "lat": 34.94281,
-   "lon": 127.73704,
-   "position": "코스영역 중심",
-   "area_ha": 11.0,
-   "website": "",
-   "osm_ids": [
-    "w560875452"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 7,
-   "elevation_range_m": [
-    5,
-    26
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 74,
-   "kma_ny": 70
   },
   {
    "id": "osm-w540940807",
@@ -13008,9 +12370,8 @@
     "6130000-302012011000003"
    ],
    "match": "이름",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 165,
    "elevation_range_m": [
     150,
@@ -13051,6 +12412,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 94,
    "elevation_range_m": [
     57,
@@ -13083,9 +12445,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 43,
    "elevation_range_m": [
     28,
@@ -13097,7 +12458,7 @@
    "kma_ny": 70
   },
   {
-   "id": "lic-302012016000001",
+   "id": "lic-6130000-302012016000001",
    "name": "나주혁신도시 부영CC",
    "aliases": [],
    "type": [],
@@ -13116,9 +12477,8 @@
     "6130000-302012016000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 27,
    "elevation_range_m": [
     27,
@@ -13133,13 +12493,14 @@
    "id": "osm-w621523752",
    "name": "나주힐스컨트리클럽",
    "aliases": [
-    "Naju Hills Country Club"
+    "Naju Hills Country Club",
+    "나주힐스CC"
    ],
    "type": [],
    "status": "",
    "sido": "전남광주통합특별시",
    "sigungu": "나주시",
-   "address": "",
+   "address": "전남광주통합특별시 나주시 공산면 상방신포길 160-27",
    "tel": "",
    "lat": 34.89145,
    "lon": 126.72502,
@@ -13149,11 +12510,12 @@
    "osm_ids": [
     "w621523752"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6130000-302012011000006"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 71,
    "elevation_range_m": [
     53,
@@ -13163,6 +12525,42 @@
    "choseong": "ㄴㅈㅎㅅ",
    "kma_nx": 56,
    "kma_ny": 68
+  },
+  {
+   "id": "lic-6130000-302012012000001",
+   "name": "정남진골프리조트",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전남광주통합특별시",
+   "sigungu": "나주시",
+   "address": "전남광주통합특별시 장흥군 장평면 제산기동로 326",
+   "tel": "",
+   "lat": 35.01401,
+   "lon": 126.81895,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6130000-302012012000001"
+   ],
+   "match": "검수",
+   "review": [
+    "좌표확인"
+   ],
+   "reviewed": true,
+   "elevation_m": 30,
+   "elevation_range_m": [
+    30,
+    30
+   ],
+   "name_norm": "정남진",
+   "choseong": "ㅈㄴㅈ",
+   "kma_nx": 58,
+   "kma_ny": 71
   },
   {
    "id": "osm-w389445363",
@@ -13194,6 +12592,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 115,
    "elevation_range_m": [
     67,
@@ -13203,39 +12602,6 @@
    "choseong": "ㅎㅍㄴㅅ",
    "kma_nx": 58,
    "kma_ny": 71
-  },
-  {
-   "id": "lic-5815000-CDFH2302012026000001",
-   "name": "보스당구클럽",
-   "aliases": [],
-   "type": [],
-   "status": "영업",
-   "sido": "전남광주통합특별시",
-   "sigungu": "남구",
-   "address": "전남광주통합특별시 남구 광복마을길 49, 김밥나라 (진월동)",
-   "tel": "",
-   "lat": 35.12227,
-   "lon": 126.8973,
-   "position": "인허가 주소 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "5815000-CDFH2302012026000001"
-   ],
-   "match": "",
-   "review": [
-    "영역없음"
-   ],
-   "elevation_m": 58,
-   "elevation_range_m": [
-    58,
-    58
-   ],
-   "name_norm": "보스당구클럽",
-   "choseong": "ㅂㅅㄷㄱㅋㄹ",
-   "kma_nx": 59,
-   "kma_ny": 74
   },
   {
    "id": "osm-w393274884",
@@ -13265,9 +12631,8 @@
     "6130000-302012010000005"
    ],
    "match": "이름+좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 87,
    "elevation_range_m": [
     77,
@@ -13306,9 +12671,8 @@
     "6130000-302012007000012"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 190,
    "elevation_range_m": [
     169,
@@ -13346,6 +12710,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 145,
    "elevation_range_m": [
     133,
@@ -13376,10 +12741,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 83,
    "elevation_range_m": [
     68,
@@ -13419,6 +12782,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 2,
    "elevation_range_m": [
     1,
@@ -13451,9 +12815,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 119,
    "elevation_range_m": [
     82,
@@ -13484,10 +12847,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 211,
    "elevation_range_m": [
     181,
@@ -13525,6 +12886,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 159,
    "elevation_range_m": [
     120,
@@ -13534,6 +12896,42 @@
    "choseong": "ㅂㅅ",
    "kma_nx": 65,
    "kma_ny": 67
+  },
+  {
+   "id": "lic-302012007000010",
+   "name": "아크로컨트리클럽",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전남광주통합특별시",
+   "sigungu": "서구",
+   "address": "전남광주통합특별시 영암군 금정면 안적동길 403",
+   "tel": "",
+   "lat": 35.14694,
+   "lon": 126.87349,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6130000-302012007000010"
+   ],
+   "match": "검수",
+   "review": [
+    "좌표확인"
+   ],
+   "reviewed": true,
+   "elevation_m": 42,
+   "elevation_range_m": [
+    42,
+    42
+   ],
+   "name_norm": "아크로",
+   "choseong": "ㅇㅋㄹ",
+   "kma_nx": 59,
+   "kma_ny": 74
   },
   {
    "id": "osm-w468589803",
@@ -13555,9 +12953,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 32,
    "elevation_range_m": [
     27,
@@ -13594,6 +12991,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 240,
    "elevation_range_m": [
     166,
@@ -13632,6 +13030,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 204,
    "elevation_range_m": [
     123,
@@ -13670,6 +13069,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 187,
    "elevation_range_m": [
     141,
@@ -13679,40 +13079,6 @@
    "choseong": "ㅍㄹㅇㅈ",
    "kma_nx": 69,
    "kma_ny": 69
-  },
-  {
-   "id": "osm-w509423306",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "전남광주통합특별시",
-   "sigungu": "여수시",
-   "address": "",
-   "tel": "",
-   "lat": 34.79414,
-   "lon": 127.73305,
-   "position": "코스영역 중심",
-   "area_ha": 40.5,
-   "website": "",
-   "osm_ids": [
-    "w509423306"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 129,
-   "elevation_range_m": [
-    73,
-    151
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 74,
-   "kma_ny": 67
   },
   {
    "id": "osm-w1446853665",
@@ -13736,9 +13102,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 87,
    "elevation_range_m": [
     8,
@@ -13776,6 +13141,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 33,
    "elevation_range_m": [
     14,
@@ -13811,9 +13177,8 @@
     "5785000-CDFH2302012011000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 143,
    "elevation_range_m": [
     123,
@@ -13828,6 +13193,7 @@
    "id": "osm-w922840150",
    "name": "에콜리안영광골프장",
    "aliases": [
+    "에코리안영광골프장",
     "에콜리안영광CC"
    ],
    "type": [
@@ -13847,10 +13213,12 @@
     "w922840150"
    ],
    "licence_ids": [
+    "6130000-302012014000001",
     "6130000-302012023000001"
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 36,
    "elevation_range_m": [
     28,
@@ -13888,9 +13256,8 @@
     "6130000-302012008000006"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 109,
    "elevation_range_m": [
     23,
@@ -13924,6 +13291,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 1,
    "elevation_range_m": [
     0,
@@ -13957,9 +13325,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 1,
    "elevation_range_m": [
     0,
@@ -13996,9 +13363,8 @@
     "6130000-302012009000012"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 114,
    "elevation_range_m": [
     108,
@@ -14029,9 +13395,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 194,
    "elevation_range_m": [
     136,
@@ -14068,6 +13433,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 68,
    "elevation_range_m": [
     58,
@@ -14098,9 +13464,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 201,
    "elevation_range_m": [
     186,
@@ -14139,6 +13504,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 59,
    "elevation_range_m": [
     33,
@@ -14174,6 +13540,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 55,
    "elevation_range_m": [
     26,
@@ -14211,9 +13578,8 @@
     "6130000-302012015000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 69,
    "elevation_range_m": [
     42,
@@ -14247,6 +13613,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 0,
    "elevation_range_m": [
     0,
@@ -14261,7 +13628,8 @@
    "id": "osm-w390545752",
    "name": "파인비치골프링크스",
    "aliases": [
-    "Pine Beach Golf Links"
+    "Pine Beach Golf Links",
+    "오시아노골프클럽"
    ],
    "type": [
     "비회원제"
@@ -14280,10 +13648,12 @@
     "w390545752"
    ],
    "licence_ids": [
-    "6130000-302012010000004"
+    "6130000-302012010000004",
+    "6130000-302012013000001"
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 22,
    "elevation_range_m": [
     0,
@@ -14320,6 +13690,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 122,
    "elevation_range_m": [
     97,
@@ -14355,6 +13726,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 157,
    "elevation_range_m": [
     105,
@@ -14390,6 +13762,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 160,
    "elevation_range_m": [
     134,
@@ -14427,6 +13800,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 132,
    "elevation_range_m": [
     100,
@@ -14464,6 +13838,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 4,
    "elevation_range_m": [
     3,
@@ -14499,6 +13874,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 114,
    "elevation_range_m": [
     100,
@@ -14508,41 +13884,6 @@
    "choseong": "ㅅㅈㅎ",
    "kma_nx": 56,
    "kma_ny": 80
-  },
-  {
-   "id": "osm-w1318760088",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "전북특별자치도",
-   "sigungu": "군산시",
-   "address": "",
-   "tel": "",
-   "lat": 35.91844,
-   "lon": 126.61739,
-   "position": "코스영역 중심",
-   "area_ha": 16.5,
-   "website": "",
-   "osm_ids": [
-    "w1318760088"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 6,
-   "elevation_range_m": [
-    5,
-    11
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 54,
-   "kma_ny": 91
   },
   {
    "id": "osm-w95038747",
@@ -14569,6 +13910,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 3,
    "elevation_range_m": [
     2,
@@ -14605,6 +13947,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 27,
    "elevation_range_m": [
     19,
@@ -14640,6 +13983,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 26,
    "elevation_range_m": [
     19,
@@ -14675,6 +14019,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 52,
    "elevation_range_m": [
     40,
@@ -14707,9 +14052,8 @@
     "6540000-302012010000003"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 32,
    "elevation_range_m": [
     27,
@@ -14747,6 +14091,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 139,
    "elevation_range_m": [
     116,
@@ -14784,6 +14129,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 904,
    "elevation_range_m": [
     878,
@@ -14793,6 +14139,41 @@
    "choseong": "ㅁㅈㄷㅇㅅ",
    "kma_nx": 73,
    "kma_ny": 90
+  },
+  {
+   "id": "lic-302012011000001",
+   "name": "무주안성CC",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전북특별자치도",
+   "sigungu": "무주군",
+   "address": "전북특별자치도 무주군 안성면 공진리 산 53번지 1호",
+   "tel": "",
+   "lat": 35.83132,
+   "lon": 127.63655,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6540000-302012011000001",
+    "6540000-302012012000006"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 508,
+   "elevation_range_m": [
+    508,
+    508
+   ],
+   "name_norm": "무주안성",
+   "choseong": "ㅁㅈㅇㅅ",
+   "kma_nx": 72,
+   "kma_ny": 89
   },
   {
    "id": "lic-CDFH2302012003000001",
@@ -14814,9 +14195,8 @@
     "4771000-CDFH2302012003000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 134,
    "elevation_range_m": [
     134,
@@ -14852,10 +14232,8 @@
     "6540000-302012010000001"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)",
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 217,
    "elevation_range_m": [
     199,
@@ -14886,9 +14264,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 190,
    "elevation_range_m": [
     151,
@@ -14924,9 +14301,8 @@
     "6540000-302012010000004"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 212,
    "elevation_range_m": [
     201,
@@ -14957,9 +14333,8 @@
     "6540000-302012020000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 125,
    "elevation_range_m": [
     125,
@@ -14993,9 +14368,8 @@
     "4681000-CDFH2302012011000002"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 15,
    "elevation_range_m": [
     15,
@@ -15036,9 +14410,8 @@
     "6540000-302012025000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 59,
    "elevation_range_m": [
     32,
@@ -15080,6 +14453,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 35,
    "elevation_range_m": [
     29,
@@ -15115,6 +14489,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 324,
    "elevation_range_m": [
     263,
@@ -15150,6 +14525,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 505,
    "elevation_range_m": [
     469,
@@ -15159,41 +14535,6 @@
    "choseong": "ㅈㅅ",
    "kma_nx": 71,
    "kma_ny": 86
-  },
-  {
-   "id": "osm-w107394848",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "전북특별자치도",
-   "sigungu": "전주시덕진구",
-   "address": "",
-   "tel": "",
-   "lat": 35.86373,
-   "lon": 127.06583,
-   "position": "코스영역 중심",
-   "area_ha": 16.0,
-   "website": "",
-   "osm_ids": [
-    "w107394848"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 16,
-   "elevation_range_m": [
-    14,
-    17
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 62,
-   "kma_ny": 90
   },
   {
    "id": "osm-w645702323",
@@ -15222,6 +14563,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 109,
    "elevation_range_m": [
     103,
@@ -15261,6 +14603,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 52,
    "elevation_range_m": [
     32,
@@ -15299,6 +14642,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 431,
    "elevation_range_m": [
     393,
@@ -15340,6 +14684,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 617,
    "elevation_range_m": [
     596,
@@ -15376,6 +14721,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 391,
    "elevation_range_m": [
     348,
@@ -15417,9 +14763,8 @@
     "6500000-302012010000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 258,
    "elevation_range_m": [
     221,
@@ -15460,6 +14805,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 319,
    "elevation_range_m": [
     307,
@@ -15495,6 +14841,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 493,
    "elevation_range_m": [
     455,
@@ -15535,6 +14882,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 277,
    "elevation_range_m": [
     264,
@@ -15574,6 +14922,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 83,
    "elevation_range_m": [
     79,
@@ -15612,6 +14961,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 362,
    "elevation_range_m": [
     345,
@@ -15650,6 +15000,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 321,
    "elevation_range_m": [
     255,
@@ -15687,6 +15038,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 62,
    "elevation_range_m": [
     43,
@@ -15727,6 +15079,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 428,
    "elevation_range_m": [
     418,
@@ -15765,6 +15118,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 212,
    "elevation_range_m": [
     193,
@@ -15802,9 +15156,8 @@
     "6520000-CDFH2302011999100001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 437,
    "elevation_range_m": [
     437,
@@ -15843,6 +15196,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 347,
    "elevation_range_m": [
     316,
@@ -15880,9 +15234,8 @@
     "6500000-302012008000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 569,
    "elevation_range_m": [
     550,
@@ -15921,6 +15274,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 154,
    "elevation_range_m": [
     140,
@@ -15951,9 +15305,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 43,
    "elevation_range_m": [
     28,
@@ -15992,6 +15345,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 394,
    "elevation_range_m": [
     379,
@@ -16033,6 +15387,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 260,
    "elevation_range_m": [
     236,
@@ -16072,9 +15427,8 @@
     "6500000-302012018000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 98,
    "elevation_range_m": [
     74,
@@ -16113,6 +15467,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 463,
    "elevation_range_m": [
     447,
@@ -16153,6 +15508,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 398,
    "elevation_range_m": [
     377,
@@ -16190,6 +15546,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 376,
    "elevation_range_m": [
     352,
@@ -16230,6 +15587,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 519,
    "elevation_range_m": [
     503,
@@ -16262,9 +15620,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 306,
    "elevation_range_m": [
     275,
@@ -16302,9 +15659,8 @@
     "6500000-302012011000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 509,
    "elevation_range_m": [
     492,
@@ -16345,6 +15701,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 55,
    "elevation_range_m": [
     47,
@@ -16383,6 +15740,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 607,
    "elevation_range_m": [
     515,
@@ -16395,8 +15753,10 @@
   },
   {
    "id": "osm-w713801223",
-   "name": "플라자CC",
-   "aliases": [],
+   "name": "플라자CC 제주",
+   "aliases": [
+    "플라자CC"
+   ],
    "type": [
     "비회원제"
    ],
@@ -16417,16 +15777,15 @@
     "6500000-302012008000011"
    ],
    "match": "좌표",
-   "review": [
-    "동명"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 448,
    "elevation_range_m": [
     435,
     457
    ],
-   "name_norm": "플라자",
-   "choseong": "ㅍㄹㅈ",
+   "name_norm": "플라자cc제주",
+   "choseong": "ㅍㄹㅈccㅈㅈ",
    "kma_nx": 55,
    "kma_ny": 37
   },
@@ -16457,6 +15816,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 460,
    "elevation_range_m": [
     416,
@@ -16487,9 +15847,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 149,
    "elevation_range_m": [
     139,
@@ -16499,6 +15858,73 @@
    "choseong": "ㄱㄹㄷ",
    "kma_nx": 65,
    "kma_ny": 100
+  },
+  {
+   "id": "lic-302012015000001",
+   "name": "계룡산골프장",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "충청남도",
+   "sigungu": "공주시",
+   "address": "충청남도 공주시 계룡면 내흥리 28번지 1호",
+   "tel": "",
+   "lat": 36.40958,
+   "lon": 127.19077,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6440000-302012015000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 127,
+   "elevation_range_m": [
+    127,
+    127
+   ],
+   "name_norm": "계룡산",
+   "choseong": "ㄱㄹㅅ",
+   "kma_nx": 64,
+   "kma_ny": 102
+  },
+  {
+   "id": "lic-6440000-302012010000002",
+   "name": "골드리버cc",
+   "aliases": [
+    "골드리버 cc"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "충청남도",
+   "sigungu": "공주시",
+   "address": "충청남도 공주시 의당면 신성말길 67-38",
+   "tel": "041-856-7100",
+   "lat": 36.50365,
+   "lon": 127.16333,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6440000-302012010000002",
+    "6440000-302012024000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 58,
+   "elevation_range_m": [
+    58,
+    58
+   ],
+   "name_norm": "골드리버",
+   "choseong": "ㄱㄷㄹㅂ",
+   "kma_nx": 63,
+   "kma_ny": 104
   },
   {
    "id": "osm-w617106042",
@@ -16528,6 +15954,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 183,
    "elevation_range_m": [
     144,
@@ -16566,6 +15993,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 269,
    "elevation_range_m": [
     204,
@@ -16575,41 +16003,6 @@
    "choseong": "ㅇㄷㅂㄹ",
    "kma_nx": 66,
    "kma_ny": 96
-  },
-  {
-   "id": "osm-w807398174",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청남도",
-   "sigungu": "논산시",
-   "address": "",
-   "tel": "",
-   "lat": 36.27314,
-   "lon": 127.11612,
-   "position": "코스영역 중심",
-   "area_ha": 20.4,
-   "website": "",
-   "osm_ids": [
-    "w807398174"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 40,
-   "elevation_range_m": [
-    34,
-    45
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 63,
-   "kma_ny": 99
   },
   {
    "id": "osm-w120410414",
@@ -16635,9 +16028,8 @@
     "6440000-302012010000004"
    ],
    "match": "좌표",
-   "review": [
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 80,
    "elevation_range_m": [
     64,
@@ -16676,6 +16068,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 152,
    "elevation_range_m": [
     107,
@@ -16711,6 +16104,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 23,
    "elevation_range_m": [
     15,
@@ -16744,6 +16138,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 7,
    "elevation_range_m": [
     7,
@@ -16776,9 +16171,8 @@
     "6440000-302012023000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 2,
    "elevation_range_m": [
     2,
@@ -16815,6 +16209,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 90,
    "elevation_range_m": [
     67,
@@ -16849,6 +16244,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 5,
    "elevation_range_m": [
     4,
@@ -16886,6 +16282,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 165,
    "elevation_range_m": [
     142,
@@ -16922,6 +16319,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 41,
    "elevation_range_m": [
     31,
@@ -16931,40 +16329,6 @@
    "choseong": "ㅎㅌㄹㄷㅅㅋㅇㅎㅂㅇ",
    "kma_nx": 59,
    "kma_ny": 99
-  },
-  {
-   "id": "osm-w342009744",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청남도",
-   "sigungu": "서산시",
-   "address": "",
-   "tel": "",
-   "lat": 36.71745,
-   "lon": 126.47963,
-   "position": "코스영역 중심",
-   "area_ha": 75.5,
-   "website": "",
-   "osm_ids": [
-    "w342009744"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 10,
-   "elevation_range_m": [
-    5,
-    19
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 51,
-   "kma_ny": 108
   },
   {
    "id": "osm-w95469920",
@@ -16993,9 +16357,8 @@
     "6440000-302012009000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 53,
    "elevation_range_m": [
     32,
@@ -17007,50 +16370,17 @@
    "kma_ny": 114
   },
   {
-   "id": "osm-w647487606",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청남도",
-   "sigungu": "아산시",
-   "address": "",
-   "tel": "",
-   "lat": 36.74165,
-   "lon": 126.99383,
-   "position": "코스영역 중심",
-   "area_ha": 34.9,
-   "website": "",
-   "osm_ids": [
-    "w647487606"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 92,
-   "elevation_range_m": [
-    63,
-    141
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 60,
-   "kma_ny": 109
-  },
-  {
    "id": "osm-w633130195",
    "name": "SG아름다운CC",
    "aliases": [
-    "Arumdaun Golf & Resort"
+    "Arumdaun Golf & Resort",
+    "에스지아름다운골프앤리조트"
    ],
    "type": [],
    "status": "",
    "sido": "충청남도",
    "sigungu": "아산시",
-   "address": "",
+   "address": "충청남도 아산시 염치읍 영인산로 440",
    "tel": "",
    "lat": 36.84581,
    "lon": 126.92083,
@@ -17060,11 +16390,12 @@
    "osm_ids": [
     "w633130195"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6440000-302012009000004"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 108,
    "elevation_range_m": [
     56,
@@ -17103,9 +16434,8 @@
     "6440000-302012007000004"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 34,
    "elevation_range_m": [
     23,
@@ -17136,10 +16466,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 55,
    "elevation_range_m": [
     39,
@@ -17149,6 +16477,38 @@
    "choseong": "ㅇㅅ",
    "kma_nx": 61,
    "kma_ny": 111
+  },
+  {
+   "id": "lic-302012025000001",
+   "name": "내포골프클럽",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "충청남도",
+   "sigungu": "예산군",
+   "address": "충청남도 예산군 삽교읍 산수길 242-0",
+   "tel": "",
+   "lat": 36.67432,
+   "lon": 126.66982,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6440000-302012025000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 56,
+   "elevation_range_m": [
+    56,
+    56
+   ],
+   "name_norm": "내포",
+   "choseong": "ㄴㅍ",
+   "kma_nx": 55,
+   "kma_ny": 107
   },
   {
    "id": "osm-w547145443",
@@ -17180,6 +16540,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 298,
    "elevation_range_m": [
     229,
@@ -17191,7 +16552,7 @@
    "kma_ny": 112
   },
   {
-   "id": "lic-CDFH2302012006000001",
+   "id": "lic-4490000-CDFH2302012006000001",
    "name": "버드우드골프클럽",
    "aliases": [],
    "type": [],
@@ -17210,9 +16571,8 @@
     "4490000-CDFH2302012006000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 160,
    "elevation_range_m": [
     160,
@@ -17252,6 +16612,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 120,
    "elevation_range_m": [
     100,
@@ -17292,6 +16653,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 82,
    "elevation_range_m": [
     72,
@@ -17322,9 +16684,8 @@
     "6440000-302012026000001"
    ],
    "match": "",
-   "review": [
-    "영역없음"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 152,
    "elevation_range_m": [
     152,
@@ -17360,6 +16721,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 53,
    "elevation_range_m": [
     16,
@@ -17372,10 +16734,10 @@
   },
   {
    "id": "osm-w558442586",
-   "name": "로얄링스CC1",
+   "name": "로얄링스CC2",
    "aliases": [
     "Royal Hills Country Club",
-    "로얄링스CC2",
+    "로얄링스CC1",
     "로얄힐스CC"
    ],
    "type": [],
@@ -17397,16 +16759,15 @@
     "4620000-CDFH2302012014000002"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 1,
    "elevation_range_m": [
     0,
     3
    ],
-   "name_norm": "로얄링스cc1",
-   "choseong": "ㄹㅇㄹㅅcc1",
+   "name_norm": "로얄링스cc2",
+   "choseong": "ㄹㅇㄹㅅcc2",
    "kma_nx": 49,
    "kma_ny": 108
   },
@@ -17438,6 +16799,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 1,
    "elevation_range_m": [
     0,
@@ -17477,9 +16839,8 @@
     "6440000-302012007000003"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 2,
    "elevation_range_m": [
     2,
@@ -17517,6 +16878,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 262,
    "elevation_range_m": [
     216,
@@ -17551,9 +16913,8 @@
     "6430000-302012012000006"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 250,
    "elevation_range_m": [
     185,
@@ -17594,9 +16955,8 @@
     "6430000-302012023000002"
    ],
    "match": "이름+좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 217,
    "elevation_range_m": [
     198,
@@ -17627,9 +16987,8 @@
    ],
    "licence_ids": [],
    "match": "",
-   "review": [
-    "인허가미확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 175,
    "elevation_range_m": [
     139,
@@ -17668,6 +17027,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 184,
    "elevation_range_m": [
     146,
@@ -17706,6 +17066,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 205,
    "elevation_range_m": [
     137,
@@ -17744,6 +17105,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 239,
    "elevation_range_m": [
     200,
@@ -17782,6 +17144,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 218,
    "elevation_range_m": [
     169,
@@ -17819,6 +17182,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 217,
    "elevation_range_m": [
     187,
@@ -17828,6 +17192,40 @@
    "choseong": "ㅆㅂㄹ",
    "kma_nx": 68,
    "kma_ny": 115
+  },
+  {
+   "id": "lic-302012024000002",
+   "name": "음성 힐데스하임CC",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "충청북도",
+   "sigungu": "음성군",
+   "address": "충청북도 음성군 소이면 후삼로158번길 101-0, 0동 (클럽하우스)",
+   "tel": "",
+   "lat": 36.92959,
+   "lon": 127.77901,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6430000-302012024000002"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 180,
+   "elevation_range_m": [
+    180,
+    180
+   ],
+   "name_norm": "음성힐데스하임",
+   "choseong": "ㅇㅅㅎㄷㅅㅎㅇ",
+   "kma_nx": 74,
+   "kma_ny": 113
   },
   {
    "id": "osm-w690618087",
@@ -17856,6 +17254,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 137,
    "elevation_range_m": [
     112,
@@ -17894,6 +17293,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 224,
    "elevation_range_m": [
     187,
@@ -17931,6 +17331,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 221,
    "elevation_range_m": [
     189,
@@ -17970,6 +17371,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 295,
    "elevation_range_m": [
     279,
@@ -18008,6 +17410,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 316,
    "elevation_range_m": [
     273,
@@ -18043,9 +17446,8 @@
     "5570000-CDFH2302012019000001"
    ],
    "match": "좌표",
-   "review": [
-    "이름불일치"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 184,
    "elevation_range_m": [
     144,
@@ -18086,6 +17488,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 314,
    "elevation_range_m": [
     263,
@@ -18126,6 +17529,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 273,
    "elevation_range_m": [
     234,
@@ -18163,6 +17567,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 307,
    "elevation_range_m": [
     234,
@@ -18174,41 +17579,6 @@
    "kma_ny": 112
   },
   {
-   "id": "osm-w543805238",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청북도",
-   "sigungu": "청주시상당구",
-   "address": "",
-   "tel": "",
-   "lat": 36.57715,
-   "lon": 127.53253,
-   "position": "코스영역 중심",
-   "area_ha": 22.8,
-   "website": "",
-   "osm_ids": [
-    "w543805238"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인",
-    "소형(25ha 미만)"
-   ],
-   "elevation_m": 119,
-   "elevation_range_m": [
-    102,
-    155
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 70,
-   "kma_ny": 105
-  },
-  {
    "id": "osm-w514081203",
    "name": "골드나인CC",
    "aliases": [
@@ -18218,7 +17588,7 @@
    "status": "",
    "sido": "충청북도",
    "sigungu": "청주시상당구",
-   "address": "",
+   "address": "충청북도 청원군 낭성면 산성로 1520-71",
    "tel": "",
    "lat": 36.61505,
    "lon": 127.61872,
@@ -18228,11 +17598,12 @@
    "osm_ids": [
     "w514081203"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6430000-302012008000002"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 278,
    "elevation_range_m": [
     258,
@@ -18247,13 +17618,16 @@
    "id": "osm-w513380428",
    "name": "이븐데일CC",
    "aliases": [
-    "EvenDale Golf&Resort"
+    "EvenDale Golf&Resort",
+    "이븐데일 CC"
    ],
-   "type": [],
+   "type": [
+    "회원제"
+   ],
    "status": "",
    "sido": "충청북도",
    "sigungu": "청주시상당구",
-   "address": "",
+   "address": "충청북도 청원군 미원면 대신2길 31",
    "tel": "",
    "lat": 36.6832,
    "lon": 127.60506,
@@ -18263,11 +17637,12 @@
    "osm_ids": [
     "w513380428"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6430000-302012010000002"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 393,
    "elevation_range_m": [
     349,
@@ -18284,11 +17659,13 @@
    "aliases": [
     "Serenity Country Club"
    ],
-   "type": [],
+   "type": [
+    "회원제"
+   ],
    "status": "",
    "sido": "충청북도",
    "sigungu": "청주시서원구",
-   "address": "",
+   "address": "충청북도 청원군 남이면 문곡구절골길 235",
    "tel": "",
    "lat": 36.54724,
    "lon": 127.38908,
@@ -18298,11 +17675,12 @@
    "osm_ids": [
     "w378243002"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6430000-302012007000012"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 144,
    "elevation_range_m": [
     110,
@@ -18312,40 +17690,6 @@
    "choseong": "ㅅㄹㄴㅌ",
    "kma_nx": 67,
    "kma_ny": 105
-  },
-  {
-   "id": "osm-w347466547",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청북도",
-   "sigungu": "청주시청원구",
-   "address": "",
-   "tel": "",
-   "lat": 36.7092,
-   "lon": 127.50569,
-   "position": "코스영역 중심",
-   "area_ha": 38.7,
-   "website": "",
-   "osm_ids": [
-    "w347466547"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 73,
-   "elevation_range_m": [
-    53,
-    86
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 69,
-   "kma_ny": 108
   },
   {
    "id": "osm-w388772671",
@@ -18374,6 +17718,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 96,
    "elevation_range_m": [
     77,
@@ -18388,13 +17733,14 @@
    "id": "osm-w388760235",
    "name": "오창에딘버러컨트리클럽",
    "aliases": [
-    "Ochang Edinburgh Country Club"
+    "Ochang Edinburgh Country Club",
+    "오창에딘버러 CC"
    ],
    "type": [],
    "status": "",
    "sido": "충청북도",
    "sigungu": "청주시청원구",
-   "address": "",
+   "address": "충청북도 청원군 오창읍 두릉유리로 846",
    "tel": "",
    "lat": 36.73434,
    "lon": 127.4277,
@@ -18404,11 +17750,12 @@
    "osm_ids": [
     "w388760235"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6430000-302012009000004"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 139,
    "elevation_range_m": [
     132,
@@ -18422,12 +17769,16 @@
   {
    "id": "osm-w378723983",
    "name": "떼제베 골프장",
-   "aliases": [],
-   "type": [],
+   "aliases": [
+    "올데이 청주떼제베CC(대중형 골프장-36홀)"
+   ],
+   "type": [
+    "비회원제"
+   ],
    "status": "",
    "sido": "충청북도",
    "sigungu": "청주시흥덕구",
-   "address": "",
+   "address": "충청북도 청원군 옥산면 동림2길 149",
    "tel": "",
    "lat": 36.6663,
    "lon": 127.32156,
@@ -18437,11 +17788,12 @@
    "osm_ids": [
     "w378723983"
    ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "인허가미확인"
+   "licence_ids": [
+    "6430000-302012007000004"
    ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
    "elevation_m": 170,
    "elevation_range_m": [
     93,
@@ -18451,40 +17803,6 @@
    "choseong": "ㄸㅈㅂ",
    "kma_nx": 66,
    "kma_ny": 107
-  },
-  {
-   "id": "osm-w347478560",
-   "name": "",
-   "aliases": [],
-   "type": [],
-   "status": "",
-   "sido": "충청북도",
-   "sigungu": "충주시",
-   "address": "",
-   "tel": "",
-   "lat": 37.01648,
-   "lon": 127.89939,
-   "position": "코스영역 중심",
-   "area_ha": 51.1,
-   "website": "",
-   "osm_ids": [
-    "w347478560"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [
-    "이름없음",
-    "인허가미확인"
-   ],
-   "elevation_m": 85,
-   "elevation_range_m": [
-    80,
-    97
-   ],
-   "name_norm": "",
-   "choseong": "",
-   "kma_nx": 76,
-   "kma_ny": 115
   },
   {
    "id": "osm-w378748953",
@@ -18517,6 +17835,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 228,
    "elevation_range_m": [
     182,
@@ -18555,6 +17874,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 171,
    "elevation_range_m": [
     140,
@@ -18593,6 +17913,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 238,
    "elevation_range_m": [
     184,
@@ -18628,6 +17949,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 226,
    "elevation_range_m": [
     201,
@@ -18667,9 +17989,8 @@
     "6430000-302012017000002"
    ],
    "match": "좌표",
-   "review": [
-    "병합확인"
-   ],
+   "review": [],
+   "reviewed": true,
    "elevation_m": 294,
    "elevation_range_m": [
     253,
@@ -18707,6 +18028,7 @@
    ],
    "match": "이름+좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 183,
    "elevation_range_m": [
     177,
@@ -18742,6 +18064,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 357,
    "elevation_range_m": [
     267,
@@ -18783,6 +18106,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 126,
    "elevation_range_m": [
     79,
@@ -18792,41 +18116,6 @@
    "choseong": "ㅅㄱㄴㅅ",
    "kma_nx": 73,
    "kma_ny": 118
-  },
-  {
-   "id": "lic-6430000-302012021000002",
-   "name": "에스엘세레스 올데이리조트",
-   "aliases": [],
-   "type": [
-    "회원제"
-   ],
-   "status": "영업",
-   "sido": "충청북도",
-   "sigungu": "충주시",
-   "address": "충청북도 충주시 앙성면 비내길 189-0",
-   "tel": "",
-   "lat": 37.10847,
-   "lon": 127.78731,
-   "position": "인허가 주소 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "6430000-302012021000002"
-   ],
-   "match": "",
-   "review": [
-    "영역없음"
-   ],
-   "elevation_m": 162,
-   "elevation_range_m": [
-    162,
-    162
-   ],
-   "name_norm": "에스엘세레스올데이",
-   "choseong": "ㅇㅅㅇㅅㄹㅅㅇㄷㅇ",
-   "kma_nx": 74,
-   "kma_ny": 117
   },
   {
    "id": "osm-w1213004519",
@@ -18855,6 +18144,7 @@
    ],
    "match": "이름",
    "review": [],
+   "reviewed": true,
    "elevation_m": 315,
    "elevation_range_m": [
     276,
@@ -18893,6 +18183,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 93,
    "elevation_range_m": [
     70,
@@ -18905,10 +18196,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원CC",
+   "name": "중원GC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원GC"
+    "중원CC"
    ],
    "type": [
     "비회원제"
@@ -18932,6 +18223,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 282,
    "elevation_range_m": [
     231,
@@ -18970,6 +18262,7 @@
    ],
    "match": "좌표",
    "review": [],
+   "reviewed": true,
    "elevation_m": 180,
    "elevation_range_m": [
     153,
