@@ -125,7 +125,8 @@ def load_licences():
             x, y = float(r["CRD_INFO_X"]), float(r["CRD_INFO_Y"]); pt = Point(*TM5174.transform(x, y))
         except (TypeError, ValueError): pass
         addr = r.get("ROAD_NM_ADDR") or r.get("LOTNO_ADDR") or ""
-        out.append(dict(mng=r["MNG_NO"], raw=r["BPLC_NM"], name=nm, norm=normalize(nm), pt=pt, addr=addr, tel=r.get("TELNO") or "",
+        # MNG_NO is unique only within one municipality (OPN_ATMY_GRP_CD)
+        out.append(dict(mng=r["MNG_NO"], uid=f'{r["OPN_ATMY_GRP_CD"]}-{r["MNG_NO"]}', raw=r["BPLC_NM"], name=nm, norm=normalize(nm), pt=pt, addr=addr, tel=r.get("TELNO") or "",
                         kind=TYPE_MAP.get(r.get("DTIL_TPBIZ_NM") or "", ""), status="휴업" if r["SALS_STTS_CD"] == "02" else "영업",
                         opened=r.get("LCPMT_YMD") or ""))
     return out, d.get("fetched", "")
@@ -236,7 +237,7 @@ def main():
                  sido=c["region"][0], sigungu=c["region"][1], address=next((l["addr"] for l in c["lics"] if l["addr"]), ""),
                  tel=next((l["tel"] for l in c["lics"] if l["tel"]), ""),
                  lat=round(c["lat"], 5), lon=round(c["lon"], 5), position="코스영역 중심", area_ha=round(gm.area / 1e4, 1),
-                 website=main_p["website"], osm_ids=sorted(p["osm"] for p in grp), licence_ids=sorted(l["mng"] for l in c["lics"]),
+                 website=main_p["website"], osm_ids=sorted(p["osm"] for p in grp), licence_ids=sorted(l["uid"] for l in c["lics"]),
                  match="+".join(sorted(c["how"])), review=flags), pts)
     # ---- 4) licences with coordinates but no course area in OSM: group records of one club, place at licence point
     left, unresolved = [l for l in rest3 if l["pt"] is not None], [l for l in rest3 if l["pt"] is None]
@@ -248,11 +249,17 @@ def main():
             if not used[j] and left[j]["pt"].distance(l["pt"]) < 2000 and compatible(l["norm"], left[j]["norm"]): g.append(left[j]); used[j] = True
         x = sum(a["pt"].x for a in g) / len(g); y = sum(a["pt"].y for a in g) / len(g); lon, lat = TO_LL.transform(x, y)
         sd, sg = region(lon, lat); name = best_name(g)
-        add(dict(id="lic-" + g[0]["mng"], name=name, aliases=sorted({a["name"] for a in g} - {name}), type=sorted({a["kind"] for a in g if a["kind"]}),
+        add(dict(id="lic-" + g[0]["mng"], _uid="lic-" + g[0]["uid"], name=name, aliases=sorted({a["name"] for a in g} - {name}), type=sorted({a["kind"] for a in g if a["kind"]}),
                  status="휴업" if all(a["status"] == "휴업" for a in g) else "영업", sido=sd, sigungu=sg, address=g[0]["addr"], tel=next((a["tel"] for a in g if a["tel"]), ""),
                  lat=round(lat, 5), lon=round(lon, 5), position="인허가 주소 좌표", area_ha=None, website="", osm_ids=[],
-                 licence_ids=sorted(a["mng"] for a in g), match="", review=["영역없음"]), [(lat, lon)])
+                 licence_ids=sorted(a["uid"] for a in g), match="", review=["영역없음"]), [(lat, lon)])
 
+    counts = {}
+    for r in recs: counts[r["id"]] = counts.get(r["id"], 0) + 1
+    for r in recs:                      # ids stay short unless two municipalities reuse a management number
+        uid = r.pop("_uid", None)
+        if counts[r["id"]] > 1 and uid: r["id"] = uid
+    assert len({r["id"] for r in recs}) == len(recs), "duplicate course ids"
     elev = elevations(samples); i = 0
     for r in recs:
         n = r.pop("_n"); vals = elev[i:i + n]; i += n
@@ -277,7 +284,7 @@ def main():
         for r in recs: w.writerow([("; ".join(r[c]) if isinstance(r[c], list) else r[c]) for c in cols])
     with open(os.path.join(HERE, "unresolved_licences.csv"), "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f); w.writerow(["관리번호", "사업장명", "구분", "주소", "전화"])
-        for l in sorted(unresolved, key=lambda l: l["addr"]): w.writerow([l["mng"], l["raw"], l["kind"], l["addr"], l["tel"]])
+        for l in sorted(unresolved, key=lambda l: l["addr"]): w.writerow([l["uid"], l["raw"], l["kind"], l["addr"], l["tel"]])
     print(json.dumps(meta, ensure_ascii=False))
 
 if __name__ == "__main__":

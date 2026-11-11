@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>골프날씨</title>
+<style>
+:root { --bg:#f4f7f5; --surface:#fff; --surface-2:#ecf1ee; --fg:#14201a; --fg-2:#3a4740; --muted:#64716a; --line:#d8e0dc; --accent:#1c6a55; --accent-ink:#fff; --rain:#2a78d6; }
+@media (prefers-color-scheme: dark) { :root { --bg:#0e1311; --surface:#151b18; --surface-2:#1b2320; --fg:#e3eae6; --fg-2:#bac6bf; --muted:#8b9891; --line:#29332f; --accent:#63c4a3; --accent-ink:#0e1311; --rain:#5a9ff0; color-scheme: dark; } }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif; word-break:keep-all; }
+main { max-width:760px; margin:0 auto; padding:20px max(16px, env(safe-area-inset-left)) 60px max(16px, env(safe-area-inset-right)); display:grid; gap:14px; }
+h1 { font-size:1.4rem; margin:0; } h2 { font-size:1.15rem; margin:0; }
+.note { font-size:13px; color:var(--muted); margin:0; }
+input, select, button { font:inherit; color:inherit; }
+#q { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:10px; background:var(--surface); font-size:1.05rem; }
+ul { list-style:none; margin:0; padding:0; display:grid; gap:4px; }
+#results button { width:100%; text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 12px; cursor:pointer; }
+#results small { color:var(--muted); }
+.card { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px; display:grid; gap:12px; }
+.row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+select { padding:6px 10px; border:1px solid var(--line); border-radius:8px; background:var(--bg); }
+.scroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:13.5px; font-variant-numeric:tabular-nums; }
+th, td { padding:6px 8px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap; }
+th:first-child, td:first-child { text-align:left; }
+th { color:var(--muted); font-weight:500; }
+td.rain { color:var(--rain); font-weight:600; }
+.seg { display:inline-flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+.seg button { border:0; background:var(--bg); padding:5px 12px; cursor:pointer; }
+.seg button[aria-pressed="true"] { background:var(--accent); color:var(--accent-ink); }
+:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>골프날씨 <small style="font-weight:400;color:var(--muted);font-size:.6em">개발 중 미리보기</small></h1>
+  <input id="q" type="search" placeholder="골프장 이름 또는 초성, 예: ㅂㅇㅋㄹㅋ" autocomplete="off" aria-label="골프장 검색">
+  <ul id="results"></ul>
+  <div id="detail"></div>
+  <p class="note" id="meta">예보 자료를 불러오는 중…</p>
+  <p class="note">예보는 참고용이며 실제 날씨와 다를 수 있습니다. 자료: Open-Meteo(DWD, ECMWF, NOAA, UKMO), 기상청. 골프장 위치: 행정안전부 인허가 데이터, © OpenStreetMap contributors.</p>
+</main>
+<script>
+(async function () {
+  "use strict";
+  const $ = id => document.getElementById(id), esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ", DOW = "일월화수목금토";
+  const LABEL = { icon:"ICON", ifs:"ECMWF IFS", aifs:"ECMWF AIFS", gfs:"GFS", ukmo:"UKMO", kma:"기상청 단기예보", blend:"블렌드" };
+  const ORDER = ["icon","blend","ifs","aifs","ukmo","gfs","kma"];
+  let courses = [], meta = null, cur = null, fc = null, model = "icon", step = 3, day = 0;
+  try {
+    [courses, meta] = await Promise.all([fetch("data/courses.json").then(r => r.json()).then(d => d.courses), fetch("data/meta.json").then(r => r.json())]);
+    $("meta").textContent = "골프장 " + courses.length + "곳 · 예보 생성 " + meta.generated.replace("T", " ").slice(0, 16) + " (한국 시간) · 약 3시간마다 갱신";
+  } catch (e) { $("meta").textContent = "예보 자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요."; return; }
+
+  const norm = s => s.toLowerCase().replace(/\s+/g, "");
+  function search(raw) {
+    const q = norm(raw); if (!q) return [];
+    const allCho = [...q].every(c => CHO.includes(c) || /[0-9a-z]/.test(c));
+    const out = [];
+    for (const c of courses) {
+      let s = 0;
+      if (c.norm === q) s = 100; else if (c.norm.startsWith(q)) s = 90; else if (allCho && c.cho.startsWith(q)) s = 80;
+      else if (c.norm.includes(q)) s = 60; else if (allCho && c.cho.includes(q)) s = 50;
+      else if (c.aliases.some(a => norm(a).includes(q))) s = 55;
+      else if ((c.sido + c.sigungu).includes(q)) s = 20;
+      if (s) out.push([s, c]);
+    }
+    return out.sort((a, b) => b[0] - a[0] || a[1].name.localeCompare(b[1].name, "ko")).slice(0, 8).map(x => x[1]);
+  }
+  $("q").addEventListener("input", () => {
+    $("results").innerHTML = search($("q").value).map(c => '<li><button data-id="' + esc(c.id) + '">' + esc(c.name) + ' <small>' + esc(c.sido + " " + c.sigungu) + '</small></button></li>').join("");
+  });
+  $("results").addEventListener("click", async ev => {
+    const b = ev.target.closest("button[data-id]"); if (!b) return;
+    cur = courses.find(c => c.id === b.dataset.id); $("results").innerHTML = ""; $("q").value = cur.name; day = 0;
+    $("detail").innerHTML = '<p class="note">불러오는 중…</p>';
+    try { fc = await fetch("data/fc/" + encodeURIComponent(cur.id) + ".json").then(r => { if (!r.ok) throw 0; return r.json(); }); }
+    catch (e) { $("detail").innerHTML = '<p class="note">이 골프장의 예보를 불러오지 못했습니다.</p>'; return; }
+    if (!fc.models[model]) model = "blend";
+    render();
+  });
+
+  const dirName = d => d == null ? "" : ["북","북동","동","남동","남","남서","서","북서"][Math.round(d / 45) % 8];
+  const icon = (wc, p) => (p != null && p >= 0.1) || (wc >= 51 && wc < 70) || (wc >= 80 && wc < 83) ? "🌧" : wc >= 71 && wc < 78 ? "🌨" : wc >= 95 ? "⛈" : wc === 0 ? "☀" : wc <= 2 ? "⛅" : "☁";
+  const f1 = v => v == null ? "—" : v.toFixed(1), f0 = v => v == null ? "—" : Math.round(v);
+  function daily(m) {
+    const days = {};
+    fc.time.forEach((t, i) => { const d = t.slice(0, 10); (days[d] = days[d] || []).push(i); });
+    return Object.entries(days).map(([d, idx]) => {
+      const pick = k => idx.map(i => m[k] ? m[k][i] : null).filter(v => v != null);
+      const t = pick("t"), p = pick("p"), w = pick("w"), dayIdx = idx.filter(i => { const h = +fc.time[i].slice(11, 13); return h >= 6 && h <= 18; });
+      const wcs = dayIdx.map(i => m.wc ? m.wc[i] : null).filter(v => v != null), mid = wcs.length ? wcs.slice().sort((a, b) => a - b)[wcs.length >> 1] : null;
+      return { d, n: t.length, tmin: t.length ? Math.min(...t) : null, tmax: t.length ? Math.max(...t) : null, p: p.length ? p.reduce((a, b) => a + b, 0) : null, w: w.length ? Math.max(...w) : null, wc: mid };
+    }).filter(x => x.n >= 12);
+  }
+  function render() {
+    const m = fc.models[model], ds = daily(m); if (day >= ds.length) day = 0;
+    const date = ds[day] ? ds[day].d : null;
+    let rows = "";
+    if (date) fc.time.forEach((t, i) => {
+      if (t.slice(0, 10) !== date) return; const h = +t.slice(11, 13); if (h % step) return;
+      let p = null; for (let k = i; k < i + step && k < fc.time.length; k++) if (m.p[k] != null) p = (p || 0) + m.p[k];
+      const g = m.g ? m.g[i] : null, v = fc.rain_votes && fc.rain_votes[i];
+      if (m.t[i] == null) return;
+      rows += '<tr><td>' + String(h).padStart(2, "0") + '시 ' + icon(m.wc ? m.wc[i] : null, p) + '</td><td>' + f1(m.t[i]) + '°</td><td class="' + (p >= 0.1 ? "rain" : "") + '">' + (p == null ? "—" : p.toFixed(1)) + '</td><td>' + f1(m.w[i]) + ' ' + dirName(m.wd[i]) + '</td><td>' + f1(g) + '</td><td>' + (v ? v[0] + "/" + v[1] : "—") + '</td></tr>';
+    });
+    const init = meta.models[model] && meta.models[model].init;
+    $("detail").innerHTML = '<div class="card"><div><h2>' + esc(cur.name) + '</h2><p class="note">' + esc(cur.sido + " " + cur.sigungu) + ' · 해발 ' + cur.elev + ' m' + (cur.type.length ? " · " + esc(cur.type.join("·")) : "") + '</p></div>' +
+      '<div class="row"><label>모델 <select id="model">' + ORDER.filter(k => fc.models[k]).map(k => '<option value="' + k + '"' + (k === model ? " selected" : "") + '>' + LABEL[k] + '</option>').join("") + '</select></label>' +
+      '<span class="note">' + (init ? "실행 " + esc(init.replace("T", " ").slice(0, 16)) + (init.endsWith("Z") ? " UTC" : " KST") : "여러 모델의 평균·중앙값") + '</span></div>' +
+      '<div class="scroll"><table><thead><tr><th>날짜</th><th>최저/최고</th><th>강수 mm</th><th>최대 풍속 m/s</th></tr></thead><tbody>' +
+      ds.map((x, i) => '<tr data-day="' + i + '" style="cursor:pointer' + (i === day ? ";background:var(--surface-2)" : "") + '"><td>' + x.d.slice(5).replace("-", "/") + ' ' + DOW[new Date(x.d + "T12:00:00Z").getUTCDay()] + ' ' + icon(x.wc, null) + '</td><td>' + f0(x.tmin) + '° / ' + f0(x.tmax) + '°</td><td class="' + (x.p >= 1 ? "rain" : "") + '">' + (x.p == null ? "—" : x.p.toFixed(1)) + '</td><td>' + f1(x.w) + '</td></tr>').join("") + '</tbody></table></div>' +
+      '<div class="row"><b>' + (date ? date.slice(5).replace("-", "/") : "") + ' 시간별</b><span class="seg"><button data-step="1" aria-pressed="' + (step === 1) + '">1시간</button><button data-step="3" aria-pressed="' + (step === 3) + '">3시간</button></span></div>' +
+      '<div class="scroll"><table><thead><tr><th>시각</th><th>기온</th><th>강수 mm</th><th>바람 m/s</th><th>돌풍</th><th>비 예보 모델</th></tr></thead><tbody>' + (rows || '<tr><td colspan="6">이 모델은 이 날짜의 예보가 없습니다.</td></tr>') + '</tbody></table></div>' +
+      '<p class="note">날짜를 누르면 그날의 시간별 예보가 나옵니다. "비 예보 모델"은 5개 모델 중 그 시각에 0.1 mm 이상 비를 예보한 수입니다.</p></div>';
+  }
+  $("detail").addEventListener("change", ev => { if (ev.target.id === "model") { model = ev.target.value; render(); } });
+  $("detail").addEventListener("click", ev => {
+    const s = ev.target.closest("button[data-step]"); if (s) { step = +s.dataset.step; render(); return; }
+    const d = ev.target.closest("tr[data-day]"); if (d) { day = +d.dataset.day; render(); }
+  });
+})();
+</script>
+</body>
+</html>

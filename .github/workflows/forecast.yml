@@ -1,0 +1,51 @@
+name: 예보 갱신과 배포
+
+on:
+  workflow_dispatch:
+  # 예약 실행은 예보 원천을 Open-Meteo 오픈데이터(AWS)로 바꾼 뒤 켠다. docs/MVP.md 8장 참고.
+  # 기상청 단기예보 발표(02·05·…·23시 KST) 25분 뒤 = UTC 17·20·23·02·05·08·11·14시 25분
+  # schedule:
+  #   - cron: "25 2,5,8,11,14,17,20,23 * * *"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 예보 생성
+        env:
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
+        run: python3 pipeline/build_forecasts.py --out site/data
+      - name: 예보 보관본 만들기
+        run: tar -czf forecast-archive.tar.gz -C site/data .
+      - name: 예보 보관 (90일)
+        uses: actions/upload-artifact@v4
+        with:
+          name: forecast-${{ github.run_id }}
+          path: forecast-archive.tar.gz
+          retention-days: 90
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
