@@ -105,3 +105,5 @@ input[type=range] { width:100%; accent-color:var(--accent); }
 .msearch { position:relative; z-index:10; display:grid; gap:6px; }
 .msearch .list:empty { display:none; }
 button.item { cursor:pointer; }
+.prose > * { min-width:0; }
+.prose h3 { font-size:13px; color:var(--fg-2); }

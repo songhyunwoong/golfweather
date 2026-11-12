@@ -1,0 +1,394 @@
+[
+{
+"stn": 100,
+"name": "DAEGWALLYEONG",
+"lat": 37.6833,
+"lon": 128.7167,
+"elev": 844.0,
+"region": "강원"
+},
+{
+"stn": 101,
+"name": "CHUNCHEON",
+"lat": 37.9,
+"lon": 127.7333,
+"elev": 78.0,
+"region": "강원"
+},
+{
+"stn": 105,
+"name": "GANGNEUNG",
+"lat": 37.7709,
+"lon": 128.8681,
+"elev": 26.1,
+"region": "강원"
+},
+{
+"stn": 106,
+"name": "DONGHAERADAR",
+"lat": 37.5,
+"lon": 129.13,
+"elev": 37.0,
+"region": "강원"
+},
+{
+"stn": 112,
+"name": "INCHEON",
+"lat": 37.4667,
+"lon": 126.6333,
+"elev": 70.0,
+"region": "수도권"
+},
+{
+"stn": 113,
+"name": "INCHEON INT'L AIRPORT",
+"lat": 37.4667,
+"lon": 126.4333,
+"elev": 7.0,
+"region": "수도권"
+},
+{
+"stn": 114,
+"name": "WONJU",
+"lat": 37.33,
+"lon": 127.95,
+"elev": 151.0,
+"region": "강원"
+},
+{
+"stn": 116,
+"name": "GWANAKSAN",
+"lat": 37.4333,
+"lon": 126.9667,
+"elev": 637.0,
+"region": "수도권"
+},
+{
+"stn": 119,
+"name": "SUWON",
+"lat": 37.2667,
+"lon": 126.9833,
+"elev": 35.0,
+"region": "수도권"
+},
+{
+"stn": 126,
+"name": "MANGILSAN",
+"lat": 36.9333,
+"lon": 126.45,
+"elev": 84.0,
+"region": "충청"
+},
+{
+"stn": 127,
+"name": "A511/PYEONGTAEK",
+"lat": 36.97,
+"lon": 127.95,
+"elev": 116.0,
+"region": "충청"
+},
+{
+"stn": 129,
+"name": "SEOSAN",
+"lat": 36.7667,
+"lon": 126.5,
+"elev": 27.0,
+"region": "충청"
+},
+{
+"stn": 130,
+"name": "ULJIN",
+"lat": 37.0,
+"lon": 129.4167,
+"elev": 51.2,
+"region": "영남"
+},
+{
+"stn": 131,
+"name": "CHEONGJU",
+"lat": 36.63,
+"lon": 127.45,
+"elev": 59.0,
+"region": "충청"
+},
+{
+"stn": 135,
+"name": "CHUPUNGNYEONG",
+"lat": 36.2167,
+"lon": 127.9833,
+"elev": 245.0,
+"region": "영남"
+},
+{
+"stn": 136,
+"name": "ANDONG",
+"lat": 36.5667,
+"lon": 128.7,
+"elev": 141.6,
+"region": "영남"
+},
+{
+"stn": 137,
+"name": "SANGJU",
+"lat": 36.4,
+"lon": 128.15,
+"elev": 100.0,
+"region": "영남"
+},
+{
+"stn": 138,
+"name": "POHANG",
+"lat": 36.0333,
+"lon": 129.3833,
+"elev": 3.6,
+"region": "영남"
+},
+{
+"stn": 140,
+"name": "GUNSAN",
+"lat": 36.0023,
+"lon": 126.7635,
+"elev": 26.9,
+"region": "호남"
+},
+{
+"stn": 144,
+"name": "OSUNGSAN",
+"lat": 36.0,
+"lon": 126.7833,
+"elev": 227.0,
+"region": "호남"
+},
+{
+"stn": 145,
+"name": "CHEONAN",
+"lat": 36.7625,
+"lon": 127.2928,
+"elev": 81.5,
+"region": "충청"
+},
+{
+"stn": 145,
+"name": "CHEONAN",
+"lat": 36.77,
+"lon": 127.12,
+"elev": 22.0,
+"region": "충청"
+},
+{
+"stn": 146,
+"name": "JEONJU",
+"lat": 35.8333,
+"lon": 127.1167,
+"elev": 62.6,
+"region": "호남"
+},
+{
+"stn": 147,
+"name": "GYERYONGDAE",
+"lat": 36.3,
+"lon": 127.2167,
+"elev": 145.0,
+"region": "충청"
+},
+{
+"stn": 148,
+"name": "MYONBONGSAN",
+"lat": 36.1833,
+"lon": 129.0,
+"elev": 1133.0,
+"region": "영남"
+},
+{
+"stn": 149,
+"name": "SEOSAN AB",
+"lat": 36.6833,
+"lon": 126.4833,
+"elev": 12.0,
+"region": "충청"
+},
+{
+"stn": 150,
+"name": "BORYEONG",
+"lat": 36.3333,
+"lon": 126.55,
+"elev": 18.0,
+"region": "충청"
+},
+{
+"stn": 151,
+"name": "ULSAN AIRPORT",
+"lat": 35.5833,
+"lon": 129.35,
+"elev": 13.0,
+"region": "영남"
+},
+{
+"stn": 154,
+"name": "GUMI",
+"lat": 36.1167,
+"lon": 128.3167,
+"elev": 47.0,
+"region": "영남"
+},
+{
+"stn": 155,
+"name": "CHANGWON",
+"lat": 35.1702,
+"lon": 128.5729,
+"elev": 36.8,
+"region": "영남"
+},
+{
+"stn": 156,
+"name": "GWANGJU",
+"lat": 35.1667,
+"lon": 126.9,
+"elev": 74.0,
+"region": "호남"
+},
+{
+"stn": 157,
+"name": "GEOCHANG",
+"lat": 35.6667,
+"lon": 127.9167,
+"elev": 225.9,
+"region": "영남"
+},
+{
+"stn": 159,
+"name": "BUSAN",
+"lat": 35.1,
+"lon": 129.0333,
+"elev": 71.0,
+"region": "영남"
+},
+{
+"stn": 160,
+"name": "GUDEOKSAN",
+"lat": 35.1167,
+"lon": 129.0,
+"elev": 532.0,
+"region": "영남"
+},
+{
+"stn": 162,
+"name": "TONGYEONG",
+"lat": 34.85,
+"lon": 128.4333,
+"elev": 33.3,
+"region": "영남"
+},
+{
+"stn": 165,
+"name": "MOKPO",
+"lat": 34.8167,
+"lon": 126.3833,
+"elev": 39.0,
+"region": "호남"
+},
+{
+"stn": 168,
+"name": "YEOSU",
+"lat": 34.7333,
+"lon": 127.75,
+"elev": 67.0,
+"region": "호남"
+},
+{
+"stn": 170,
+"name": "WANDO",
+"lat": 34.4,
+"lon": 126.7,
+"elev": 35.0,
+"region": "호남"
+},
+{
+"stn": 171,
+"name": "JEONGEUP",
+"lat": 35.55,
+"lon": 126.8667,
+"elev": 39.0,
+"region": "호남"
+},
+{
+"stn": 172,
+"name": "GOCHANG",
+"lat": 35.3489,
+"lon": 126.5989,
+"elev": 55.0,
+"region": "호남"
+},
+{
+"stn": 173,
+"name": "NAMWON",
+"lat": 35.4167,
+"lon": 127.4,
+"elev": 132.5,
+"region": "호남"
+},
+{
+"stn": 174,
+"name": "SUNCHEON",
+"lat": 35.0167,
+"lon": 127.3667,
+"elev": 166.9,
+"region": "호남"
+},
+{
+"stn": 174,
+"name": "SUNCHEON",
+"lat": 35.07,
+"lon": 127.23,
+"elev": 75.0,
+"region": "호남"
+},
+{
+"stn": 175,
+"name": "JINDO RADAR",
+"lat": 34.4667,
+"lon": 126.3333,
+"elev": 478.0,
+"region": "호남"
+},
+{
+"stn": 177,
+"name": "HONGSUNG",
+"lat": 36.65,
+"lon": 126.6833,
+"elev": 25.6,
+"region": "충청"
+},
+{
+"stn": 184,
+"name": "JEJU",
+"lat": 33.5167,
+"lon": 126.5333,
+"elev": 23.0,
+"region": "제주"
+},
+{
+"stn": 185,
+"name": "GOSAN",
+"lat": 33.2938,
+"lon": 126.1628,
+"elev": 70.9,
+"region": "제주"
+},
+{
+"stn": 188,
+"name": "SEONGSAN",
+"lat": 33.3833,
+"lon": 126.8667,
+"elev": 18.0,
+"region": "제주"
+},
+{
+"stn": 189,
+"name": "SEOGWIPO",
+"lat": 33.25,
+"lon": 126.5667,
+"elev": 51.0,
+"region": "제주"
+}
+]

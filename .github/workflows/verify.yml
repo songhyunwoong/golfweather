@@ -1,0 +1,39 @@
+name: 예보 검증과 신뢰도 갱신
+
+on:
+  schedule:
+    - cron: "40 19 * * *"        # 매일 04:40 KST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: pipeline/requirements.txt
+      - run: pip install -r pipeline/requirements.txt
+      - name: 최근 16일 초기화분 검증
+        env:
+          KMA_APIHUB_KEY: ${{ secrets.KMA_APIHUB_KEY }}
+        run: python3 pipeline/verify.py --days 16
+      - name: 신뢰도 점수 계산
+        run: python3 pipeline/make_reliability.py
+      - name: 결과 저장
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/verification/daily site/reliability.json pipeline/cache
+          git diff --cached --quiet || git commit -m "Update forecast verification ($(date -u +%F))"
+          git push

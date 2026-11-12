@@ -51,10 +51,10 @@ def variables(m):
     return v
 
 # ------------------------------------------------------------------ grid cells
-def select_cells(domain, courses, run_path):
-    """course id -> {idx:[y,x], z: model terrain height}. Cached in pipeline/cache."""
+def select_cells(domain, courses, run_path, tag=""):
+    """course id -> {idx:[y,x], z: model terrain height}. Cached in pipeline/cache (`tag` keeps other point sets apart)."""
     os.makedirs(CACHE, exist_ok=True)
-    path = os.path.join(CACHE, f"cells_{domain}.json")
+    path = os.path.join(CACHE, f"cells_{tag}{domain}.json")
     cells = json.load(open(path)) if os.path.exists(path) else {}
     key = lambda c: f'{c["lat"]:.5f},{c["lon"]:.5f},{c["elevation_m"]}'
     todo = [c for c in courses if cells.get(c["id"], {}).get("key") != key(c)]
