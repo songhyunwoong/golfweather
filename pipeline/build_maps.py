@@ -1,7 +1,8 @@
 """Gridded weather over Korea for the map screen.
 
 For each map model, reads the Korea box of the newest runs from the Open-Meteo open-data bucket, puts it on a
-3-hourly time axis (now .. +7 days) and regrids to 0.1 deg. Output (default ../site/data/map):
+time axis that is hourly for the first 72 h and 3-hourly up to +7 days, and regrids to 0.1 deg. Precipitation in
+each frame is the sum over that frame's own step (1 h or 3 h); the app adds hourly frames up when it shows 3 h. Output (default ../site/data/map):
   {model}.json                  grid, times, value encoding
   {model}_{t|p|u|v}.png         all time steps stacked vertically; value = (R*256 + G) * scale + offset, 65535 = no data
 
@@ -19,7 +20,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 KST = dt.timezone(dt.timedelta(hours=9))
 WEST, EAST, SOUTH, NORTH, STEP = 124.0, 132.0, 32.5, 39.0, 0.1
 LONS = np.round(np.arange(WEST, EAST + 1e-6, STEP), 4); LATS = np.round(np.arange(NORTH, SOUTH - 1e-6, -STEP), 4)   # row 0 = north
-STEP_H, DAYS = 3, 7
+STEP_H, DAYS, HOURLY_H = 3, 7, 72
 ENC = {"t": (0.01, -60.0), "p": (0.01, 0.0), "u": (0.01, -100.0), "v": (0.01, -100.0)}     # value = raw * scale + offset
 VARS = {"t": ("temperature_2m", "inst"), "p": ("precipitation", "sum"), "u": ("wind_u_component_10m", "inst"), "v": ("wind_v_component_10m", "inst")}
 LABEL = {"icon": "DWD ICON", "ifs": "ECMWF IFS", "gfs": "NCEP GFS"}
@@ -83,12 +84,15 @@ def build_model(key, axis_h, out_dir, log=print):
             h = om.to_hourly(axis_h, tt, vals, kind)
             merged = np.where(np.isnan(merged), h, merged)
         fields[k] = merged
-    # hourly -> 3-hourly: instantaneous values at the step, precipitation summed over the step
-    idx = np.arange(STEP_H - 1, len(axis_h), STEP_H)
+    # frames: hourly up to HOURLY_H, then 3-hourly. Instantaneous values at the frame time, precipitation summed over the frame's step
+    base = STEP_H - 1                                       # index of the start time in axis_h
+    offs = list(range(0, HOURLY_H + 1)) + list(range(HOURLY_H + STEP_H, 24 * DAYS + 1, STEP_H))
+    steps = [1] * (HOURLY_H + 1) + [STEP_H] * (len(offs) - HOURLY_H - 1)
+    idx = np.array([base + o for o in offs])
     times = [dt.datetime.fromtimestamp(int(axis_h[i]), KST).strftime("%Y-%m-%dT%H:%M") for i in idx]
     out = {}
     for k, a in fields.items():
-        if k == "p": s = np.stack([a[:, i - STEP_H + 1:i + 1].sum(axis=1) for i in idx], axis=1)      # NaN if any hour is missing
+        if k == "p": s = np.stack([a[:, i - st + 1:i + 1].sum(axis=1) for i, st in zip(idx, steps)], axis=1)      # NaN if any hour is missing
         else: s = a[:, idx]
         g = regrid(rows, s)                                                                    # [ny, nx, T]
         scale, off = ENC[k]; raw = np.round((g - off) / scale)
@@ -100,7 +104,7 @@ def build_model(key, axis_h, out_dir, log=print):
         out[k] = dict(file=f"{key}_{k}.png", scale=scale, offset=off, valid=[bool((raw[:, :, i] != 65535).mean() > 0.9) for i in range(len(times))])
     ok = [i for i in range(len(times)) if out["t"]["valid"][i]]
     meta = dict(model=key, label=LABEL.get(key, key), init=runs[0][1].strftime("%Y-%m-%dT%H:%MZ"), west=WEST, east=EAST, south=SOUTH, north=NORTH, step=STEP,
-                nx=len(LONS), ny=len(LATS), step_hours=STEP_H, times=times, last_valid=(ok[-1] if ok else -1), vars=out)
+                nx=len(LONS), ny=len(LATS), times=times, step_h=steps, last_valid=(ok[-1] if ok else -1), vars=out)
     json.dump(meta, open(os.path.join(out_dir, f"{key}.json"), "w"), separators=(",", ":"))
     log(f"  map {key}: cells {N} runs {len(runs)} steps {len(times)} valid to {times[ok[-1]] if ok else None} {time.time() - t0:.0f}s")
     return meta

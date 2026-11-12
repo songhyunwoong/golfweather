@@ -269,7 +269,7 @@
   const LAYERS = {
     p: { label: "강수", unit: "mm/3시간", stepped: true, stops: [[0.1, "#b9dcff"], [0.5, "#7fbcf5"], [1, "#4a97e8"], [2, "#2a78d6"], [5, "#1f55b5"], [10, "#5b3fb5"], [20, "#8e2fa8"], [40, "#c0267e"]] },
     t: { label: "기온", unit: "°C", stops: [[-15, "#2b3f9e"], [-5, "#4f8fd6"], [0, "#9fd0ea"], [5, "#d9eef0"], [10, "#f3f1d5"], [15, "#f6d98a"], [20, "#f1a652"], [25, "#e36a35"], [30, "#c6352b"], [35, "#8f1a2b"]] },
-    w: { label: "바람", unit: "m/s", stops: [[0, "#f2f7f5"], [2, "#cfe8dc"], [4, "#9fd3bd"], [6, "#63b99a"], [8, "#2f9c86"], [10, "#1f7f8f"], [14, "#2a5d9c"], [18, "#4b3a94"], [24, "#6b2380"]] }
+    w: { label: "바람", unit: "m/s", stepped: true, stops: [[2, "#d9f0e3"], [4, "#a3dcb8"], [6, "#f2e37c"], [8, "#f5b54d"], [10, "#ee7f3d"], [14, "#d8473c"], [18, "#a3257c"], [24, "#5c1b8c"]] }
   };
   const hex = h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
   Object.values(LAYERS).forEach(l => l.rgb = l.stops.map(([v, c]) => [v, hex(c)]));
@@ -279,7 +279,7 @@
     if (v <= st[0][0]) return st[0][1]; if (v >= st[st.length - 1][0]) return st[st.length - 1][1];
     for (let i = 1; i < st.length; i++) if (v <= st[i][0]) { const f = (v - st[i - 1][0]) / (st[i][0] - st[i - 1][0]), a = st[i - 1][1], b = st[i][1]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
   }
-  const M = { map: null, model: store.get("mapModel", "icon"), layer: store.get("mapLayer", "p"), ti: 0, meta: null, data: {}, cache: new Map(), overlay: null, timer: null, raf: null, parts: [], pcanvas: null, alive: false };
+  const M = { map: null, model: store.get("mapModel", "icon"), layer: store.get("mapLayer", "p"), ti: 0, fi: 0, step: store.get("mapStep", 3), frames: [], pidx: [0], meta: null, data: {}, cache: new Map(), overlay: null, timer: null, raf: null, parts: [], pcanvas: null, alive: false };
   function decodePng(url, meta, v) {
     return new Promise((res, rej) => { const im = new Image(); im.onload = () => {
       const c = document.createElement("canvas"); c.width = im.width; c.height = im.height; const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(im, 0, 0);
@@ -299,7 +299,25 @@
     const x0 = Math.min(meta.nx - 2, Math.floor(fx)), y0 = Math.min(meta.ny - 2, Math.floor(fy)), ax = fx - x0, ay = fy - y0, o = ti * meta.nx * meta.ny + y0 * meta.nx + x0;
     return (arr[o] * (1 - ax) + arr[o + 1] * ax) * (1 - ay) + (arr[o + meta.nx] * (1 - ax) + arr[o + meta.nx + 1] * ax) * ay;
   }
-  const fieldAt = (k, lat, lon) => k === "w" ? Math.hypot(sample(M.data.u, M.meta, M.ti, lat, lon), sample(M.data.v, M.meta, M.ti, lat, lon)) : sample(M.data[k], M.meta, M.ti, lat, lon);
+  function fieldAt(k, lat, lon) {
+    if (k === "w") return Math.hypot(sample(M.data.u, M.meta, M.ti, lat, lon), sample(M.data.v, M.meta, M.ti, lat, lon));
+    if (k === "p") { let s = 0; for (const i of M.pidx) s += sample(M.data.p, M.meta, i, lat, lon); return s; }      // 3 h view adds up hourly frames
+    return sample(M.data[k], M.meta, M.ti, lat, lon);
+  }
+  // Frames for the chosen step. 1 h: every stored frame (hourly for 3 days, 3-hourly after). 3 h: frames on 3 h marks,
+  // with the precipitation frames that make up the preceding 3 h.
+  function buildFrames() {
+    const m = M.meta, t = m.times.map(x => Date.parse(x + ":00+09:00")), out = [];
+    for (let i = 0; i <= m.last_valid; i++) {
+      if (M.step === 1) { out.push({ i, pidx: [i], span: m.step_h[i] }); continue; }
+      if (new Date(t[i] + 9 * 3600e3).getUTCHours() % 3) continue;
+      const pidx = []; for (let k = i; k >= 0 && t[k] > t[i] - 3 * 3600e3; k--) pidx.push(k);
+      const covered = pidx.reduce((a, k) => a + m.step_h[k], 0);
+      if (covered === 3) out.push({ i, pidx, span: 3 });
+    }
+    M.frames = out; M.fi = Math.max(0, Math.min(M.fi, out.length - 1)); setFrame();
+  }
+  function setFrame() { const f = M.frames[M.fi]; if (f) { M.ti = f.i; M.pidx = f.pidx; } }
   function drawField() {
     const m = M.meta, layer = LAYERS[M.layer], W = m.nx * 5, merc = la => Math.log(Math.tan(Math.PI / 4 + la * Math.PI / 360));
     const mN = merc(m.north), mS = merc(m.south), H = Math.round(W * (mN - mS) / ((m.east - m.west) * Math.PI / 180));
@@ -319,48 +337,48 @@
   function drawMapUi() {
     if (!M.alive || !M.meta) return;
     drawField();
-    $("#mt-label").textContent = mapTimeLabel() + (M.layer === "p" ? " · 직전 3시간 합계" : "");
-    $("#mt").value = M.ti; $("#mt").max = M.meta.last_valid;
+    const f = M.frames[M.fi] || { span: 3 };
+    $("#mt-label").textContent = mapTimeLabel() + (M.layer === "p" ? " · 직전 " + f.span + "시간 합계" : "");
+    $("#mt").max = M.frames.length - 1; $("#mt").value = M.fi;
+    $("#m-stepnote").hidden = !(M.step === 1 && f.span > 1);
+    document.querySelectorAll("[data-mstep]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.mstep === M.step));
     $("#m-run").textContent = M.meta.label + " · " + initLabel(M.meta.init) + " 실행";
     const l = LAYERS[M.layer];
-    $("#m-legend").innerHTML = '<span class="small muted">' + l.label + " " + l.unit + "</span>" + l.stops.map(([v, c]) => '<span class="lg"><i style="background:' + c + '"></i>' + v + "</span>").join("");
+    $("#m-legend").innerHTML = '<span class="small muted">' + l.label + " " + (M.layer === "p" ? "mm/" + f.span + "시간" : l.unit) + "</span>" + l.stops.map(([v, c]) => '<span class="lg"><i style="background:' + c + '"></i>' + v + "</span>").join("");
     document.querySelectorAll("[data-mlayer]").forEach(b => b.setAttribute("aria-pressed", b.dataset.mlayer === M.layer));
     document.querySelectorAll("[data-mmodel]").forEach(b => b.setAttribute("aria-pressed", b.dataset.mmodel === M.model));
     if (M.probe) probe(M.probe);
-    M.parts = [];
+    drawWind();
   }
   function probe(ll) {
     M.probe = ll; const t = fieldAt("t", ll.lat, ll.lng), p = fieldAt("p", ll.lat, ll.lng), u = sample(M.data.u, M.meta, M.ti, ll.lat, ll.lng), v = sample(M.data.v, M.meta, M.ti, ll.lat, ll.lng);
-    $("#m-probe").innerHTML = Number.isNaN(t) ? "지도 범위 밖입니다." : "<b>" + mapTimeLabel() + "</b> 고른 지점 · 기온 " + fmt(t, 1) + "° · 강수 " + fmt(p, 1) + " mm/3시간 · 바람 " + dirName((Math.atan2(-u, -v) * 180 / Math.PI + 360) % 360) + " " + fmt(Math.hypot(u, v), 1) + " m/s";
+    $("#m-probe").innerHTML = Number.isNaN(t) ? "지도 범위 밖입니다." : "<b>" + mapTimeLabel() + "</b> 고른 지점 · 기온 " + fmt(t, 1) + "° · 강수 " + fmt(p, 1) + " mm/" + (M.frames[M.fi] ? M.frames[M.fi].span : 3) + "시간 · 바람 " + dirName((Math.atan2(-u, -v) * 180 / Math.PI + 360) % 360) + " " + fmt(Math.hypot(u, v), 1) + " m/s";
     if (!M.pin) M.pin = window.L.circleMarker(ll, { radius: 6, color: "#14201a", weight: 2, fillColor: "#fff", fillOpacity: 1, interactive: false }).addTo(M.map); else M.pin.setLatLng(ll);
   }
-  function animate() {               // wind particles, drawn in container pixels and reset whenever the map moves
-    if (!M.alive) return;
-    M.raf = requestAnimationFrame(animate);
-    const cv = M.pcanvas, map = M.map; if (!cv || !M.meta) return;
-    const x = cv.getContext("2d"), w = cv.width, h = cv.height;
-    if (M.layer !== "w" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) { if (M.parts.length || M.dirty) { x.clearRect(0, 0, w, h); M.parts = []; M.dirty = false; } return; }
-    const dpr = cv.width / cv.clientWidth, N = Math.round(cv.clientWidth * cv.clientHeight / 220), b = map.getBounds(), speed = 0.028 * Math.pow(1.6, map.getZoom() - 7);
-    while (M.parts.length < N) M.parts.push({ lat: b.getSouth() + Math.random() * (b.getNorth() - b.getSouth()), lng: b.getWest() + Math.random() * (b.getEast() - b.getWest()), age: Math.random() * 60 });
-    x.globalCompositeOperation = "destination-in"; x.fillStyle = "rgba(0,0,0,0.9)"; x.fillRect(0, 0, w, h); x.globalCompositeOperation = "source-over";
-    x.strokeStyle = "rgba(20,32,26,0.7)"; x.lineWidth = 1.1 * dpr; x.lineCap = "round"; x.beginPath(); M.dirty = true;
-    for (const p of M.parts) {
-      const u = sample(M.data.u, M.meta, M.ti, p.lat, p.lng), v = sample(M.data.v, M.meta, M.ti, p.lat, p.lng);
-      if (Number.isNaN(u) || p.age++ > 70) { p.lat = b.getSouth() + Math.random() * (b.getNorth() - b.getSouth()); p.lng = b.getWest() + Math.random() * (b.getEast() - b.getWest()); p.age = 0; continue; }
-      const a = map.latLngToContainerPoint([p.lat, p.lng]); const nx = a.x + u * speed * 8, ny = a.y - v * speed * 8;
-      x.moveTo(a.x * dpr, a.y * dpr); x.lineTo(nx * dpr, ny * dpr);
-      const ll = map.containerPointToLatLng([nx, ny]); p.lat = ll.lat; p.lng = ll.lng;
-      if (nx < 0 || ny < 0 || nx > cv.clientWidth || ny > cv.clientHeight) p.age = 999;
+  function drawWind() {              // wind layer: arrows on a screen grid, length and number show the speed
+    const cv = M.pcanvas, map = M.map; if (!cv || !map || !M.meta) return;
+    const x = cv.getContext("2d"), dpr = cv.width / cv.clientWidth; x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cv.width, cv.height);
+    if (M.layer !== "w") return;
+    x.setTransform(dpr, 0, 0, dpr, 0, 0); x.lineCap = "round"; x.lineJoin = "round"; x.font = "600 11px system-ui, sans-serif"; x.textAlign = "center"; x.textBaseline = "middle";
+    const gap = 52, W = cv.clientWidth, H = cv.clientHeight;
+    for (let py = gap / 2; py < H; py += gap) for (let px = gap / 2; px < W; px += gap) {
+      const ll = map.containerPointToLatLng([px, py]), u = sample(M.data.u, M.meta, M.ti, ll.lat, ll.lng), v = sample(M.data.v, M.meta, M.ti, ll.lat, ll.lng);
+      if (Number.isNaN(u)) continue;
+      const sp = Math.hypot(u, v), len = Math.min(30, 9 + sp * 2.2), ang = Math.atan2(u, v);     // direction the wind blows towards, clockwise from north
+      x.save(); x.translate(px, py - 6); x.rotate(ang);
+      const shaft = () => { x.beginPath(); x.moveTo(0, len / 2); x.lineTo(0, -len / 2); x.moveTo(-4.5, -len / 2 + 5.5); x.lineTo(0, -len / 2); x.lineTo(4.5, -len / 2 + 5.5); x.stroke(); };
+      x.strokeStyle = "rgba(255,255,255,0.95)"; x.lineWidth = 4.6; shaft(); x.strokeStyle = "#14201a"; x.lineWidth = sp >= 8 ? 2.6 : 2; shaft(); x.restore();
+      const txt = sp.toFixed(sp < 10 ? 1 : 0);
+      x.strokeStyle = "rgba(255,255,255,0.95)"; x.lineWidth = 3.2; x.strokeText(txt, px, py + 15); x.fillStyle = "#14201a"; x.fillText(txt, px, py + 15);
     }
-    x.stroke();
   }
   function stopMap() {
-    M.alive = false; if (M.timer) clearInterval(M.timer); if (M.raf) cancelAnimationFrame(M.raf); M.timer = M.raf = null;
-    if (M.map) { M.map.remove(); M.map = null; } M.overlay = M.pin = M.pcanvas = M.probe = M.base = null; M.parts = [];
+    M.alive = false; if (M.timer) clearInterval(M.timer); M.timer = null;
+    if (M.map) { M.map.remove(); M.map = null; } M.overlay = M.pin = M.pcanvas = M.probe = M.base = null;
   }
   async function setMapModel(key) {
     const st = $("#m-status"); st.hidden = false; st.textContent = "지도 자료를 불러오는 중…";
-    try { const r = await loadMapModel(key); if (!M.alive) return; M.model = key; store.set("mapModel", key); M.meta = r.meta; M.data = r.data; M.ti = Math.min(M.ti, r.meta.last_valid); st.hidden = true; drawMapUi(); }
+    try { const r = await loadMapModel(key); if (!M.alive) return; M.model = key; store.set("mapModel", key); M.meta = r.meta; M.data = r.data; if (!r.meta.step_h) r.meta.step_h = r.meta.times.map(() => 3); buildFrames(); st.hidden = true; drawMapUi(); }
     catch (e) { st.textContent = "이 모델의 지도 자료를 불러오지 못했습니다."; }
   }
   async function renderMap(courseId) {
@@ -369,7 +387,7 @@
     app.innerHTML = '<div class="msearch"><input class="search" id="mq" type="search" placeholder="골프장 이름 또는 초성으로 지도에서 찾기" autocomplete="off" aria-label="지도에서 골프장 검색"><ul class="list" id="mresults"></ul></div>' +
       '<div class="mapbox"><div id="wmap" aria-label="날씨 지도"></div><canvas id="wparts"></canvas></div>' +
       '<section class="card"><div class="row between"><span class="seg" role="group" aria-label="표시할 날씨">' + Object.entries(LAYERS).map(([k, l]) => '<button data-mlayer="' + k + '">' + l.label + "</button>").join("") + '</span><span class="seg" role="group" aria-label="날씨 모델">' + MAPMODELS.map(([k, l]) => '<button data-mmodel="' + k + '">' + l + "</button>").join("") + "</span>" + (S.vworld ? '<span class="seg" role="group" aria-label="배경 지도"><button data-base="osm">기본 지도</button><button data-base="sat">위성</button></span>' : "") + "</div>" +
-      '<div class="row"><button class="chip" id="m-play" aria-pressed="false">▶ 재생</button><b id="mt-label" class="num"></b></div><input id="mt" type="range" min="0" max="56" step="1" value="0" aria-label="시각">' +
+      '<div class="row between"><div class="row"><button class="chip" id="m-play" aria-pressed="false">▶ 재생</button><b id="mt-label" class="num"></b></div><span class="seg" role="group" aria-label="시간 간격"><button data-mstep="1">1시간</button><button data-mstep="3">3시간</button></span></div><input id="mt" type="range" min="0" max="56" step="1" value="0" aria-label="시각"><p class="small muted" id="m-stepnote" hidden>3일 뒤부터는 자료가 3시간 간격입니다.</p>' +
       '<div class="legend" id="m-legend"></div><div class="readout" id="m-probe">지도를 누르면 그 지점의 값이 나옵니다. 점은 골프장입니다.</div><p class="small muted" id="m-run"></p><p class="note" id="m-status" hidden></p></section>';
     stopMap(); M.alive = true; M.dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     let L; try { L = await loadLeaflet(); } catch (e) { $("#m-status").hidden = false; $("#m-status").textContent = "지도를 불러오지 못했습니다."; return; }
@@ -388,16 +406,21 @@
       if (!me) marks.push(mk);
       byCourse.set(k.id, mk);
       mk.bindPopup("<b>" + esc(k.name) + "</b><br>" + esc(k.sido + " " + k.sigungu) + '<br><a href="#c/' + encodeURIComponent(k.id) + '">예보 보기</a>'); });
-    const cv = M.pcanvas = $("#wparts"), fit = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); M.parts = []; };
+    const cv = M.pcanvas = $("#wparts"), fit = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); };
     map.on("zoomend", () => { const r = rad(); marks.forEach(m => m.setRadius(r)); });
-    fit(); map.on("move zoom resize", () => { if (cv.width) cv.getContext("2d").clearRect(0, 0, cv.width, cv.height); M.parts = []; }); map.on("resize", fit);
+    fit(); map.on("move zoom", () => { if (cv.width) { const x = cv.getContext("2d"); x.setTransform(1, 0, 0, 1, 0, 0); x.clearRect(0, 0, cv.width, cv.height); } });
+    map.on("moveend zoomend", drawWind); map.on("resize", () => { fit(); drawWind(); });
     map.on("click", ev => { if (M.meta) probe(ev.latlng); });
-    $("#mt").addEventListener("input", ev => { M.ti = +ev.target.value; drawMapUi(); });
+    $("#mt").addEventListener("input", ev => { M.fi = +ev.target.value; setFrame(); drawMapUi(); });
+    app.querySelectorAll("[data-mstep]").forEach(b => b.addEventListener("click", () => {
+      const t = M.meta ? M.meta.times[M.ti] : null; M.step = +b.dataset.mstep; store.set("mapStep", M.step); if (!M.meta) return;
+      buildFrames(); const k = M.frames.findIndex(f => M.meta.times[f.i] >= t); M.fi = k < 0 ? M.frames.length - 1 : k; setFrame(); drawMapUi();      // stay near the same time
+    }));
     $("#m-play").addEventListener("click", () => {
       const b = $("#m-play");
       if (M.timer) { clearInterval(M.timer); M.timer = null; b.textContent = "▶ 재생"; b.setAttribute("aria-pressed", "false"); return; }
       b.textContent = "❚❚ 멈춤"; b.setAttribute("aria-pressed", "true");
-      M.timer = setInterval(() => { M.ti = M.ti >= M.meta.last_valid ? 0 : M.ti + 1; drawMapUi(); }, 700);
+      M.timer = setInterval(() => { M.fi = M.fi >= M.frames.length - 1 ? 0 : M.fi + 1; setFrame(); drawMapUi(); }, M.step === 1 ? 450 : 700);
     });
     app.querySelectorAll("[data-mlayer]").forEach(b => b.addEventListener("click", () => { M.layer = b.dataset.mlayer; store.set("mapLayer", M.layer); drawMapUi(); }));
     app.querySelectorAll("[data-mmodel]").forEach(b => b.addEventListener("click", () => setMapModel(b.dataset.mmodel)));
@@ -412,9 +435,8 @@
       map.setView([k.lat, k.lon], Math.max(map.getZoom(), 10)); const mk = byCourse.get(k.id); if (mk) mk.openPopup();
       if (M.meta) probe({ lat: k.lat, lng: k.lon });
     });
-    M.ti = 0; await setMapModel(M.model);
+    M.fi = 0; await setMapModel(M.model);
     if (c && M.meta) probe({ lat: c.lat, lng: c.lon });
-    animate();
   }
 
   // ---------------- info
@@ -425,7 +447,7 @@
     app.innerHTML = '<p><a href="#/">← 처음으로</a></p><section class="card prose"><h1>안내</h1><p>골프날씨는 국내 골프장의 7일 예보를 여러 날씨 모델로 보여줍니다. 개인용으로 만든 개발 중 서비스입니다.</p>' +
       "<h2>모델</h2><ul>" + MODELS.map(([k]) => "<li><b>" + esc(FULL[k]) + "</b>" + ({ icon: " — 1~3일 예보에서 한국 검증 성적이 가장 좋았습니다. 7일차는 신뢰도가 크게 떨어집니다.", blend: " — 기온·바람은 평균, 강수량은 중앙값입니다. 기온은 1~7일 내내 상위권입니다.", ifs: " — 4일 이후에 강합니다.", aifs: " — AI 모델. 4~7일 기온·강수에서 가장 좋았습니다. 돌풍 자료가 없습니다.", ukmo: " — 1~3일 강수 적중이 좋습니다.", gfs: " — 참고용. 한국 검증 성적은 낮은 편입니다. 돌풍 자료가 없습니다.", kma: " — 예보관이 보정한 공식 예보. 약 4일까지 제공됩니다." }[k] || "") + "</li>").join("") + "</ul>" +
       "<h2>신뢰도 점수</h2><p>과거 예보를 기상청 관측과 대조한 결과입니다(" + (rel ? esc(rel.period) + ", " + esc(rel.note) : "") + "). 점수 = 강수 적중 45% + 기온 오차 35% + 풍속 오차 20%. 지금은 고정값이며, 지역별 자동 갱신은 다음 단계에서 넣습니다.</p>" + tbl +
-      "<h2>날씨 지도</h2><p>강수(3시간 합계), 기온, 바람을 3시간 간격으로 7일까지 보여줍니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li></ul>" +
+      "<h2>날씨 지도</h2><p>강수, 기온, 바람을 7일까지 보여줍니다. 1시간 간격은 3일까지이고 그 뒤는 3시간 간격입니다. 바람은 화살표가 불어 가는 방향, 길이와 숫자가 풍속(m/s)입니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li></ul>" +
       "<h2>자료</h2><ul><li>모델 예보: Open-Meteo 오픈데이터 (CC BY 4.0) — DWD, ECMWF, NOAA NCEP, UK Met Office</li><li>기상청 단기예보: 공공데이터포털</li><li>골프장: 행정안전부 인허가 데이터, © OpenStreetMap contributors (ODbL)</li><li>고도: Copernicus DEM</li></ul></section>";
   }
 
