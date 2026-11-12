@@ -102,3 +102,6 @@ input[type=range] { width:100%; accent-color:var(--accent); }
 .legend .lg { display:inline-flex; align-items:center; gap:4px; }
 .legend .lg i { width:14px; height:10px; border-radius:2px; display:block; border:1px solid var(--line); }
 .leaflet-popup-content { font:14px/1.5 inherit; }
+.msearch { position:relative; z-index:10; display:grid; gap:6px; }
+.msearch .list:empty { display:none; }
+button.item { cursor:pointer; }

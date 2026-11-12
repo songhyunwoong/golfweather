@@ -366,7 +366,8 @@
   async function renderMap(courseId) {
     document.title = "날씨 지도 · 골프날씨";
     const c = courseId ? S.byId.get(courseId) : null;
-    app.innerHTML = '<div class="mapbox"><div id="wmap" aria-label="날씨 지도"></div><canvas id="wparts"></canvas></div>' +
+    app.innerHTML = '<div class="msearch"><input class="search" id="mq" type="search" placeholder="골프장 이름 또는 초성으로 지도에서 찾기" autocomplete="off" aria-label="지도에서 골프장 검색"><ul class="list" id="mresults"></ul></div>' +
+      '<div class="mapbox"><div id="wmap" aria-label="날씨 지도"></div><canvas id="wparts"></canvas></div>' +
       '<section class="card"><div class="row between"><span class="seg" role="group" aria-label="표시할 날씨">' + Object.entries(LAYERS).map(([k, l]) => '<button data-mlayer="' + k + '">' + l.label + "</button>").join("") + '</span><span class="seg" role="group" aria-label="날씨 모델">' + MAPMODELS.map(([k, l]) => '<button data-mmodel="' + k + '">' + l + "</button>").join("") + "</span>" + (S.vworld ? '<span class="seg" role="group" aria-label="배경 지도"><button data-base="osm">기본 지도</button><button data-base="sat">위성</button></span>' : "") + "</div>" +
       '<div class="row"><button class="chip" id="m-play" aria-pressed="false">▶ 재생</button><b id="mt-label" class="num"></b></div><input id="mt" type="range" min="0" max="56" step="1" value="0" aria-label="시각">' +
       '<div class="legend" id="m-legend"></div><div class="readout" id="m-probe">지도를 누르면 그 지점의 값이 나옵니다. 점은 골프장입니다.</div><p class="small muted" id="m-run"></p><p class="note" id="m-status" hidden></p></section>';
@@ -382,9 +383,10 @@
     setBase(); map.attributionControl.addAttribution("날씨: Open-Meteo");
     app.querySelectorAll("[data-base]").forEach(b => b.addEventListener("click", () => { store.set("base", b.dataset.base); const st = $("#m-status"); if (st) st.hidden = true; setBase(); }));
     map.createPane("courses").style.zIndex = 450;
-    const marks = [], rad = () => { const z = map.getZoom(); return z >= 10 ? 6 : z >= 9 ? 4.5 : z >= 8 ? 3 : 1.8; };
+    const byCourse = new Map(), marks = [], rad = () => { const z = map.getZoom(); return z >= 10 ? 6 : z >= 9 ? 4.5 : z >= 8 ? 3 : 1.8; };
     S.courses.forEach(k => { const me = c && k.id === c.id, mk = L.circleMarker([k.lat, k.lon], { pane: "courses", radius: me ? 7 : rad(), color: "#14201a", weight: me ? 2 : 0.8, fillColor: me ? "#f6c453" : "#ffffff", fillOpacity: 0.95 }).addTo(map);
       if (!me) marks.push(mk);
+      byCourse.set(k.id, mk);
       mk.bindPopup("<b>" + esc(k.name) + "</b><br>" + esc(k.sido + " " + k.sigungu) + '<br><a href="#c/' + encodeURIComponent(k.id) + '">예보 보기</a>'); });
     const cv = M.pcanvas = $("#wparts"), fit = () => { const r = cv.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); cv.width = Math.round(r.width * d); cv.height = Math.round(r.height * d); M.parts = []; };
     map.on("zoomend", () => { const r = rad(); marks.forEach(m => m.setRadius(r)); });
@@ -399,6 +401,17 @@
     });
     app.querySelectorAll("[data-mlayer]").forEach(b => b.addEventListener("click", () => { M.layer = b.dataset.mlayer; store.set("mapLayer", M.layer); drawMapUi(); }));
     app.querySelectorAll("[data-mmodel]").forEach(b => b.addEventListener("click", () => setMapModel(b.dataset.mmodel)));
+    const mq = $("#mq"), mres = $("#mresults");
+    mq.addEventListener("input", () => {
+      const r = search(mq.value);
+      mres.innerHTML = r.length ? r.slice(0, 6).map(x => '<li><button class="item" data-go="' + esc(x.c.id) + '"><span><b>' + esc(x.c.name) + "</b></span><small>" + esc(x.c.sido + " " + x.c.sigungu) + (x.hit ? " · 다른 이름: " + esc(x.hit) : "") + "</small></button></li>").join("") : mq.value.trim() ? '<li class="muted small">찾는 골프장이 없습니다.</li>' : "";
+    });
+    mres.addEventListener("click", ev => {
+      const b = ev.target.closest("[data-go]"); if (!b) return; const k = S.byId.get(b.dataset.go); if (!k) return;
+      mq.value = k.name; mres.innerHTML = ""; mq.blur();
+      map.setView([k.lat, k.lon], Math.max(map.getZoom(), 10)); const mk = byCourse.get(k.id); if (mk) mk.openPopup();
+      if (M.meta) probe({ lat: k.lat, lng: k.lon });
+    });
     M.ti = 0; await setMapModel(M.model);
     if (c && M.meta) probe({ lat: c.lat, lng: c.lon });
     animate();
