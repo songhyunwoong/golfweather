@@ -1,8 +1,8 @@
 {
  "meta": {
   "version": "v2",
-  "generated": "2026-11-11",
-  "count": 496,
+  "generated": "2026-11-12",
+  "count": 497,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -17,9 +17,9 @@
    "renamed": 5,
    "confirmed": 480,
    "attached": 1,
-   "added": 16,
+   "added": 17,
    "excluded": 16,
-   "near_existing": 15,
+   "near_existing": 14,
    "check": 2
   }
  },
@@ -13625,11 +13625,44 @@
    "kma_ny": 64
   },
   {
+   "id": "lic-302012013000001",
+   "name": "오시아노골프클럽",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전남광주통합특별시",
+   "sigungu": "해남군",
+   "address": "전남광주통합특별시 해남군 화원면 시아로 224",
+   "tel": "",
+   "lat": 34.69709,
+   "lon": 126.26383,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6130000-302012013000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 28,
+   "elevation_range_m": [
+    28,
+    28
+   ],
+   "name_norm": "오시아노",
+   "choseong": "ㅇㅅㅇㄴ",
+   "kma_nx": 48,
+   "kma_ny": 64
+  },
+  {
    "id": "osm-w390545752",
    "name": "파인비치골프링크스",
    "aliases": [
-    "Pine Beach Golf Links",
-    "오시아노골프클럽"
+    "Pine Beach Golf Links"
    ],
    "type": [
     "비회원제"
@@ -13648,8 +13681,7 @@
     "w390545752"
    ],
    "licence_ids": [
-    "6130000-302012010000004",
-    "6130000-302012013000001"
+    "6130000-302012010000004"
    ],
    "match": "좌표",
    "review": [],
@@ -16734,10 +16766,10 @@
   },
   {
    "id": "osm-w558442586",
-   "name": "로얄링스CC2",
+   "name": "로얄링스CC1",
    "aliases": [
     "Royal Hills Country Club",
-    "로얄링스CC1",
+    "로얄링스CC2",
     "로얄힐스CC"
    ],
    "type": [],
@@ -16766,8 +16798,8 @@
     0,
     3
    ],
-   "name_norm": "로얄링스cc2",
-   "choseong": "ㄹㅇㄹㅅcc2",
+   "name_norm": "로얄링스cc1",
+   "choseong": "ㄹㅇㄹㅅcc1",
    "kma_nx": 49,
    "kma_ny": 108
   },
@@ -18196,10 +18228,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원GC",
+   "name": "중원CC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원CC"
+    "중원GC"
    ],
    "type": [
     "비회원제"

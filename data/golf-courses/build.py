@@ -74,8 +74,8 @@ def elevations(points):
     """Copernicus GLO-90 DEM via Open-Meteo elevation API, 100 points per call (curl honours the session proxy)."""
     import subprocess
     out = []
-    for i in range(0, len(points), 100):
-        chunk = points[i:i + 100]
+    for i in range(0, len(points), 20):          # short URLs: long ones are dropped by some proxies
+        chunk = points[i:i + 20]
         q = urllib.parse.urlencode({"latitude": ",".join(f"{la:.5f}" for la, lo in chunk), "longitude": ",".join(f"{lo:.5f}" for la, lo in chunk)})
         for attempt in range(5):
             r = subprocess.run(["curl", "-sS", "-m", "60", "https://api.open-meteo.com/v1/elevation?" + q], capture_output=True, text=True)
@@ -191,7 +191,7 @@ def apply_overrides(recs, samples, unresolved, region):
         if o["verdict"] == "new" and o.get("lat"):
             near = sorted((km(o["lat"], o["lon"], r["lat"], r["lon"]), k) for k, r in enumerate(kept))
             sd, sg = region(o["lon"], o["lat"]); asd, asg = addr_region(l["addr"])
-            if near and near[0][0] < 1.5:                       # the reviewer's point falls on a course that is already listed
+            if near and near[0][0] < 1.5 and not o.get("separate"):   # the reviewer's point falls on a course that is already listed
                 t = kept[near[0][1]]
                 same_area = bool(asg) and t["sigungu"].replace(" ", "").startswith(asg.split()[0])
                 if same_area or compatible(l["norm"], normalize(t["name"])) or any(compatible(l["norm"], normalize(a)) for a in t["aliases"]):
@@ -321,10 +321,24 @@ def main():
         uid = r.pop("_uid", None)
         if counts[r["id"]] > 1 and uid: r["id"] = uid
     assert len({r["id"] for r in recs}) == len(recs), "duplicate course ids"
-    elev = elevations(samples); i = 0
+    # elevations: reuse the previous build for courses whose point did not move; look up only the rest
+    prev = {}
+    if os.path.exists(os.path.join(HERE, "courses.json")):
+        prev = {c["id"]: c for c in json.load(open(os.path.join(HERE, "courses.json")))["courses"]}
+    i = 0; need = []
     for r in recs:
-        n = r.pop("_n"); vals = elev[i:i + n]; i += n
+        n = r.pop("_n"); r["_pts"] = samples[i:i + n]; i += n
+        p = prev.get(r["id"])
+        if p and p["lat"] == r["lat"] and p["lon"] == r["lon"] and "elevation_m" in p:
+            r["elevation_m"], r["elevation_range_m"] = p["elevation_m"], p["elevation_range_m"]
+        else: need.append(r)
+    elev = elevations([pt for r in need for pt in r["_pts"]]); i = 0
+    for r in need:
+        vals = elev[i:i + len(r["_pts"])]; i += len(r["_pts"])
         r["elevation_m"] = round(statistics.median(vals)); r["elevation_range_m"] = [round(min(vals)), round(max(vals))]
+    print(f"elevation looked up for {len(need)} courses, reused for {len(recs) - len(need)}", flush=True)
+    for r in recs:
+        r.pop("_pts")
         r["name_norm"] = normalize(r["name"]) if r["name"] else ""; r["choseong"] = choseong(r["name_norm"])
         r["kma_nx"], r["kma_ny"] = kma_grid(r["lat"], r["lon"])
     seen = {}
