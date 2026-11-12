@@ -33,6 +33,10 @@ jobs:
         env:
           DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
         run: python3 pipeline/build_forecasts.py --out site/data
+      - name: 지도 자료 생성
+        # 지도가 실패해도 골프장 예보는 배포한다
+        continue-on-error: true
+        run: python3 pipeline/build_maps.py --out site/data/map
       - name: 예보 보관본 만들기
         run: tar -czf forecast-archive.tar.gz -C site/data .
       - name: 예보 보관 (90일)
