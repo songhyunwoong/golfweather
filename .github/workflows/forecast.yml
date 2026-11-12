@@ -37,6 +37,12 @@ jobs:
         # 지도가 실패해도 골프장 예보는 배포한다
         continue-on-error: true
         run: python3 pipeline/build_maps.py --out site/data/map
+      - name: 지도 배경 설정 (VWorld 키가 등록된 경우)
+        env:
+          VWORLD_API_KEY: ${{ secrets.VWORLD_API_KEY }}
+        run: |
+          # 이 키는 브라우저에서 쓰이므로 배포된 사이트에서는 공개된다. VWorld에 등록한 주소에서만 동작한다.
+          python3 -c "import json,os; json.dump({'vworld': os.environ.get('VWORLD_API_KEY') or None}, open('site/data/config.json','w'))"
       - name: 예보 보관본 만들기
         run: tar -czf forecast-archive.tar.gz -C site/data .
       - name: 예보 보관 (90일)

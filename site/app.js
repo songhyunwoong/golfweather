@@ -232,6 +232,19 @@
   }
 
   // ---------------- map (Leaflet, loaded on demand)
+  // Base map: OpenStreetMap, or VWorld satellite + labels when a VWorld key is deployed (data/config.json).
+  function addBase(L, map, onFail) {
+    const useSat = S.vworld && store.get("base", "osm") === "sat", layers = [];
+    if (useSat) {
+      const u = "https://api.vworld.kr/req/wmts/1.0.0/" + S.vworld + "/";
+      const att = '© <a href="https://www.vworld.kr" target="_blank" rel="noopener">VWorld</a> 국토교통부';
+      const sat = L.tileLayer(u + "Satellite/{z}/{y}/{x}.jpeg", { minZoom: 6, maxZoom: 18, attribution: att }), hyb = L.tileLayer(u + "Hybrid/{z}/{y}/{x}.png", { minZoom: 6, maxZoom: 18 });
+      let bad = 0, ok = 0; sat.on("tileload", () => ok++); sat.on("tileerror", () => { if (++bad === 4 && !ok && onFail) onFail(); });
+      layers.push(sat.addTo(map), hyb.addTo(map));
+    } else layers.push(L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map));
+    layers.forEach(l => l.setZIndex(1));
+    return layers;
+  }
   let leaflet = null;
   function loadLeaflet() {
     if (!leaflet) leaflet = new Promise((res, rej) => {
@@ -244,8 +257,8 @@
     const el = $("#map"), c = S.cur; if (!el) return;
     try {
       const L = await loadLeaflet(); if (!$("#map") || S.cur !== c) return;
-      const map = L.map(el, { scrollWheelZoom: false, attributionControl: true }).setView([c.lat, c.lon], 12);
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+      const map = L.map(el, { scrollWheelZoom: false, attributionControl: true }).setView([c.lat, c.lon], S.vworld && store.get("base", "osm") === "sat" ? 14 : 12);
+      addBase(L, map, () => { store.set("base", "osm"); if (S.cur === c) { map.remove(); $("#map").innerHTML = ""; drawMap(); } });
       L.circleMarker([c.lat, c.lon], { radius: 9, color: "#1c6a55", weight: 3, fillColor: "#63c4a3", fillOpacity: 0.9 }).addTo(map).bindTooltip(c.name);
     } catch (e) { el.outerHTML = '<p class="muted small">지도를 불러오지 못했습니다. 아래 링크로 위치를 확인하세요.</p>'; }
   }
@@ -343,7 +356,7 @@
   }
   function stopMap() {
     M.alive = false; if (M.timer) clearInterval(M.timer); if (M.raf) cancelAnimationFrame(M.raf); M.timer = M.raf = null;
-    if (M.map) { M.map.remove(); M.map = null; } M.overlay = M.pin = M.pcanvas = M.probe = null; M.parts = [];
+    if (M.map) { M.map.remove(); M.map = null; } M.overlay = M.pin = M.pcanvas = M.probe = M.base = null; M.parts = [];
   }
   async function setMapModel(key) {
     const st = $("#m-status"); st.hidden = false; st.textContent = "지도 자료를 불러오는 중…";
@@ -354,14 +367,20 @@
     document.title = "날씨 지도 · 골프날씨";
     const c = courseId ? S.byId.get(courseId) : null;
     app.innerHTML = '<div class="mapbox"><div id="wmap" aria-label="날씨 지도"></div><canvas id="wparts"></canvas></div>' +
-      '<section class="card"><div class="row between"><span class="seg" role="group" aria-label="표시할 날씨">' + Object.entries(LAYERS).map(([k, l]) => '<button data-mlayer="' + k + '">' + l.label + "</button>").join("") + '</span><span class="seg" role="group" aria-label="날씨 모델">' + MAPMODELS.map(([k, l]) => '<button data-mmodel="' + k + '">' + l + "</button>").join("") + "</span></div>" +
+      '<section class="card"><div class="row between"><span class="seg" role="group" aria-label="표시할 날씨">' + Object.entries(LAYERS).map(([k, l]) => '<button data-mlayer="' + k + '">' + l.label + "</button>").join("") + '</span><span class="seg" role="group" aria-label="날씨 모델">' + MAPMODELS.map(([k, l]) => '<button data-mmodel="' + k + '">' + l + "</button>").join("") + "</span>" + (S.vworld ? '<span class="seg" role="group" aria-label="배경 지도"><button data-base="osm">기본 지도</button><button data-base="sat">위성</button></span>' : "") + "</div>" +
       '<div class="row"><button class="chip" id="m-play" aria-pressed="false">▶ 재생</button><b id="mt-label" class="num"></b></div><input id="mt" type="range" min="0" max="56" step="1" value="0" aria-label="시각">' +
       '<div class="legend" id="m-legend"></div><div class="readout" id="m-probe">지도를 누르면 그 지점의 값이 나옵니다. 점은 골프장입니다.</div><p class="small muted" id="m-run"></p><p class="note" id="m-status" hidden></p></section>';
     stopMap(); M.alive = true; M.dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     let L; try { L = await loadLeaflet(); } catch (e) { $("#m-status").hidden = false; $("#m-status").textContent = "지도를 불러오지 못했습니다."; return; }
     if (!M.alive || !$("#wmap")) return;
     const map = M.map = L.map("wmap", { minZoom: 6, maxZoom: 12, maxBounds: [[31, 121], [40.5, 135]], preferCanvas: true }).setView(c ? [c.lat, c.lon] : [36.0, 127.8], c ? 10 : 7);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · 날씨: Open-Meteo' }).addTo(map);
+    const setBase = () => {
+      (M.base || []).forEach(l => map.removeLayer(l));
+      M.base = addBase(L, map, () => { store.set("base", "osm"); setBase(); const st = $("#m-status"); if (st) { st.hidden = false; st.textContent = "VWorld 위성 지도를 불러오지 못해 기본 지도로 돌아왔습니다. VWorld 인증키에 이 사이트 주소가 등록돼 있는지 확인해 주세요."; } });
+      document.querySelectorAll("[data-base]").forEach(b => b.setAttribute("aria-pressed", b.dataset.base === (S.vworld ? store.get("base", "osm") : "osm")));
+    };
+    setBase(); map.attributionControl.addAttribution("날씨: Open-Meteo");
+    app.querySelectorAll("[data-base]").forEach(b => b.addEventListener("click", () => { store.set("base", b.dataset.base); const st = $("#m-status"); if (st) st.hidden = true; setBase(); }));
     map.createPane("courses").style.zIndex = 450;
     const marks = [], rad = () => { const z = map.getZoom(); return z >= 10 ? 6 : z >= 9 ? 4.5 : z >= 8 ? 3 : 1.8; };
     S.courses.forEach(k => { const me = c && k.id === c.id, mk = L.circleMarker([k.lat, k.lon], { pane: "courses", radius: me ? 7 : rad(), color: "#14201a", weight: me ? 2 : 0.8, fillColor: me ? "#f6c453" : "#ffffff", fillOpacity: 0.95 }).addTo(map);
@@ -416,6 +435,7 @@
     try {
       const [c, m, r] = await Promise.all([fetch("data/courses.json").then(x => x.json()), fetch("data/meta.json").then(x => x.json()), fetch("reliability.json").then(x => x.json()).catch(() => null)]);
       S.courses = c.courses; S.byId = new Map(c.courses.map(x => [x.id, x])); S.meta = m; S.rel = r;
+      S.vworld = await fetch("data/config.json").then(x => x.ok ? x.json() : {}).then(x => /^[A-Za-z0-9-]{8,80}$/.test(x.vworld || "") ? x.vworld : null).catch(() => null);
       $("#foot-meta").textContent = "골프장 " + c.courses.length + "곳 · 예보 생성 " + m.generated.replace("T", " ").slice(0, 16) + " (한국 시간) · 약 3시간마다 갱신";
     } catch (e) { app.innerHTML = "<p>예보 자료를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>"; return; }
     window.addEventListener("hashchange", route); route();
