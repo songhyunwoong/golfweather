@@ -2,7 +2,7 @@
  "meta": {
   "version": "v2",
   "generated": "2026-11-12",
-  "count": 497,
+  "count": 496,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -17,10 +17,10 @@
    "renamed": 5,
    "confirmed": 480,
    "attached": 1,
-   "added": 17,
+   "added": 16,
    "excluded": 16,
-   "near_existing": 14,
-   "check": 2
+   "near_existing": 15,
+   "check": 0
   }
  },
  "courses": [
@@ -1814,10 +1814,10 @@
   },
   {
    "id": "osm-w545967310",
-   "name": "소노펠리체 컨트리클럽 비발디파크 웨스트",
+   "name": "소노펠리체 컨트리클럽 비발디파크 마운틴",
    "aliases": [
     "Sono Felice Country Club - Vivaldi Park West",
-    "소노펠리체 컨트리클럽 비발디파크 마운틴",
+    "소노펠리체 컨트리클럽 비발디파크 웨스트",
     "소노펠리체 컨트리클럽 비발디파크 이스트",
     "소노펠리체CC 비발디파크"
    ],
@@ -1850,8 +1850,8 @@
     345,
     470
    ],
-   "name_norm": "소노펠리체컨트리클럽비발디파크웨스트",
-   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅇㅅㅌ",
+   "name_norm": "소노펠리체컨트리클럽비발디파크마운틴",
+   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅁㅇㅌ",
    "kma_nx": 72,
    "kma_ny": 128
   },
@@ -12527,42 +12527,6 @@
    "kma_ny": 68
   },
   {
-   "id": "lic-6130000-302012012000001",
-   "name": "정남진골프리조트",
-   "aliases": [],
-   "type": [
-    "비회원제"
-   ],
-   "status": "영업",
-   "sido": "전남광주통합특별시",
-   "sigungu": "나주시",
-   "address": "전남광주통합특별시 장흥군 장평면 제산기동로 326",
-   "tel": "",
-   "lat": 35.01401,
-   "lon": 126.81895,
-   "position": "검수 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "6130000-302012012000001"
-   ],
-   "match": "검수",
-   "review": [
-    "좌표확인"
-   ],
-   "reviewed": true,
-   "elevation_m": 30,
-   "elevation_range_m": [
-    30,
-    30
-   ],
-   "name_norm": "정남진",
-   "choseong": "ㅈㄴㅈ",
-   "kma_nx": 58,
-   "kma_ny": 71
-  },
-  {
    "id": "osm-w389445363",
    "name": "해피니스CC",
    "aliases": [
@@ -12896,42 +12860,6 @@
    "choseong": "ㅂㅅ",
    "kma_nx": 65,
    "kma_ny": 67
-  },
-  {
-   "id": "lic-302012007000010",
-   "name": "아크로컨트리클럽",
-   "aliases": [],
-   "type": [
-    "비회원제"
-   ],
-   "status": "영업",
-   "sido": "전남광주통합특별시",
-   "sigungu": "서구",
-   "address": "전남광주통합특별시 영암군 금정면 안적동길 403",
-   "tel": "",
-   "lat": 35.14694,
-   "lon": 126.87349,
-   "position": "검수 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "6130000-302012007000010"
-   ],
-   "match": "검수",
-   "review": [
-    "좌표확인"
-   ],
-   "reviewed": true,
-   "elevation_m": 42,
-   "elevation_range_m": [
-    42,
-    42
-   ],
-   "name_norm": "아크로",
-   "choseong": "ㅇㅋㄹ",
-   "kma_nx": 59,
-   "kma_ny": 74
   },
   {
    "id": "osm-w468589803",
@@ -13338,6 +13266,40 @@
    "kma_ny": 65
   },
   {
+   "id": "lic-302012007000010",
+   "name": "아크로컨트리클럽",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전남광주통합특별시",
+   "sigungu": "영암군",
+   "address": "전남광주통합특별시 영암군 금정면 안적동길 403",
+   "tel": "",
+   "lat": 34.87183,
+   "lon": 126.78532,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6130000-302012007000010"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 370,
+   "elevation_range_m": [
+    370,
+    370
+   ],
+   "name_norm": "아크로",
+   "choseong": "ㅇㅋㄹ",
+   "kma_nx": 57,
+   "kma_ny": 68
+  },
+  {
    "id": "osm-w643204152",
    "name": "백양우리컨트리클럽",
    "aliases": [
@@ -13447,12 +13409,16 @@
   {
    "id": "osm-w474855108",
    "name": "JNJ골프리조트",
-   "aliases": [],
-   "type": [],
+   "aliases": [
+    "정남진골프리조트"
+   ],
+   "type": [
+    "비회원제"
+   ],
    "status": "",
    "sido": "전남광주통합특별시",
    "sigungu": "장흥군",
-   "address": "",
+   "address": "전남광주통합특별시 장흥군 장평면 제산기동로 326",
    "tel": "",
    "lat": 34.79767,
    "lon": 126.97077,
@@ -13462,7 +13428,9 @@
    "osm_ids": [
     "w474855108"
    ],
-   "licence_ids": [],
+   "licence_ids": [
+    "6130000-302012012000001"
+   ],
    "match": "",
    "review": [],
    "reviewed": true,
@@ -18228,10 +18196,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원CC",
+   "name": "중원GC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원GC"
+    "중원CC"
    ],
    "type": [
     "비회원제"
