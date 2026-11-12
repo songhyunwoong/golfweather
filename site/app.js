@@ -278,7 +278,7 @@
       const L = await loadLeaflet(); if (!$("#map") || S.cur !== c) return;
       const map = L.map(el, { scrollWheelZoom: false, attributionControl: true }).setView([c.lat, c.lon], S.vworld && store.get("base", "osm") === "sat" ? 14 : 12);
       addBase(L, map, () => { store.set("base", "osm"); if (S.cur === c) { map.remove(); $("#map").innerHTML = ""; drawMap(); } });
-      L.circleMarker([c.lat, c.lon], { radius: 6, color: "#1c6a55", weight: 2, fillColor: "#63c4a3", fillOpacity: 0.9 }).addTo(map).bindTooltip(c.name);
+      L.circleMarker([c.lat, c.lon], { radius: 5, color: "#14201a", weight: 1.5, fillColor: "#2f9e7d", fillOpacity: 1 }).addTo(map).bindTooltip(c.name);
     } catch (e) { el.outerHTML = '<p class="muted small">지도를 불러오지 못했습니다. 아래 링크로 위치를 확인하세요.</p>'; }
   }
 
@@ -430,8 +430,8 @@
     setBase(); map.attributionControl.addAttribution("날씨: Open-Meteo");
     app.querySelectorAll("[data-base]").forEach(b => b.addEventListener("click", () => { store.set("base", b.dataset.base); const st = $("#m-status"); if (st) st.hidden = true; setBase(); }));
     map.createPane("courses").style.zIndex = 450; const cren = L.canvas({ pane: "courses", tolerance: 8 });   // small dots, generous tap area
-    const byCourse = new Map(), marks = [], rad = () => { const z = map.getZoom(); return z >= 11 ? 4 : z >= 10 ? 3.2 : z >= 9 ? 2.6 : z >= 8 ? 2 : 1.3; };
-    S.courses.forEach(k => { const me = c && k.id === c.id, mk = L.circleMarker([k.lat, k.lon], { pane: "courses", renderer: cren, radius: me ? 5 : rad(), color: "#14201a", weight: me ? 1.5 : 0.6, fillColor: me ? "#f6c453" : "#ffffff", fillOpacity: 0.95 }).addTo(map);
+    const byCourse = new Map(), marks = [], rad = () => { const z = map.getZoom(); return z >= 11 ? 3.2 : z >= 10 ? 2.6 : z >= 9 ? 2.1 : z >= 8 ? 1.6 : 1.1; };
+    S.courses.forEach(k => { const me = c && k.id === c.id, mk = L.circleMarker([k.lat, k.lon], { pane: "courses", renderer: cren, radius: me ? 4.5 : rad(), color: "#14201a", weight: me ? 1.5 : 0.5, fillColor: me ? "#f6c453" : "#2f9e7d", fillOpacity: 1 }).addTo(map);
       if (!me) marks.push(mk);
       byCourse.set(k.id, mk);
       mk.bindPopup("<b>" + esc(k.name) + "</b><br>" + esc(k.sido + " " + k.sigungu) + '<br><a href="#c/' + encodeURIComponent(k.id) + '">예보 보기</a>'); });
