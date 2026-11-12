@@ -197,6 +197,7 @@ def kma_run(path, stations):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--days", type=int, default=16); ap.add_argument("--start"); ap.add_argument("--end")
+    ap.add_argument("--no-write", action="store_true", help="do not write daily score files (experiments)")
     ap.add_argument("--dump", help="also save 6-hourly forecast/observation arrays per run here (for blend experiments)")
     a = ap.parse_args(); key = os.environ.get("KMA_APIHUB_KEY")
     if not key: sys.exit("KMA_APIHUB_KEY is not set")
@@ -219,11 +220,6 @@ def main():
                 except Exception as e: print(f"  warn {d} {key_m} {hh:02d}Z: {str(e)[:120]}", file=sys.stderr); fc = None
                 if fc is None: continue
                 fcs[key_m] = fc; score_run(fc, init, stations, obs, now, accs.setdefault(key_m, {}))
-            if a.dump and fcs:
-                hs = list(range(6, MAX_LEAD_D * 24 + 1, 6)); os.makedirs(a.dump, exist_ok=True)
-                ob = lambda k: np.array([[((obs.get((init + dt.timedelta(hours=h)).astimezone(KST), {}).get(s["stn"]) or {}).get(k)) for h in hs] for s in stations], dtype=float)
-                np.savez_compressed(os.path.join(a.dump, f"{init:%Y%m%d%H}.npz"), obs_t=ob("t"), obs_w=ob("w"),
-                                    **{f"{k}_{v}": fcs[k][v][:, hs].astype("float32") for k in fcs for v in ("t", "w")})
             members = [fcs[k] for k in BLEND if k in fcs]
             if len(members) >= 2:                      # same rule as the app: mean temperature and wind, median precipitation
                 import warnings
@@ -232,7 +228,14 @@ def main():
                     stack = lambda k: np.stack([m[k] for m in members]); cnt = (~np.isnan(stack("t"))).sum(axis=0)
                     bl = dict(t=np.where(cnt >= 2, np.nanmean(stack("t"), axis=0), np.nan), w=np.where(cnt >= 2, np.nanmean(stack("w"), axis=0), np.nan),
                               p=np.where(cnt >= 2, np.nanmedian(stack("p"), axis=0), np.nan))
-                score_run(bl, init, stations, obs, now, accs.setdefault("blend", {}))
+                score_run(bl, init, stations, obs, now, accs.setdefault("blend", {})); fcs["blend"] = bl
+            if a.dump and fcs:                         # 6-hourly t, w and 12 h rain totals of every model and of the blend
+                hs = list(range(6, MAX_LEAD_D * 24 + 1, 6)); h12 = list(range(12, MAX_LEAD_D * 24 + 1, 12)); os.makedirs(a.dump, exist_ok=True)
+                ob = lambda k: np.array([[((obs.get((init + dt.timedelta(hours=h)).astimezone(KST), {}).get(s["stn"]) or {}).get(k)) for h in hs] for s in stations], dtype=float)
+                obp = np.array([[(lambda v: np.nan if v is None else v)(obs_rain12(obs, init + dt.timedelta(hours=h), s["stn"])) for h in h12] for s in stations], dtype=float)
+                p12 = lambda p: np.stack([p[:, h - 11:h + 1].sum(axis=1) for h in h12], axis=1).astype("float32")     # NaN if any hour is missing
+                np.savez_compressed(os.path.join(a.dump, f"{init:%Y%m%d%H}.npz"), obs_t=ob("t"), obs_w=ob("w"), obs_p=obp,
+                                    **{f"{k}_{v}": fcs[k][v][:, hs].astype("float32") for k in fcs for v in ("t", "w")}, **{f"{k}_p": p12(fcs[k]["p"]) for k in fcs})
         for hh in KMA_ISSUES:                              # archived KMA issues of this (KST) date
             f = os.path.join(KMA_DIR, f"{d}_{hh:02d}.json")
             if os.path.exists(f):
@@ -242,7 +245,7 @@ def main():
     done = 0
     with ThreadPoolExecutor(max_workers=int(os.environ.get("WORKERS", "12"))) as ex:
         for d, out in ex.map(one, days):
-            if out: json.dump(dict(init=str(d), wet_mm=WET, models=out), open(os.path.join(VDIR, "daily", f"{d}.json"), "w"), ensure_ascii=False, separators=(",", ":"))
+            if out and not a.no_write: json.dump(dict(init=str(d), wet_mm=WET, models=out), open(os.path.join(VDIR, "daily", f"{d}.json"), "w"), ensure_ascii=False, separators=(",", ":"))
             done += 1
             if done % 5 == 0 or done == len(days): print(f"  {done}/{len(days)}", flush=True)
     print("verify done")

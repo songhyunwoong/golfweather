@@ -1,11 +1,30 @@
-# 블렌드 가중치 실험 (1년 자료)
+# 블렌드 가중치 실험
 
-예보 기간(1~7일)과 항목(기온·바람·비)별로 모델 가중치를 다르게 주면 지금의 단순 평균·중앙값 블렌드보다 나아지는지 확인한다.
+예보 기간(며칠 뒤)과 항목(기온·바람·비)별로 모델 가중치를 다르게 주면 지금의 단순 평균·중앙값 블렌드보다 나아지는지 확인한다.
+
+## 자료
+
+| 경로 | 기간 | 상태 |
+|---|---|---|
+| 공개 실행 자료(`s3://openmeteo/data_run`, 키 불필요) | 2026-08-10 이후, 1~15일 뒤 | 사용 |
+| Open-Meteo 과거 실행 API(1년, 11개 모델) | 2025-11 이후, 1~7일 뒤 | 유료 Professional 요금제 이상에서만 열려 보류 |
+
+## 실행
+
+```bash
+cd pipeline && python3 verify.py --start 2026-08-10 --end 2026-11-10 --no-write --dump /tmp/dump
+```
+
+```bash
+cd research/blend-weights && python3 pairs_dump.py /tmp/dump
+```
+
+```bash
+python3 experiment.py
+```
 
 | 파일 | 내용 |
 |---|---|
-| `stations_obs.json` | 관측이 있는 기상청 지점 32곳 |
-| `fetch_prev.py` | Open-Meteo 과거 실행 API에서 2025-11-07~2026-11-06, 11개 모델의 예보를 14일 묶음으로 받는다. `OPEN_METEO_API_KEY`가 있으면 유료 서버를 쓴다. 이어받기 가능 |
-| `pairs_prev.py` | 받은 예보와 기상청 관측(`KMA_APIHUB_KEY`)을 맞춰 `pairs_main.npz`, `pairs_extra.npz`를 만든다 |
-
-`data/`(원본 응답)는 커밋하지 않는다. `pairs_*.npz`만 커밋한다.
+| `pairs_dump.py` | `verify.py --dump`가 실행별로 남긴 예보·관측을 `pairs_runs.npz`로 묶는다 |
+| `experiment.py` | 직전 `TRAIN_DAYS`일로 가중치·치우침을 정해 다음 `TEST_DAYS`일을 채점하는 굴림 평가. 결과는 `results/` |
+| `fetch_prev.py`, `pairs_prev.py`, `stations_obs.json` | 과거 실행 API용(보류). 요금제가 맞으면 그대로 1년 실험에 쓸 수 있다 |
