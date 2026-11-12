@@ -430,7 +430,7 @@
     setBase(); map.attributionControl.addAttribution("날씨: Open-Meteo");
     app.querySelectorAll("[data-base]").forEach(b => b.addEventListener("click", () => { store.set("base", b.dataset.base); const st = $("#m-status"); if (st) st.hidden = true; setBase(); }));
     map.createPane("courses").style.zIndex = 450; const cren = L.canvas({ pane: "courses", tolerance: 8 });   // small dots, generous tap area
-    const byCourse = new Map(), marks = [], rad = () => { const z = map.getZoom(); return z >= 11 ? 3.2 : z >= 10 ? 2.6 : z >= 9 ? 2.1 : z >= 8 ? 1.6 : 1.1; };
+    const byCourse = new Map(), marks = [], rad = () => { const z = map.getZoom(); return z >= 11 ? 3.2 : z >= 10 ? 2.6 : z >= 9 ? 2.1 : z >= 8 ? 1.7 : 1.5; };
     S.courses.forEach(k => { const me = c && k.id === c.id, mk = L.circleMarker([k.lat, k.lon], { pane: "courses", renderer: cren, radius: me ? 4.5 : rad(), color: "#14201a", weight: me ? 1.5 : 0.5, fillColor: me ? "#f6c453" : "#2f9e7d", fillOpacity: 1 }).addTo(map);
       if (!me) marks.push(mk);
       byCourse.set(k.id, mk);
