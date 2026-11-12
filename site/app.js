@@ -6,7 +6,7 @@
   const app = $("#app");
   const CHO = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ", DOW = "일월화수목금토";
   const MODELS = [["icon", "ICON"], ["blend", "블렌드"], ["ifs", "ECMWF"], ["aifs", "AIFS"], ["ukmo", "UKMO"], ["gfs", "GFS"], ["kma", "기상청"]];
-  const FULL = { icon: "DWD ICON (독일)", blend: "블렌드 (ICON·AIFS·ECMWF·UKMO)", ifs: "ECMWF IFS (유럽)", aifs: "ECMWF AIFS (유럽, AI)", ukmo: "UKMO (영국)", gfs: "NCEP GFS (미국)", kma: "기상청 단기예보" };
+  const FULL = { icon: "DWD ICON (독일)", blend: "블렌드 (5개 모델 성적 가중)", ifs: "ECMWF IFS (유럽)", aifs: "ECMWF AIFS (유럽, AI)", ukmo: "UKMO (영국)", gfs: "NCEP GFS (미국)", kma: "기상청 단기예보" };
   const VOTERS = ["icon", "ifs", "aifs", "gfs", "ukmo"];
   const ROUND_H = 5, WET_MM = 0.5;
 
@@ -471,9 +471,9 @@
     const rel = S.rel, regs = rel && rel.regions ? ["전국", "수도권", "강원", "충청", "영남", "호남", "제주"].filter(r => rel.regions[r]) : [];
     const tbl = rel ? '<div class="chips" id="reg-chips">' + regs.map((r, i) => '<button class="chip" data-reg="' + r + '" aria-pressed="' + (i === 0) + '">' + r + '</button>').join("") + '</div><div id="scoreboard">' + scoreTable("전국") + "</div>" : "";
     app.innerHTML = '<p><a href="#/">← 처음으로</a></p><section class="card prose"><h1>안내</h1><p>골프날씨는 국내 골프장의 예보를 여러 날씨 모델로 15일까지 보여줍니다. 개인용으로 만든 개발 중 서비스입니다.</p>' +
-      "<h2>모델</h2><ul>" + MODELS.map(([k]) => "<li><b>" + esc(FULL[k]) + "</b>" + ({ icon: " — 1~3일 예보에서 한국 검증 성적이 가장 좋았습니다. 7일차는 신뢰도가 크게 떨어집니다.", blend: " — 기온·바람은 평균, 강수량은 중앙값입니다. 기온은 1~7일 내내 상위권입니다.", ifs: " — 4일 이후에 강합니다.", aifs: " — AI 모델. 4~7일 기온·강수에서 가장 좋았습니다. 돌풍 자료가 없습니다.", ukmo: " — 1~3일 강수 적중이 좋습니다.", gfs: " — 참고용. 한국 검증 성적은 낮은 편입니다. 돌풍 자료가 없습니다.", kma: " — 예보관이 보정한 공식 예보. 약 4일까지 제공됩니다. 05시·17시 발표분을 2026-11-10부터 모아 채점하고 있어, 다른 모델보다 표본이 적습니다." }[k] || "") + "</li>").join("") + "</ul>" +
+      "<h2>모델</h2><ul>" + MODELS.map(([k]) => "<li><b>" + esc(FULL[k]) + "</b>" + ({ icon: " — 1~3일 예보에서 한국 검증 성적이 가장 좋았습니다. 7일차는 신뢰도가 크게 떨어집니다.", blend: " — 기온·바람은 5개 모델을 최근 90일 성적으로 가중 평균하고, 모델마다 평균적으로 높거나 낮게 예보하는 만큼을 예보 기간별로 보정합니다. 강수량은 ICON·AIFS·ECMWF·UKMO의 중앙값입니다.", ifs: " — 4일 이후에 강합니다.", aifs: " — AI 모델. 4~7일 기온·강수에서 가장 좋았습니다. 돌풍 자료가 없습니다.", ukmo: " — 1~3일 강수 적중이 좋습니다.", gfs: " — 참고용. 한국 검증 성적은 낮은 편입니다. 돌풍 자료가 없습니다.", kma: " — 예보관이 보정한 공식 예보. 약 4일까지 제공됩니다. 05시·17시 발표분을 2026-11-10부터 모아 채점하고 있어, 다른 모델보다 표본이 적습니다." }[k] || "") + "</li>").join("") + "</ul>" +
       "<h2>신뢰도 성적표</h2><p>과거 예보를 기상청 관측과 매일 자동으로 대조합니다(" + (rel ? "최근 " + rel.init_dates + "일, " + esc(rel.period) + ", " + esc(rel.note) : "") + "). 점수 = 강수 적중 45% + 기온 오차 35% + 풍속 오차 20%. 골프장 화면의 배지는 그 골프장이 속한 지역의 값을 쓰고, 지역 표본이 적으면 전국 값을 씁니다. 리드타임이 긴 칸은 관측이 쌓일 때까지 표본이 적습니다.</p>" + tbl +
-      "<h2>날씨 지도</h2><p>강수, 기온, 바람을 7일까지 보여줍니다. 1시간 간격은 3일까지이고 그 뒤는 3시간 간격입니다. 바람은 화살표가 불어 가는 방향, 길이와 숫자가 풍속(m/s)입니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li><li>예보는 15일까지 나옵니다. ICON과 UKMO는 7일까지만 있고, 8일 뒤부터는 ECMWF·AIFS·GFS와 블렌드(ECMWF·AIFS 평균)만 나옵니다. 흐리게 표시된 날짜는 참고용입니다.</li></ul>" +
+      "<h2>날씨 지도</h2><p>강수, 기온, 바람을 7일까지 보여줍니다. 1시간 간격은 3일까지이고 그 뒤는 3시간 간격입니다. 바람은 화살표가 불어 가는 방향, 길이와 숫자가 풍속(m/s)입니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li><li>예보는 15일까지 나옵니다. ICON과 UKMO는 7일까지만 있고, 8일 뒤부터는 ECMWF·AIFS·GFS와 블렌드(기온·바람은 ECMWF·AIFS·GFS, 강수는 ECMWF·AIFS)만 나옵니다. 흐리게 표시된 날짜는 참고용입니다.</li></ul>" +
       "<h2>자료</h2><ul><li>모델 예보: Open-Meteo 오픈데이터 (CC BY 4.0) — DWD, ECMWF, NOAA NCEP, UK Met Office</li><li>기상청 단기예보: 공공데이터포털</li><li>골프장: 행정안전부 인허가 데이터, © OpenStreetMap contributors (ODbL)</li><li>고도: Copernicus DEM</li></ul></section>";
   }
 

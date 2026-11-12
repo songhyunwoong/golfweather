@@ -15,6 +15,7 @@ DATA_GO_KR_SERVICE_KEY) and scores the archived issues as model "kma".
 Usage: python3 verify.py [--days 16] [--start YYYY-MM-DD --end YYYY-MM-DD]
 """
 import argparse, datetime as dt, json, os, subprocess, sys, time
+import blendrule
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -195,6 +196,7 @@ def kma_run(path, stations):
                         for m in range(1, gap): fc[k][i, h - m] = x + (xs[n - 1][1] - x) * m / gap
     return init, fc
 
+TABLE = blendrule.load()
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--days", type=int, default=16); ap.add_argument("--start"); ap.add_argument("--end")
     ap.add_argument("--no-write", action="store_true", help="do not write daily score files (experiments)")
@@ -220,14 +222,20 @@ def main():
                 except Exception as e: print(f"  warn {d} {key_m} {hh:02d}Z: {str(e)[:120]}", file=sys.stderr); fc = None
                 if fc is None: continue
                 fcs[key_m] = fc; score_run(fc, init, stations, obs, now, accs.setdefault(key_m, {}))
-            members = [fcs[k] for k in BLEND if k in fcs]
-            if len(members) >= 2:                      # same rule as the app: mean temperature and wind, median precipitation
+            members = [fcs[k] for k in BLEND if k in fcs]; tw = [(k, fcs[k]) for k in blendrule.MEMBERS if k in fcs]
+            if len(members) >= 2 and len(tw) >= 2:     # same rule as the app: weighted, bias-corrected temperature and wind; median precipitation
                 import warnings
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore", RuntimeWarning)
-                    stack = lambda k: np.stack([m[k] for m in members]); cnt = (~np.isnan(stack("t"))).sum(axis=0)
-                    bl = dict(t=np.where(cnt >= 2, np.nanmean(stack("t"), axis=0), np.nan), w=np.where(cnt >= 2, np.nanmean(stack("w"), axis=0), np.nan),
-                              p=np.where(cnt >= 2, np.nanmedian(stack("p"), axis=0), np.nan))
+                    nh = tw[0][1]["t"].shape[1]; ld = np.clip((np.arange(nh) + 23) // 24, 1, MAX_LEAD_D)
+                    def wavg(var):
+                        X = np.stack([m[var] for _, m in tw]); ok = ~np.isnan(X)
+                        cf = np.array([[blendrule.coef(TABLE, var, L, k) for L in ld] for k, _ in tw])       # [model, hour, (w, b)]
+                        ww = cf[:, None, :, 0] * ok; sw = ww.sum(axis=0)
+                        v = (np.where(ok, X - cf[:, None, :, 1], 0) * ww).sum(axis=0) / np.where(sw > 0, sw, 1)
+                        return np.where((ok.sum(axis=0) >= 2) & (sw > 0), v, np.nan)
+                    stack = lambda k: np.stack([m[k] for m in members]); cnt = (~np.isnan(stack("p"))).sum(axis=0)
+                    bl = dict(t=wavg("t"), w=np.maximum(wavg("w"), 0), p=np.where(cnt >= 2, np.nanmedian(stack("p"), axis=0), np.nan))
                 score_run(bl, init, stations, obs, now, accs.setdefault("blend", {})); fcs["blend"] = bl
             if a.dump and fcs:                         # 6-hourly t, w and 12 h rain totals of every model and of the blend
                 hs = list(range(6, MAX_LEAD_D * 24 + 1, 6)); h12 = list(range(12, MAX_LEAD_D * 24 + 1, 12)); os.makedirs(a.dump, exist_ok=True)

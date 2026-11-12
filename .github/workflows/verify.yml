@@ -35,6 +35,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/verification/daily data/verification/kma_fc site/reliability.json pipeline/cache
+          git add -A data/verification/daily data/verification/kma_fc site/reliability.json pipeline/blend_weights.json pipeline/cache
           git diff --cached --quiet || git commit -m "Update forecast verification ($(date -u +%F))"
           git push

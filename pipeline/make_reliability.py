@@ -7,6 +7,7 @@ score = 0.45 * rain + 0.35 * temperature + 0.20 * wind, each part 0..100:
   wind  MAE of 10 m wind speed              2.0 m/s -> 0, 0.8 m/s -> 100
 """
 import glob, json, os, time
+import blendrule
 HERE = os.path.dirname(os.path.abspath(__file__))
 VDIR = os.path.join(HERE, "..", "data", "verification")
 WINDOW = 90
@@ -42,6 +43,8 @@ def main():
                    note=f"기상청 지상관측 {stations}개 지점, 00·12 UTC 실행", regions=out),
               open(os.path.join(HERE, "..", "site", "reliability.json"), "w"), ensure_ascii=False, separators=(",", ":"))
     nat = out.get("전국", {})
+    json.dump(dict(generated=time.strftime("%Y-%m-%d"), period=f"{first} ~ {last}", note="weight 1/MAE^2 and bias per model, lead day and variable (t: C, w: m/s)",
+                   leads=blendrule.make(nat)), open(blendrule.PATH, "w"), separators=(",", ":"))
     print(f"reliability: {first}..{last} ({len(files)} init dates)")
     for m in nat: print(f"  {m:6s}", " ".join(f"{nat[m].get(str(d), {}).get('score', '--'):>3}" for d in range(1, 16)))
 

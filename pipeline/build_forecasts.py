@@ -10,6 +10,7 @@ instead (rate-limited; for comparison only). Output directory (default ../site/d
 Usage: python3 build_forecasts.py [--out DIR] [--limit N] [--source s3|api]
 """
 import argparse, datetime as dt, json, math, os, statistics, subprocess, sys, time, urllib.parse
+import blendrule
 from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -125,20 +126,31 @@ def kma_series(by, times):
     return m
 
 # ---------------------------------------------------------------- blend
-def blend(models, n):
+def blend(models, n, lead=None, table=None):
+    """Temperature and wind: bias-corrected, skill-weighted mean of blendrule.MEMBERS for the hour's lead day.
+    Precipitation: median of BLEND. Other fields: mean of BLEND."""
     src = [models[k] for k in BLEND if k in models]
+    tw = [(k, models[k]) for k in blendrule.MEMBERS if k in models]
     voters = [models[k] for k in MODELS if k in models]
-    if len(src) < 2: return None, None
-    b = {k: [] for k in VARS}; votes = []
+    if len(src) < 2 and len(tw) < 2: return None, None
+    b = {k: [] for k in VARS}; votes = []; table = table or {}
     for i in range(n):
         col = lambda k, s=src: [m[k][i] for m in s if i < len(m[k]) and m[k][i] is not None]
-        t, ap, p, w, g, c = col("t"), col("ap"), col("p"), col("w"), col("g"), col("c")
-        ok = len(t) >= 2
+        L = lead[i] if lead else 1
+        def wavg(key, var, shift=True):          # (value, members)
+            xs = [(m[key][i], *blendrule.coef(table, var, L, k)) for k, m in tw if i < len(m[key]) and m[key][i] is not None]
+            sw = sum(w for _, w, _ in xs)
+            return (sum((x - (bb if shift else 0)) * w for x, w, bb in xs) / sw if len(xs) >= 2 and sw > 0 else None), len(xs)
+        tv, nt = wavg("t", "t"); wv, _ = wavg("w", "w"); apv, _ = wavg("ap", "t")
+        p, g, c = col("p"), col("g"), col("c")
+        ok = nt >= 2
         mean = lambda a, r: rnd(sum(a) / len(a), r) if ok and a else None
-        b["t"].append(mean(t, 1)); b["ap"].append(mean(ap, 1)); b["w"].append(mean(w, 1)); b["g"].append(mean(g, 1)); b["c"].append(mean(c, 0))
+        wv = None if wv is None else max(0.0, wv); gm = mean(g, 1)
+        b["t"].append(rnd(tv, 1) if tv is not None else None); b["ap"].append(rnd(apv, 1) if apv is not None else None)
+        b["w"].append(rnd(wv, 1) if wv is not None else None); b["g"].append(max(gm, rnd(wv, 1)) if gm is not None and wv is not None else gm); b["c"].append(mean(c, 0))
         pm = rnd(statistics.median(p), 1) if ok and p else None
         b["p"].append(pm)
-        dirs = [(m["wd"][i], m["w"][i]) for m in src if i < len(m["wd"]) and m["wd"][i] is not None and m["w"][i] is not None]
+        dirs = [(m["wd"][i], m["w"][i]) for _, m in tw if i < len(m["wd"]) and m["wd"][i] is not None and m["w"][i] is not None]
         if ok and dirs:
             x = sum(s * math.sin(math.radians(d)) for d, s in dirs); y = sum(s * math.cos(math.radians(d)) for d, s in dirs)
             b["wd"].append(int(round(math.degrees(math.atan2(x, y)) % 360)) % 360 if (x or y) else dirs[0][0])
@@ -178,10 +190,13 @@ def main():
         print(f"KMA grids {sum(v is not None for v in kma.values())}/{len(grids)}", flush=True)
     else:
         print("warn: DATA_GO_KR_SERVICE_KEY not set, skipping KMA", file=sys.stderr)
-    n_kma = 0
+    n_kma = 0; table = blendrule.load(); lead = None
     for c in courses:
+        if lead is None:                         # lead day of every hour, counted from now (hours already past count as day 1)
+            t0 = now.replace(tzinfo=None)
+            lead = [min(15, max(1, math.ceil((dt.datetime.fromisoformat(t) - t0).total_seconds() / 86400))) for t in om[c["id"]]["time"]]
         rec = om[c["id"]]; times = rec["time"]; models = rec["models"]
-        b, votes = blend(models, len(times))
+        b, votes = blend(models, len(times), lead, table)
         if b: models["blend"] = b
         by = kma.get((c["kma_nx"], c["kma_ny"]))
         if by:
@@ -192,7 +207,7 @@ def main():
                  lat=c["lat"], lon=c["lon"], elev=c["elevation_m"], type=c["type"], addr=c["address"], tel=c["tel"]) for c in courses]
     json.dump(dict(version=src["meta"]["version"], courses=slim), open(os.path.join(a.out, "courses.json"), "w"), ensure_ascii=False, separators=(",", ":"))
     info = {k: dict(label=v[2], init=runs.get(k), native_steps=v[3]) for k, v in MODELS.items()}
-    info["blend"] = dict(label="블렌드", members=BLEND, init=None)
+    info["blend"] = dict(label="블렌드", members=BLEND, tw_members=blendrule.MEMBERS, weighted=bool(table), init=None)
     info["kma"] = dict(label="기상청 단기예보", init=kma_init, courses=n_kma)
     json.dump(dict(generated=now.strftime("%Y-%m-%dT%H:%M+09:00"), source=a.source, courses=len(courses), days=DAYS, rain_mm=RAIN_MM, models=info),
               open(os.path.join(a.out, "meta.json"), "w"), ensure_ascii=False, indent=1)
