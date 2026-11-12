@@ -143,8 +143,8 @@
   }
   function relBadge(model, date) {
     const d = leadDay(date), reg = regionOf(S.cur);
-    if (model === "kma") return '<div class="badge"><b>신뢰도 검증 준비 중</b><span class="small muted">기상청 단기예보는 아직 과거 예보를 모으는 중입니다.</span></div>';
     const x = relFor(model, d, reg);
+    if (!x && model === "kma") return '<div class="badge"><b>신뢰도 검증 준비 중</b><span class="small muted">기상청 단기예보는 2026-11-10부터 예보를 모으고 있습니다. 며칠 뒤부터 점수가 나옵니다.</span></div>';
     if (!x) return '<div class="badge"><b>이 리드타임의 검증 자료 없음</b></div>';
     const r = x.r;
     return '<details class="badge"><summary><span class="stars" aria-label="별 ' + r.stars + '개">' + "★".repeat(r.stars) + "☆".repeat(5 - r.stars) + "</span> <b>신뢰도 " + r.score + "점</b> <span class=\"small muted\">" + d + "일 뒤 예보 · " + esc(x.region) + " 기준</span></summary>" +
@@ -164,9 +164,10 @@
       '<p class="small muted">' + esc(FULL[S.model]) + (init ? " · " + esc(initLabel(init)) + " 실행" : "") + "</p>" + relBadge(S.model, S.date) + "</section>";
     // days
     h += '<div class="days" role="group" aria-label="날짜">' + ds.map(d => { const s = dayStats(fc, m, d), w = dow(d);
-      return '<button class="day" data-date="' + d + '" aria-pressed="' + (d === S.date) + '"><span class="dow ' + (w === 6 ? "sat" : w === 0 ? "sun" : "") + '">' + DOW[w] + '</span><span class="muted small">' + +d.slice(5, 7) + "/" + +d.slice(8, 10) + "</span>" + (s.n >= 6 ? wx(s.wc, null) + '<span class="num">' + fmt(s.tmax) + "° <span class=\"muted\">" + fmt(s.tmin) + '°</span></span><span class="pr' + (s.p >= 1 ? "" : " dry") + '">' + (s.p >= 0.1 ? s.p.toFixed(1) : "0") + "</span>" : '<span class="muted small">예보<br>없음</span>') + "</button>"; }).join("") + "</div>";
+      return '<button class="day' + (leadDay(d) > 8 ? " far" : "") + '" data-date="' + d + '" aria-pressed="' + (d === S.date) + '"><span class="dow ' + (w === 6 ? "sat" : w === 0 ? "sun" : "") + '">' + DOW[w] + '</span><span class="muted small">' + +d.slice(5, 7) + "/" + +d.slice(8, 10) + "</span>" + (s.n >= 6 ? wx(s.wc, null) + '<span class="num">' + fmt(s.tmax) + "° <span class=\"muted\">" + fmt(s.tmin) + '°</span></span><span class="pr' + (s.p >= 1 ? "" : " dry") + '">' + (s.p >= 0.1 ? s.p.toFixed(1) : "0") + "</span>" : '<span class="muted small">예보<br>없음</span>') + "</button>"; }).join("") + "</div>";
     // round summary
     h += '<section class="card"><div class="row between"><h2>' + dlabel(S.date) + ' 라운드</h2><label class="small">티업 <select class="plain" id="tee">' + tees.map(t => '<option value="' + t + '"' + (t === S.tee ? " selected" : "") + ">" + String(t).padStart(2, "0") + ":00</option>").join("") + "</select></label></div>";
+    if (leadDay(S.date) > 8) h += '<p class="note">8일 뒤부터는 참고용입니다. 기온의 큰 흐름은 볼 만하지만, 비가 오는 날과 시각은 거의 맞지 않습니다.</p>';
     if (!rs) h += '<p class="muted">' + (noData ? "이 모델은 이 날짜의 예보가 없습니다. 다른 모델을 골라 보세요." : "이 시각의 예보가 없습니다.") + "</p>";
     else {
       const wet = rs.p != null && rs.p >= WET_MM;
@@ -460,7 +461,7 @@
   // ---------------- info
   function scoreTable(region) {
     const R = S.rel && S.rel.regions && S.rel.regions[region]; if (!R) return '<p class="muted small">검증 자료가 없습니다.</p>';
-    const ks = ["icon", "blend", "ifs", "aifs", "ukmo", "gfs"].filter(k => R[k]), leads = []; for (let d = 1; d <= 15; d++) if (ks.some(k => R[k][d])) leads.push(d);
+    const ks = ["icon", "blend", "ifs", "aifs", "ukmo", "gfs", "kma"].filter(k => R[k]), leads = []; for (let d = 1; d <= 15; d++) if (ks.some(k => R[k][d])) leads.push(d);
     const cell = (k, d, f) => { const r = R[k][d]; return "<td>" + (r ? f(r) : "—") + "</td>"; };
     const tbl = (title, f) => '<h3 class="small" style="margin-top:6px">' + title + '</h3><div class="scroll"><table><thead><tr><th>모델</th>' + leads.map(d => "<th>" + d + "일</th>").join("") + "</tr></thead><tbody>" + ks.map(k => "<tr><td>" + MODELS.find(m => m[0] === k)[1] + "</td>" + leads.map(d => cell(k, d, f)).join("") + "</tr>").join("") + "</tbody></table></div>";
     return tbl("신뢰도 점수 (100점 만점)", r => r.score) + tbl("기온 평균오차 (°C)", r => r.t_mae.toFixed(1)) + tbl("풍속 평균오차 (m/s)", r => r.w_mae.toFixed(1)) + tbl("12시간 강수 적중 ETS (1에 가까울수록 좋음)", r => r.ets.toFixed(2));
@@ -469,10 +470,10 @@
     document.title = "안내 · 골프날씨";
     const rel = S.rel, regs = rel && rel.regions ? ["전국", "수도권", "강원", "충청", "영남", "호남", "제주"].filter(r => rel.regions[r]) : [];
     const tbl = rel ? '<div class="chips" id="reg-chips">' + regs.map((r, i) => '<button class="chip" data-reg="' + r + '" aria-pressed="' + (i === 0) + '">' + r + '</button>').join("") + '</div><div id="scoreboard">' + scoreTable("전국") + "</div>" : "";
-    app.innerHTML = '<p><a href="#/">← 처음으로</a></p><section class="card prose"><h1>안내</h1><p>골프날씨는 국내 골프장의 7일 예보를 여러 날씨 모델로 보여줍니다. 개인용으로 만든 개발 중 서비스입니다.</p>' +
-      "<h2>모델</h2><ul>" + MODELS.map(([k]) => "<li><b>" + esc(FULL[k]) + "</b>" + ({ icon: " — 1~3일 예보에서 한국 검증 성적이 가장 좋았습니다. 7일차는 신뢰도가 크게 떨어집니다.", blend: " — 기온·바람은 평균, 강수량은 중앙값입니다. 기온은 1~7일 내내 상위권입니다.", ifs: " — 4일 이후에 강합니다.", aifs: " — AI 모델. 4~7일 기온·강수에서 가장 좋았습니다. 돌풍 자료가 없습니다.", ukmo: " — 1~3일 강수 적중이 좋습니다.", gfs: " — 참고용. 한국 검증 성적은 낮은 편입니다. 돌풍 자료가 없습니다.", kma: " — 예보관이 보정한 공식 예보. 약 4일까지 제공됩니다." }[k] || "") + "</li>").join("") + "</ul>" +
+    app.innerHTML = '<p><a href="#/">← 처음으로</a></p><section class="card prose"><h1>안내</h1><p>골프날씨는 국내 골프장의 예보를 여러 날씨 모델로 15일까지 보여줍니다. 개인용으로 만든 개발 중 서비스입니다.</p>' +
+      "<h2>모델</h2><ul>" + MODELS.map(([k]) => "<li><b>" + esc(FULL[k]) + "</b>" + ({ icon: " — 1~3일 예보에서 한국 검증 성적이 가장 좋았습니다. 7일차는 신뢰도가 크게 떨어집니다.", blend: " — 기온·바람은 평균, 강수량은 중앙값입니다. 기온은 1~7일 내내 상위권입니다.", ifs: " — 4일 이후에 강합니다.", aifs: " — AI 모델. 4~7일 기온·강수에서 가장 좋았습니다. 돌풍 자료가 없습니다.", ukmo: " — 1~3일 강수 적중이 좋습니다.", gfs: " — 참고용. 한국 검증 성적은 낮은 편입니다. 돌풍 자료가 없습니다.", kma: " — 예보관이 보정한 공식 예보. 약 4일까지 제공됩니다. 05시·17시 발표분을 2026-11-10부터 모아 채점하고 있어, 다른 모델보다 표본이 적습니다." }[k] || "") + "</li>").join("") + "</ul>" +
       "<h2>신뢰도 성적표</h2><p>과거 예보를 기상청 관측과 매일 자동으로 대조합니다(" + (rel ? "최근 " + rel.init_dates + "일, " + esc(rel.period) + ", " + esc(rel.note) : "") + "). 점수 = 강수 적중 45% + 기온 오차 35% + 풍속 오차 20%. 골프장 화면의 배지는 그 골프장이 속한 지역의 값을 쓰고, 지역 표본이 적으면 전국 값을 씁니다. 리드타임이 긴 칸은 관측이 쌓일 때까지 표본이 적습니다.</p>" + tbl +
-      "<h2>날씨 지도</h2><p>강수, 기온, 바람을 7일까지 보여줍니다. 1시간 간격은 3일까지이고 그 뒤는 3시간 간격입니다. 바람은 화살표가 불어 가는 방향, 길이와 숫자가 풍속(m/s)입니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li></ul>" +
+      "<h2>날씨 지도</h2><p>강수, 기온, 바람을 7일까지 보여줍니다. 1시간 간격은 3일까지이고 그 뒤는 3시간 간격입니다. 바람은 화살표가 불어 가는 방향, 길이와 숫자가 풍속(m/s)입니다. ICON·ECMWF·GFS의 원래 격자를 0.1° 간격으로 다시 계산한 것이라, 골프장 상세 화면의 값(고도 보정)과 조금 다를 수 있습니다.</p><h2>읽는 법</h2><ul><li><b>라운드 강수</b>는 티업 시각부터 " + ROUND_H + "시간 동안의 합계입니다.</li><li><b>비 예보 모델 수</b>는 5개 모델(ICON, ECMWF, AIFS, UKMO, GFS) 중 라운드 시간에 " + WET_MM + " mm 이상을 예보한 수입니다.</li><li>기온은 골프장 고도에 맞춰 보정했습니다(100 m당 0.65°C).</li><li>원자료가 3·6시간 간격인 구간은 사이 시각을 보간했습니다.</li><li>예보는 15일까지 나옵니다. ICON과 UKMO는 7일까지만 있고, 8일 뒤부터는 ECMWF·AIFS·GFS와 블렌드(ECMWF·AIFS 평균)만 나옵니다. 흐리게 표시된 날짜는 참고용입니다.</li></ul>" +
       "<h2>자료</h2><ul><li>모델 예보: Open-Meteo 오픈데이터 (CC BY 4.0) — DWD, ECMWF, NOAA NCEP, UK Met Office</li><li>기상청 단기예보: 공공데이터포털</li><li>골프장: 행정안전부 인허가 데이터, © OpenStreetMap contributors (ODbL)</li><li>고도: Copernicus DEM</li></ul></section>";
   }
 

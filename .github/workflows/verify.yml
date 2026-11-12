@@ -24,9 +24,10 @@ jobs:
           cache: pip
           cache-dependency-path: pipeline/requirements.txt
       - run: pip install -r pipeline/requirements.txt
-      - name: 최근 16일 초기화분 검증
+      - name: 기상청 단기예보 보관, 최근 16일 초기화분 검증
         env:
           KMA_APIHUB_KEY: ${{ secrets.KMA_APIHUB_KEY }}
+          DATA_GO_KR_SERVICE_KEY: ${{ secrets.DATA_GO_KR_SERVICE_KEY }}
         run: python3 pipeline/verify.py --days 16
       - name: 신뢰도 점수 계산
         run: python3 pipeline/make_reliability.py
@@ -34,6 +35,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/verification/daily site/reliability.json pipeline/cache
+          git add -A data/verification/daily data/verification/kma_fc site/reliability.json pipeline/cache
           git diff --cached --quiet || git commit -m "Update forecast verification ($(date -u +%F))"
           git push

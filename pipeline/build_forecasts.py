@@ -14,7 +14,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 KST = dt.timezone(dt.timedelta(hours=9))
-DAYS = 8                                  # today + 7
+DAYS = 16                                 # today + 15; ICON and UKMO end after about 7 days, the rest run to 15
 VARS = {"t": "temperature_2m", "ap": "apparent_temperature", "p": "precipitation", "w": "wind_speed_10m",
         "wd": "wind_direction_10m", "g": "wind_gusts_10m", "c": "cloud_cover", "wc": "weather_code"}
 ROUND = {"t": 1, "ap": 1, "p": 1, "w": 1, "wd": 0, "g": 1, "c": 0, "wc": 0}

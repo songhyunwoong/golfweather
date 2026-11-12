@@ -107,3 +107,5 @@ input[type=range] { width:100%; accent-color:var(--accent); }
 button.item { cursor:pointer; }
 .prose > * { min-width:0; }
 .prose h3 { font-size:13px; color:var(--fg-2); }
+.day.far { opacity:.62; border-style:dashed; }
+.day.far[aria-pressed="true"] { opacity:1; }
