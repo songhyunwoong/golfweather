@@ -61,6 +61,10 @@ def cont(var, OV):
                  "성적 가중(5)": wmean(f, inv(mse, 1), ALL), "성적 가중 강하게(5)": wmean(f, inv(mse, 2), ALL),
                  "치우침 보정+평균(4)": wmean(fc, one, CUR), "치우침 보정+평균(5)": wmean(fc, one, ALL),
                  "치우침 보정+성적 가중(5)": wmean(fc, inv(msec, 1), ALL), "치우침 보정+성적 가중 강하게(5)": wmean(fc, w2, ALL)}
+            bp = nmean(e[:, :, tr], (1, 2)); fp = f - np.where(np.isfinite(bp), bp, 0)[:, None, None]      # what the app can do: one bias per model and lead day,
+            maer = nmean(np.abs(e[:, :, tr]), (1, 2))                                                       # weights from the published MAE of the raw forecasts
+            P["운영안: 전체 치우침 보정+평균(5)"] = wmean(fp, one, ALL); P["운영안: 전체 치우침 보정+1/MAE² 가중(5)"] = wmean(fp, inv(maer, 2), ALL)
+            P["운영안: 1/MAE² 가중만(5)"] = wmean(f, inv(maer, 2), ALL)
             for i, n in enumerate(names): P["단일 " + n] = f[i]; P["단일 " + n + " 보정"] = fc[i]
             base = np.isfinite(P["현재(4모델 평균)"]) & np.isfinite(O) & te[None]
             for k, p in P.items():
@@ -80,7 +84,7 @@ def table(pred, obs, ok):
 
 def rain():
     FA = D["P"]; OA = D["OP"]; acc = {}; per = {}; chosen = {}
-    THR = [0.2, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0]
+    THR = [0.2, 0.3, 0.5, 0.7, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0]
     for s0 in blocks(D["tv12"]):
         for li, L in enumerate(leads):
             tv = D["tv12"][li]; tr = (tv >= s0 - TRAIN_DAYS) & (tv < s0); te = (tv >= s0) & (tv < s0 + TEST_DAYS)
