@@ -1,8 +1,8 @@
 {
  "meta": {
   "version": "v2",
-  "generated": "2026-11-12",
-  "count": 495,
+  "generated": "2026-11-20",
+  "count": 504,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -10,16 +10,16 @@
   "admin_boundaries": "HangJeongDong_ver20261001.geojson",
   "elevation": "Copernicus GLO-90 via Open-Meteo",
   "min_area_ha": 10.0,
-  "licences_active": 625,
+  "licences_active": 644,
   "licences_unresolved": 0,
   "review": {
    "removed": 40,
-   "renamed": 5,
-   "confirmed": 480,
-   "attached": 2,
-   "added": 15,
+   "renamed": 15,
+   "confirmed": 485,
+   "attached": 4,
+   "added": 13,
    "excluded": 16,
-   "near_existing": 15,
+   "near_existing": 16,
    "check": 0
   }
  },
@@ -1589,7 +1589,7 @@
    "kma_ny": 129
   },
   {
-   "id": "lic-302012016000002",
+   "id": "lic-6530000-302012016000002",
    "name": "용평리조트 골프클럽",
    "aliases": [
     "용평"
@@ -1614,9 +1614,9 @@
    ],
    "match": "",
    "review": [
+    "영역없음",
     "동명"
    ],
-   "reviewed": true,
    "elevation_m": 753,
    "elevation_range_m": [
     753,
@@ -3485,6 +3485,74 @@
    "choseong": "ㅈㅇ",
    "kma_nx": 58,
    "kma_ny": 121
+  },
+  {
+   "id": "osm-w631057875",
+   "name": "골프존카운티 안성H",
+   "aliases": [
+    "Golfzon County Anseong H"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "안성시",
+   "address": "경기도 안성시 보개면 보삼로 302",
+   "tel": "070-8056-0700",
+   "lat": 37.09618,
+   "lon": 127.33525,
+   "position": "코스영역 중심",
+   "area_ha": 60.9,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=4",
+   "osm_ids": [
+    "w631057875"
+   ],
+   "licence_ids": [
+    "4080000-CDFH2302012014000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "elevation_m": 171,
+   "elevation_range_m": [
+    118,
+    208
+   ],
+   "name_norm": "골프존카운티안성h",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅇㅅh",
+   "kma_nx": 66,
+   "kma_ny": 117
+  },
+  {
+   "id": "osm-w389269620",
+   "name": "골프존카운티 안성W",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "안성시",
+   "address": "경기도 안성시 양성면 교동길 19-70",
+   "tel": "031-674-0139",
+   "lat": 37.07628,
+   "lon": 127.19347,
+   "position": "코스영역 중심",
+   "area_ha": 48.1,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=7",
+   "osm_ids": [
+    "w389269620"
+   ],
+   "licence_ids": [
+    "4080000-CDFH2302012008000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "elevation_m": 114,
+   "elevation_range_m": [
+    99,
+    143
+   ],
+   "name_norm": "골프존카운티안성w",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅇㅅw",
+   "kma_nx": 64,
+   "kma_ny": 116
   },
   {
    "id": "osm-w1205705685",
@@ -7959,6 +8027,43 @@
    "kma_ny": 82
   },
   {
+   "id": "osm-w1446179327",
+   "name": "골프존카운티 사천",
+   "aliases": [
+    "골프존카운티 사천",
+    "골프존카운티사천"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경상남도",
+   "sigungu": "사천시",
+   "address": "경상남도 사천시 서포면 구송로 151",
+   "tel": "",
+   "lat": 35.01029,
+   "lon": 127.95208,
+   "position": "코스영역 중심",
+   "area_ha": 74.7,
+   "website": "",
+   "osm_ids": [
+    "w1446179327"
+   ],
+   "licence_ids": [
+    "6480000-302012013000002"
+   ],
+   "match": "이름",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 27,
+   "elevation_range_m": [
+    18,
+    42
+   ],
+   "name_norm": "골프존카운티사천",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅅㅊ",
+   "kma_nx": 78,
+   "kma_ny": 71
+  },
+  {
    "id": "lic-302012011000003",
    "name": "사천 타니컨트리클럽",
    "aliases": [],
@@ -8975,6 +9080,45 @@
    "kma_ny": 91
   },
   {
+   "id": "osm-w525072359",
+   "name": "골프존카운티 감포",
+   "aliases": [
+    "골프존카운티감포",
+    "제이스C.C 시사이드"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "경주시",
+   "address": "경상북도 경주시 감포읍 동해안로 1819-59",
+   "tel": "054-777-9000",
+   "lat": 35.77545,
+   "lon": 129.48359,
+   "position": "코스영역 중심",
+   "area_ha": 98.2,
+   "website": "",
+   "osm_ids": [
+    "w525072359"
+   ],
+   "licence_ids": [
+    "5050000-CDFH2302012006000001",
+    "6470000-302012010000005"
+   ],
+   "match": "좌표",
+   "review": [],
+   "elevation_m": 141,
+   "elevation_range_m": [
+    57,
+    183
+   ],
+   "name_norm": "골프존카운티감포",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㄱㅍ",
+   "kma_nx": 105,
+   "kma_ny": 89
+  },
+  {
    "id": "osm-w523812158",
    "name": "디아너스컨트리클럽",
    "aliases": [
@@ -9214,38 +9358,6 @@
    "choseong": "ㅇㅅㅌㅎ",
    "kma_nx": 103,
    "kma_ny": 88
-  },
-  {
-   "id": "lic-5050000-CDFH2302012006000001",
-   "name": "제이스C.C 시사이드",
-   "aliases": [],
-   "type": [],
-   "status": "영업",
-   "sido": "경상북도",
-   "sigungu": "경주시",
-   "address": "경상북도 경주시 감포읍 나정리 산 47",
-   "tel": "054-777-9000",
-   "lat": 35.81639,
-   "lon": 129.50222,
-   "position": "검수 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "5050000-CDFH2302012006000001"
-   ],
-   "match": "검수",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 27,
-   "elevation_range_m": [
-    27,
-    27
-   ],
-   "name_norm": "제이스cc시사이드",
-   "choseong": "ㅈㅇㅅccㅅㅅㅇㄷ",
-   "kma_nx": 105,
-   "kma_ny": 90
   },
   {
    "id": "lic-302012008000041",
@@ -9498,13 +9610,57 @@
    "kma_ny": 87
   },
   {
+   "id": "osm-w386241143",
+   "name": "골프존카운티 선산·구미",
+   "aliases": [
+    "Golfzon County Sunsan",
+    "골프존카운티 선산",
+    "골프존카운티구미",
+    "골프존카운티선산"
+   ],
+   "type": [
+    "회원제"
+   ],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "구미시",
+   "address": "경상북도 구미시 산동면 강동로 953-73",
+   "tel": "",
+   "lat": 36.15724,
+   "lon": 128.44959,
+   "position": "코스영역 중심",
+   "area_ha": 143.0,
+   "website": "http://sunsan.golfzoncounty.com/",
+   "osm_ids": [
+    "w386241143"
+   ],
+   "licence_ids": [
+    "6470000-302012013000004",
+    "6470000-302012013000005"
+   ],
+   "match": "이름",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 73,
+   "elevation_range_m": [
+    60,
+    83
+   ],
+   "name_norm": "골프존카운티선산구미",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅅㅅㄱㅁ",
+   "kma_nx": 86,
+   "kma_ny": 97
+  },
+  {
    "id": "osm-w521310826",
    "name": "구미컨트리클럽",
    "aliases": [
     "Gumi Country Club",
     "구미CC"
    ],
-   "type": [],
+   "type": [
+    "비회원제"
+   ],
    "status": "영업",
    "sido": "경상북도",
    "sigungu": "구미시",
@@ -9522,7 +9678,7 @@
     "6470000-302012010000008",
     "6470000-302012010000009"
    ],
-   "match": "좌표",
+   "match": "이름+좌표",
    "review": [],
    "reviewed": true,
    "elevation_m": 107,
@@ -9936,6 +10092,44 @@
    "kma_ny": 101
   },
   {
+   "id": "osm-w628481060",
+   "name": "골프존카운티 청통",
+   "aliases": [
+    "Golfzon County Cheongtong",
+    "골프존카운티 청통",
+    "청통골프장"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "영천시",
+   "address": "경상북도 영천시 청통면 송천리 661번지 1호 청통골프장",
+   "tel": "070-8660-3956",
+   "lat": 35.9878,
+   "lon": 128.81251,
+   "position": "코스영역 중심",
+   "area_ha": 55.4,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=33",
+   "osm_ids": [
+    "w628481060"
+   ],
+   "licence_ids": [
+    "6470000-302012015000005"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 124,
+   "elevation_range_m": [
+    95,
+    149
+   ],
+   "name_norm": "골프존카운티청통",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅊㅌ",
+   "kma_nx": 93,
+   "kma_ny": 93
+  },
+  {
    "id": "osm-w253055978",
    "name": "영천 시엘골프클럽",
    "aliases": [
@@ -10045,38 +10239,6 @@
    "choseong": "ㅇㅍ",
    "kma_nx": 97,
    "kma_ny": 94
-  },
-  {
-   "id": "lic-302012015000005",
-   "name": "청통골프장",
-   "aliases": [],
-   "type": [],
-   "status": "영업",
-   "sido": "경상북도",
-   "sigungu": "영천시",
-   "address": "경상북도 영천시 청통면 송천리 661번지 1호 청통골프장",
-   "tel": "070-8660-3956",
-   "lat": 35.98685,
-   "lon": 128.81007,
-   "position": "인허가 주소 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "6470000-302012015000005"
-   ],
-   "match": "",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 102,
-   "elevation_range_m": [
-    102,
-    102
-   ],
-   "name_norm": "청통",
-   "choseong": "ㅊㅌ",
-   "kma_nx": 92,
-   "kma_ny": 93
   },
   {
    "id": "osm-w635470186",
@@ -12862,6 +13024,42 @@
    "kma_ny": 67
   },
   {
+   "id": "osm-w545767312",
+   "name": "골프존카운티 순천",
+   "aliases": [
+    "Golfzon County Suncheon"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "전남광주통합특별시",
+   "sigungu": "순천시",
+   "address": "전남광주통합특별시 순천시 주암면 행정1길 77",
+   "tel": "",
+   "lat": 35.046,
+   "lon": 127.30766,
+   "position": "코스영역 중심",
+   "area_ha": 106.5,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=26",
+   "osm_ids": [
+    "w545767312"
+   ],
+   "licence_ids": [
+    "6130000-302012008000001",
+    "6130000-302012008000002"
+   ],
+   "match": "좌표",
+   "review": [],
+   "elevation_m": 230,
+   "elevation_range_m": [
+    175,
+    318
+   ],
+   "name_norm": "골프존카운티순천",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅅㅊ",
+   "kma_nx": 66,
+   "kma_ny": 72
+  },
+  {
    "id": "osm-w468589803",
    "name": "부영CC순천",
    "aliases": [],
@@ -13232,15 +13430,17 @@
   },
   {
    "id": "osm-w893914230",
-   "name": "사우스링스 영암",
+   "name": "골프존카운티 영암",
    "aliases": [
+    "골프존카운티 영암(대중형골프장)",
+    "사우스링스 영암",
     "사우스링스영암"
    ],
    "type": [],
-   "status": "",
+   "status": "영업",
    "sido": "전남광주통합특별시",
    "sigungu": "영암군",
-   "address": "",
+   "address": "전남광주통합특별시 영암군 삼호읍 에프원로 121-1",
    "tel": "",
    "lat": 34.7369,
    "lon": 126.43301,
@@ -13251,8 +13451,10 @@
     "w893914230",
     "w893914231"
    ],
-   "licence_ids": [],
-   "match": "",
+   "licence_ids": [
+    "5875000-CDFH2302012019000001"
+   ],
+   "match": "좌표",
    "review": [],
    "reviewed": true,
    "elevation_m": 1,
@@ -13260,8 +13462,8 @@
     0,
     1
    ],
-   "name_norm": "사우스링스영암",
-   "choseong": "ㅅㅇㅅㄹㅅㅇㅇ",
+   "name_norm": "골프존카운티영암",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅇㅇ",
    "kma_nx": 51,
    "kma_ny": 65
   },
@@ -13818,6 +14020,43 @@
    "kma_ny": 82
   },
   {
+   "id": "lic-6540000-302012016000002",
+   "name": "골프존카운티 선운",
+   "aliases": [
+    "골프존카운티선운"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "전북특별자치도",
+   "sigungu": "고창군",
+   "address": "전북특별자치도 고창군 아산면 운곡로 418-0, 1동 (골프존카운티선운)",
+   "tel": "",
+   "lat": 35.49219,
+   "lon": 126.64661,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6540000-302012016000001",
+    "6540000-302012016000002"
+   ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 113,
+   "elevation_range_m": [
+    113,
+    113
+   ],
+   "name_norm": "골프존카운티선운",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅅㅇ",
+   "kma_nx": 54,
+   "kma_ny": 82
+  },
+  {
    "id": "osm-w643232453",
    "name": "석정힐CC",
    "aliases": [
@@ -14033,6 +14272,42 @@
    "kma_ny": 88
   },
   {
+   "id": "osm-w388325966",
+   "name": "골프존카운티 드래곤",
+   "aliases": [
+    "Golfzon County Dragon"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "전북특별자치도",
+   "sigungu": "남원시",
+   "address": "전북특별자치도 남원시 대산면 대사로 500-0, 1동 0층 0호 (드라곤레이크컨트리클럽)",
+   "tel": "",
+   "lat": 35.43563,
+   "lon": 127.34267,
+   "position": "코스영역 중심",
+   "area_ha": 99.6,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=44",
+   "osm_ids": [
+    "w388325966"
+   ],
+   "licence_ids": [
+    "6540000-302012012000001",
+    "6540000-302012021000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "elevation_m": 197,
+   "elevation_range_m": [
+    165,
+    221
+   ],
+   "name_norm": "골프존카운티드래곤",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㄷㄹㄱ",
+   "kma_nx": 67,
+   "kma_ny": 80
+  },
+  {
    "id": "osm-w621557551",
    "name": "남원상록골프장",
    "aliases": [
@@ -14071,6 +14346,46 @@
    "kma_ny": 80
   },
   {
+   "id": "osm-w392661654",
+   "name": "골프존카운티 무주",
+   "aliases": [
+    "Golfzon County Muju",
+    "무주안성CC"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "",
+   "sido": "전북특별자치도",
+   "sigungu": "무주군",
+   "address": "전북특별자치도 무주군 안성면 공진리 산 53번지 1호",
+   "tel": "",
+   "lat": 35.83099,
+   "lon": 127.6348,
+   "position": "코스영역 중심",
+   "area_ha": 68.4,
+   "website": "http://www.golfzoncounty.com/",
+   "osm_ids": [
+    "w392661654"
+   ],
+   "licence_ids": [
+    "6540000-302012011000001",
+    "6540000-302012012000006"
+   ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 534,
+   "elevation_range_m": [
+    491,
+    579
+   ],
+   "name_norm": "골프존카운티무주",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅁㅈ",
+   "kma_nx": 72,
+   "kma_ny": 89
+  },
+  {
    "id": "osm-w652088377",
    "name": "무주덕유산CC",
    "aliases": [
@@ -14107,41 +14422,6 @@
    "choseong": "ㅁㅈㄷㅇㅅ",
    "kma_nx": 73,
    "kma_ny": 90
-  },
-  {
-   "id": "lic-302012011000001",
-   "name": "무주안성CC",
-   "aliases": [],
-   "type": [
-    "비회원제"
-   ],
-   "status": "영업",
-   "sido": "전북특별자치도",
-   "sigungu": "무주군",
-   "address": "전북특별자치도 무주군 안성면 공진리 산 53번지 1호",
-   "tel": "",
-   "lat": 35.83132,
-   "lon": 127.63655,
-   "position": "검수 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "6540000-302012011000001",
-    "6540000-302012012000006"
-   ],
-   "match": "검수",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 508,
-   "elevation_range_m": [
-    508,
-    508
-   ],
-   "name_norm": "무주안성",
-   "choseong": "ㅁㅈㅇㅅ",
-   "kma_nx": 72,
-   "kma_ny": 89
   },
   {
    "id": "lic-CDFH2302012003000001",
@@ -15137,6 +15417,49 @@
    "kma_ny": 34
   },
   {
+   "id": "osm-w368963715",
+   "name": "골프존카운티 오라",
+   "aliases": [
+    "ORA CC",
+    "골프존카운티 오라",
+    "골프존카운티오라",
+    "오라CC"
+   ],
+   "type": [
+    "비회원제",
+    "회원제"
+   ],
+   "status": "영업",
+   "sido": "제주특별자치도",
+   "sigungu": "제주시",
+   "address": "제주특별자치도 제주시 오라남로 130-16 (오라이동,오라칸트리클럽)",
+   "tel": "",
+   "lat": 33.44566,
+   "lon": 126.51029,
+   "position": "코스영역 중심",
+   "area_ha": 168.1,
+   "website": "",
+   "osm_ids": [
+    "w368963715"
+   ],
+   "licence_ids": [
+    "6500000-302012008000001",
+    "6500000-302012020000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 306,
+   "elevation_range_m": [
+    275,
+    348
+   ],
+   "name_norm": "골프존카운티오라",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅇㄹ",
+   "kma_nx": 52,
+   "kma_ny": 37
+  },
+  {
    "id": "osm-w371732050",
    "name": "그린필드 컨트리클럽",
    "aliases": [
@@ -15565,40 +15888,6 @@
    "choseong": "ㅇㄹㅅㅇㅈㅈ",
    "kma_nx": 50,
    "kma_ny": 35
-  },
-  {
-   "id": "osm-w368963715",
-   "name": "오라CC",
-   "aliases": [
-    "ORA CC"
-   ],
-   "type": [],
-   "status": "",
-   "sido": "제주특별자치도",
-   "sigungu": "제주시",
-   "address": "",
-   "tel": "",
-   "lat": 33.44566,
-   "lon": 126.51029,
-   "position": "코스영역 중심",
-   "area_ha": 168.1,
-   "website": "",
-   "osm_ids": [
-    "w368963715"
-   ],
-   "licence_ids": [],
-   "match": "",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 306,
-   "elevation_range_m": [
-    275,
-    348
-   ],
-   "name_norm": "오라",
-   "choseong": "ㅇㄹ",
-   "kma_nx": 52,
-   "kma_ny": 37
   },
   {
    "id": "osm-w368960374",
@@ -16479,6 +16768,46 @@
    "kma_ny": 107
   },
   {
+   "id": "osm-w389322763",
+   "name": "골프존카운티 천안",
+   "aliases": [
+    "Golfzon County",
+    "버드우드골프클럽"
+   ],
+   "type": [
+    "회원제"
+   ],
+   "status": "영업",
+   "sido": "충청남도",
+   "sigungu": "천안시동남구",
+   "address": "충청남도 천안시 동남구 병천면 매성2길 103",
+   "tel": "",
+   "lat": 36.80305,
+   "lon": 127.30574,
+   "position": "코스영역 중심",
+   "area_ha": 57.6,
+   "website": "http://www.golfzoncounty.com/gcounty/info/main?cc_code=43",
+   "osm_ids": [
+    "w389322763"
+   ],
+   "licence_ids": [
+    "4490000-CDFH2302012006000001",
+    "6440000-302012007000002"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 239,
+   "elevation_range_m": [
+    192,
+    323
+   ],
+   "name_norm": "골프존카운티천안",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅊㅇ",
+   "kma_nx": 66,
+   "kma_ny": 110
+  },
+  {
    "id": "osm-w547145443",
    "name": "마론컨트리클럽",
    "aliases": [
@@ -16518,38 +16847,6 @@
    "choseong": "ㅁㄹ",
    "kma_nx": 65,
    "kma_ny": 112
-  },
-  {
-   "id": "lic-4490000-CDFH2302012006000001",
-   "name": "버드우드골프클럽",
-   "aliases": [],
-   "type": [],
-   "status": "영업",
-   "sido": "충청남도",
-   "sigungu": "천안시동남구",
-   "address": "충청남도 천안시 동남구 병천면 매성2길 103, 버드우드골프클럽",
-   "tel": "",
-   "lat": 36.80269,
-   "lon": 127.31299,
-   "position": "인허가 주소 좌표",
-   "area_ha": null,
-   "website": "",
-   "osm_ids": [],
-   "licence_ids": [
-    "4490000-CDFH2302012006000001"
-   ],
-   "match": "",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 160,
-   "elevation_range_m": [
-    160,
-    160
-   ],
-   "name_norm": "버드우드",
-   "choseong": "ㅂㄷㅇㄷ",
-   "kma_nx": 66,
-   "kma_ny": 110
   },
   {
    "id": "osm-w170608708",
@@ -16702,10 +16999,10 @@
   },
   {
    "id": "osm-w558442586",
-   "name": "로얄링스CC2",
+   "name": "로얄링스CC1",
    "aliases": [
     "Royal Hills Country Club",
-    "로얄링스CC1",
+    "로얄링스CC2",
     "로얄힐스CC"
    ],
    "type": [],
@@ -16734,8 +17031,8 @@
     0,
     3
    ],
-   "name_norm": "로얄링스cc2",
-   "choseong": "ㄹㅇㄹㅅcc2",
+   "name_norm": "로얄링스cc1",
+   "choseong": "ㄹㅇㄹㅅcc1",
    "kma_nx": 49,
    "kma_ny": 108
   },
@@ -17424,6 +17721,86 @@
    "name_norm": "블랙스톤에듀팜",
    "choseong": "ㅂㄹㅅㅌㅇㄷㅍ",
    "kma_nx": 71,
+   "kma_ny": 111
+  },
+  {
+   "id": "osm-w378243177",
+   "name": "골프존카운티 진천",
+   "aliases": [
+    "Golfzon County Jincheon",
+    "골프존카운티 진천",
+    "골프존카운티진천"
+   ],
+   "type": [
+    "회원제"
+   ],
+   "status": "영업",
+   "sido": "충청북도",
+   "sigungu": "진천군",
+   "address": "충청북도 진천군 진천읍 송강로 783-51",
+   "tel": "",
+   "lat": 36.81631,
+   "lon": 127.40162,
+   "position": "코스영역 중심",
+   "area_ha": 99.9,
+   "website": "https://www.golfzoncounty.com/gcounty/info/main?cc_code=32",
+   "osm_ids": [
+    "w378243177"
+   ],
+   "licence_ids": [
+    "6430000-302012009000002"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 174,
+   "elevation_range_m": [
+    132,
+    230
+   ],
+   "name_norm": "골프존카운티진천",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅈㅊ",
+   "kma_nx": 67,
+   "kma_ny": 111
+  },
+  {
+   "id": "osm-w388594622",
+   "name": "골프존카운티 화랑",
+   "aliases": [
+    "Golfzon County Hwarang",
+    "골프존카운티 화랑",
+    "골프존카운티 화랑(지씨진천)"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "충청북도",
+   "sigungu": "진천군",
+   "address": "충청북도 진천군 문백면 농다리로 809",
+   "tel": "",
+   "lat": 36.82167,
+   "lon": 127.46999,
+   "position": "코스영역 중심",
+   "area_ha": 75.7,
+   "website": "",
+   "osm_ids": [
+    "w388594622"
+   ],
+   "licence_ids": [
+    "6430000-302012011000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 150,
+   "elevation_range_m": [
+    105,
+    191
+   ],
+   "name_norm": "골프존카운티화랑",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㅎㄹ",
+   "kma_nx": 69,
    "kma_ny": 111
   },
   {

@@ -19,7 +19,7 @@ from hangul import choseong, normalize, kma_grid
 HERE = os.path.dirname(os.path.abspath(__file__))
 MIN_HA = 10.0          # smaller polygons are practice ranges, park golf, pitch & putt
 MERGE_M = 250.0        # polygons of one club closer than this are merged
-NOISE = re.compile(r"파크\s*골프|연습장|스크린|골프존|게이트볼|practice|driving range|park golf", re.I)
+NOISE = re.compile(r"파크\s*골프|연습장|스크린|골프존(?!\s*카운티)|게이트볼|practice|driving range|park golf", re.I)
 COURSE_PART = re.compile(r"[\s\-–]*(\(?[A-Za-z가-힣]{1,8}\s*코스\)?|(east|west|south|north|old|new|lake|valley|mountain|public)\s+course)\s*$", re.I)
 TO_M = Transformer.from_crs(4326, 5179, always_xy=True)
 TO_LL = Transformer.from_crs(5179, 4326, always_xy=True)
@@ -181,6 +181,14 @@ def apply_overrides(recs, samples, unresolved, region):
     still = []
     for u, o in sorted(ov["licences"].items()):
         l = lic.get(u)
+        if not l and o.get("move_from"):         # a licence the automatic name match put on the wrong course: move it
+            src = [r for r in kept if r["id"] == o["move_from"] and u in r["licence_ids"]]; dst = [r for r in kept if r["id"] == o.get("course_id")]
+            if src and dst:
+                src[0]["licence_ids"] = [x for x in src[0]["licence_ids"] if x != u]; src[0]["aliases"] = [x for x in src[0]["aliases"] if x != o.get("alias")]
+                dst[0]["licence_ids"] = sorted(set(dst[0]["licence_ids"]) | {u})
+                if o.get("alias") and o["alias"] != dst[0]["name"]: dst[0]["aliases"] = sorted(set(dst[0]["aliases"]) | {o["alias"]})
+                n["attached"] += 1
+            continue
         if not l: continue
         if o["verdict"] == "exclude": n["excluded"] += 1; continue
         if o["verdict"] == "attach":
