@@ -79,7 +79,9 @@
    "verdict": "ok"
   },
   "lic-6430000-302012021000002": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "올데이 골프앤리조트 충주",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "lic-6440000-302012023000001": {
    "verdict": "ok"
@@ -319,7 +321,9 @@
    "verdict": "ok"
   },
   "osm-w1456013376": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "칼레이트CC",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "osm-w1460436387": {
    "verdict": "ok"
@@ -944,7 +948,9 @@
    "verdict": "ok"
   },
   "osm-w469029834": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "사이언스대덕골프장",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "osm-w470665698": {
    "verdict": "ok"
@@ -1174,7 +1180,9 @@
    "verdict": "ok"
   },
   "osm-w551202442": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "123골프클럽",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "osm-w553345524": {
    "verdict": "ok"
@@ -1406,7 +1414,9 @@
    "verdict": "ok"
   },
   "osm-w642932126": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "골프존카운티 더골프",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "osm-w642986592": {
    "verdict": "ok"
@@ -1538,7 +1548,9 @@
    "verdict": "ok"
   },
   "osm-w708940453": {
-   "verdict": "remove"
+   "verdict": "ok",
+   "name": "냉천컨트리클럽",
+   "note": "2026-11-20 누락 점검에서 복원 (영업 중 인허가 확인)"
   },
   "osm-w713801223": {
    "name": "플라자CC 제주",

@@ -2,7 +2,7 @@
  "meta": {
   "version": "v2",
   "generated": "2026-11-20",
-  "count": 504,
+  "count": 510,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -13,9 +13,9 @@
   "licences_active": 644,
   "licences_unresolved": 0,
   "review": {
-   "removed": 40,
-   "renamed": 15,
-   "confirmed": 485,
+   "removed": 34,
+   "renamed": 21,
+   "confirmed": 491,
    "attached": 4,
    "added": 13,
    "excluded": 16,
@@ -1814,10 +1814,10 @@
   },
   {
    "id": "osm-w545967310",
-   "name": "소노펠리체 컨트리클럽 비발디파크 마운틴",
+   "name": "소노펠리체 컨트리클럽 비발디파크 웨스트",
    "aliases": [
     "Sono Felice Country Club - Vivaldi Park West",
-    "소노펠리체 컨트리클럽 비발디파크 웨스트",
+    "소노펠리체 컨트리클럽 비발디파크 마운틴",
     "소노펠리체 컨트리클럽 비발디파크 이스트",
     "소노펠리체CC 비발디파크"
    ],
@@ -1850,8 +1850,8 @@
     345,
     470
    ],
-   "name_norm": "소노펠리체컨트리클럽비발디파크마운틴",
-   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅁㅇㅌ",
+   "name_norm": "소노펠리체컨트리클럽비발디파크웨스트",
+   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅇㅅㅌ",
    "kma_nx": 72,
    "kma_ny": 128
   },
@@ -2471,6 +2471,43 @@
    "choseong": "ㅍㄹㅅㅌㅂㄹ",
    "kma_nx": 68,
    "kma_ny": 129
+  },
+  {
+   "id": "osm-w551202442",
+   "name": "123골프클럽",
+   "aliases": [
+    "1.2.3",
+    "123 GC"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "고양시덕양구",
+   "address": "경기도 고양시 덕양구 통일로 43-168  (동산동)",
+   "tel": "02-359-0123",
+   "lat": 37.64024,
+   "lon": 126.90561,
+   "position": "코스영역 중심",
+   "area_ha": 15.8,
+   "website": "",
+   "osm_ids": [
+    "w551202442"
+   ],
+   "licence_ids": [
+    "3940000-CDFH2302011991000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 58,
+   "elevation_range_m": [
+    44,
+    92
+   ],
+   "name_norm": "123",
+   "choseong": "123",
+   "kma_nx": 59,
+   "kma_ny": 128
   },
   {
    "id": "osm-w551025577",
@@ -10986,6 +11023,83 @@
    "kma_ny": 100
   },
   {
+   "id": "osm-w1456013376",
+   "name": "칼레이트CC",
+   "aliases": [
+    "산타크로스골프장",
+    "칼레이트CC"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "대구광역시",
+   "sigungu": "군위군",
+   "address": "대구광역시 군위군 소보면 서금로 342-0",
+   "tel": "",
+   "lat": 36.21179,
+   "lon": 128.52427,
+   "position": "코스영역 중심",
+   "area_ha": 83.6,
+   "website": "",
+   "osm_ids": [
+    "w1456013376"
+   ],
+   "licence_ids": [
+    "6270000-302012024000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 246,
+   "elevation_range_m": [
+    165,
+    287
+   ],
+   "name_norm": "칼레이트",
+   "choseong": "ㅋㄹㅇㅌ",
+   "kma_nx": 87,
+   "kma_ny": 98
+  },
+  {
+   "id": "osm-w708940453",
+   "name": "냉천컨트리클럽",
+   "aliases": [
+    "냉천개발 윤상락"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "대구광역시",
+   "sigungu": "달성군",
+   "address": "대구광역시 달성군 가창면 가창로 1037-9",
+   "tel": "",
+   "lat": 35.79351,
+   "lon": 128.62386,
+   "position": "코스영역 중심",
+   "area_ha": 13.6,
+   "website": "",
+   "osm_ids": [
+    "w708940453"
+   ],
+   "licence_ids": [
+    "6270000-302012011000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 186,
+   "elevation_range_m": [
+    113,
+    305
+   ],
+   "name_norm": "냉천",
+   "choseong": "ㄴㅊ",
+   "kma_nx": 89,
+   "kma_ny": 89
+  },
+  {
    "id": "osm-w130172399",
    "name": "팔공컨트리클럽",
    "aliases": [
@@ -11022,6 +11136,45 @@
    "choseong": "ㅍㄱ",
    "kma_nx": 91,
    "kma_ny": 93
+  },
+  {
+   "id": "osm-w469029834",
+   "name": "사이언스대덕골프장",
+   "aliases": [
+    "대덕복지센터",
+    "사이언스 대덕"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "대전광역시",
+   "sigungu": "유성구",
+   "address": "대전광역시 유성구 유성대로1689번길 69-0, 1층 (전민동,연구단지체육공원)",
+   "tel": "",
+   "lat": 36.40524,
+   "lon": 127.39092,
+   "position": "코스영역 중심",
+   "area_ha": 25.7,
+   "website": "",
+   "osm_ids": [
+    "w469029834"
+   ],
+   "licence_ids": [
+    "6300000-302012006000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 89,
+   "elevation_range_m": [
+    78,
+    99
+   ],
+   "name_norm": "사이언스대덕",
+   "choseong": "ㅅㅇㅇㅅㄷㄷ",
+   "kma_nx": 67,
+   "kma_ny": 102
   },
   {
    "id": "osm-w68913380",
@@ -11644,6 +11797,42 @@
    "kma_ny": 83
   },
   {
+   "id": "osm-w642932126",
+   "name": "골프존카운티 더골프",
+   "aliases": [],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "울산광역시",
+   "sigungu": "울주군",
+   "address": "울산광역시 울주군 서생면 용연길 206-52",
+   "tel": "",
+   "lat": 35.36182,
+   "lon": 129.31139,
+   "position": "코스영역 중심",
+   "area_ha": 51.3,
+   "website": "",
+   "osm_ids": [
+    "w642932126"
+   ],
+   "licence_ids": [
+    "6310000-302012014000001"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 38,
+   "elevation_range_m": [
+    28,
+    79
+   ],
+   "name_norm": "골프존카운티더골프",
+   "choseong": "ㄱㅍㅈㅋㅇㅌㄷㄱㅍ",
+   "kma_nx": 102,
+   "kma_ny": 80
+  },
+  {
    "id": "osm-w525662303",
    "name": "보라컨트리클럽",
    "aliases": [
@@ -12084,7 +12273,7 @@
    "kma_ny": 123
   },
   {
-   "id": "lic-302012021000002",
+   "id": "lic-6280000-302012021000002",
    "name": "드림아일랜드골프장",
    "aliases": [],
    "type": [
@@ -16999,10 +17188,10 @@
   },
   {
    "id": "osm-w558442586",
-   "name": "로얄링스CC1",
+   "name": "로얄링스CC2",
    "aliases": [
     "Royal Hills Country Club",
-    "로얄링스CC2",
+    "로얄링스CC1",
     "로얄힐스CC"
    ],
    "type": [],
@@ -17031,8 +17220,8 @@
     0,
     3
    ],
-   "name_norm": "로얄링스cc1",
-   "choseong": "ㄹㅇㄹㅅcc1",
+   "name_norm": "로얄링스cc2",
+   "choseong": "ㄹㅇㄹㅅcc2",
    "kma_nx": 49,
    "kma_ny": 108
   },
@@ -18463,6 +18652,42 @@
    "kma_ny": 118
   },
   {
+   "id": "lic-6430000-302012021000002",
+   "name": "올데이 골프앤리조트 충주",
+   "aliases": [
+    "에스엘세레스 올데이리조트"
+   ],
+   "type": [
+    "회원제"
+   ],
+   "status": "영업",
+   "sido": "충청북도",
+   "sigungu": "충주시",
+   "address": "충청북도 충주시 앙성면 비내길 189-0",
+   "tel": "",
+   "lat": 37.10847,
+   "lon": 127.78731,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6430000-302012021000002"
+   ],
+   "match": "",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 162,
+   "elevation_range_m": [
+    162,
+    162
+   ],
+   "name_norm": "올데이골프앤리조트충주",
+   "choseong": "ㅇㄷㅇㄱㅍㅇㄹㅈㅌㅊㅈ",
+   "kma_nx": 74,
+   "kma_ny": 117
+  },
+  {
    "id": "osm-w1213004519",
    "name": "일레븐CC",
    "aliases": [
@@ -18541,10 +18766,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원CC",
+   "name": "중원GC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원GC"
+    "중원CC"
    ],
    "type": [
     "비회원제"
