@@ -86,7 +86,7 @@ def list_runs(domain):
     for k in range(0, 8):
         t = t0 - dt.timedelta(hours=step * k)
         p = f"{BUCKET}/data_run/{domain}/{t:%Y/%m/%d/%H%M}Z"
-        if k == 0 or retry(lambda: fs().exists(p + "/temperature_2m.om")): out.append((p, t))
+        if retry(lambda: fs().exists(p + "/temperature_2m.om")): out.append((p, t))   # latest.json can name a run whose files are not there yet
         if len(out) >= RUNS_BACK: break
     return out
 
