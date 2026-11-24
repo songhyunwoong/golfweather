@@ -147,7 +147,7 @@
     if (!x && model === "kma") return '<div class="badge"><b>신뢰도 검증 준비 중</b><span class="small muted">기상청 단기예보는 2026-11-10부터 예보를 모으고 있습니다. 며칠 뒤부터 점수가 나옵니다.</span></div>';
     if (!x) return '<div class="badge"><b>이 리드타임의 검증 자료 없음</b></div>';
     const r = x.r;
-    return '<details class="badge"><summary><span class="stars" aria-label="별 ' + r.stars + '개">' + "★".repeat(r.stars) + "☆".repeat(5 - r.stars) + "</span> <b>신뢰도 " + r.score + "점</b> <span class=\"small muted\">" + d + "일 뒤 예보 · " + esc(x.region) + " 기준</span></summary>" +
+    return '<details class="badge"><summary><span class="stars" aria-label="별 ' + r.stars + '개">' + "★".repeat(r.stars) + "☆".repeat(5 - r.stars) + "</span> <b>신뢰도 " + r.score + "점</b> <span class=\"small muted\">" + leadName(d) + " 예보 · " + esc(x.region) + " 기준</span></summary>" +
       '<span class="small">기온 평균오차 ' + r.t_mae.toFixed(1) + "°C (" + (r.t_bias >= 0 ? "+" : "") + r.t_bias.toFixed(1) + " 치우침) · 풍속 평균오차 " + r.w_mae.toFixed(1) + " m/s · 12시간 강수 적중(ETS) " + r.ets.toFixed(2) + (r.fbi != null ? " · 비 예보 빈도 " + r.fbi.toFixed(1) + "배" : "") + "</span>" +
       '<span class="small muted">최근 ' + S.rel.init_dates + "일(" + esc(S.rel.period) + ") 검증 · " + (x.region === "전국" && reg !== "전국" ? esc(reg) + " 표본이 적어 전국 값 · " : "") + '<a href="#info">산출 방법과 성적표</a></span></details>';
   }
@@ -469,11 +469,13 @@
   }
 
   // ---------------- info
+  // lead day 1 is today (0–24 h ahead), so the label counts days from today
+  function leadName(d) { return d <= 1 ? "오늘" : d === 2 ? "내일" : (d - 1) + "일 뒤"; }
   function scoreTable(region) {
     const R = S.rel && S.rel.regions && S.rel.regions[region]; if (!R) return '<p class="muted small">검증 자료가 없습니다.</p>';
     const ks = ["icon", "blend", "ifs", "aifs", "ukmo", "gfs", "kma"].filter(k => R[k]), leads = []; for (let d = 1; d <= 15; d++) if (ks.some(k => R[k][d])) leads.push(d);
     const cell = (k, d, f) => { const r = R[k][d]; return "<td>" + (r ? f(r) : "—") + "</td>"; };
-    const tbl = (title, f) => '<h3 class="small" style="margin-top:6px">' + title + '</h3><div class="scroll"><table><thead><tr><th>모델</th>' + leads.map(d => "<th>" + d + "일</th>").join("") + "</tr></thead><tbody>" + ks.map(k => "<tr><td>" + MODELS.find(m => m[0] === k)[1] + "</td>" + leads.map(d => cell(k, d, f)).join("") + "</tr>").join("") + "</tbody></table></div>";
+    const tbl = (title, f) => '<h3 class="small" style="margin-top:6px">' + title + '</h3><div class="scroll"><table><thead><tr><th>모델</th>' + leads.map(d => "<th>" + leadName(d) + "</th>").join("") + "</tr></thead><tbody>" + ks.map(k => "<tr><td>" + MODELS.find(m => m[0] === k)[1] + "</td>" + leads.map(d => cell(k, d, f)).join("") + "</tr>").join("") + "</tbody></table></div>";
     return tbl("신뢰도 점수 (100점 만점)", r => r.score) + tbl("기온 평균오차 (°C)", r => r.t_mae.toFixed(1)) + tbl("풍속 평균오차 (m/s)", r => r.w_mae.toFixed(1)) + tbl("12시간 강수 적중 ETS (1에 가까울수록 좋음)", r => r.ets.toFixed(2));
   }
   function renderInfo() {
