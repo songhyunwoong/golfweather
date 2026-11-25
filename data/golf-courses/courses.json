@@ -2,7 +2,7 @@
  "meta": {
   "version": "v2",
   "generated": "2026-11-25",
-  "count": 510,
+  "count": 516,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
    "OpenStreetMap contributors (ODbL), leisure=golf_course"
@@ -16,10 +16,10 @@
    "removed": 34,
    "renamed": 22,
    "confirmed": 491,
-   "attached": 4,
-   "added": 13,
+   "attached": 6,
+   "added": 19,
    "excluded": 16,
-   "near_existing": 16,
+   "near_existing": 15,
    "check": 0
   }
  },
@@ -1814,11 +1814,11 @@
   },
   {
    "id": "osm-w545967310",
-   "name": "소노펠리체 컨트리클럽 비발디파크 이스트",
+   "name": "소노펠리체 컨트리클럽 비발디파크 마운틴",
    "aliases": [
     "Sono Felice Country Club - Vivaldi Park West",
-    "소노펠리체 컨트리클럽 비발디파크 마운틴",
     "소노펠리체 컨트리클럽 비발디파크 웨스트",
+    "소노펠리체 컨트리클럽 비발디파크 이스트",
     "소노펠리체CC 비발디파크"
    ],
    "type": [
@@ -1850,8 +1850,8 @@
     345,
     470
    ],
-   "name_norm": "소노펠리체컨트리클럽비발디파크이스트",
-   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅇㅅㅌ",
+   "name_norm": "소노펠리체컨트리클럽비발디파크마운틴",
+   "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅁㅇㅌ",
    "kma_nx": 72,
    "kma_ny": 128
   },
@@ -2041,11 +2041,43 @@
    "kma_ny": 125
   },
   {
-   "id": "lic-302012011000004",
-   "name": "벨라스톤 컨트리클럽",
+   "id": "lic-6530000-302012024000002",
+   "name": "벨라45CC",
    "aliases": [
     "벨라45 마스터스 컨트리클럽"
    ],
+   "type": [],
+   "status": "영업",
+   "sido": "강원특별자치도",
+   "sigungu": "횡성군",
+   "address": "강원특별자치도 횡성군 서원면 서원남로 80-0",
+   "tel": "",
+   "lat": 37.45298,
+   "lon": 127.82973,
+   "position": "검수 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6530000-302012024000002"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 282,
+   "elevation_range_m": [
+    282,
+    282
+   ],
+   "name_norm": "벨라45",
+   "choseong": "ㅂㄹ45",
+   "kma_nx": 75,
+   "kma_ny": 125
+  },
+  {
+   "id": "lic-302012011000004",
+   "name": "벨라스톤 컨트리클럽",
+   "aliases": [],
    "type": [
     "비회원제"
    ],
@@ -2061,8 +2093,7 @@
    "website": "",
    "osm_ids": [],
    "licence_ids": [
-    "6530000-302012011000004",
-    "6530000-302012024000002"
+    "6530000-302012011000004"
    ],
    "match": "검수",
    "review": [],
@@ -5022,6 +5053,38 @@
    "kma_ny": 136
   },
   {
+   "id": "lic-CDFH2302011986000001",
+   "name": "골드컨트리클럽",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "용인시기흥구",
+   "address": "경기도 용인시 기흥구 기흥단지로 406 (고매동, 골드훼미리콘도)",
+   "tel": "031-286-8111",
+   "lat": 37.22015,
+   "lon": 127.13824,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "4050000-CDFH2302011986000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 186,
+   "elevation_range_m": [
+    186,
+    186
+   ],
+   "name_norm": "골드",
+   "choseong": "ㄱㄷ",
+   "kma_nx": 63,
+   "kma_ny": 119
+  },
+  {
    "id": "osm-w376925267",
    "name": "남부",
    "aliases": [
@@ -5203,6 +5266,40 @@
    "kma_ny": 121
   },
   {
+   "id": "lic-CDFH2302011988000001",
+   "name": "88컨트리클럽",
+   "aliases": [
+    "88"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "용인시처인구",
+   "address": "경기도 용인시 기흥구 석성로521번길 169 (청덕동)",
+   "tel": "",
+   "lat": 37.30228,
+   "lon": 127.16659,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "4050000-CDFH2302011988000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 263,
+   "elevation_range_m": [
+    263,
+    263
+   ],
+   "name_norm": "88",
+   "choseong": "88",
+   "kma_nx": 63,
+   "kma_ny": 121
+  },
+  {
    "id": "osm-w541600442",
    "name": "글렌로스골프클럽",
    "aliases": [
@@ -5242,7 +5339,6 @@
    "id": "osm-w376628275",
    "name": "레이크사이드",
    "aliases": [
-    "88",
     "레이크사이드CC",
     "레이크사이드회원"
    ],
@@ -5261,7 +5357,6 @@
     "w376628275"
    ],
    "licence_ids": [
-    "4050000-CDFH2302011988000001",
     "4050000-CDFH2302011990000001",
     "4050000-CDFH2302011997000002"
    ],
@@ -7180,7 +7275,6 @@
    "name": "코리아컨트리클럽",
    "aliases": [
     "KOREA CC",
-    "골드컨트리클럽",
     "코리아"
    ],
    "type": [],
@@ -7199,7 +7293,6 @@
     "w778930978"
    ],
    "licence_ids": [
-    "4050000-CDFH2302011986000001",
     "4050000-CDFH2302011994000001"
    ],
    "match": "좌표",
@@ -9202,9 +9295,7 @@
    "aliases": [
     "마우나오션 C.C",
     "마우나오션 블루",
-    "마우나오션CC",
-    "우리골프장",
-    "우리골프클럽"
+    "마우나오션CC"
    ],
    "type": [
     "비회원제",
@@ -9225,9 +9316,7 @@
    ],
    "licence_ids": [
     "5050000-CDFH2302011999000002",
-    "5050000-CDFH2302012003000001",
     "6470000-302012008000012",
-    "6470000-302012008000043",
     "6470000-302012022000002"
    ],
    "match": "좌표",
@@ -9358,6 +9447,41 @@
    "choseong": "ㅅㄹㅊ",
    "kma_nx": 99,
    "kma_ny": 93
+  },
+  {
+   "id": "lic-5050000-CDFH2302012003000001",
+   "name": "우리골프클럽",
+   "aliases": [
+    "우리골프장"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경상북도",
+   "sigungu": "경주시",
+   "address": "경상북도 경주시 양남면 신대리 산 307-6",
+   "tel": "054-740-0810",
+   "lat": 35.67875,
+   "lon": 129.37459,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "5050000-CDFH2302012003000001",
+    "6470000-302012008000043"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 420,
+   "elevation_range_m": [
+    420,
+    420
+   ],
+   "name_norm": "우리",
+   "choseong": "ㅇㄹ",
+   "kma_nx": 103,
+   "kma_ny": 87
   },
   {
    "id": "osm-w525071803",
@@ -11433,6 +11557,38 @@
    "kma_ny": 77
   },
   {
+   "id": "lic-6260000-302012010000001",
+   "name": "베이사이드골프클럽",
+   "aliases": [],
+   "type": [],
+   "status": "영업",
+   "sido": "부산광역시",
+   "sigungu": "기장군",
+   "address": "부산광역시 기장군 일광면 이천8길 100",
+   "tel": "051-642-5100",
+   "lat": 35.27627,
+   "lon": 129.24186,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6260000-302012010000001"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 45,
+   "elevation_range_m": [
+    45,
+    45
+   ],
+   "name_norm": "베이사이드",
+   "choseong": "ㅂㅇㅅㅇㄷ",
+   "kma_nx": 101,
+   "kma_ny": 78
+  },
+  {
    "id": "osm-w756749258",
    "name": "스톤게이트C.C",
    "aliases": [
@@ -11474,7 +11630,6 @@
    "name": "아시아드컨트리클럽",
    "aliases": [
     "Asiad Country Club",
-    "베이사이드골프클럽",
     "아시아드CC"
    ],
    "type": [],
@@ -11492,8 +11647,7 @@
     "w389977446"
    ],
    "licence_ids": [
-    "6260000-302012008000001",
-    "6260000-302012010000001"
+    "6260000-302012008000001"
    ],
    "match": "좌표",
    "review": [],
@@ -14614,7 +14768,7 @@
    "kma_ny": 90
   },
   {
-   "id": "lic-CDFH2302012003000001",
+   "id": "lic-4771000-CDFH2302012003000001",
    "name": "금과",
    "aliases": [],
    "type": [],
@@ -14635,10 +14789,10 @@
    "match": "",
    "review": [],
    "reviewed": true,
-   "elevation_m": 134,
+   "elevation_m": 138,
    "elevation_range_m": [
-    134,
-    134
+    138,
+    138
    ],
    "name_norm": "금과",
    "choseong": "ㄱㄱ",
@@ -15175,8 +15329,7 @@
    "name": "동광주택 제주부영CC",
    "aliases": [
     "Booyeong CC",
-    "부영CC",
-    "해비치호텔앤드리조트 해비치컨트리클럽"
+    "부영CC"
    ],
    "type": [
     "비회원제",
@@ -15196,9 +15349,7 @@
     "w582796107"
    ],
    "licence_ids": [
-    "6500000-302012008000030",
-    "6500000-302012010000001",
-    "6500000-302012010000002"
+    "6500000-302012008000030"
    ],
    "match": "좌표",
    "review": [],
@@ -15605,6 +15756,43 @@
    "choseong": "ㅍㅋㅅ",
    "kma_nx": 50,
    "kma_ny": 34
+  },
+  {
+   "id": "lic-6500000-302012010000001",
+   "name": "해비치컨트리클럽 제주",
+   "aliases": [
+    "해비치호텔앤드리조트 해비치컨트리클럽"
+   ],
+   "type": [
+    "비회원제"
+   ],
+   "status": "영업",
+   "sido": "제주특별자치도",
+   "sigungu": "서귀포시",
+   "address": "제주특별자치도 서귀포시 남원읍 원님로399번길 319",
+   "tel": "",
+   "lat": 33.35899,
+   "lon": 126.72441,
+   "position": "인허가 주소 좌표",
+   "area_ha": null,
+   "website": "",
+   "osm_ids": [],
+   "licence_ids": [
+    "6500000-302012010000001",
+    "6500000-302012010000002"
+   ],
+   "match": "검수",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 231,
+   "elevation_range_m": [
+    231,
+    231
+   ],
+   "name_norm": "해비치컨트리클럽제주",
+   "choseong": "ㅎㅂㅊㅋㅌㄹㅋㄹㅈㅈ",
+   "kma_nx": 56,
+   "kma_ny": 35
   },
   {
    "id": "osm-w368963715",
@@ -17189,10 +17377,10 @@
   },
   {
    "id": "osm-w558442586",
-   "name": "로얄링스CC2",
+   "name": "로얄링스CC1",
    "aliases": [
     "Royal Hills Country Club",
-    "로얄링스CC1",
+    "로얄링스CC2",
     "로얄힐스CC"
    ],
    "type": [],
@@ -17221,8 +17409,8 @@
     0,
     3
    ],
-   "name_norm": "로얄링스cc2",
-   "choseong": "ㄹㅇㄹㅅcc2",
+   "name_norm": "로얄링스cc1",
+   "choseong": "ㄹㅇㄹㅅcc1",
    "kma_nx": 49,
    "kma_ny": 108
   },
@@ -17649,7 +17837,7 @@
    "kma_ny": 115
   },
   {
-   "id": "lic-302012024000002",
+   "id": "lic-6430000-302012024000002",
    "name": "음성 힐데스하임CC",
    "aliases": [],
    "type": [
@@ -17672,10 +17860,10 @@
    "match": "검수",
    "review": [],
    "reviewed": true,
-   "elevation_m": 180,
+   "elevation_m": 185,
    "elevation_range_m": [
-    180,
-    180
+    185,
+    185
    ],
    "name_norm": "음성힐데스하임",
    "choseong": "ㅇㅅㅎㄷㅅㅎㅇ",
@@ -18767,10 +18955,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원CC",
+   "name": "중원GC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원GC"
+    "중원CC"
    ],
    "type": [
     "비회원제"

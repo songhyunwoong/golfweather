@@ -82,7 +82,11 @@ def elevations(points):
             try:
                 vals = json.loads(r.stdout)["elevation"]; assert len(vals) == len(chunk); out += vals; break
             except Exception:
-                if attempt == 4: raise RuntimeError(f"elevation API failed: {r.stdout[:200]} {r.stderr[:200]}")
+                if attempt == 4 or "limit" in r.stdout:     # daily limit reached: fall back to SRTM 90 m (opentopodata.org)
+                    r2 = subprocess.run(["curl", "-sS", "-m", "60", "https://api.opentopodata.org/v1/srtm90m?locations=" + "|".join(f"{la:.5f},{lo:.5f}" for la, lo in chunk)], capture_output=True, text=True)
+                    try:
+                        vals = [x["elevation"] for x in json.loads(r2.stdout)["results"]]; assert len(vals) == len(chunk) and None not in vals; out += vals; time.sleep(1.1); break
+                    except Exception: raise RuntimeError(f"elevation API failed: {r.stdout[:200]} {r.stderr[:200]} / {r2.stdout[:200]}")
                 time.sleep(3 * (attempt + 1))
         time.sleep(0.3)
     return out
@@ -171,6 +175,7 @@ def apply_overrides(recs, samples, unresolved, region):
         r["review"] = [f for f in r["review"] if f == "이름없음" and not r["name"]]; r["reviewed"] = True; n["confirmed"] += 1
         kept.append(r)
     lic = {l["uid"]: l for l in unresolved}
+    alllic = {l["uid"]: l for l in load_licences()[0]}
     def attach(r, l):
         r["licence_ids"] = sorted(set(r["licence_ids"]) | {l["uid"]})
         if l["name"] and l["name"] != r["name"]: r["aliases"] = sorted(set(r["aliases"]) | {l["name"]})
@@ -182,7 +187,16 @@ def apply_overrides(recs, samples, unresolved, region):
     for u, o in sorted(ov["licences"].items()):
         l = lic.get(u)
         if not l and o.get("move_from"):         # a licence the automatic name match put on the wrong course: move it
-            src = [r for r in kept if r["id"] == o["move_from"] and u in r["licence_ids"]]; dst = [r for r in kept if r["id"] == o.get("course_id")]
+            src = [r for r in kept if r["id"] == o["move_from"] and u in r["licence_ids"]]; dst = [r for r in kept if uid_of(r) == o.get("course_id")] or [r for r in kept if r["id"] == o.get("course_id")]
+            if src and o["verdict"] == "new":    # a separate course whose licence was absorbed by a neighbour's area: split it off at its own address
+                l = alllic[u]; lon, lat = TO_LL.transform(l["pt"].x, l["pt"].y) if not o.get("lat") else (o["lon"], o["lat"])
+                src[0]["licence_ids"] = [x for x in src[0]["licence_ids"] if x != u]; src[0]["aliases"] = [x for x in src[0]["aliases"] if x not in (o.get("alias"), l["name"])]
+                sd, sg = region(lon, lat)
+                r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and l["name"] != o["name"] else [], type=[l["kind"]] if l["kind"] else [],
+                         status=l["status"], sido=sd, sigungu=sg, address=l["addr"], tel=l["tel"], lat=round(lat, 5), lon=round(lon, 5), position="검수 좌표" if o.get("lat") else "인허가 주소 좌표",
+                         area_ha=None, website="", osm_ids=[], licence_ids=[u], match="검수", review=[], reviewed=True, _n=1)
+                pts[id(r)] = [(r["lat"], r["lon"])]; kept.append(r); n["added"] += 1
+                continue
             if src and dst:
                 src[0]["licence_ids"] = [x for x in src[0]["licence_ids"] if x != u]; src[0]["aliases"] = [x for x in src[0]["aliases"] if x != o.get("alias")]
                 dst[0]["licence_ids"] = sorted(set(dst[0]["licence_ids"]) | {u})
@@ -206,7 +220,7 @@ def apply_overrides(recs, samples, unresolved, region):
                     attach(t, l); n["near_existing"] += 1; continue
             flags = [] if (asg and sg.replace(" ", "").startswith(asg.split()[0])) or (asd and asd[:2] == sd[:2] and not asg) else ["좌표확인"]
             n["check"] += bool(flags)
-            r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=l["name"], aliases=[], type=[l["kind"]] if l["kind"] else [], status=l["status"], sido=sd, sigungu=sg,
+            r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and o["name"] != l["name"] else [], type=[l["kind"]] if l["kind"] else [], status=l["status"], sido=sd, sigungu=sg,
                      address=l["addr"], tel=l["tel"], lat=round(o["lat"], 5), lon=round(o["lon"], 5), position="검수 좌표", area_ha=None, website="", osm_ids=[],
                      licence_ids=[l["uid"]], match="검수", review=flags, reviewed=True, _n=1)
             pts[id(r)] = [(r["lat"], r["lon"])]; kept.append(r); n["added"] += 1
