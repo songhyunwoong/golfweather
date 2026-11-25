@@ -1,7 +1,7 @@
 {
  "meta": {
   "version": "v2",
-  "generated": "2026-11-20",
+  "generated": "2026-11-25",
   "count": 510,
   "sources": [
    "행정안전부_생활_골프장 조회서비스 (data.go.kr 15154978), 2026-11-11",
@@ -14,7 +14,7 @@
   "licences_unresolved": 0,
   "review": {
    "removed": 34,
-   "renamed": 21,
+   "renamed": 22,
    "confirmed": 491,
    "attached": 4,
    "added": 13,
@@ -1814,11 +1814,11 @@
   },
   {
    "id": "osm-w545967310",
-   "name": "소노펠리체 컨트리클럽 비발디파크 웨스트",
+   "name": "소노펠리체 컨트리클럽 비발디파크 이스트",
    "aliases": [
     "Sono Felice Country Club - Vivaldi Park West",
     "소노펠리체 컨트리클럽 비발디파크 마운틴",
-    "소노펠리체 컨트리클럽 비발디파크 이스트",
+    "소노펠리체 컨트리클럽 비발디파크 웨스트",
     "소노펠리체CC 비발디파크"
    ],
    "type": [
@@ -1850,7 +1850,7 @@
     345,
     470
    ],
-   "name_norm": "소노펠리체컨트리클럽비발디파크웨스트",
+   "name_norm": "소노펠리체컨트리클럽비발디파크이스트",
    "choseong": "ㅅㄴㅍㄹㅊㅋㅌㄹㅋㄹㅂㅂㄷㅍㅋㅇㅅㅌ",
    "kma_nx": 72,
    "kma_ny": 128
@@ -5022,42 +5022,6 @@
    "kma_ny": 136
   },
   {
-   "id": "osm-w378414559",
-   "name": "경기경찰청CC",
-   "aliases": [
-    "한성"
-   ],
-   "type": [],
-   "status": "영업",
-   "sido": "경기도",
-   "sigungu": "용인시기흥구",
-   "address": "경기도 용인시 기흥구 구교동로 151 (마북동)",
-   "tel": "",
-   "lat": 37.30074,
-   "lon": 127.13176,
-   "position": "코스영역 중심",
-   "area_ha": 24.4,
-   "website": "",
-   "osm_ids": [
-    "w378414559"
-   ],
-   "licence_ids": [
-    "4050000-CDFH2302011984000002"
-   ],
-   "match": "좌표",
-   "review": [],
-   "reviewed": true,
-   "elevation_m": 180,
-   "elevation_range_m": [
-    153,
-    216
-   ],
-   "name_norm": "경기경찰청",
-   "choseong": "ㄱㄱㄱㅊㅊ",
-   "kma_nx": 63,
-   "kma_ny": 121
-  },
-  {
    "id": "osm-w376925267",
    "name": "남부",
    "aliases": [
@@ -5198,6 +5162,43 @@
    ],
    "name_norm": "태광",
    "choseong": "ㅌㄱ",
+   "kma_nx": 62,
+   "kma_ny": 121
+  },
+  {
+   "id": "osm-w378414559",
+   "name": "한성CC",
+   "aliases": [
+    "경기경찰청CC",
+    "한성"
+   ],
+   "type": [],
+   "status": "영업",
+   "sido": "경기도",
+   "sigungu": "용인시기흥구",
+   "address": "경기도 용인시 기흥구 구교동로 151 (마북동)",
+   "tel": "",
+   "lat": 37.3103,
+   "lon": 127.1177,
+   "position": "검수 좌표",
+   "area_ha": 24.4,
+   "website": "",
+   "osm_ids": [
+    "w378414559"
+   ],
+   "licence_ids": [
+    "4050000-CDFH2302011984000002"
+   ],
+   "match": "좌표",
+   "review": [],
+   "reviewed": true,
+   "elevation_m": 112,
+   "elevation_range_m": [
+    112,
+    112
+   ],
+   "name_norm": "한성",
+   "choseong": "ㅎㅅ",
    "kma_nx": 62,
    "kma_ny": 121
   },
@@ -18766,10 +18767,10 @@
   },
   {
    "id": "osm-w377924549",
-   "name": "중원GC",
+   "name": "중원CC",
    "aliases": [
     "Joongwon Golf Club",
-    "중원CC"
+    "중원GC"
    ],
    "type": [
     "비회원제"
