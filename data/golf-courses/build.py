@@ -192,7 +192,7 @@ def apply_overrides(recs, samples, unresolved, region):
                 l = alllic[u]; lon, lat = TO_LL.transform(l["pt"].x, l["pt"].y) if not o.get("lat") else (o["lon"], o["lat"])
                 src[0]["licence_ids"] = [x for x in src[0]["licence_ids"] if x != u]; src[0]["aliases"] = [x for x in src[0]["aliases"] if x not in (o.get("alias"), l["name"])]
                 sd, sg = region(lon, lat)
-                r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and l["name"] != o["name"] else [], type=[l["kind"]] if l["kind"] else [],
+                r = dict(id="lic-" + l["uid"], _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and l["name"] != o["name"] else [], type=[l["kind"]] if l["kind"] else [],
                          status=l["status"], sido=sd, sigungu=sg, address=l["addr"], tel=l["tel"], lat=round(lat, 5), lon=round(lon, 5), position="검수 좌표" if o.get("lat") else "인허가 주소 좌표",
                          area_ha=None, website="", osm_ids=[], licence_ids=[u], match="검수", review=[], reviewed=True, _n=1)
                 pts[id(r)] = [(r["lat"], r["lon"])]; kept.append(r); n["added"] += 1
@@ -220,7 +220,7 @@ def apply_overrides(recs, samples, unresolved, region):
                     attach(t, l); n["near_existing"] += 1; continue
             flags = [] if (asg and sg.replace(" ", "").startswith(asg.split()[0])) or (asd and asd[:2] == sd[:2] and not asg) else ["좌표확인"]
             n["check"] += bool(flags)
-            r = dict(id="lic-" + l["mng"], _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and o["name"] != l["name"] else [], type=[l["kind"]] if l["kind"] else [], status=l["status"], sido=sd, sigungu=sg,
+            r = dict(id="lic-" + (l["uid"] if o.get("full_id") else l["mng"]), _uid="lic-" + l["uid"], name=o.get("name") or l["name"], aliases=[l["name"]] if o.get("name") and o["name"] != l["name"] else [], type=[l["kind"]] if l["kind"] else [], status=l["status"], sido=sd, sigungu=sg,
                      address=l["addr"], tel=l["tel"], lat=round(o["lat"], 5), lon=round(o["lon"], 5), position="검수 좌표", area_ha=None, website="", osm_ids=[],
                      licence_ids=[l["uid"]], match="검수", review=flags, reviewed=True, _n=1)
             pts[id(r)] = [(r["lat"], r["lon"])]; kept.append(r); n["added"] += 1
